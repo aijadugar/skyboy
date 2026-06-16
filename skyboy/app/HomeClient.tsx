@@ -31,7 +31,7 @@ export function HomeClient({ patterns }: { patterns: Pattern[] }) {
     <div>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <h1 className="max-w-5xl font-mono text-5xl font-bold leading-none tracking-normal md:text-7xl">SKYBOY AI PATTERNS</h1>
-        <p className="mt-5 text-xl text-[var(--text-muted)]">Production-ready AI engineering patterns.</p>
+        <p className="mt-5 text-xl text-[var(--text-muted)]">Production-ready patterns, architectures, and implementation guides for modern software and AI systems.</p>
         <button
           type="button"
           data-search-trigger
@@ -39,7 +39,7 @@ export function HomeClient({ patterns }: { patterns: Pattern[] }) {
         >
           <span className="inline-flex items-center gap-3 text-[var(--text-muted)]">
             <Search className="size-5" />
-            Search patterns, e.g. hybrid search...
+            Search techniques or tools...
           </span>
           <span className="font-mono text-xs text-[var(--text-muted)]">⌘K / Ctrl+K</span>
         </button>

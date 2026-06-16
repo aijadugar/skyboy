@@ -1,3 +1,4 @@
+import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
@@ -5,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { getAllPatterns } from "@/lib/patterns";
 import { SearchDialog } from "@/search/SearchDialog";
-import "@/styles/globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,18 +28,18 @@ export const metadata: Metadata = {
   },
 
   description:
-    "Production-ready AI engineering patterns for agents, RAG, evaluations, fine-tuning, deployment and many more.",
+    "Production-ready patterns, architectures, and implementation guides for modern software and AI systems.",
 
   openGraph: {
     title: "Skyboy AI Patterns",
     description:
-      "Production-ready AI engineering patterns for agents, RAG, evaluations, fine-tuning, deployment and many more.",
+      "Production-ready patterns, architectures, and implementation guides for modern software and AI systems.",
     url: "https://skyboy.in",
     siteName: "Skyboy AI Patterns",
     type: "website",
     images: [
       {
-        url: "/og-image.png",
+        url: "/skyboy.png",
         width: 1200,
         height: 630,
         alt: "Skyboy AI Patterns",
@@ -51,14 +51,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Skyboy AI Patterns",
     description:
-      "Production-ready AI engineering patterns for agents, RAG, evaluations, fine-tuning, deployment and many more.",
-    images: ["/og-image.png"],
+      "Production-ready patterns, architectures, and implementation guides for modern software and AI systems.",
+    images: ["/skyboy.png"],
   },
 
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    icon: "/skyboy.png",
+    shortcut: "/skyboy.png",
+    apple: "/skyboy.png",
   },
 
   alternates: {
