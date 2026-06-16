@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 const links = [
-  { label: 'GitHub', href: 'https://github.com/skyboy-ai/skyboy-ai-patterns' },
+  { label: 'GitHub', href: 'https://github.com/aijadugar/skyboy' },
   { label: 'Sponsors', href: '/sponsors' },
-  { label: 'Contributing', href: '/contributing' },
-  { label: 'Roadmap', href: '/roadmap' },
+  { label: 'Contributing', href: 'https://github.com/aijadugar/skyboy/blob/main/CONTRIBUTING.md' },
+  { label: 'Roadmap', href: 'https://github.com/aijadugar/skyboy/blob/main/ROADMAP.md' },
 ]
 
 export function Footer() {
@@ -14,7 +14,7 @@ export function Footer() {
         <div>
           <div className="font-mono text-sm font-bold">SKYBOY AI PATTERNS</div>
           <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--text-muted)]">
-            Production-ready AI engineering patterns for agents, RAG, evaluations, fine-tuning, deployment and many more.
+            Production-ready patterns, architectures, and implementation guides for modern software and AI systems.
           </p>
           <p className="mt-3 text-xs text-[var(--text-muted)]">Built in public by Skyboy</p>
         </div>

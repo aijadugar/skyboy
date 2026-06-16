@@ -2,7 +2,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE) [![Stars](https://img.shields.io/github/stars/skyboy-ai/skyboy-ai-patterns?style=social)](https://github.com/skyboy-ai/skyboy-ai-patterns) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00D2FF.svg)](CONTRIBUTING.md)
 
-> Production-ready AI engineering patterns for agents, RAG, evaluations, fine-tuning, deployment and many more.
+> Production-ready patterns, architectures, and implementation guides for modern software and AI systems.
 
 Skyboy AI Patterns is a copy-paste-first pattern library for engineers building AI systems in production. It focuses on working code, architecture diagrams, benchmarks, and tradeoffs for backend AI workflows: agents, retrieval, evaluation, deployment, MCP, and observability.
 

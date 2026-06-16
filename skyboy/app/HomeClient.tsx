@@ -94,7 +94,7 @@ export function HomeClient({ patterns }: { patterns: Pattern[] }) {
           <h2 className="text-2xl font-semibold">Open Source. Built by AI Engineers.</h2>
           <p className="mt-2 text-[var(--text-muted)]">Contribute patterns, benchmarks, and examples.</p>
           <div className="mt-5 flex flex-wrap gap-3">
-            <Link className="border-2 border-[var(--border)] px-4 py-2 shadow-[3px_3px_0_var(--border)] hover:border-[#00D2FF]" href="https://github.com/skyboy-ai/skyboy-ai-patterns">
+            <Link className="border-2 border-[var(--border)] px-4 py-2 shadow-[3px_3px_0_var(--border)] hover:border-[#00D2FF]" href="https://github.com/aijadugar/skyboy">
               Star on GitHub ↗
             </Link>
             <Link className="border-2 border-[var(--border)] px-4 py-2 shadow-[3px_3px_0_var(--border)] hover:border-[#00D2FF]" href="/roadmap">

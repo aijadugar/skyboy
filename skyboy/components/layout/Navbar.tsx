@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { GitFork, Menu, Search, X } from 'lucide-react'
+import { FaGithub } from "react-icons/fa";
 import { useState } from 'react'
 import { ThemeToggle } from '@/components/theme/ThemeToggle'
 import { cn } from '@/lib/utils'
@@ -13,7 +14,7 @@ const navItems = [
   { label: 'Evaluations', href: '/patterns/evaluations' },
   { label: 'Fine-Tuning', href: '/patterns/finetuning' },
   { label: 'Deployment', href: '/patterns/deployment' },
-  { label: 'Prompting', href: '/patterns/prompting' },
+  // { label: 'Prompting', href: '/patterns/prompting' },
   { label: 'MCP', href: '/patterns/mcp' },
   { label: 'Observability', href: '/patterns/observability' },
 ]
@@ -62,11 +63,11 @@ export function Navbar() {
             <span className="font-mono text-xs">⌘K</span>
           </button>
           <Link
-            href="https://github.com/skyboy-ai/skyboy-ai-patterns"
+            href="https://github.com/aijadugar/skyboy"
             aria-label="GitHub repository"
             className="inline-flex size-9 items-center justify-center border-2 border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-primary)] shadow-[3px_3px_0_var(--border)] transition-[transform,box-shadow,border-color] duration-100 hover:-translate-y-0.5 hover:border-[#00D2FF]"
           >
-            <GitFork className="size-4" />
+            <FaGithub className="size-4" />
           </Link>
           <ThemeToggle />
         </div>
@@ -105,11 +106,11 @@ export function Navbar() {
               <span className="font-mono text-xs">⌘K</span>
             </button>
             <Link
-              href="https://github.com/skyboy-ai/skyboy-ai-patterns"
+              href="https://github.com/aijadugar/skyboy"
               aria-label="GitHub repository"
               className="inline-flex size-9 items-center justify-center border-2 border-[var(--border)] bg-[var(--bg-card)] shadow-[3px_3px_0_var(--border)]"
             >
-              <GitFork className="size-4" />
+              <FaGithub className="size-4" />
             </Link>
             <ThemeToggle />
           </div>
