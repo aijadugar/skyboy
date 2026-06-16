@@ -1,6 +1,6 @@
 # Skyboy AI Patterns
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE) [![Stars](https://img.shields.io/github/stars/skyboy-ai/skyboy-ai-patterns?style=social)](https://github.com/skyboy-ai/skyboy-ai-patterns) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00D2FF.svg)](CONTRIBUTING.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](LICENSE) [![Stars](https://img.shields.io/github/stars/skyboy-ai/skyboy-ai-patterns?style=social)](https://github.com/aijadugar/skyboy) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-00D2FF.svg)](CONTRIBUTING.md)
 
 > Production-ready patterns, architectures, and implementation guides for modern software and AI systems.
 
