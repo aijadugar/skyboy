@@ -48,4 +48,4 @@ Contributions should add practical patterns, benchmarks, examples, or maintenanc
 
 ## License
 
-MIT License. Copyright 2025 Skyboy AI Patterns.
+MIT License. Copyright 2025-2026 Skyboy AI Patterns.
