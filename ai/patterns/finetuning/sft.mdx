@@ -1,0 +1,61 @@
+---
+title: Supervised Fine-Tuning
+description: Train a model on instruction-response pairs for stable task behavior.
+category: finetuning
+difficulty: advanced
+frameworks:
+  - openai
+  - vllm
+  - modal
+models:
+  - gpt-4o-mini
+  - llama-3.1-8b
+tags:
+  - sft
+  - finetuning
+  - dataset
+featured: false
+author: skyboy
+updatedAt: 2025-06-11T00:00:00.000Z
+---
+## Code
+
+```python
+import json
+from pathlib import Path
+
+raw_examples = [
+    {"instruction": "Classify: chargeback after renewal", "output": "billing_dispute"},
+    {"instruction": "Classify: cannot reset password", "output": "account_access"},
+]
+
+def to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:
+    return {
+        "messages": [
+            {"role": "system", "content": "Return one support intent label."},
+            {"role": "user", "content": example["instruction"]},
+            {"role": "assistant", "content": example["output"]},
+        ]
+    }
+
+dataset = [to_chat_row(row) for row in raw_examples]
+Path("train.jsonl").write_text("\n".join(json.dumps(row) for row in dataset))
+print(f"wrote {len(dataset)} examples")
+```
+
+## Architecture
+
+```mermaid
+graph TD
+    A[Input] --> B[Supervised Fine-Tuning]
+    B --> C[Validation]
+    C --> D[Execution]
+    D --> E[Metrics]
+    E --> F[Response]
+```
+
+## References
+
+- [arxiv.org](https://arxiv.org/abs/2106.09685)
+- [huggingface.co](https://huggingface.co/docs/trl/sft_trainer)
+- [huggingface.co](https://huggingface.co/docs/peft/index)

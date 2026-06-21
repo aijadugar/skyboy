@@ -1,0 +1,699 @@
+{
+  "patterns": [
+    {
+      "id": "agents/reflection-agent",
+      "name": "Reflection Agent",
+      "title": "Reflection Agent",
+      "description": "Add a bounded critique-and-revise loop for answers that need self-checking.",
+      "category": "agents",
+      "difficulty": "advanced",
+      "frameworks": [
+        "langgraph",
+        "openai",
+        "anthropic"
+      ],
+      "models": [
+        "gpt-4o",
+        "claude-3-5-sonnet"
+      ],
+      "tags": [
+        "agents",
+        "reflection",
+        "quality"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-02",
+      "slug": "reflection-agent",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "response": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+        "graph TD\n    A[Input] --> B[Reflection Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Reflection Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [langchain-ai.github.io](https://langchain-ai.github.io/langgraph/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/tool_calling/)\n- [platform.openai.com](https://platform.openai.com/docs/guides/function-calling)\n"
+    },
+    {
+      "id": "agents/router-agent",
+      "name": "Router Agent",
+      "title": "Router Agent",
+      "description": "Route requests to specialized tools or agents before generation.",
+      "category": "agents",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "langgraph",
+        "langchain",
+        "openai"
+      ],
+      "models": [
+        "gpt-4o",
+        "claude-3-5-sonnet"
+      ],
+      "tags": [
+        "agents",
+        "routing",
+        "tools"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-01",
+      "slug": "router-agent",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "response": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+        "graph TD\n    A[Input] --> B[Router Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Router Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [langchain-ai.github.io](https://langchain-ai.github.io/langgraph/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/tool_calling/)\n- [platform.openai.com](https://platform.openai.com/docs/guides/function-calling)\n"
+    },
+    {
+      "id": "agents/tool-calling-agent",
+      "name": "Tool Calling Agent",
+      "title": "Tool Calling Agent",
+      "description": "Expose typed tools to an LLM while keeping execution deterministic and auditable.",
+      "category": "agents",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "langchain",
+        "openai",
+        "anthropic"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "tools",
+        "function-calling",
+        "agents"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-03",
+      "slug": "tool-calling-agent",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "response": "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))",
+        "graph TD\n    A[Input] --> B[Tool Calling Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Callable\n\n@dataclass\nclass Tool:\n    name: str\n    description: str\n    run: Callable[[str], str]\n\ndef route(task: str, tools: list[Tool]) -> str:\n    lowered = task.lower()\n    if \"sql\" in lowered or \"database\" in lowered:\n        return \"query_db\"\n    if \"summarize\" in lowered or \"brief\" in lowered:\n        return \"summarize\"\n    return \"answer\"\n\ndef execute(task: str, tools: list[Tool]) -> str:\n    registry = {tool.name: tool for tool in tools}\n    selected = route(task, tools)\n    return registry[selected].run(task)\n\ntools = [\n    Tool(\"answer\", \"General response\", lambda task: f\"answer: {task}\"),\n    Tool(\"summarize\", \"Condense text\", lambda task: task[:120]),\n    Tool(\"query_db\", \"Run approved read-only SQL\", lambda _: \"SELECT count(*) FROM tickets;\"),\n]\n\nprint(execute(\"summarize the incident report\", tools))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Tool Calling Agent]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [langchain-ai.github.io](https://langchain-ai.github.io/langgraph/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/tool_calling/)\n- [platform.openai.com](https://platform.openai.com/docs/guides/function-calling)\n"
+    },
+    {
+      "id": "deployment/fastapi-deployment",
+      "name": "FastAPI Deployment",
+      "title": "FastAPI Deployment",
+      "description": "Wrap model inference behind a typed FastAPI service.",
+      "category": "deployment",
+      "difficulty": "beginner",
+      "frameworks": [
+        "fastapi",
+        "openai",
+        "vllm"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "llama-3.1-8b"
+      ],
+      "tags": [
+        "deployment",
+        "fastapi",
+        "api"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-13",
+      "slug": "fastapi-deployment",
+      "trigger": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "response": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "examples": [
+        "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+        "graph TD\n    A[Input] --> B[FastAPI Deployment]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[FastAPI Deployment]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [fastapi.tiangolo.com](https://fastapi.tiangolo.com/deployment/)\n- [modal.com](https://modal.com/docs/guide/gpu)\n- [docs.vllm.ai](https://docs.vllm.ai/)\n"
+    },
+    {
+      "id": "deployment/modal-gpu-worker",
+      "name": "Modal GPU Worker",
+      "title": "Modal GPU Worker",
+      "description": "Run bursty GPU inference jobs on Modal with cold-start aware workers.",
+      "category": "deployment",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "modal",
+        "vllm",
+        "openai"
+      ],
+      "models": [
+        "llama-3.1-8b",
+        "mistral-7b"
+      ],
+      "tags": [
+        "deployment",
+        "gpu",
+        "modal"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-14",
+      "slug": "modal-gpu-worker",
+      "trigger": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "response": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "examples": [
+        "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+        "graph TD\n    A[Input] --> B[Modal GPU Worker]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Modal GPU Worker]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [fastapi.tiangolo.com](https://fastapi.tiangolo.com/deployment/)\n- [modal.com](https://modal.com/docs/guide/gpu)\n- [docs.vllm.ai](https://docs.vllm.ai/)\n"
+    },
+    {
+      "id": "deployment/serverless-inference",
+      "name": "Serverless Inference",
+      "title": "Serverless Inference",
+      "description": "Package inference behind serverless routes with strict timeouts and retries.",
+      "category": "deployment",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "fastapi",
+        "vllm"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "serverless",
+        "deployment",
+        "inference"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-15",
+      "slug": "serverless-inference",
+      "trigger": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "response": "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+      "examples": [
+        "from fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))",
+        "graph TD\n    A[Input] --> B[Serverless Inference]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom fastapi import FastAPI\nfrom pydantic import BaseModel\nimport time\n\napp = FastAPI()\n\nclass GenerateRequest(BaseModel):\n    prompt: str\n    max_tokens: int = 128\n\nclass GenerateResponse(BaseModel):\n    text: str\n    latency_ms: int\n\ndef generate_text(prompt: str, max_tokens: int) -> str:\n    trimmed = \" \".join(prompt.split())[:max_tokens]\n    return f\"model response for: {trimmed}\"\n\n@app.post(\"/generate\", response_model=GenerateResponse)\ndef generate(req: GenerateRequest) -> GenerateResponse:\n    started = time.perf_counter()\n    text = generate_text(req.prompt, req.max_tokens)\n    return GenerateResponse(text=text, latency_ms=int((time.perf_counter() - started) * 1000))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Serverless Inference]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [fastapi.tiangolo.com](https://fastapi.tiangolo.com/deployment/)\n- [modal.com](https://modal.com/docs/guide/gpu)\n- [docs.vllm.ai](https://docs.vllm.ai/)\n"
+    },
+    {
+      "id": "evaluations/groundedness",
+      "name": "Groundedness",
+      "title": "Groundedness",
+      "description": "Measure whether answer statements are entailed by supplied evidence.",
+      "category": "evaluations",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "llamaindex",
+        "langchain"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "text-embedding-3-large"
+      ],
+      "tags": [
+        "evals",
+        "groundedness",
+        "citations"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-09",
+      "slug": "groundedness",
+      "trigger": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "response": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "examples": [
+        "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+        "graph TD\n    A[Input] --> B[Groundedness]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Groundedness]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.ragas.io](https://docs.ragas.io/)\n- [arxiv.org](https://arxiv.org/abs/2306.05685)\n- [platform.openai.com](https://platform.openai.com/docs/guides/evals)\n"
+    },
+    {
+      "id": "evaluations/hallucination-detection",
+      "name": "Hallucination Detection",
+      "title": "Hallucination Detection",
+      "description": "Flag answers that introduce claims not supported by retrieved context.",
+      "category": "evaluations",
+      "difficulty": "advanced",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "langchain"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "evals",
+        "hallucination",
+        "rag"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-08",
+      "slug": "hallucination-detection",
+      "trigger": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "response": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "examples": [
+        "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+        "graph TD\n    A[Input] --> B[Hallucination Detection]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Hallucination Detection]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.ragas.io](https://docs.ragas.io/)\n- [arxiv.org](https://arxiv.org/abs/2306.05685)\n- [platform.openai.com](https://platform.openai.com/docs/guides/evals)\n"
+    },
+    {
+      "id": "evaluations/llm-as-judge",
+      "name": "LLM-as-Judge",
+      "title": "LLM-as-Judge",
+      "description": "Use a rubric-driven model judge to score subjective answer quality.",
+      "category": "evaluations",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "langchain"
+      ],
+      "models": [
+        "gpt-4o",
+        "claude-3-5-sonnet"
+      ],
+      "tags": [
+        "evals",
+        "judge",
+        "rubric"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-07",
+      "slug": "llm-as-judge",
+      "trigger": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "response": "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+      "examples": [
+        "from statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))",
+        "graph TD\n    A[Input] --> B[LLM-as-Judge]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom statistics import mean\n\nexamples = [\n    {\"answer\": \"The refund window is 30 days.\", \"context\": \"Refunds are available for 30 days.\"},\n    {\"answer\": \"Enterprise support is included.\", \"context\": \"Enterprise support requires a paid plan.\"},\n]\n\ndef grounded_score(answer: str, context: str) -> float:\n    answer_terms = {term.lower().strip(\".,\") for term in answer.split() if len(term) > 3}\n    context_terms = {term.lower().strip(\".,\") for term in context.split()}\n    return len(answer_terms & context_terms) / max(len(answer_terms), 1)\n\ndef evaluate(rows: list[dict[str, str]]) -> dict[str, float]:\n    scores = [grounded_score(row[\"answer\"], row[\"context\"]) for row in rows]\n    return {\"mean_groundedness\": round(mean(scores), 3)}\n\nprint(evaluate(examples))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[LLM-as-Judge]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.ragas.io](https://docs.ragas.io/)\n- [arxiv.org](https://arxiv.org/abs/2306.05685)\n- [platform.openai.com](https://platform.openai.com/docs/guides/evals)\n"
+    },
+    {
+      "id": "finetuning/lora",
+      "name": "LoRA Fine-Tuning",
+      "title": "LoRA Fine-Tuning",
+      "description": "Adapt a base model with low-rank adapters instead of full fine-tuning.",
+      "category": "finetuning",
+      "difficulty": "advanced",
+      "frameworks": [
+        "openai",
+        "vllm",
+        "modal"
+      ],
+      "models": [
+        "llama-3.1-8b",
+        "mistral-7b"
+      ],
+      "tags": [
+        "finetuning",
+        "lora",
+        "peft"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-10",
+      "slug": "lora",
+      "trigger": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "response": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "examples": [
+        "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+        "graph TD\n    A[Input] --> B[LoRA Fine-Tuning]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[LoRA Fine-Tuning]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [arxiv.org](https://arxiv.org/abs/2106.09685)\n- [huggingface.co](https://huggingface.co/docs/trl/sft_trainer)\n- [huggingface.co](https://huggingface.co/docs/peft/index)\n"
+    },
+    {
+      "id": "finetuning/sft",
+      "name": "Supervised Fine-Tuning",
+      "title": "Supervised Fine-Tuning",
+      "description": "Train a model on instruction-response pairs for stable task behavior.",
+      "category": "finetuning",
+      "difficulty": "advanced",
+      "frameworks": [
+        "openai",
+        "vllm",
+        "modal"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "llama-3.1-8b"
+      ],
+      "tags": [
+        "sft",
+        "finetuning",
+        "dataset"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-11",
+      "slug": "sft",
+      "trigger": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "response": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "examples": [
+        "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+        "graph TD\n    A[Input] --> B[Supervised Fine-Tuning]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Supervised Fine-Tuning]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [arxiv.org](https://arxiv.org/abs/2106.09685)\n- [huggingface.co](https://huggingface.co/docs/trl/sft_trainer)\n- [huggingface.co](https://huggingface.co/docs/peft/index)\n"
+    },
+    {
+      "id": "finetuning/synthetic-data",
+      "name": "Synthetic Data Generation",
+      "title": "Synthetic Data Generation",
+      "description": "Generate and filter training examples for scarce edge cases.",
+      "category": "finetuning",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "langchain"
+      ],
+      "models": [
+        "gpt-4o",
+        "claude-3-5-sonnet"
+      ],
+      "tags": [
+        "synthetic-data",
+        "datasets",
+        "evals"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-12",
+      "slug": "synthetic-data",
+      "trigger": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "response": "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+      "examples": [
+        "import json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")",
+        "graph TD\n    A[Input] --> B[Synthetic Data Generation]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport json\nfrom pathlib import Path\n\nraw_examples = [\n    {\"instruction\": \"Classify: chargeback after renewal\", \"output\": \"billing_dispute\"},\n    {\"instruction\": \"Classify: cannot reset password\", \"output\": \"account_access\"},\n]\n\ndef to_chat_row(example: dict[str, str]) -> dict[str, list[dict[str, str]]]:\n    return {\n        \"messages\": [\n            {\"role\": \"system\", \"content\": \"Return one support intent label.\"},\n            {\"role\": \"user\", \"content\": example[\"instruction\"]},\n            {\"role\": \"assistant\", \"content\": example[\"output\"]},\n        ]\n    }\n\ndataset = [to_chat_row(row) for row in raw_examples]\nPath(\"train.jsonl\").write_text(\"\\n\".join(json.dumps(row) for row in dataset))\nprint(f\"wrote {len(dataset)} examples\")\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Synthetic Data Generation]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [arxiv.org](https://arxiv.org/abs/2106.09685)\n- [huggingface.co](https://huggingface.co/docs/trl/sft_trainer)\n- [huggingface.co](https://huggingface.co/docs/peft/index)\n"
+    },
+    {
+      "id": "mcp/mcp-client",
+      "name": "MCP Client",
+      "title": "MCP Client",
+      "description": "Connect an assistant runtime to MCP servers with approval and logging.",
+      "category": "mcp",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "anthropic",
+        "openai",
+        "langchain"
+      ],
+      "models": [
+        "claude-3-5-sonnet",
+        "gpt-4o-mini"
+      ],
+      "tags": [
+        "mcp",
+        "client",
+        "tools"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-17",
+      "slug": "mcp-client",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "response": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+        "graph TD\n    A[Input] --> B[MCP Client]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[MCP Client]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [modelcontextprotocol.io](https://modelcontextprotocol.io/)\n- [github.com](https://github.com/modelcontextprotocol/python-sdk)\n- [github.com](https://github.com/modelcontextprotocol/typescript-sdk)\n"
+    },
+    {
+      "id": "mcp/mcp-server",
+      "name": "MCP Server",
+      "title": "MCP Server",
+      "description": "Expose internal tools through a Model Context Protocol server.",
+      "category": "mcp",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "fastapi"
+      ],
+      "models": [
+        "claude-3-5-sonnet",
+        "gpt-4o"
+      ],
+      "tags": [
+        "mcp",
+        "tools",
+        "server"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-16",
+      "slug": "mcp-server",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "response": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+        "graph TD\n    A[Input] --> B[MCP Server]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[MCP Server]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [modelcontextprotocol.io](https://modelcontextprotocol.io/)\n- [github.com](https://github.com/modelcontextprotocol/python-sdk)\n- [github.com](https://github.com/modelcontextprotocol/typescript-sdk)\n"
+    },
+    {
+      "id": "mcp/tool-registry",
+      "name": "Tool Registry",
+      "title": "Tool Registry",
+      "description": "Maintain a versioned catalog of tool schemas, owners, and risk levels.",
+      "category": "mcp",
+      "difficulty": "beginner",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "fastapi"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "tools",
+        "registry",
+        "governance"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-18",
+      "slug": "tool-registry",
+      "trigger": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "response": "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+      "examples": [
+        "from dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))",
+        "graph TD\n    A[Input] --> B[Tool Registry]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nfrom dataclasses import dataclass\nfrom typing import Any, Callable\n\n@dataclass\nclass ToolSpec:\n    name: str\n    description: str\n    handler: Callable[[dict[str, Any]], dict[str, Any]]\n\nclass ToolRegistry:\n    def __init__(self) -> None:\n        self.tools: dict[str, ToolSpec] = {}\n\n    def register(self, spec: ToolSpec) -> None:\n        if spec.name in self.tools:\n            raise ValueError(f\"duplicate tool: {spec.name}\")\n        self.tools[spec.name] = spec\n\n    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:\n        return self.tools[name].handler(payload)\n\nregistry = ToolRegistry()\nregistry.register(ToolSpec(\"healthcheck\", \"Return service health\", lambda _: {\"ok\": True}))\nprint(registry.call(\"healthcheck\", {}))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Tool Registry]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [modelcontextprotocol.io](https://modelcontextprotocol.io/)\n- [github.com](https://github.com/modelcontextprotocol/python-sdk)\n- [github.com](https://github.com/modelcontextprotocol/typescript-sdk)\n"
+    },
+    {
+      "id": "observability/cost-tracking",
+      "name": "Cost Tracking",
+      "title": "Cost Tracking",
+      "description": "Attribute token spend by tenant, feature, model, and request.",
+      "category": "observability",
+      "difficulty": "beginner",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "fastapi"
+      ],
+      "models": [
+        "gpt-4o",
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "cost",
+        "tokens",
+        "observability"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-20",
+      "slug": "cost-tracking",
+      "trigger": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Cost Tracking\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "response": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Cost Tracking\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "examples": [
+        "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Cost Tracking\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+        "graph TD\n    A[Input] --> B[Cost Tracking]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Cost Tracking\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Cost Tracking]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [opentelemetry.io](https://opentelemetry.io/docs/)\n- [www.langchain.com](https://www.langchain.com/langsmith)\n- [docs.smith.langchain.com](https://docs.smith.langchain.com/observability)\n"
+    },
+    {
+      "id": "observability/llm-tracing",
+      "name": "LLM Tracing",
+      "title": "LLM Tracing",
+      "description": "Trace prompts, model calls, tool calls, latency, and token usage per request.",
+      "category": "observability",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "langchain",
+        "openai",
+        "fastapi"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "observability",
+        "tracing",
+        "latency"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-19",
+      "slug": "llm-tracing",
+      "trigger": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"LLM Tracing\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "response": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"LLM Tracing\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "examples": [
+        "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"LLM Tracing\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+        "graph TD\n    A[Input] --> B[LLM Tracing]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"LLM Tracing\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[LLM Tracing]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [opentelemetry.io](https://opentelemetry.io/docs/)\n- [www.langchain.com](https://www.langchain.com/langsmith)\n- [docs.smith.langchain.com](https://docs.smith.langchain.com/observability)\n"
+    },
+    {
+      "id": "observability/prompt-logging",
+      "name": "Prompt Logging",
+      "title": "Prompt Logging",
+      "description": "Log prompts and responses with redaction, sampling, and replay metadata.",
+      "category": "observability",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "openai",
+        "anthropic",
+        "langchain"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "prompts",
+        "logging",
+        "privacy"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-21",
+      "slug": "prompt-logging",
+      "trigger": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Prompt Logging\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "response": "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Prompt Logging\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+      "examples": [
+        "import time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Prompt Logging\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)",
+        "graph TD\n    A[Input] --> B[Prompt Logging]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport time\nimport uuid\nfrom contextlib import contextmanager\n\n@contextmanager\ndef llm_span(name: str, **attrs: object):\n    trace_id = str(uuid.uuid4())\n    started = time.perf_counter()\n    try:\n        yield trace_id\n    finally:\n        elapsed_ms = int((time.perf_counter() - started) * 1000)\n        event = {\"trace_id\": trace_id, \"name\": name, \"latency_ms\": elapsed_ms, **attrs}\n        print(event)\n\nwith llm_span(\"Prompt Logging\", model=\"gpt-4o-mini\", prompt_tokens=128):\n    response = \"Grounded answer with cited context.\"\nprint(response)\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Prompt Logging]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [opentelemetry.io](https://opentelemetry.io/docs/)\n- [www.langchain.com](https://www.langchain.com/langsmith)\n- [docs.smith.langchain.com](https://docs.smith.langchain.com/observability)\n"
+    },
+    {
+      "id": "rag/basic-rag",
+      "name": "Basic RAG",
+      "title": "Basic RAG",
+      "description": "Retrieve top-k chunks and ground the answer in context before generation.",
+      "category": "rag",
+      "difficulty": "beginner",
+      "frameworks": [
+        "llamaindex",
+        "langchain",
+        "openai"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "text-embedding-3-small"
+      ],
+      "tags": [
+        "rag",
+        "retrieval",
+        "embeddings"
+      ],
+      "featured": true,
+      "author": "skyboy",
+      "updatedAt": "2025-06-04",
+      "slug": "basic-rag",
+      "trigger": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "response": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "examples": [
+        "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+        "graph TD\n    A[Input] --> B[Basic RAG]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Basic RAG]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.llamaindex.ai](https://docs.llamaindex.ai/en/stable/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/retrievers/)\n- [arxiv.org](https://arxiv.org/abs/2312.10997)\n"
+    },
+    {
+      "id": "rag/context-compression",
+      "name": "Context Compression",
+      "title": "Context Compression",
+      "description": "Trim retrieved chunks to the evidence needed for a cheaper grounded prompt.",
+      "category": "rag",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "langchain",
+        "llamaindex",
+        "openai"
+      ],
+      "models": [
+        "gpt-4o-mini",
+        "claude-3-haiku"
+      ],
+      "tags": [
+        "rag",
+        "compression",
+        "latency"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-06",
+      "slug": "context-compression",
+      "trigger": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "response": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "examples": [
+        "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+        "graph TD\n    A[Input] --> B[Context Compression]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Context Compression]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.llamaindex.ai](https://docs.llamaindex.ai/en/stable/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/retrievers/)\n- [arxiv.org](https://arxiv.org/abs/2312.10997)\n"
+    },
+    {
+      "id": "rag/hybrid-search",
+      "name": "Hybrid Search RAG",
+      "title": "Hybrid Search RAG",
+      "description": "Combine dense vector retrieval with sparse BM25 for higher recall.",
+      "category": "rag",
+      "difficulty": "intermediate",
+      "frameworks": [
+        "llamaindex",
+        "langchain",
+        "openai"
+      ],
+      "models": [
+        "gpt-4o",
+        "claude-3-5-sonnet",
+        "text-embedding-3-large"
+      ],
+      "tags": [
+        "rag",
+        "bm25",
+        "vector-search"
+      ],
+      "featured": false,
+      "author": "skyboy",
+      "updatedAt": "2025-06-05",
+      "slug": "hybrid-search",
+      "trigger": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "response": "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+      "examples": [
+        "import math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))",
+        "graph TD\n    A[Input] --> B[Hybrid Search RAG]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]"
+      ],
+      "content": "## Code\n\n```python\nimport math\nfrom collections import Counter\n\ndocuments = {\n    \"runbook\": \"Restart the worker after rotating the OpenAI key.\",\n    \"pricing\": \"Track token usage by model and request id.\",\n    \"retrieval\": \"Hybrid search combines BM25 with vector similarity.\",\n}\n\ndef tokenize(text: str) -> list[str]:\n    return [term.strip(\".,\").lower() for term in text.split()]\n\ndef score(query: str, text: str) -> float:\n    query_terms = Counter(tokenize(query))\n    doc_terms = Counter(tokenize(text))\n    shared = set(query_terms) & set(doc_terms)\n    numerator = sum(query_terms[term] * doc_terms[term] for term in shared)\n    query_norm = math.sqrt(sum(value * value for value in query_terms.values()))\n    doc_norm = math.sqrt(sum(value * value for value in doc_terms.values()))\n    return numerator / (query_norm * doc_norm or 1)\n\ndef retrieve(query: str, k: int = 2) -> list[tuple[str, float]]:\n    ranked = [(doc_id, round(score(query, text), 3)) for doc_id, text in documents.items()]\n    return sorted(ranked, key=lambda row: row[1], reverse=True)[:k]\n\nprint(retrieve(\"hybrid search token usage\"))\n```\n\n## Architecture\n\n```mermaid\ngraph TD\n    A[Input] --> B[Hybrid Search RAG]\n    B --> C[Validation]\n    C --> D[Execution]\n    D --> E[Metrics]\n    E --> F[Response]\n```\n\n## References\n\n- [docs.llamaindex.ai](https://docs.llamaindex.ai/en/stable/)\n- [python.langchain.com](https://python.langchain.com/docs/concepts/retrievers/)\n- [arxiv.org](https://arxiv.org/abs/2312.10997)\n"
+    }
+  ]
+}
