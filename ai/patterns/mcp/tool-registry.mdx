@@ -1,0 +1,65 @@
+---
+title: Tool Registry
+description: 'Maintain a versioned catalog of tool schemas, owners, and risk levels.'
+category: mcp
+difficulty: beginner
+frameworks:
+  - openai
+  - anthropic
+  - fastapi
+models:
+  - gpt-4o-mini
+  - claude-3-haiku
+tags:
+  - tools
+  - registry
+  - governance
+featured: false
+author: skyboy
+updatedAt: 2025-06-18T00:00:00.000Z
+---
+## Code
+
+```python
+from dataclasses import dataclass
+from typing import Any, Callable
+
+@dataclass
+class ToolSpec:
+    name: str
+    description: str
+    handler: Callable[[dict[str, Any]], dict[str, Any]]
+
+class ToolRegistry:
+    def __init__(self) -> None:
+        self.tools: dict[str, ToolSpec] = {}
+
+    def register(self, spec: ToolSpec) -> None:
+        if spec.name in self.tools:
+            raise ValueError(f"duplicate tool: {spec.name}")
+        self.tools[spec.name] = spec
+
+    def call(self, name: str, payload: dict[str, Any]) -> dict[str, Any]:
+        return self.tools[name].handler(payload)
+
+registry = ToolRegistry()
+registry.register(ToolSpec("healthcheck", "Return service health", lambda _: {"ok": True}))
+print(registry.call("healthcheck", {}))
+```
+
+## Architecture
+
+```mermaid
+graph TD
+    A[Input] --> B[Tool Registry]
+    B --> C[Validation]
+    C --> D[Execution]
+    D --> E[Metrics]
+    E --> F[Response]
+```
+
+## References
+
+- [modelcontextprotocol.io](https://modelcontextprotocol.io/)
+- [github.com](https://github.com/modelcontextprotocol/python-sdk)
+- [github.com](https://github.com/modelcontextprotocol/typescript-sdk)

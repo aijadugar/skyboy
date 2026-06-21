@@ -1,0 +1,14 @@
+# Default ownership for repository-wide changes.
+* @aijadugar
+
+# Domain ownership.
+/core/ @aijadugar
+/ai/ @aijadugar
+/ui/ @aijadugar
+/api/ @aijadugar
+/app/ @aijadugar
+/config/ @aijadugar
+/scripts/ @aijadugar
+/docs/ @aijadugar
+/tests/ @aijadugar
+/.github/ @aijadugar
