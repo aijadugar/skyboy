@@ -1,0 +1,29 @@
+---
+import { cn } from "@/lib/utils";
+
+export interface Props {
+  as?: keyof HTMLElementTagNameMap;
+  class?: string;
+  glow?: boolean;
+}
+
+const { as: Tag = "div", class: className, glow = true } = Astro.props;
+---
+
+<Tag
+  class={cn(
+    "group relative rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur transition duration-200 hover:border-white/[0.16]",
+    className,
+  )}
+>
+  {
+    glow && (
+      <span
+        aria-hidden="true"
+        class="pointer-events-none absolute -inset-px -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-200 group-hover:opacity-60"
+        style="background: radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.22), rgba(139, 92, 246, 0.12) 42%, transparent 72%);"
+      />
+    )
+  }
+  <slot />
+</Tag>

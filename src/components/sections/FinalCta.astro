@@ -1,0 +1,27 @@
+---
+import AnimatedGridBackground from "@/components/shared/AnimatedGridBackground";
+---
+
+<section class="relative isolate overflow-hidden py-20 md:py-24">
+  <AnimatedGridBackground client:visible blobOpacity={0.22} className="opacity-90" />
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent"></div>
+  <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-skyboy-background to-transparent"></div>
+
+  <div class="skyboy-container relative z-10">
+    <div class="mx-auto grid max-w-3xl justify-items-center text-center">
+      <h2 class="text-4xl font-semibold tracking-normal text-skyboy-text md:text-6xl">
+        Stop rebuilding evaluation infrastructure
+      </h2>
+      <p class="mt-6 max-w-2xl text-base leading-8 text-skyboy-text-secondary md:text-lg">
+        Push your first algorithm and see a full benchmark report in minutes.
+      </p>
+      <a
+        href="#pricing"
+        class="mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-gradient-accent px-6 text-sm font-medium text-skyboy-text shadow-[0_0_30px_rgba(59,130,246,0.24)] transition hover:scale-[1.01] hover:shadow-[0_0_42px_rgba(34,211,238,0.28)]"
+      >
+        Get Started — Free
+      </a>
+      <p class="mt-4 text-sm text-skyboy-text-muted">No credit card required</p>
+    </div>
+  </div>
+</section>

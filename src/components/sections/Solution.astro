@@ -1,0 +1,52 @@
+---
+import GradientText from "@/components/shared/GradientText.astro";
+import { algorithmLifecycleSteps } from "@/content/copy";
+---
+
+<section id="solution" class="skyboy-section">
+  <div class="skyboy-container">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+      <div class="max-w-2xl">
+        <p class="text-sm font-medium text-skyboy-success">The Solution</p>
+        <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+          One platform for the entire <GradientText>algorithm lifecycle</GradientText>
+        </h2>
+        <p class="mt-6 text-base leading-8 text-skyboy-text-secondary md:text-lg">
+          Skyboy is the infrastructure layer purpose-built for algorithm engineering.
+          Push an algorithm, and Skyboy runs the benchmarks, compares baselines, tracks
+          every experiment, catches regressions, and packages it for deployment,
+          automatically.
+        </p>
+      </div>
+
+      <div
+        class="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 md:p-7"
+        aria-label="Ordered algorithm lifecycle pipeline"
+      >
+        <div
+          aria-hidden="true"
+          class="absolute inset-x-12 top-1/2 h-px bg-gradient-to-r from-skyboy-blue/0 via-skyboy-blue/50 to-skyboy-cyan/0 max-lg:hidden"
+        >
+        </div>
+        <div
+          aria-hidden="true"
+          class="absolute bottom-10 left-1/2 top-10 w-px bg-gradient-to-b from-skyboy-blue/0 via-skyboy-blue/50 to-skyboy-cyan/0 lg:hidden"
+        >
+        </div>
+
+        <div class="relative grid gap-3 lg:grid-cols-4">
+          {
+            algorithmLifecycleSteps.map((step, index) => (
+              <div class="relative flex items-center gap-3 rounded-lg border border-white/[0.08] bg-skyboy-surface/90 px-4 py-3 text-sm text-skyboy-text-secondary shadow-[0_16px_40px_rgba(0,0,0,0.14)] transition duration-200 hover:border-white/[0.16] hover:text-skyboy-text">
+                <span class="flex size-7 shrink-0 items-center justify-center rounded-full border border-white/[0.1] bg-white/[0.04] font-mono text-[11px] text-skyboy-text-muted">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span>{step}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

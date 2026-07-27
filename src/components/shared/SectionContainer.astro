@@ -1,0 +1,16 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  id?: string;
+  class?: string;
+}
+
+const { id, class: className } = Astro.props;
+---
+
+<section id={id} class={cn("skyboy-section", className)}>
+  <div class="skyboy-container">
+    <slot />
+  </div>
+</section>

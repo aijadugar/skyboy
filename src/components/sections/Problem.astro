@@ -1,0 +1,59 @@
+---
+import { algorithmLifecycleSteps } from "@/content/copy";
+
+const scatteredClasses = [
+  "lg:translate-x-4 lg:-translate-y-1 lg:-rotate-3",
+  "lg:translate-x-1 lg:translate-y-5 lg:rotate-2",
+  "lg:-translate-x-5 lg:translate-y-1 lg:rotate-1",
+  "lg:translate-x-6 lg:-translate-y-3 lg:-rotate-2",
+  "lg:-translate-x-2 lg:translate-y-4 lg:rotate-3",
+  "lg:translate-x-3 lg:-translate-y-2 lg:rotate-1",
+  "lg:-translate-x-6 lg:translate-y-2 lg:-rotate-2",
+  "lg:translate-x-2 lg:translate-y-6 lg:rotate-2",
+];
+---
+
+<section id="problem" class="skyboy-section">
+  <div class="skyboy-container">
+    <div class="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+      <div class="max-w-2xl">
+        <p class="text-sm font-medium text-skyboy-success">The Problem</p>
+        <h2 class="mt-4 max-w-2xl text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+          Every algorithm reinvents the same infrastructure
+        </h2>
+        <p class="mt-6 text-base leading-8 text-skyboy-text-secondary md:text-lg">
+          Software engineering standardized on GitHub, CI/CD, Docker, and monitoring.
+          But every new ranking, retrieval, memory, or reasoning algorithm still forces
+          teams to rebuild benchmarking, evaluation, comparison, and deployment tooling
+          from scratch. Then it happens again at every company, on every project.
+        </p>
+      </div>
+
+      <div
+        class="relative rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 md:p-7"
+        aria-label="Repeated manual algorithm engineering steps"
+      >
+        <div
+          aria-hidden="true"
+          class="absolute inset-6 rounded-full bg-gradient-to-br from-skyboy-success/10 via-skyboy-blue/10 to-transparent blur-3xl"
+        >
+        </div>
+        <div class="relative grid grid-cols-1 gap-3 sm:grid-cols-2">
+          {
+            algorithmLifecycleSteps.map((step, index) => (
+              <div
+                class:list={[
+                  "rounded-lg border border-white/[0.08] bg-skyboy-surface/80 px-4 py-3 text-sm text-skyboy-text-secondary shadow-[0_16px_40px_rgba(0,0,0,0.16)] transition duration-200 hover:border-white/[0.16] hover:text-skyboy-text",
+                  index % 3 === 0 ? "sm:min-h-16" : "sm:min-h-12",
+                  scatteredClasses[index],
+                ]}
+              >
+                {step}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

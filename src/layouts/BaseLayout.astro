@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer.astro";
+
+const title = "Skyboy - The GitHub for AI Algorithms";
+const description =
+  "Skyboy is the infrastructure layer for AI algorithm engineering: benchmarking, evaluation, experiment tracking, leaderboards, regression detection, and deployment for retrieval, ranking, memory, and reasoning systems.";
+const siteUrl = Astro.site ?? new URL("https://skyboy.in");
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
+const ogImageUrl = new URL("/favicon.svg", siteUrl);
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Skyboy",
+  applicationCategory: "DeveloperApplication",
+  operatingSystem: "Web",
+  url: canonicalUrl.href,
+  publisher: {
+    "@type": "Organization",
+    name: "Skyboy",
+    url: siteUrl.href,
+  },
+  description,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+};
+---
+
+<!doctype html>
+<html
+  lang="en"
+  class="dark"
+  style="--font-geist-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Consolas, monospace;"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#09090B" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl.href} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl.href} />
+    <meta property="og:site_name" content="Skyboy" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl.href} />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Navbar client:load />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

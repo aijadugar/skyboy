@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Hero from "@/components/sections/Hero";
+import TrustedBy from "@/components/sections/TrustedBy.astro";
+import Problem from "@/components/sections/Problem.astro";
+import Solution from "@/components/sections/Solution.astro";
+import HowItWorks from "@/components/sections/HowItWorks";
+import Features from "@/components/sections/Features";
+import Architecture from "@/components/sections/Architecture";
+import DashboardPreview from "@/components/sections/DashboardPreview";
+import Comparison from "@/components/sections/Comparison.astro";
+import UseCases from "@/components/sections/UseCases.astro";
+import Testimonials from "@/components/sections/Testimonials.astro";
+import Pricing from "@/components/sections/Pricing";
+import Faq from "@/components/sections/Faq";
+import FinalCta from "@/components/sections/FinalCta.astro";
+---
+
+<BaseLayout>
+  <Hero client:load />
+  <TrustedBy />
+  <Problem />
+  <Solution />
+  <HowItWorks client:visible />
+  <Features client:visible />
+  <Architecture client:visible />
+  <DashboardPreview client:visible />
+  <Comparison />
+  <UseCases />
+  <Testimonials />
+  <Pricing client:visible />
+  <Faq client:visible />
+  <FinalCta />
+</BaseLayout>

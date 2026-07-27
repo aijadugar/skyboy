@@ -1,0 +1,78 @@
+---
+import GlowCard from "@/components/shared/GlowCard.astro";
+
+const testimonials = [
+  {
+    quote:
+      "We deleted about 4,000 lines of internal eval scripts in our first month on Skyboy. Regression detection alone caught a retriever regression before it hit production.",
+    name: "Maya Chen",
+    title: "Head of ML",
+    company: "Quill AI",
+    initials: "MC",
+    avatarClass: "from-skyboy-blue/80 to-skyboy-cyan/70",
+  },
+  {
+    quote:
+      "Reproducibility was our biggest pain point in the lab. Every result on Skyboy comes with a verified re-run - that alone changed how we review papers internally.",
+    name: "Dr. Aaron Whitfield",
+    title: "Research Lead",
+    company: "Meridian Labs",
+    initials: "AW",
+    avatarClass: "from-skyboy-purple/80 to-skyboy-blue/70",
+  },
+  {
+    quote:
+      "We evaluate a dozen ranking variants a week. Skyboy's leaderboards turned that from a Slack thread of screenshots into an actual system of record.",
+    name: "Priya Nair",
+    title: "Staff Engineer",
+    company: "Northbeam",
+    initials: "PN",
+    avatarClass: "from-skyboy-success/80 to-skyboy-cyan/70",
+  },
+] as const;
+---
+
+<section id="testimonials" class="skyboy-section">
+  <div class="skyboy-container">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-medium text-skyboy-success">What people are building</p>
+      <h2 class="mt-4 text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+        Trusted by teams who used to build this themselves
+      </h2>
+    </div>
+
+    <div class="mt-14 grid gap-5 lg:grid-cols-3">
+      {
+        testimonials.map((testimonial) => (
+          <GlowCard class="flex min-h-88 flex-col overflow-hidden">
+            <span
+              aria-hidden="true"
+              class="absolute right-5 top-2 font-serif text-8xl leading-none text-skyboy-text opacity-[0.06]"
+            >
+              &quot;
+            </span>
+            <blockquote class="relative z-10 flex flex-1 flex-col">
+              <p class="text-base leading-8 text-skyboy-text-secondary">"{testimonial.quote}"</p>
+              <footer class="mt-8 flex items-center gap-4 border-t border-white/[0.08] pt-5">
+                <div
+                  class:list={[
+                    "flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br font-mono text-sm font-semibold text-skyboy-text",
+                    testimonial.avatarClass,
+                  ]}
+                >
+                  {testimonial.initials}
+                </div>
+                <div>
+                  <p class="font-medium text-skyboy-text">{testimonial.name}</p>
+                  <p class="mt-1 text-sm text-skyboy-text-muted">
+                    {testimonial.title}, {testimonial.company}
+                  </p>
+                </div>
+              </footer>
+            </blockquote>
+          </GlowCard>
+        ))
+      }
+    </div>
+  </div>
+</section>
