@@ -1,6 +1,9 @@
+import { CLI_NAME } from "@/lib/constants";
+
 export const siteCopy = {
-  name: "Skyboy.in",
-  description: "Skyboy.in landing page scaffold.",
+  name: "Skyboy",
+  description: "Skyboy landing page scaffold.",
+  cliName: CLI_NAME,
 } as const;
 
 export const algorithmLifecycleSteps = [

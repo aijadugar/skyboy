@@ -10,7 +10,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 border-b border-white/[0.08] bg-skyboy-background/80 backdrop-blur">
       <div className="skyboy-container flex h-16 items-center justify-between">
         <a href="/" className="font-semibold text-skyboy-text">
-          Skyboy.in
+          Skyboy
         </a>
         <div className="hidden items-center gap-6 text-sm text-skyboy-text-secondary md:flex">
           {navLinks.map((link) => (

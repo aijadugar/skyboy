@@ -1,10 +1,11 @@
 import { Activity, AlertTriangle, GitCompare, Rocket, Upload } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import { CLI_NAME } from "@/lib/constants";
 
 const steps = [
   {
     title: "Upload",
-    description: "Push your algorithm via CLI or Git. Skyboy detects the entry point automatically.",
+    description: `Push your algorithm with ${CLI_NAME} or Git. Skyboy detects the entry point automatically.`,
     icon: Upload,
   },
   {
