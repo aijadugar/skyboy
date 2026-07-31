@@ -3,12 +3,12 @@ import "../styles/global.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const title = "Skyboy - Benchmark AI Algorithms. Catch Regressions. Ship with Confidence.";
+const title = "Skyboy - Infrastructure for AI Algorithms";
 const description =
   "Skyboy is the benchmarking and CI/CD infrastructure for AI algorithms. Push your algorithm, get scored against standardized datasets, and catch regressions automatically.";
 const siteUrl = Astro.site ?? new URL("https://skyboy.in");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
-const ogImageUrl = new URL("/favicon.svg", siteUrl);
+const ogImageUrl = new URL("/skyboy.png", siteUrl);
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
