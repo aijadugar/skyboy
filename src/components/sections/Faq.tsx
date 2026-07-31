@@ -38,27 +38,27 @@ const faqs = [
 
 export default function Faq() {
   return (
-    <section id="faq" className="skyboy-section">
+    <section id="faq" className="skyboy-section bg-[#FAFAF8]">
       <div className="skyboy-container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-skyboy-success">FAQ</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+          <p className="text-sm font-medium text-[#2563EB]">FAQ</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111110] md:text-5xl">
             Questions, answered
           </h2>
         </div>
 
-        <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3 backdrop-blur sm:p-5">
+        <div className="mx-auto mt-14 max-w-3xl rounded-2xl border border-black/[0.08] bg-white p-3 sm:p-5">
           <Accordion type="single" collapsible className="gap-2">
             {faqs.map((faq, index) => (
               <AccordionItem
                 key={faq.question}
                 value={`faq-${index + 1}`}
-                className="rounded-xl border border-white/[0.06] bg-skyboy-background/50 px-4 not-last:border-b-white/[0.06]"
+                className="rounded-xl border border-black/[0.06] bg-[#FAFAF8] px-4 not-last:border-b-black/[0.06]"
               >
-                <AccordionTrigger className="py-4 text-base text-skyboy-text hover:no-underline">
+                <AccordionTrigger className="py-4 text-base text-[#111110] hover:no-underline">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="pb-5 text-sm leading-7 text-skyboy-text-secondary">
+                <AccordionContent className="pb-5 text-sm leading-7 text-[#4B4B48]">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

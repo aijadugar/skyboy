@@ -1,11 +1,12 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/sections/Hero";
-import Problem from "@/components/sections/Problem.astro";
-import Solution from "@/components/sections/Solution.astro";
+import EcosystemAnimation from "@/components/sections/EcosystemAnimation";
+import LeaderboardPreview from "@/components/sections/LeaderboardPreview";
 import HowItWorks from "@/components/sections/HowItWorks";
+import WhoItsFor from "@/components/sections/WhoItsFor";
+import CompetitiveFraming from "@/components/sections/CompetitiveFraming";
 import Features from "@/components/sections/Features";
-import Architecture from "@/components/sections/Architecture";
 import Pricing from "@/components/sections/Pricing";
 import Faq from "@/components/sections/Faq";
 import FinalCta from "@/components/sections/FinalCta.astro";
@@ -13,11 +14,12 @@ import FinalCta from "@/components/sections/FinalCta.astro";
 
 <BaseLayout>
   <Hero client:load />
-  <Problem />
-  <Solution />
+  <EcosystemAnimation client:visible />
+  <LeaderboardPreview client:visible />
   <HowItWorks client:visible />
+  <WhoItsFor client:visible />
+  <CompetitiveFraming client:visible />
   <Features client:visible />
-  <Architecture client:visible />
   <Pricing client:visible />
   <Faq client:visible />
   <FinalCta />

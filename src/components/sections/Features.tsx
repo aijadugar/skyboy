@@ -100,22 +100,14 @@ function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <motion.article
       variants={cardVariants}
-      className="group relative flex min-h-64 flex-col rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 backdrop-blur transition duration-200 hover:-translate-y-1 hover:border-white/[0.16]"
+      className="group relative flex min-h-56 flex-col rounded-2xl border border-black/[0.08] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-black/[0.16]"
     >
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -inset-px -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-200 group-hover:opacity-60"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.22), rgba(139, 92, 246, 0.12) 42%, transparent 72%)",
-        }}
-      />
-      <div className="flex size-11 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.04] text-skyboy-text">
+      <div className="flex size-11 items-center justify-center rounded-xl border border-black/[0.08] bg-[#F7F7F5] text-[#111110]">
         <Icon className="size-5" aria-hidden="true" />
       </div>
       <div className="mt-6 flex flex-1 flex-col">
-        <h3 className="text-lg font-semibold text-skyboy-text">{feature.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-6 text-skyboy-text-secondary">{feature.description}</p>
+        <h3 className="text-lg font-semibold text-[#111110]">{feature.title}</h3>
+        <p className="mt-3 flex-1 text-sm leading-6 text-[#4B4B48]">{feature.description}</p>
       </div>
     </motion.article>
   );
@@ -125,11 +117,11 @@ export default function Features() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="platform" className="skyboy-section">
+    <section id="platform" className="skyboy-section bg-white">
       <div className="skyboy-container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-skyboy-success">Platform</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+          <p className="text-sm font-medium text-[#2563EB]">Platform</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111110] md:text-5xl">
             Everything algorithm engineering needs, built in
           </h2>
         </div>

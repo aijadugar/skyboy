@@ -3,8 +3,6 @@
 @import "@fontsource/geist-sans/latin.css";
 @import "@fontsource/geist-mono/latin.css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: var(--font-geist-sans);
@@ -16,6 +14,8 @@
     --color-skyboy-text: var(--skyboy-text);
     --color-skyboy-text-secondary: var(--skyboy-text-secondary);
     --color-skyboy-text-muted: var(--skyboy-text-muted);
+    --color-skyboy-blue: var(--skyboy-blue);
+    --color-skyboy-blue-deep: var(--skyboy-blue-deep);
     --color-skyboy-success: var(--skyboy-success);
     --color-skyboy-warning: var(--skyboy-warning);
     --color-sidebar-ring: var(--sidebar-ring);
@@ -26,11 +26,6 @@
     --color-sidebar-primary: var(--sidebar-primary);
     --color-sidebar-foreground: var(--sidebar-foreground);
     --color-sidebar: var(--sidebar);
-    --color-chart-5: var(--chart-5);
-    --color-chart-4: var(--chart-4);
-    --color-chart-3: var(--chart-3);
-    --color-chart-2: var(--chart-2);
-    --color-chart-1: var(--chart-1);
     --color-ring: var(--ring);
     --color-input: var(--input);
     --color-border: var(--border);
@@ -61,79 +56,71 @@
 :root {
     --font-geist-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
     --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
-    --skyboy-background: #09090b;
-    --skyboy-surface: #0f0f12;
-    --skyboy-border: rgba(255, 255, 255, 0.08);
-    --skyboy-border-hover: rgba(255, 255, 255, 0.16);
-    --skyboy-text: #fafafa;
-    --skyboy-text-secondary: #a1a1aa;
-    --skyboy-text-muted: #8b8b96;
-    --skyboy-blue: #3b82f6;
-    --skyboy-blue-deep: #2563eb;
-    --skyboy-purple: #8b5cf6;
-    --skyboy-cyan: #22d3ee;
-    --skyboy-success: #34d399;
-    --skyboy-warning: #f87171;
+
+    /* Light theme palette */
+    --skyboy-background: #FAFAF8;
+    --skyboy-surface: #F0F0ED;
+    --skyboy-border: rgba(0, 0, 0, 0.08);
+    --skyboy-border-hover: rgba(0, 0, 0, 0.16);
+    --skyboy-text: #111110;
+    --skyboy-text-secondary: #4B4B48;
+    --skyboy-text-muted: #8A8A85;
+    --skyboy-blue: #2563EB;
+    --skyboy-blue-deep: #1D4ED8;
+    --skyboy-success: #16A34A;
+    --skyboy-warning: #DC2626;
+
     --background: var(--skyboy-background);
     --foreground: var(--skyboy-text);
-    --card: var(--skyboy-surface);
+    --card: #FFFFFF;
     --card-foreground: var(--skyboy-text);
-    --popover: var(--skyboy-surface);
+    --popover: #FFFFFF;
     --popover-foreground: var(--skyboy-text);
     --primary: var(--skyboy-text);
-    --primary-foreground: var(--skyboy-background);
-    --secondary: rgba(255, 255, 255, 0.06);
+    --primary-foreground: #FFFFFF;
+    --secondary: rgba(0, 0, 0, 0.04);
     --secondary-foreground: var(--skyboy-text);
-    --muted: rgba(255, 255, 255, 0.06);
+    --muted: rgba(0, 0, 0, 0.04);
     --muted-foreground: var(--skyboy-text-secondary);
-    --accent: rgba(59, 130, 246, 0.16);
+    --accent: rgba(37, 99, 235, 0.08);
     --accent-foreground: var(--skyboy-text);
-    --destructive: oklch(0.577 0.245 27.325);
+    --destructive: var(--skyboy-warning);
     --border: var(--skyboy-border);
     --input: var(--skyboy-border);
     --ring: var(--skyboy-blue);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
     --radius: 1rem;
     --sidebar: var(--skyboy-surface);
     --sidebar-foreground: var(--skyboy-text);
     --sidebar-primary: var(--skyboy-blue);
-    --sidebar-primary-foreground: var(--skyboy-text);
-    --sidebar-accent: rgba(255, 255, 255, 0.06);
+    --sidebar-primary-foreground: #FFFFFF;
+    --sidebar-accent: rgba(0, 0, 0, 0.04);
     --sidebar-accent-foreground: var(--skyboy-text);
     --sidebar-border: var(--skyboy-border);
     --sidebar-ring: var(--skyboy-blue);
 }
 
-.dark {
-    color-scheme: dark;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground antialiased;
-    }
+  }
   html {
     @apply scroll-smooth font-sans;
-    }
+  }
   :focus-visible {
-    @apply outline-2 outline-offset-2 outline-skyboy-success;
+    @apply outline-2 outline-offset-2 outline-skyboy-blue;
   }
 }
 
 @layer utilities {
   .bg-gradient-accent {
-    background-image: linear-gradient(135deg, var(--skyboy-blue), var(--skyboy-blue-deep), var(--skyboy-purple), var(--skyboy-cyan));
+    background-image: linear-gradient(135deg, var(--skyboy-blue), var(--skyboy-blue-deep));
   }
 
   .text-gradient-accent {
-    background-image: linear-gradient(135deg, var(--skyboy-blue), var(--skyboy-blue-deep), var(--skyboy-purple), var(--skyboy-cyan));
+    background-image: linear-gradient(135deg, var(--skyboy-blue), var(--skyboy-blue-deep));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -145,5 +132,22 @@
 
   .skyboy-section {
     @apply py-24 md:py-32;
+  }
+
+  .marker-underline {
+    position: relative;
+    display: inline-block;
+  }
+  .marker-underline::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    bottom: -3px;
+    height: 3px;
+    background: var(--skyboy-blue);
+    border-radius: 2px;
+    transform: rotate(-0.5deg) scaleX(1.02);
+    opacity: 0.65;
   }
 }

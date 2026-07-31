@@ -3,9 +3,9 @@ import "../styles/global.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
-const title = "Skyboy - The GitHub for AI Algorithms";
+const title = "Skyboy - Benchmark AI Algorithms. Catch Regressions. Ship with Confidence.";
 const description =
-  "Skyboy is the infrastructure layer for AI algorithm engineering: benchmarking, evaluation, experiment tracking, leaderboards, regression detection, and deployment for retrieval, ranking, memory, and reasoning systems.";
+  "Skyboy is the benchmarking and CI/CD infrastructure for AI algorithms. Push your algorithm, get scored against standardized datasets, and catch regressions automatically.";
 const siteUrl = Astro.site ?? new URL("https://skyboy.in");
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl);
 const ogImageUrl = new URL("/favicon.svg", siteUrl);
@@ -33,14 +33,13 @@ const jsonLd = {
 <!doctype html>
 <html
   lang="en"
-  class="dark"
   style="--font-geist-sans: 'Geist Sans', ui-sans-serif, system-ui, sans-serif; --font-geist-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Consolas, monospace;"
 >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#09090B" />
+    <meta name="theme-color" content="#FAFAF8" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="sitemap" href="/sitemap-index.xml" />

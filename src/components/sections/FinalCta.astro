@@ -1,27 +1,35 @@
 ---
-import AnimatedGridBackground from "@/components/shared/AnimatedGridBackground";
 ---
 
-<section class="relative isolate overflow-hidden py-20 md:py-24">
-  <AnimatedGridBackground client:visible blobOpacity={0.22} className="opacity-90" />
-  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.12] to-transparent"></div>
-  <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-skyboy-background to-transparent"></div>
-
-  <div class="skyboy-container relative z-10">
-    <div class="mx-auto grid max-w-3xl justify-items-center text-center">
-      <h2 class="text-4xl font-semibold tracking-normal text-skyboy-text md:text-6xl">
-        Stop rebuilding evaluation infrastructure
+<section id="early-access" class="bg-white py-24 md:py-32">
+  <div class="skyboy-container">
+    <div class="mx-auto grid max-w-xl justify-items-center text-center gap-6">
+      <h2 class="text-4xl font-semibold tracking-tight text-[#111110] md:text-5xl">
+        Get early access
       </h2>
-      <p class="mt-6 max-w-2xl text-base leading-8 text-skyboy-text-secondary md:text-lg">
-        Push your first algorithm and see a full benchmark report in minutes.
+      <p class="text-base leading-relaxed text-[#4B4B48]">
+        Join researchers and teams already benchmarking on Skyboy.
       </p>
-      <a
-        href="#pricing"
-        class="mt-8 inline-flex h-12 items-center justify-center rounded-lg bg-gradient-accent px-6 text-sm font-medium text-skyboy-text shadow-[0_0_30px_rgba(59,130,246,0.24)] transition hover:scale-[1.01] hover:shadow-[0_0_42px_rgba(34,211,238,0.28)]"
+
+      <form
+        class="mt-2 flex w-full max-w-sm flex-col gap-3 sm:flex-row"
+        onsubmit="event.preventDefault()"
       >
-        Get Started — Free
-      </a>
-      <p class="mt-4 text-sm text-skyboy-text-muted">No credit card required</p>
+        <input
+          type="email"
+          placeholder="your@email.com"
+          required
+          class="h-10 flex-1 rounded-lg border border-black/[0.12] bg-[#F7F7F5] px-4 text-sm text-[#111110] placeholder:text-[#8A8A85] focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
+        />
+        <button
+          type="submit"
+          class="inline-flex h-10 items-center justify-center rounded-lg bg-[#111110] px-5 text-sm font-medium text-white transition hover:bg-[#2a2a28] whitespace-nowrap"
+        >
+          Request access
+        </button>
+      </form>
+
+      <p class="text-xs text-[#8A8A85]">No credit card required &middot; Free for public projects</p>
     </div>
   </div>
 </section>

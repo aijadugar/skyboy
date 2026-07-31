@@ -9,7 +9,7 @@ type Tier = {
   features: string[];
   cta: string;
   popular?: boolean;
-  variant?: "outline" | "gradient" | "enterprise";
+  variant?: "outline" | "primary" | "enterprise";
 };
 
 const tiers: Tier[] = [
@@ -23,7 +23,6 @@ const tiers: Tier[] = [
   },
   {
     name: "Pro",
-    // TODO: Replace placeholder pricing before launch.
     price: "$[TBD]",
     annualPrice: "$[TBD]",
     summary: "For individual developers going private",
@@ -33,14 +32,13 @@ const tiers: Tier[] = [
   },
   {
     name: "Team",
-    // TODO: Replace placeholder pricing before launch.
     price: "$[TBD]",
     annualPrice: "$[TBD]",
     summary: "For teams building together",
     features: ["Everything in Pro", "Shared workspaces", "RBAC", "Private datasets", "CI integration", "API access"],
     cta: "Start Free Trial",
     popular: true,
-    variant: "gradient",
+    variant: "primary",
   },
   {
     name: "Enterprise",
@@ -62,55 +60,47 @@ const tiers: Tier[] = [
 
 function displayPrice(tier: Tier, annual: boolean) {
   const price = annual && tier.annualPrice ? tier.annualPrice : tier.price;
-  return price === "$[TBD]" ? "Contact us for pricing" : price;
+  return price === "$[TBD]" ? "Contact us" : price;
 }
 
 function PricingCard({ tier, annual }: { tier: Tier; annual: boolean }) {
-  const isPlaceholder = displayPrice(tier, annual) === "Contact us for pricing";
+  const isPlaceholder = displayPrice(tier, annual) === "Contact us";
 
   return (
     <article
-      className={`group relative flex min-h-[34rem] flex-col rounded-2xl border bg-white/[0.03] p-6 backdrop-blur transition duration-200 hover:-translate-y-1 ${
+      className={`group relative flex min-h-[32rem] flex-col rounded-2xl border bg-white p-6 transition duration-200 hover:-translate-y-1 ${
         tier.popular
-          ? "border-skyboy-blue/35 shadow-[0_24px_80px_rgba(59,130,246,0.16)]"
-          : "border-white/[0.08] hover:border-white/[0.16]"
+          ? "border-[#2563EB]/30 ring-1 ring-[#2563EB]/10"
+          : "border-black/[0.08] hover:border-black/[0.16]"
       }`}
     >
-      <span
-        aria-hidden="true"
-        className={`pointer-events-none absolute -inset-px -z-10 rounded-2xl opacity-0 blur-2xl transition-opacity duration-200 group-hover:opacity-60 ${
-          tier.popular ? "opacity-40" : ""
-        }`}
-        style={{
-          background:
-            "radial-gradient(circle at 50% 0%, rgba(59, 130, 246, 0.22), rgba(139, 92, 246, 0.12) 42%, transparent 72%)",
-        }}
-      />
       {tier.popular && (
-        <div className="mb-5 w-fit rounded-full bg-gradient-accent px-3 py-1 text-xs font-medium text-skyboy-text">
+        <div className="mb-5 w-fit rounded-full bg-[#2563EB] px-3 py-1 text-xs font-medium text-white">
           Most Popular
         </div>
       )}
 
       <div>
-        <h3 className="text-xl font-semibold text-skyboy-text">{tier.name}</h3>
-        <p className="mt-3 min-h-12 text-sm leading-6 text-skyboy-text-secondary">{tier.summary}</p>
+        <h3 className="text-xl font-semibold text-[#111110]">{tier.name}</h3>
+        <p className="mt-3 min-h-12 text-sm leading-6 text-[#4B4B48]">{tier.summary}</p>
       </div>
 
       <div className="mt-7">
-        <p className={isPlaceholder ? "text-2xl font-semibold text-skyboy-text" : "font-mono text-4xl text-skyboy-text"}>
+        <p className={isPlaceholder ? "text-2xl font-semibold text-[#111110]" : "font-mono text-4xl text-[#111110]"}>
           {displayPrice(tier, annual)}
         </p>
         {!isPlaceholder && tier.price !== "Custom" && tier.price !== "$0" && (
-          <p className="mt-2 text-sm text-skyboy-text-muted">per month</p>
+          <p className="mt-2 text-sm text-[#8A8A85]">per month</p>
         )}
-        {isPlaceholder && <p className="mt-2 text-sm text-skyboy-text-muted">Placeholder until launch pricing is finalized</p>}
+        {isPlaceholder && (
+          <p className="mt-2 text-sm text-[#8A8A85]">Pricing finalized at launch</p>
+        )}
       </div>
 
       <ul className="mt-7 flex flex-1 flex-col gap-3">
         {tier.features.map((feature) => (
-          <li key={feature} className="flex gap-3 text-sm leading-6 text-skyboy-text-secondary">
-            <Check className="mt-0.5 size-4 shrink-0 text-skyboy-success" aria-hidden="true" />
+          <li key={feature} className="flex gap-3 text-sm leading-6 text-[#4B4B48]">
+            <Check className="mt-0.5 size-4 shrink-0 text-[#2563EB]" aria-hidden="true" />
             <span>{feature}</span>
           </li>
         ))}
@@ -119,11 +109,11 @@ function PricingCard({ tier, annual }: { tier: Tier; annual: boolean }) {
       <button
         type="button"
         className={`mt-8 inline-flex h-11 items-center justify-center rounded-lg px-4 text-sm font-medium transition ${
-          tier.variant === "gradient"
-            ? "bg-gradient-accent text-skyboy-text shadow-[0_0_30px_rgba(59,130,246,0.22)] hover:scale-[1.01]"
+          tier.variant === "primary"
+            ? "bg-[#111110] text-white hover:bg-[#2a2a28]"
             : tier.variant === "enterprise"
-              ? "border border-white/[0.12] bg-skyboy-text text-skyboy-background hover:bg-skyboy-text/90"
-              : "border border-white/[0.08] bg-white/[0.03] text-skyboy-text hover:border-white/[0.16] hover:bg-white/[0.06]"
+              ? "border border-black/[0.12] bg-[#F7F7F5] text-[#111110] hover:bg-[#EBEBEA]"
+              : "border border-black/[0.08] bg-[#F7F7F5] text-[#111110] hover:border-black/[0.16] hover:bg-[#EBEBEA]"
         }`}
       >
         {tier.cta}
@@ -136,20 +126,20 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(true);
 
   return (
-    <section id="pricing" className="skyboy-section">
+    <section id="pricing" className="skyboy-section bg-white">
       <div className="skyboy-container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-skyboy-success">Pricing</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
+          <p className="text-sm font-medium text-[#2563EB]">Pricing</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111110] md:text-5xl">
             Start free. Scale when you need to.
           </h2>
 
-          <div className="mt-8 inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.03] p-1">
+          <div className="mt-8 inline-flex items-center rounded-full border border-black/[0.08] bg-[#F7F7F5] p-1">
             <button
               type="button"
               onClick={() => setAnnual(false)}
               className={`rounded-full px-4 py-2 text-sm transition ${
-                !annual ? "bg-skyboy-text text-skyboy-background" : "text-skyboy-text-secondary hover:text-skyboy-text"
+                !annual ? "bg-[#111110] text-white" : "text-[#4B4B48] hover:text-[#111110]"
               }`}
               aria-pressed={!annual}
             >
@@ -159,14 +149,14 @@ export default function Pricing() {
               type="button"
               onClick={() => setAnnual(true)}
               className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm transition ${
-                annual ? "bg-skyboy-text text-skyboy-background" : "text-skyboy-text-secondary hover:text-skyboy-text"
+                annual ? "bg-[#111110] text-white" : "text-[#4B4B48] hover:text-[#111110]"
               }`}
               aria-pressed={annual}
             >
               Annual
               <span
                 className={`rounded-full px-2 py-0.5 text-[11px] ${
-                  annual ? "bg-skyboy-background/15 text-skyboy-background" : "bg-skyboy-success/10 text-skyboy-success"
+                  annual ? "bg-white/10 text-white" : "bg-[#16A34A]/10 text-[#16A34A]"
                 }`}
               >
                 Save ~20%
