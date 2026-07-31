@@ -1,32 +1,23 @@
-import { Activity, AlertTriangle, GitCompare, Rocket, Upload } from "lucide-react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
-import { CLI_NAME } from "@/lib/constants";
 
 const steps = [
   {
-    title: "Upload",
-    description: `Push your algorithm with ${CLI_NAME} or Git. Skyboy detects the entry point automatically.`,
-    icon: Upload,
+    number: "01",
+    title: "Push",
+    description: "Push your algorithm via CLI or Git. Skyboy detects the entry point automatically.",
+    code: "$ sb push",
   },
   {
-    title: "Benchmark",
-    description: "Runs against standardized datasets (BEIR, MTEB, or your own private eval sets) inside an isolated sandbox.",
-    icon: Activity,
+    number: "02",
+    title: "Sandbox run",
+    description: "Skyboy runs it against benchmark datasets (LOCOMO, LongMemEval, BEIR) in an isolated sandbox.",
+    code: "Running LOCOMO...",
   },
   {
-    title: "Compare",
-    description: "Every run is scored against baselines and your own previous versions - no manual spreadsheet diffing.",
-    icon: GitCompare,
-  },
-  {
-    title: "Detect Regressions",
-    description: "Skyboy flags metric drops the moment they happen, with the exact commit that caused them.",
-    icon: AlertTriangle,
-  },
-  {
-    title: "Deploy",
-    description: "Export a production-ready container the moment you're confident in the numbers.",
-    icon: Rocket,
+    number: "03",
+    title: "Score & regression flag",
+    description: "Get a score, see the diff against your last run, and get flagged immediately if you regressed.",
+    code: "Recall@10: 0.847 \u2191",
   },
 ] as const;
 
@@ -34,8 +25,8 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.08,
+      staggerChildren: 0.14,
+      delayChildren: 0.06,
     },
   },
 };
@@ -56,64 +47,63 @@ export default function HowItWorks() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="how-it-works" className="skyboy-section">
+    <section id="how-it-works" className="skyboy-section bg-[#FAFAF8]">
       <div className="skyboy-container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-skyboy-success">How It Works</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-normal text-skyboy-text md:text-5xl">
-            From push to production in five steps
+          <p className="text-sm font-medium text-[#2563EB]">How it works</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111110] md:text-5xl">
+            From push to score in three steps
           </h2>
         </div>
 
         <motion.div
-          className="mx-auto mt-14 grid max-w-4xl gap-5 lg:max-w-none lg:grid-cols-5 lg:gap-4"
+          className="mx-auto mt-14 grid max-w-4xl gap-5 lg:grid-cols-3"
           variants={reduceMotion ? undefined : containerVariants}
           initial={reduceMotion ? false : "hidden"}
           whileInView="visible"
-          viewport={{ once: true, margin: "-120px" }}
+          viewport={{ once: true, margin: "-100px" }}
         >
-          {steps.map((step, index) => {
-            const Icon = step.icon;
-            const isLast = index === steps.length - 1;
-
-            return (
-              <motion.div key={step.title} variants={stepVariants} className="relative">
-                {!isLast && (
-                  <>
-                    <motion.span
-                      aria-hidden="true"
-                      className="absolute left-6 top-14 h-[calc(100%+1.25rem)] w-px origin-top bg-gradient-to-b from-skyboy-blue via-skyboy-purple to-skyboy-cyan lg:hidden"
-                      initial={reduceMotion ? false : { scaleY: 0 }}
-                      whileInView={reduceMotion ? { scaleY: 1 } : { scaleY: 1 }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      transition={{ duration: 0.45, delay: 0.18 + index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+          {steps.map((step, index) => (
+            <motion.div key={step.title} variants={stepVariants} className="relative flex gap-5 lg:flex-col lg:gap-0">
+              {/* Arrow connector between steps (desktop) */}
+              {index < steps.length - 1 && (
+                <div
+                  aria-hidden="true"
+                  className="absolute -right-3 top-6 hidden items-center lg:flex"
+                >
+                  <svg width="24" height="16" viewBox="0 0 24 16" fill="none">
+                    <path
+                      d="M0 8 Q8 7 16 8"
+                      stroke="#2563EB"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      fill="none"
                     />
-                    <motion.span
-                      aria-hidden="true"
-                      className="absolute left-[calc(50%+1.5rem)] right-[calc(-50%+1.5rem)] top-6 hidden h-px origin-left bg-gradient-to-r from-skyboy-blue via-skyboy-purple to-skyboy-cyan lg:block"
-                      initial={reduceMotion ? false : { scaleX: 0 }}
-                      whileInView={reduceMotion ? { scaleX: 1 } : { scaleX: 1 }}
-                      viewport={{ once: true, margin: "-120px" }}
-                      transition={{ duration: 0.5, delay: 0.2 + index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                    <path
+                      d="M13 5 L17 8 L13 11"
+                      stroke="#2563EB"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      fill="none"
                     />
-                  </>
-                )}
-
-                <div className="relative z-10 flex gap-4 rounded-2xl border border-white/[0.08] bg-white/[0.03] p-5 backdrop-blur transition duration-200 hover:border-white/[0.16] lg:min-h-80 lg:flex-col lg:items-start">
-                  <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-white/[0.1] bg-skyboy-surface font-mono text-sm text-skyboy-text shadow-[0_0_28px_rgba(59,130,246,0.18)]">
-                    <Icon className="size-5" aria-hidden="true" />
-                    <span className="sr-only">Step {index + 1}</span>
-                  </div>
-
-                  <div>
-                    <p className="font-mono text-xs text-skyboy-text-muted">{String(index + 1).padStart(2, "0")}</p>
-                    <h3 className="mt-2 text-lg font-semibold text-skyboy-text">{step.title}</h3>
-                    <p className="mt-3 text-sm leading-6 text-skyboy-text-secondary">{step.description}</p>
-                  </div>
+                  </svg>
                 </div>
-              </motion.div>
-            );
-          })}
+              )}
+
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-full border border-black/[0.08] bg-white font-mono text-sm font-medium text-[#8A8A85] lg:mb-5">
+                {step.number}
+              </div>
+
+              <div className="flex flex-1 flex-col rounded-2xl border border-black/[0.08] bg-white p-5">
+                <h3 className="text-lg font-semibold text-[#111110]">{step.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-6 text-[#4B4B48]">{step.description}</p>
+                <div className="mt-5 rounded-lg border border-black/[0.06] bg-[#F7F7F5] px-3 py-2">
+                  <p className="font-mono text-xs text-[#2563EB]">{step.code}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

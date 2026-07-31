@@ -1,8 +1,8 @@
 export const CLI_NAME = "sb";
 
 export const navLinks = [
-  { label: "Problem", href: "#problem" },
-  { label: "Solution", href: "#solution" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Leaderboard", href: "#leaderboard" },
   { label: "Pricing", href: "#pricing" },
 ] as const;
 

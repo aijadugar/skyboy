@@ -1,0 +1,53 @@
+---
+import AuthLayout from "@/layouts/AuthLayout.astro";
+---
+
+<AuthLayout>
+  <h1 class="text-2xl font-semibold text-[#111110]">Sign Up</h1>
+  <p class="mt-2 text-sm text-[#8A8A85]">Start benchmarking for free.</p>
+
+  <form class="mt-7 flex flex-col gap-5" onsubmit="event.preventDefault()">
+    <div class="flex flex-col gap-1.5">
+      <label for="email" class="text-sm font-medium text-[#111110]">Email address</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        required
+        class="h-10 rounded-lg border border-black/[0.12] bg-[#F7F7F5] px-3 text-sm text-[#111110] placeholder:text-[#8A8A85] focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="username" class="text-sm font-medium text-[#111110]">Username</label>
+      <input
+        id="username"
+        name="username"
+        type="text"
+        autocomplete="username"
+        required
+        class="h-10 rounded-lg border border-black/[0.12] bg-[#F7F7F5] px-3 text-sm text-[#111110] placeholder:text-[#8A8A85] focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
+      />
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <label for="password" class="text-sm font-medium text-[#111110]">Password</label>
+      <input
+        id="password"
+        name="password"
+        type="password"
+        autocomplete="new-password"
+        required
+        class="h-10 rounded-lg border border-black/[0.12] bg-[#F7F7F5] px-3 text-sm text-[#111110] placeholder:text-[#8A8A85] focus:border-[#2563EB] focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="mt-1 inline-flex h-10 w-full items-center justify-center rounded-lg bg-[#111110] text-sm font-medium text-white transition hover:bg-[#2a2a28]"
+    >
+      Create account
+    </button>
+  </form>
+</AuthLayout>
