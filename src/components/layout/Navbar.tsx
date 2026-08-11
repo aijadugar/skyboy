@@ -3,65 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/constants";
-
-// Skyboy logo mark: <> brackets with blue checkmark-arrow inside
-function SkyboyMark({ size = 28 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 32 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-    >
-      {/* Left bracket */}
-      <path
-        d="M10 8 L5.5 16 L10 24"
-        stroke="#111110"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* Right bracket */}
-      <path
-        d="M22 8 L26.5 16 L22 24"
-        stroke="#111110"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      {/* Blue checkmark-into-upward-arrow */}
-      <path
-        d="M11 17 L14.5 20.5 L21 12"
-        stroke="#2563EB"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-      <path
-        d="M16 20 L16 27"
-        stroke="#2563EB"
-        strokeWidth="2"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M13.5 24.5 L16 27.5 L18.5 24.5"
-        stroke="#2563EB"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    </svg>
-  );
-}
-
-export { SkyboyMark };
+import skyboyLogo from "../../public/skyboy.png";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -71,7 +13,7 @@ export default function Navbar() {
       <div className="skyboy-container flex h-16 items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 font-semibold text-[#111110]">
-          <SkyboyMark size={28} />
+          <img src={skyboyLogo.src} alt="Skyboy Logo" className="h-7 w-auto" />
           <span className="text-base tracking-tight">Skyboy</span>
         </a>
 
