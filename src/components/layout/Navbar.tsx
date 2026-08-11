@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/constants";
-import skyboyLogo from "../../public/skyboy.png";
+
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="skyboy-container flex h-16 items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 font-semibold text-[#111110]">
-          <img src={skyboyLogo.src} alt="Skyboy Logo" className="h-7 w-auto" />
+          <img src="/skyboy.png" alt="Skyboy Logo" className="h-7 w-auto" />
           <span className="text-base tracking-tight">Skyboy</span>
         </a>
 
