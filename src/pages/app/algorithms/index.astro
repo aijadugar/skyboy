@@ -1,0 +1,74 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { getAllAlgorithms } from "@/lib/mock-data";
+
+const algorithms = getAllAlgorithms();
+---
+
+<AppLayout title="Algorithms - Skyboy">
+  <div slot="breadcrumb">
+    <nav class="flex items-center gap-2 text-sm">
+      <a href="/app/dashboard" class="text-[#8A8A85] hover:text-[#111110]">Dashboard</a>
+      <span class="text-[#8A8A85]">/</span>
+      <span class="font-medium text-[#111110]">Algorithms</span>
+    </nav>
+  </div>
+
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-[#111110]">Algorithms</h1>
+      <p class="mt-1 text-sm text-[#4B4B48]">Manage and track your algorithm versions.</p>
+    </div>
+    <button class="inline-flex items-center gap-2 rounded-lg bg-[#2563EB] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#1D4ED8]">
+      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      New Algorithm
+    </button>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-sm">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-black/[0.08] bg-[#F7F7F5]">
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Name</th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Version</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] lg:table-cell">Description</th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Status</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] sm:table-cell">Recall@10</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] md:table-cell">Updated</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-black/[0.06]">
+        {algorithms.map((algorithm) => (
+          <tr class="transition hover:bg-[#F7F7F5]">
+            <td class="px-6 py-4">
+              <a href={`/app/algorithms/${algorithm.slug}`} class="font-medium text-[#2563EB] hover:underline underline-offset-4">
+                {algorithm.name}
+              </a>
+            </td>
+            <td class="px-6 py-4 font-mono text-xs text-[#4B4B48]">{algorithm.version}</td>
+            <td class="hidden max-w-xs truncate px-6 py-4 text-[#4B4B48] lg:table-cell">
+              {algorithm.description}
+            </td>
+            <td class="px-6 py-4">
+              <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                algorithm.status === "active" ? "bg-[#D1FAE5] text-[#065F46]" :
+                algorithm.status === "deprecated" ? "bg-[#FEE2E2] text-[#991B1B]" :
+                "bg-[#F3F4F6] text-[#374151]"
+              }`}>
+                {algorithm.status}
+              </span>
+            </td>
+            <td class="hidden px-6 py-4 font-mono text-[#111110] sm:table-cell">
+              {algorithm.metrics?.recallAt10.toFixed(3) ?? "—"}
+            </td>
+            <td class="hidden px-6 py-4 text-[#8A8A85] md:table-cell">
+              {new Date(algorithm.updatedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</AppLayout>

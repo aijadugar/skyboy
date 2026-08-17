@@ -1,0 +1,82 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { getAllDatasets } from "@/lib/mock-data";
+
+const datasets = getAllDatasets();
+---
+
+<AppLayout title="Datasets - Skyboy">
+  <div slot="breadcrumb">
+    <nav class="flex items-center gap-2 text-sm">
+      <a href="/app/dashboard" class="text-[#8A8A85] hover:text-[#111110]">Dashboard</a>
+      <span class="text-[#8A8A85]">/</span>
+      <span class="font-medium text-[#111110]">Datasets</span>
+    </nav>
+  </div>
+
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-[#111110]">Datasets</h1>
+      <p class="mt-1 text-sm text-[#4B4B48]">Browse and manage benchmark datasets.</p>
+    </div>
+    <button class="inline-flex items-center gap-2 rounded-lg bg-[#2563EB] px-4 py-2.5 text-sm font-medium text-white transition hover:bg-[#1D4ED8]">
+      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.5v15m7.5-7.5h-15" />
+      </svg>
+      Add Dataset
+    </button>
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2">
+    {datasets.map((dataset) => (
+      <div class="group rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm transition hover:border-black/[0.16] hover:shadow-md">
+        <div class="mb-4 flex items-start justify-between">
+          <div>
+            <h3 class="text-base font-semibold text-[#111110]">{dataset.name}</h3>
+            <p class="text-xs font-mono text-[#8A8A85]">{dataset.slug}</p>
+          </div>
+          <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${
+            dataset.category === "benchmark" ? "bg-[#DBEAFE] text-[#1E40AF]" :
+            dataset.category === "custom" ? "bg-[#FEF3C7] text-[#92400E]" :
+            "bg-[#F3E8FF] text-[#6B21A8]"
+          }`}>
+            {dataset.category}
+          </span>
+        </div>
+        
+        <p class="mb-4 text-sm leading-relaxed text-[#4B4B48]">{dataset.description}</p>
+        
+        <dl class="mb-4 grid grid-cols-2 gap-3 text-sm">
+          <div>
+            <dt class="text-xs text-[#8A8A85]">Size</dt>
+            <dd class="font-medium text-[#111110]">{(dataset.size / 1000).toFixed(0)}K entries</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-[#8A8A85]">Modality</dt>
+            <dd class="capitalize text-[#111110]">{dataset.modality}</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-[#8A8A85]">Avg Recall@10</dt>
+            <dd class="font-mono font-medium text-[#111110]">{dataset.metrics?.avgRecallAt10.toFixed(3) ?? "—"}</dd>
+          </div>
+          <div>
+            <dt class="text-xs text-[#8A8A85]">Total Runs</dt>
+            <dd class="font-medium text-[#111110]">{dataset.metrics?.totalRuns ?? "—"}</dd>
+          </div>
+        </dl>
+        
+        <div class="flex items-center justify-between border-t border-black/[0.08] pt-4">
+          <span class="text-xs text-[#8A8A85]">
+            {dataset.isPublic ? "Public" : "Private"}
+          </span>
+          <a 
+            href={`/app/datasets/${dataset.slug}`}
+            class="text-sm font-medium text-[#2563EB] hover:underline underline-offset-4"
+          >
+            View details →
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</AppLayout>

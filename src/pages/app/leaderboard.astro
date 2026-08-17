@@ -1,0 +1,114 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { getLeaderboardEntries } from "@/lib/mock-data";
+
+const entries = getLeaderboardEntries();
+---
+
+<AppLayout title="Leaderboard - Skyboy">
+  <div slot="breadcrumb">
+    <nav class="flex items-center gap-2 text-sm">
+      <a href="/app/dashboard" class="text-[#8A8A85] hover:text-[#111110]">Dashboard</a>
+      <span class="text-[#8A8A85]">/</span>
+      <span class="font-medium text-[#111110]">Leaderboard</span>
+    </nav>
+  </div>
+
+  <div class="mb-8 flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-[#111110]">Leaderboard</h1>
+      <p class="mt-1 text-sm text-[#4B4B48]">Live rankings across all benchmarks and datasets.</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <select class="rounded-lg border border-black/[0.08] bg-white px-3 py-2 text-sm text-[#4B4B48]">
+        <option>All Datasets</option>
+        <option>LOCOMO</option>
+        <option>LongMemEval</option>
+        <option>BEIR</option>
+        <option>MTEB</option>
+      </select>
+      <button class="inline-flex items-center gap-2 rounded-lg border border-black/[0.08] bg-white px-4 py-2 text-sm font-medium text-[#4B4B48] transition hover:bg-[#F7F7F5]">
+        <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25" />
+        </svg>
+        Export
+      </button>
+    </div>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-black/[0.08] bg-white shadow-sm">
+    <table class="w-full text-sm">
+      <thead>
+        <tr class="border-b border-black/[0.08] bg-[#F7F7F5]">
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Rank</th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">SDK / Algorithm</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] lg:table-cell">Dataset</th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Score</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] sm:table-cell">Recall@10</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] md:table-cell">NDCG@10</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] lg:table-cell">Latency</th>
+          <th class="hidden px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85] xl:table-cell">Commit</th>
+          <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[#8A8A85]">Trend</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-black/[0.06]">
+        {entries.map((entry) => (
+          <tr class="transition hover:bg-[#F7F7F5]">
+            <td class="px-6 py-4">
+              <span class={`inline-flex size-7 items-center justify-center rounded-full text-xs font-semibold ${
+                entry.rank === 1 ? "bg-[#FEF3C7] text-[#92400E]" :
+                entry.rank === 2 ? "bg-[#F3F4F6] text-[#374151]" :
+                entry.rank === 3 ? "bg-[#FEF3C7] text-[#92400E]" :
+                "text-[#8A8A85]"
+              }`}>
+                {entry.rank}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <div>
+                <p class="font-medium text-[#111110]">{entry.sdk}</p>
+                {entry.algorithmSlug && (
+                  <a href={`/app/algorithms/${entry.algorithmSlug}`} class="text-xs text-[#2563EB] hover:underline underline-offset-4">
+                    View algorithm →
+                  </a>
+                )}
+              </div>
+            </td>
+            <td class="hidden px-6 py-4 text-[#4B4B48] lg:table-cell">{entry.dataset}</td>
+            <td class="px-6 py-4">
+              <span class="text-base font-mono font-semibold text-[#111110]">{entry.score.toFixed(3)}</span>
+            </td>
+            <td class="hidden px-6 py-4 font-mono text-[#111110] sm:table-cell">{entry.recallAt10.toFixed(3)}</td>
+            <td class="hidden px-6 py-4 font-mono text-[#111110] md:table-cell">{entry.ndcgAt10.toFixed(3)}</td>
+            <td class="hidden px-6 py-4 text-[#4B4B48] lg:table-cell">{entry.latencyMs}ms</td>
+            <td class="hidden px-6 py-4 font-mono text-xs text-[#8A8A85] xl:table-cell">{entry.commitHash}</td>
+            <td class="px-6 py-4">
+              {entry.trend === "up" ? (
+                <svg class="size-4 text-[#10B981]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                </svg>
+              ) : entry.trend === "down" ? (
+                <svg class="size-4 text-[#DC2626]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
+              ) : (
+                <svg class="size-4 text-[#8A8A85]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14" />
+                </svg>
+              )}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-6 rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+    <h2 class="text-base font-semibold text-[#111110]">About the Leaderboard</h2>
+    <p class="mt-2 text-sm leading-relaxed text-[#4B4B48]">
+      Rankings are calculated based on composite scores across multiple benchmarks. 
+      Scores are updated automatically when new benchmark runs complete. 
+      The trend indicator shows movement compared to the previous ranking period.
+    </p>
+  </div>
+</AppLayout>

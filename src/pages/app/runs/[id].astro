@@ -1,0 +1,129 @@
+---
+import AppLayout from "@/layouts/AppLayout.astro";
+import { getRunById, getAllRuns } from "@/lib/mock-data";
+
+export function getStaticPaths() {
+  const runs = getAllRuns();
+  return runs.map((run) => ({
+    params: { id: run.id },
+    props: { run },
+  }));
+}
+
+const { run } = Astro.props;
+
+if (!run) {
+  return Astro.redirect("/app/dashboard");
+}
+---
+
+<AppLayout title={`Run ${run.id} - Skyboy`}>
+  <div slot="breadcrumb">
+    <nav class="flex items-center gap-2 text-sm">
+      <a href="/app/dashboard" class="text-[#8A8A85] hover:text-[#111110]">Dashboard</a>
+      <span class="text-[#8A8A85]">/</span>
+      <a href="/app/runs" class="text-[#8A8A85] hover:text-[#111110]">Runs</a>
+      <span class="text-[#8A8A85]">/</span>
+      <span class="font-medium text-[#111110]">{run.id}</span>
+    </nav>
+  </div>
+
+  <div class="mb-8 flex items-start justify-between">
+    <div>
+      <div class="flex items-center gap-3">
+        <h1 class="text-2xl font-semibold text-[#111110]">{run.id}</h1>
+        <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize ${
+          run.status === "completed" ? "bg-[#D1FAE5] text-[#065F46]" :
+          run.status === "running" ? "bg-[#FEF3C7] text-[#92400E]" :
+          run.status === "failed" ? "bg-[#FEE2E2] text-[#991B1B]" :
+          "bg-[#F3F4F6] text-[#374151]"
+        }`}>
+          {run.status}
+        </span>
+      </div>
+      <p class="mt-1 text-sm text-[#8A8A85]">
+        {run.algorithmName} v{run.algorithmVersion} on {run.datasetName}
+      </p>
+    </div>
+    <button class="inline-flex items-center gap-2 rounded-lg border border-black/[0.08] bg-white px-4 py-2.5 text-sm font-medium text-[#4B4B48] transition hover:bg-[#F7F7F5]">
+      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+      </svg>
+      Download Results
+    </button>
+  </div>
+
+  <!-- Metrics -->
+  {run.metrics ? (
+    <div class="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+        <p class="text-xs font-medium text-[#8A8A85]">Recall@10</p>
+        <p class="mt-2 text-2xl font-semibold text-[#111110]">{run.metrics.recallAt10.toFixed(3)}</p>
+      </div>
+      <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+        <p class="text-xs font-medium text-[#8A8A85]">NDCG@10</p>
+        <p class="mt-2 text-2xl font-semibold text-[#111110]">{run.metrics.ndcgAt10.toFixed(3)}</p>
+      </div>
+      <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+        <p class="text-xs font-medium text-[#8A8A85]">Latency</p>
+        <p class="mt-2 text-2xl font-semibold text-[#111110]">{run.metrics.latencyMs}<span class="text-sm font-normal text-[#8A8A85]">ms</span></p>
+      </div>
+      <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+        <p class="text-xs font-medium text-[#8A8A85]">Cost</p>
+        <p class="mt-2 text-2xl font-semibold text-[#111110]">${run.metrics.costUsd.toFixed(2)}</p>
+      </div>
+      <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+        <p class="text-xs font-medium text-[#8A8A85]">Throughput</p>
+        <p class="mt-2 text-2xl font-semibold text-[#111110]">{run.metrics.throughputPerSec.toLocaleString()}</p>
+        <p class="text-xs text-[#8A8A85]">queries/sec</p>
+      </div>
+    </div>
+  ) : null}
+
+  <div class="grid gap-6 lg:grid-cols-2">
+    <!-- Run details -->
+    <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+      <h2 class="text-base font-semibold text-[#111110]">Run Details</h2>
+      <dl class="mt-4 space-y-3 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-[#8A8A85]">Algorithm</dt>
+          <dd class="font-medium text-[#111110]">{run.algorithmName} v{run.algorithmVersion}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-[#8A8A85]">Dataset</dt>
+          <dd class="font-medium text-[#111110]">{run.datasetName}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-[#8A8A85]">Commit</dt>
+          <dd class="font-mono text-[#111110]">{run.commitHash}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-[#8A8A85]">Triggered By</dt>
+          <dd class="capitalize text-[#111110]">{run.triggeredBy}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-[#8A8A85]">Started</dt>
+          <dd class="text-[#111110]">{new Date(run.startedAt).toLocaleString()}</dd>
+        </div>
+        {run.completedAt && (
+          <div class="flex justify-between">
+            <dt class="text-[#8A8A85]">Completed</dt>
+            <dd class="text-[#111110]">{new Date(run.completedAt).toLocaleString()}</dd>
+          </div>
+        )}
+      </dl>
+    </div>
+
+    <!-- Logs -->
+    <div class="rounded-xl border border-black/[0.08] bg-white p-6 shadow-sm">
+      <h2 class="text-base font-semibold text-[#111110]">Logs</h2>
+      <div class="mt-4 max-h-64 overflow-auto rounded-lg bg-[#111110] p-4 font-mono text-xs text-[#E5E5E5]">
+        {run.logs?.map((log) => (
+          <div class={`py-0.5 ${log.includes("[ERROR]") ? "text-[#FCA5A5]" : log.includes("[INFO]") ? "text-[#86EFAC]" : ""}`}>
+            {log}
+          </div>
+        )) ?? <span class="text-[#8A8A85]">No logs available</span>}
+      </div>
+    </div>
+  </div>
+</AppLayout>
