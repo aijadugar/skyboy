@@ -7,53 +7,69 @@ dist/
 build/
 target/
 
+# Environment variables
+.env
+.env.local
+*.env.*
+
 # Python
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.py.class
 .Python
 env/
 venv/
 .venv/
-.env
-.env.local
-.env.*
-.ENV
-
-# Logs
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
 *.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+.MF
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
 
-# IDE
+# Compiled and binary files
+*.class
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.out
+*.swp
+*.swo
+
+# Editor/IDE files
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+*.tmp
 
-# OS
+# System files
 .DS_Store
 Thumbs.db
+
+# Logs
+*.log
 
 # Coverage
 coverage/
 htmlcov/
-.coverage
-
-# Testing
-.mypy_cache/
-.pytest_cache/
-
-# Gradle
-.gradle/
-build/
-
-# Temporary files
-*.tmp
-*.temp
-*.bak
-*.backup
+*.coverage
 
 # Compressed files
 *.zip
