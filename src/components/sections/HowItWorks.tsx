@@ -5,19 +5,25 @@ const steps = [
     number: "01",
     title: "Push",
     description: "Push your algorithm via CLI or Git. Skyboy detects the entry point automatically.",
-    code: "$ sb push",
+    code: `$ sb push
+Detecting entry point...
+Found main.py`,
   },
   {
     number: "02",
     title: "Sandbox run",
     description: "Skyboy runs it against benchmark datasets (LOCOMO, LongMemEval, BEIR) in an isolated sandbox.",
-    code: "Running LOCOMO...",
+    code: `$ sb run --bench locomo
+Isolating sandbox...
+Running LOCOMO (1/5)...`,
   },
   {
     number: "03",
     title: "Score & regression flag",
     description: "Get a score, see the diff against your last run, and get flagged immediately if you regressed.",
-    code: "Recall@10: 0.847 \u2191",
+    code: `Recall@10: 0.847 ↑
+NDCG@10:  0.792 →
+Latency:  42ms ↓`,
   },
 ] as const;
 
@@ -99,7 +105,7 @@ export default function HowItWorks() {
                 <h3 className="text-lg font-semibold text-[#111110]">{step.title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-6 text-[#4B4B48]">{step.description}</p>
                 <div className="mt-5 rounded-lg border border-black/[0.06] bg-[#F7F7F5] px-3 py-2">
-                  <p className="font-mono text-xs text-[#2563EB]">{step.code}</p>
+                  <pre className="font-mono text-xs text-[#2563EB] whitespace-pre">{step.code}</pre>
                 </div>
               </div>
             </motion.div>
