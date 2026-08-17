@@ -17,6 +17,7 @@ type Feature = {
   title: string;
   description: string;
   icon: LucideIcon;
+  featured: boolean;
 };
 
 const features: Feature[] = [
@@ -24,51 +25,61 @@ const features: Feature[] = [
     title: "Algorithm Registry",
     description: "Version every algorithm like code. Full history, changelogs, and rollback built in.",
     icon: GitBranch,
+    featured: false,
   },
   {
     title: "Benchmark Engine",
     description: "Run any algorithm against any dataset with any metric, automatically orchestrated.",
     icon: Gauge,
+    featured: true,
   },
   {
     title: "Dataset Registry",
     description: "Public benchmarks like BEIR and MTEB, plus private and synthetic datasets, all versioned.",
     icon: Database,
+    featured: false,
   },
   {
     title: "Experiment Tracking",
     description: "Every run captured - runtime, cost, accuracy, and full output - permanently.",
     icon: FlaskConical,
+    featured: false,
   },
   {
     title: "Leaderboards",
     description: "Public, private, or team leaderboards that update the moment a new run finishes.",
     icon: Trophy,
+    featured: false,
   },
   {
     title: "Regression Detection",
     description: "Get alerted the moment a metric drops, with the exact commit responsible.",
     icon: AlertTriangle,
+    featured: true,
   },
   {
     title: "Deployment Packaging",
     description: "Export a production-ready container the moment your numbers are ready.",
     icon: Package,
+    featured: false,
   },
   {
     title: "Visual Reports",
     description: "Precision-recall curves, NDCG, latency, and cost - generated automatically, every run.",
     icon: BarChart3,
+    featured: false,
   },
   {
     title: "Sandbox Execution",
     description: "Every algorithm runs isolated, reproducible, and secure - no shared state, no surprises.",
     icon: ShieldCheck,
+    featured: false,
   },
   {
     title: "Plugin SDK",
     description: "Bring your own algorithm, dataset adapter, or metric with a lightweight, typed interface.",
     icon: Puzzle,
+    featured: false,
   },
 ];
 
@@ -100,10 +111,12 @@ function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <motion.article
       variants={cardVariants}
-      className="group relative flex min-h-56 flex-col rounded-2xl border border-black/[0.08] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-black/[0.16]"
+      className={`group relative flex flex-col rounded-2xl border border-black/[0.08] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-black/[0.16] ${
+        feature.featured ? "md:row-span-2 min-h-72" : "min-h-56"
+      }`}
     >
-      <div className="flex size-11 items-center justify-center rounded-xl border border-black/[0.08] bg-[#F7F7F5] text-[#111110]">
-        <Icon className="size-5" aria-hidden="true" />
+      <div className="flex size-11 items-center justify-center rounded-xl border border-[#2563EB]/30 bg-transparent text-[#2563EB]">
+        <Icon className="size-5" aria-hidden="true" strokeWidth={1.5} />
       </div>
       <div className="mt-6 flex flex-1 flex-col">
         <h3 className="text-lg font-semibold text-[#111110]">{feature.title}</h3>
@@ -127,7 +140,7 @@ export default function Features() {
         </div>
 
         <motion.div
-          className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
+          className="mt-14 grid auto-rows-[minmax(0,_1fr)] gap-5 md:grid-cols-2 lg:grid-cols-3"
           variants={reduceMotion ? undefined : gridVariants}
           initial={reduceMotion ? false : "hidden"}
           whileInView="visible"

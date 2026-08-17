@@ -18,6 +18,10 @@
     --color-skyboy-blue-deep: var(--skyboy-blue-deep);
     --color-skyboy-success: var(--skyboy-success);
     --color-skyboy-warning: var(--skyboy-warning);
+    --color-status-clean: var(--status-clean);
+    --color-status-regressed: var(--status-regressed);
+    --color-status-running: var(--status-running);
+    --color-status-queued: var(--status-queued);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -56,6 +60,12 @@
 :root {
     --font-geist-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
     --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
+
+    /* Status colors */
+    --status-clean: #16A34A;
+    --status-regressed: #DC2626;
+    --status-running: #D97706;
+    --status-queued: #9CA3AF;
 
     /* Light theme palette */
     --skyboy-background: #FAFAF8;
@@ -99,6 +109,48 @@
     --sidebar-ring: var(--skyboy-blue);
 }
 
+/* Dark theme (default) */
+html.dark {
+    --skyboy-background: #0a0a0a;
+    --skyboy-surface: #171717;
+    --skyboy-border: rgba(255, 255, 255, 0.08);
+    --skyboy-border-hover: rgba(255, 255, 255, 0.16);
+    --skyboy-text: #fafafa;
+    --skyboy-text-secondary: #a8a8a8;
+    --skyboy-text-muted: #6b6b6b;
+    --skyboy-blue: #3b82f6;
+    --skyboy-blue-deep: #2563eb;
+    --skyboy-success: #22c55e;
+    --skyboy-warning: #ef4444;
+
+    --background: var(--skyboy-background);
+    --foreground: var(--skyboy-text);
+    --card: #171717;
+    --card-foreground: var(--skyboy-text);
+    --popover: #171717;
+    --popover-foreground: var(--skyboy-text);
+    --primary: var(--skyboy-text);
+    --primary-foreground: #0a0a0a;
+    --secondary: rgba(255, 255, 255, 0.04);
+    --secondary-foreground: var(--skyboy-text);
+    --muted: rgba(255, 255, 255, 0.04);
+    --muted-foreground: var(--skyboy-text-secondary);
+    --accent: rgba(59, 130, 246, 0.12);
+    --accent-foreground: var(--skyboy-text);
+    --destructive: var(--skyboy-warning);
+    --border: var(--skyboy-border);
+    --input: var(--skyboy-border);
+    --ring: var(--skyboy-blue);
+    --sidebar: var(--skyboy-surface);
+    --sidebar-foreground: var(--skyboy-text);
+    --sidebar-primary: var(--skyboy-blue);
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: rgba(255, 255, 255, 0.04);
+    --sidebar-accent-foreground: var(--skyboy-text);
+    --sidebar-border: var(--skyboy-border);
+    --sidebar-ring: var(--skyboy-blue);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -109,8 +161,21 @@
   html {
     @apply scroll-smooth font-sans;
   }
+  html.dark {
+    color-scheme: dark;
+  }
   :focus-visible {
     @apply outline-2 outline-offset-2 outline-skyboy-blue;
+  }
+}
+
+/* Tighten card borders to 1px hairlines, remove shadows */
+@layer components {
+  .card,
+  [class*=\"card\"],
+  .bg-card,
+  [class*=\"bg-card\"] {
+    @apply border border-[var(--skyboy-border)] shadow-none;
   }
 }
 
