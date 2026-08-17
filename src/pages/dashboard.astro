@@ -1,0 +1,105 @@
+---
+import AuthLayout from '../layouts/AuthLayout.astro';
+import { mockRuns } from '../lib/mock-data';
+
+const statusColors = {
+  clean: 'bg-status-clean/10 text-status-clean',
+  regressed: 'bg-status-regressed/10 text-status-regressed',
+  running: 'bg-status-running/10 text-status-running',
+  queued: 'bg-status-queued/10 text-status-queued',
+};
+
+const formatTime = (isoString: string) => {
+  const date = new Date(isoString);
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+};
+---
+
+<AuthLayout client:load>
+  <div class="w-full max-w-6xl">
+    <!-- Page Header -->
+    <div class="mb-8">
+      <h1 class="text-2xl font-semibold text-[var(--skyboy-text)]">Dashboard</h1>
+      <p class="mt-1 text-sm text-[var(--skyboy-text-secondary)]">Overview of your algorithm runs and performance</p>
+    </div>
+
+    <!-- Metric Cards Row -->
+    <div class="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Active algorithms -->
+      <div class="rounded-xl border border-[var(--skyboy-border)] bg-[var(--card)] p-5 shadow-none">
+        <p class="text-xs font-medium uppercase tracking-wide text-[var(--skyboy-text-muted)]">Active algorithms</p>
+        <p class="mt-2 font-mono text-3xl font-semibold text-[var(--skyboy-text)]">12</p>
+        <p class="mt-1 text-xs text-[var(--skyboy-success)]">+2 this week</p>
+      </div>
+
+      <!-- Runs this week -->
+      <div class="rounded-xl border border-[var(--skyboy-border)] bg-[var(--card)] p-5 shadow-none">
+        <p class="text-xs font-medium uppercase tracking-wide text-[var(--skyboy-text-muted)]">Runs this week</p>
+        <p class="mt-2 font-mono text-3xl font-semibold text-[var(--skyboy-text)]">47</p>
+        <p class="mt-1 text-xs text-[var(--skyboy-text-secondary)]">Avg 6.7/day</p>
+      </div>
+
+      <!-- Regressions -->
+      <div class="rounded-xl border border-[var(--skyboy-border)] bg-[var(--card)] p-5 shadow-none">
+        <p class="text-xs font-medium uppercase tracking-wide text-[var(--skyboy-text-muted)]">Regressions</p>
+        <p class="mt-2 font-mono text-3xl font-semibold text-[var(--skyboy-text)]">3</p>
+        <p class="mt-1 text-xs text-[var(--skyboy-warning)]">Needs attention</p>
+      </div>
+
+      <!-- Avg score -->
+      <div class="rounded-xl border border-[var(--skyboy-border)] bg-[var(--card)] p-5 shadow-none">
+        <p class="text-xs font-medium uppercase tracking-wide text-[var(--skyboy-text-muted)]">Avg score</p>
+        <p class="mt-2 font-mono text-3xl font-semibold text-[var(--skyboy-text)]">0.82</p>
+        <p class="mt-1 text-xs text-[var(--skyboy-success)]">+0.04 vs last week</p>
+      </div>
+    </div>
+
+    <!-- Runs Table -->
+    <div class="overflow-hidden rounded-xl border border-[var(--skyboy-border)] bg-[var(--card)] shadow-none">
+      <div class="border-b border-[var(--skyboy-border)] px-6 py-4">
+        <h2 class="text-sm font-semibold text-[var(--skyboy-text)]">Recent Runs</h2>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="w-full min-w-[640px]">
+          <thead class="bg-[var(--skyboy-surface)]">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--skyboy-text-muted)]">Algorithm</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--skyboy-text-muted)]">Dataset</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--skyboy-text-muted)]">Status</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--skyboy-text-muted)]">Score</th>
+              <th class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-[var(--skyboy-text-muted)]">Time</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[var(--skyboy-border)]">
+            {mockRuns.map((run) => (
+              <tr class="hover:bg-[var(--skyboy-surface)]/50">
+                <td class="px-6 py-4">
+                  <div class="flex flex-col">
+                    <span class="font-mono text-sm font-medium text-[var(--skyboy-text)]">{run.name}</span>
+                    <span class="text-xs text-[var(--skyboy-text-muted)]">v{run.version}</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-sm text-[var(--skyboy-text-secondary)]">{run.dataset}</td>
+                <td class="px-6 py-4">
+                  <span class={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${statusColors[run.status]}`}>
+                    {run.status.charAt(0).toUpperCase() + run.status.slice(1)}
+                  </span>
+                </td>
+                <td class="px-6 py-4 font-mono text-sm text-[var(--skyboy-text)]">
+                  {run.score > 0 ? run.score.toFixed(3) : '—'}
+                </td>
+                <td class="px-6 py-4 text-sm text-[var(--skyboy-text-secondary)]">{formatTime(run.timestamp)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</AuthLayout>
+
+<style is:global>
+  html.dark {
+    background-color: var(--skyboy-background);
+  }
+</style>
