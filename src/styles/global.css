@@ -62,55 +62,12 @@
     --font-geist-mono: "Geist Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
 
     /* Status colors */
-    --status-clean: #16A34A;
-    --status-regressed: #DC2626;
-    --status-running: #D97706;
-    --status-queued: #9CA3AF;
+    --status-clean: #22c55e;
+    --status-regressed: #ef4444;
+    --status-running: #f59e0b;
+    --status-queued: #6b7280;
 
-    /* Light theme palette */
-    --skyboy-background: #FAFAF8;
-    --skyboy-surface: #F0F0ED;
-    --skyboy-border: rgba(0, 0, 0, 0.08);
-    --skyboy-border-hover: rgba(0, 0, 0, 0.16);
-    --skyboy-text: #111110;
-    --skyboy-text-secondary: #4B4B48;
-    --skyboy-text-muted: #8A8A85;
-    --skyboy-blue: #2563EB;
-    --skyboy-blue-deep: #1D4ED8;
-    --skyboy-success: #16A34A;
-    --skyboy-warning: #DC2626;
-
-    --background: var(--skyboy-background);
-    --foreground: var(--skyboy-text);
-    --card: #FFFFFF;
-    --card-foreground: var(--skyboy-text);
-    --popover: #FFFFFF;
-    --popover-foreground: var(--skyboy-text);
-    --primary: var(--skyboy-text);
-    --primary-foreground: #FFFFFF;
-    --secondary: rgba(0, 0, 0, 0.04);
-    --secondary-foreground: var(--skyboy-text);
-    --muted: rgba(0, 0, 0, 0.04);
-    --muted-foreground: var(--skyboy-text-secondary);
-    --accent: rgba(37, 99, 235, 0.08);
-    --accent-foreground: var(--skyboy-text);
-    --destructive: var(--skyboy-warning);
-    --border: var(--skyboy-border);
-    --input: var(--skyboy-border);
-    --ring: var(--skyboy-blue);
-    --radius: 1rem;
-    --sidebar: var(--skyboy-surface);
-    --sidebar-foreground: var(--skyboy-text);
-    --sidebar-primary: var(--skyboy-blue);
-    --sidebar-primary-foreground: #FFFFFF;
-    --sidebar-accent: rgba(0, 0, 0, 0.04);
-    --sidebar-accent-foreground: var(--skyboy-text);
-    --sidebar-border: var(--skyboy-border);
-    --sidebar-ring: var(--skyboy-blue);
-}
-
-/* Dark theme (default) */
-html.dark {
+    /* Dark theme palette (default) */
     --skyboy-background: #0a0a0a;
     --skyboy-surface: #171717;
     --skyboy-border: rgba(255, 255, 255, 0.08);
@@ -141,6 +98,7 @@ html.dark {
     --border: var(--skyboy-border);
     --input: var(--skyboy-border);
     --ring: var(--skyboy-blue);
+    --radius: 1rem;
     --sidebar: var(--skyboy-surface);
     --sidebar-foreground: var(--skyboy-text);
     --sidebar-primary: var(--skyboy-blue);
@@ -160,8 +118,6 @@ html.dark {
   }
   html {
     @apply scroll-smooth font-sans;
-  }
-  html.dark {
     color-scheme: dark;
   }
   :focus-visible {

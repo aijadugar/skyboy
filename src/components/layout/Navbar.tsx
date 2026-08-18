@@ -1,35 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { navLinks } from "@/lib/constants";
 
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [isDark, setIsDark] = useState(true);
-
-  useEffect(() => {
-    // Check localStorage on mount
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (savedTheme) {
-      setIsDark(savedTheme === "dark");
-      document.documentElement.classList.toggle("dark", savedTheme === "dark");
-    } else {
-      // Default to dark theme
-      setIsDark(prefersDark);
-      document.documentElement.classList.add("dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const newIsDark = !isDark;
-    setIsDark(newIsDark);
-    document.documentElement.classList.toggle("dark", newIsDark);
-    localStorage.setItem("theme", newIsDark ? "dark" : "light");
-  };
 
   return (
     <nav className="sticky top-0 z-50 border-b border-[var(--skyboy-border)] bg-[var(--skyboy-background)]/90 backdrop-blur">
@@ -53,7 +30,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Auth + Theme toggle — desktop */}
+        {/* Auth — desktop */}
         <div className="hidden items-center gap-3 md:flex">
           <a
             href="/login"
@@ -67,14 +44,6 @@ export default function Navbar() {
           >
             Sign Up
           </a>
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="ml-2 flex size-9 items-center justify-center rounded-lg border border-[var(--skyboy-border)] text-[var(--skyboy-text-secondary)] transition-colors hover:text-[var(--skyboy-text)]"
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -112,14 +81,6 @@ export default function Navbar() {
             >
               Sign Up
             </a>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="mt-2 flex h-9 items-center justify-center gap-2 rounded-lg border border-[var(--skyboy-border)] px-4 text-sm text-[var(--skyboy-text-secondary)] transition-colors hover:text-[var(--skyboy-text)]"
-            >
-              {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-              <span>{isDark ? "Light Mode" : "Dark Mode"}</span>
-            </button>
           </div>
         </div>
       )}

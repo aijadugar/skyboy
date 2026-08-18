@@ -111,16 +111,16 @@ function FeatureCard({ feature }: { feature: Feature }) {
   return (
     <motion.article
       variants={cardVariants}
-      className={`group relative flex flex-col rounded-2xl border border-black/[0.08] bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-black/[0.16] ${
+      className={`group relative flex flex-col rounded-2xl border border-[var(--skyboy-border)] bg-[var(--card)] p-6 transition duration-200 hover:-translate-y-1 hover:border-[var(--skyboy-border-hover)] ${
         feature.featured ? "md:row-span-2 min-h-72" : "min-h-56"
       }`}
     >
-      <div className="flex size-11 items-center justify-center rounded-xl border border-[#2563EB]/30 bg-transparent text-[#2563EB]">
+      <div className="flex size-11 items-center justify-center rounded-xl border border-[var(--skyboy-blue)]/30 bg-transparent text-[var(--skyboy-blue)]">
         <Icon className="size-5" aria-hidden="true" strokeWidth={1.5} />
       </div>
       <div className="mt-6 flex flex-1 flex-col">
-        <h3 className="text-lg font-semibold text-[#111110]">{feature.title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-6 text-[#4B4B48]">{feature.description}</p>
+        <h3 className="text-lg font-semibold text-[var(--skyboy-text)]">{feature.title}</h3>
+        <p className="mt-3 flex-1 text-sm leading-6 text-[var(--skyboy-text-secondary)]">{feature.description}</p>
       </div>
     </motion.article>
   );
@@ -130,11 +130,11 @@ export default function Features() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="platform" className="skyboy-section bg-white">
+    <section id="platform" className="skyboy-section bg-[var(--skyboy-background)]">
       <div className="skyboy-container">
         <div className="mx-auto max-w-3xl text-center">
-          <p className="text-sm font-medium text-[#2563EB]">Platform</p>
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#111110] md:text-5xl">
+          <p className="text-sm font-medium text-[var(--skyboy-blue)]">Platform</p>
+          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[var(--skyboy-text)] md:text-5xl">
             Everything algorithm engineering needs, built in
           </h2>
         </div>
