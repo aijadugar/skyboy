@@ -3,9 +3,9 @@ import { siteCopy } from "@/content/copy";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-black/[0.08] py-8">
-      <div className="skyboy-container grid gap-5 text-sm text-[#8A8A85] md:grid-cols-[1fr_auto_1fr] md:items-center">
-        <a href="/" className="flex items-center gap-2 font-semibold text-[#111110]">
+    <footer className="border-t border-[var(--skyboy-border)] py-8">
+      <div className="skyboy-container grid gap-5 text-sm text-[var(--skyboy-text-secondary)] md:grid-cols-[1fr_auto_1fr] md:items-center">
+        <a href="/" className="flex items-center gap-2 font-semibold text-[var(--skyboy-text)]">
           <span>{siteCopy.name}</span>
         </a>
 
@@ -14,14 +14,14 @@ export default function Footer() {
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-[#111110]"
+              className="transition-colors hover:text-[var(--skyboy-text)]"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
-        <p className="text-xs text-[#8A8A85] md:text-right">
+        <p className="text-xs text-[var(--skyboy-text-muted)] md:text-right">
           &copy; {new Date().getFullYear()} {siteCopy.name}
         </p>
       </div>
