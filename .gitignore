@@ -1,17 +1,16 @@
-```gitignore
+```
 # Dependencies
 node_modules/
 
 # Build outputs
 dist/
 build/
-.next/
-out/
+*.tsbuildinfo
 
 # Environment variables
 .env
 .env.local
-*.env.*
+.env.*
 
 # IDE files
 .vscode/
@@ -19,33 +18,16 @@ out/
 *.swp
 *.swo
 
-# Python cache
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
 # Logs
 *.log
 
-# OS generated files
+# Temporary files
+*.tmp
+
+# OS files
 .DS_Store
 Thumbs.db
 
-# Coverage reports
-coverage/
-htmlcov/
-.coverage
-
-# Temporary files
-*.tmp
-*.temp
-```
-
-Wait, let me reconsider. The changes only include TypeScript/JSX files and CSS - no build artifacts, dependencies, or temporary files are shown in the change list. The current .gitignore appears to be empty.
-
-Since only source code files (.tsx, .css) are being modified, no additional ignores are needed.
-
-```gitignore
-
+# Astro-specific
+.astro/
 ```
