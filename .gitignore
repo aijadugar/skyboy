@@ -2,7 +2,7 @@
 # Dependencies
 node_modules/
 
-# Build outputs
+# Build artifacts
 dist/
 build/
 *.tsbuildinfo
@@ -12,7 +12,7 @@ build/
 .env.local
 .env.*
 
-# IDE files
+# IDE and editor settings
 .vscode/
 .idea/
 *.swp
