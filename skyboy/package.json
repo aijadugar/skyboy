@@ -1,0 +1,19 @@
+{
+  "name": "skyboy",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "astro": "^4.16.18",
+    "typescript": "^5.9.3"
+  }
+}
