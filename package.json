@@ -17,5 +17,8 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "drawably": "^0.3.10"
   }
 }
