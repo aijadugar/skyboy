@@ -1,0 +1,26 @@
+{
+  "category": "coding/frontend",
+  "tags": [
+    "nextjs",
+    "app-router",
+    "react"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "license": "MIT",
+  "author": "skyboy",
+  "verified": false,
+  "version": "1.0.0",
+  "permissions": {
+    "network": false,
+    "filesystem_write_outside_target": false,
+    "shell_exec": false,
+    "env_read": [],
+    "generated_by": "generate-manifest.ts@1.0.0",
+    "generated_at": "2026-09-02T10:27:59.078Z"
+  }
+}

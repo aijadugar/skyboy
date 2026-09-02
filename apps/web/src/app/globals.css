@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ----------------------------- Skyboy tokens ----------------------------- */
+:root {
+  /* Drawably-native theme (see drawably/CLAUDE.md brand section):
+     pen #2724d1 on paper #e3e3e1. Pen blue belongs to strokes, never surfaces.
+     The ink #18181b is for type/body, not the sketch chrome. */
+  --drawably-stroke: #2724d1; /* pen blue - the sketch chrome */
+  --drawably-fill: #2724d1; /* pen blue - solid/highlight fill */
+  --drawably-paper: #e3e3e1; /* warm paper canvas */
+  --drawably-width: 2;
+  --drawably-ink: #18181b; /* near-black ink for type */
+  --drawably-error: #d12724;
+  --drawably-success: #188a42;
+}
+
+/* Colour contrast: the pen-blue fill is used on the primary CTA, so its label
+   is white on a dark enough blue. For outline/scribble variant the stroke is
+   the ink, and the button text stays ink on paper. */
+
+body {
+  background: var(--drawably-paper);
+  color: #18181b;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Hairline borders instead of heavy drop shadows (drawably invariant). Cards
+   sit on the page held by a hairline + the pen stroke, not a shadow. */
+.sk-card {
+  background: #fbfbfa;
+  border: 1px solid #c9c9c6;
+  border-radius: 10px;
+}
+
+/* For a .drawably-host that also draws its own sketch border: the SVG chrome
+   is the border, so suppress the CSS hairline to avoid a double frame. */
+.sk-card--bare {
+  background: #fbfbfa;
+  border-radius: 10px;
+}
+
+/* Badge treatments */
+.sk-badge {
+  border: 1px solid #c9c9c6;
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #474645;
+  background: #f1f1ef;
+}
+.sk-badge-official {
+  color: #2724d1;
+  border-color: #c9c9c6;
+  background: #eceafc;
+}
+
+/* Single marquee (taste-skill: max one). Agent names as mono chips, not logos:
+   a name is a fact, a fake logo would imply endorsement. Fades at the edges. */
+@keyframes sk-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.sk-marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.sk-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: sk-marquee 34s linear infinite;
+}
+.sk-marquee:hover .sk-marquee__track {
+  animation-play-state: paused;
+}
+/* margin-right (not flex gap) so the -50% loop point is seamless: each chip
+   carries its own trailing space inside the shifted width. */
+.sk-marquee__set {
+  display: flex;
+}
+.sk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-right: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #c9c9c6;
+  border-radius: 9999px;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: #474645;
+  background: #f1f1ef;
+  white-space: nowrap;
+}
+.sk-chip__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background: #2724d1;
+}
+
+/* Reduced motion: drawably already freezes its sketch + skips hover re-sketch.
+   We honor the same preference for any page-level motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .sk-marquee__track {
+    animation: none !important;
+  }
+}

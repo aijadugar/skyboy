@@ -1,0 +1,21 @@
+{
+  "name": "skyboy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "skyboy.in - a fast, curated, agent-agnostic directory of portable AI-era skills",
+  "license": "MIT",
+  "type": "module",
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm --workspace apps/web run dev",
+    "build": "npm --workspace apps/web run build",
+    "start": "npm --workspace apps/web run start",
+    "lint": "npm --workspace apps/web run lint",
+    "validate-skills": "node --experimental-strip-types scripts/validate-skill.ts"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
