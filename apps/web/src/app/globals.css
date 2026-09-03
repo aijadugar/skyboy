@@ -106,6 +106,126 @@ body {
   border-radius: 9999px;
   background: #2724d1;
 }
+.sk-chip--active {
+  border-color: #2724d1;
+  color: #2724d1;
+  background: #eceafc;
+}
+
+/* ------------- Rendered SKILL.md (md-body) ------------- */
+/* The in-page SKILL.md preview. Hairline-framed inside .md-body on a paper card.
+   Type stays on Inter; mono classes land on the Geist Mono stack. */
+.md-body {
+  color: #18181b;
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+.md-body > :first-child { margin-top: 0; }
+.md-body > :last-child { margin-bottom: 0; }
+.md-body h1,
+.md-body h2,
+.md-body h3,
+.md-body h4 {
+  color: #18181b;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin: 1.75em 0 0.6em;
+}
+.md-body h1 { font-size: 1.7rem; }
+.md-body h2 { font-size: 1.35rem; }
+.md-body h3 { font-size: 1.12rem; }
+.md-body h4 { font-size: 1rem; }
+.md-body p { margin: 0.9em 0; }
+.md-body a {
+  color: #2724d1;
+  text-decoration: underline;
+  text-decoration-color: #c9c9c6;
+  text-underline-offset: 3px;
+}
+.md-body a:hover { text-decoration-color: #2724d1; }
+.md-body strong { color: #18181b; }
+.md-body ul,
+.md-body ol { margin: 0.9em 0; padding-left: 1.35rem; }
+.md-body ul { list-style: disc; }
+.md-body ol { list-style: decimal; }
+.md-body li { margin: 0.3em 0; }
+.md-body blockquote {
+  margin: 1.1em 0;
+  padding: 0.1em 0 0.1em 1.1em;
+  border-left: 2px solid #c9c9c6;
+  color: #474645;
+}
+.md-body table {
+  width: 100%;
+  margin: 1.25em 0;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.md-body th,
+.md-body td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #c9c9c6;
+  vertical-align: top;
+}
+.md-body th {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #474645;
+}
+.md-body tr:last-child td { border-bottom: none; }
+.md-body code {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.85em;
+  background: #ececeb;
+  border: 1px solid #d9d9d6;
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.md-body hr {
+  border: none;
+  border-top: 1px solid #c9c9c6;
+  margin: 1.75em 0;
+}
+
+/* Syntax-highlighted code blocks: hairline frame, mono, no drop shadow. */
+.md-code {
+  margin: 1.25em 0;
+  background: #f4f4f2;
+  border: 1px solid #c9c9c6;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+.md-code code {
+  display: block;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  color: #18181b;
+}
+/* Pen-blue used only where it means "accent": keywords, strings, tags. No
+   syntax rainbow (taste-skill §4.2: one accent, restrained). */
+.md-code .hljs-keyword,
+.md-code .hljs-selector-tag,
+.md-code .hljs-literal { color: #2724d1; }
+.md-code .hljs-string,
+.md-code .hljs-attr,
+.md-code .hljs-regexp,
+.md-code .hljs-template-variable { color: #188a42; }
+.md-code .hljs-comment { color: #a1a1aa; font-style: italic; }
+.md-code .hljs-number,
+.md-code .hljs-title,
+.md-code .hljs-name,
+.md-code .hljs-built_in { color: #18181b; }
+.md-code .hljs-tag { color: #474645; }
+.md-code .hljs-meta { color: #2724d1; }
 
 /* Reduced motion: drawably already freezes its sketch + skips hover re-sketch.
    We honor the same preference for any page-level motion. */

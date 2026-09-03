@@ -7,7 +7,10 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "skyboy.in",
+  title: {
+    default: "skyboy.in",
+    template: "%s",
+  },
   description:
     "A fast, curated, agent-agnostic directory of portable AI-era skills. Search, preview, and install skills into Claude, Cursor, ChatGPT, Gemini CLI, and more.",
 };
