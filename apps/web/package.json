@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm --workspace @skyboy/core run build && npm --workspace @skyboy/mcp-server run build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
