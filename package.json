@@ -6,7 +6,8 @@
   "license": "MIT",
   "type": "module",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm --workspace apps/web run dev",
@@ -15,6 +16,7 @@
     "lint": "npm --workspace apps/web run lint",
     "validate-skills": "node --experimental-strip-types scripts/validate-skill.ts",
     "generate-manifests": "node --experimental-strip-types scripts/generate-manifest.ts",
+    "export-catalog": "node --experimental-strip-types scripts/export-catalog.ts",
     "detect-duplicates": "node --experimental-strip-types scripts/detect-duplicates.ts",
     "dedupe": "node --experimental-strip-types scripts/detect-duplicates.ts"
   },

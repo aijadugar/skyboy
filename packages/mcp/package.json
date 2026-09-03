@@ -1,0 +1,33 @@
+{
+  "name": "@skyboy/mcp-server",
+  "version": "0.1.0",
+  "description": "Skyboy MCP server: search, preview, and install skills from the skyboy.in catalog, without leaving your agent.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "skyboy-mcp": "./dist/index.js"
+  },
+  "files": ["dist", "README.md"],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./handler": {
+      "types": "./dist/handler.d.ts",
+      "import": "./dist/handler.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@skyboy/core": "*",
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "@types/node": "^22.10.0"
+  }
+}

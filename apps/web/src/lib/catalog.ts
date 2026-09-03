@@ -367,12 +367,13 @@ export function getFeaturedSkills(): Skill[] {
   return order.map((slug) => bySlug.get(slug)).filter((s): s is Skill => Boolean(s));
 }
 
-export const SUPPORTED_AGENTS: { name: string; note: string }[] = [
-  { name: "Claude Code", note: "folder drop" },
-  { name: "Claude Desktop", note: "upload" },
-  { name: "Cursor", note: ".cursor/rules" },
-  { name: "ChatGPT", note: "paste config" },
-  { name: "Gemini CLI", note: "SKILL.md" },
-  { name: "Codex CLI", note: "SKILL.md" },
-  { name: "Windsurf", note: "skills" },
+export const SUPPORTED_AGENTS: { name: string; note: string; slug?: string }[] = [
+  { name: "Claude Code", note: "folder drop", slug: "claude-code" },
+  { name: "Claude Desktop", note: "upload", slug: "claude-desktop" },
+  { name: "Cursor", note: ".cursor/rules", slug: "cursor" },
+  { name: "ChatGPT", note: "paste config", slug: "chatgpt" },
+  { name: "Gemini CLI", note: "SKILL.md", slug: "gemini-cli" },
+  { name: "Codex CLI", note: "SKILL.md", slug: "codex-cli" },
+  { name: "Windsurf", note: "skills", slug: "windsurf" },
+  { name: "MCP", note: "remote endpoint", slug: "mcp" },
 ];

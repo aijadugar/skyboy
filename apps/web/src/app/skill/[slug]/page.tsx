@@ -5,7 +5,6 @@ import { renderMarkdown } from "@/lib/markdown";
 import { SiteNav } from "@/components/site-nav";
 import { PermissionsRow } from "@/components/permissions";
 import { CopyButton } from "@/components/copy-button";
-
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
@@ -227,20 +226,73 @@ export default async function SkillPage({ params }: Props) {
             Install
           </h2>
           <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
-            Copy the SKILL.md above, or clone this one skill directly for
-            Claude Code.
+            Copy the SKILL.md above, or pull this one skill directly for your
+            agent. The degit command needs Node; the CLI and MCP paths work for
+            both npm and pip users.
           </p>
-          <div className="mt-5 overflow-x-auto">
-            <pre className="md-code">
-              <code className="hljs language-bash">{`npx degit skyboy/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}</code>
-            </pre>
+
+          <div className="mt-5 space-y-5">
+            <div>
+              <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                degit (npm)
+              </p>
+              <pre className="md-code mt-2">
+                <code className="hljs language-bash">{`npx degit aijadugar/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}</code>
+              </pre>
+              <div className="mt-2">
+                <CopyButton
+                  text={`npx degit aijadugar/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}
+                  label="Copy degit command"
+                />
+              </div>
+            </div>
+
+            <div>
+              <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                CLI
+              </p>
+              <pre className="md-code mt-2">
+                <code className="hljs language-bash">{`skyboy add ${skill.slug}`}</code>
+              </pre>
+              <div className="mt-2">
+                <CopyButton text={`skyboy add ${skill.slug}`} label="Copy CLI command" />
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-mute">
+                Or the PyPI equivalent: <code className="text-ink">pipx run skyboy add {skill.slug}</code>
+              </p>
+            </div>
           </div>
-          <div className="mt-4">
+        </section>
+
+        {/* Connect via MCP (§8F) */}
+        <section className="mt-14 rounded-sm border border-hairline bg-card p-6 sm:p-8">
+          <h2 className="text-xl font-semibold tracking-tight text-ink">
+            Connect via MCP
+          </h2>
+          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
+            Point an MCP-compatible agent at the Skyboy MCP server and it can pull
+            this skill (or search the catalog) without leaving the conversation.
+            The hosted endpoint is read-only; the stdio server also installs
+            locally.
+          </p>
+          <pre className="mt-5 md-code">{`{"mcpServers":{"skyboy":{"type":"http","url":"https://mcp.skyboy.in"}}}`}</pre>
+          <div className="mt-2">
             <CopyButton
-              text={`npx degit skyboy/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}
-              label="Copy install command"
+              text={`{"mcpServers":{"skyboy":{"type":"http","url":"https://mcp.skyboy.in"}}}`}
+              label="Copy MCP config"
             />
           </div>
+          <p className="mt-4 max-w-[58ch] text-sm leading-relaxed text-body">
+            Then ask the agent:{" "}
+            <code className="text-ink">get_skill &apos;{skill.slug}&apos;</code> to preview it,
+            or <code className="text-ink">install_skill &apos;{skill.slug}&apos;</code> over stdio.
+          </p>
+          <a
+            href="/docs/mcp"
+            className="mt-5 inline-block font-mono text-xs uppercase tracking-[0.1em] text-pen hover:text-pen-deep"
+          >
+            Full setup guide →
+          </a>
         </section>
       </main>
     </div>

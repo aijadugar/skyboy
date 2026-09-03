@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skyboy-mcp"
+version = "0.1.0"
+description = "PyPI wrapper for the Skyboy MCP server. Runs the npm core via npx at runtime."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+keywords = ["skills", "claude", "cursor", "mcp", "model-context-protocol", "skyboy", "cli"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Topic :: Software Development :: Libraries",
+]
+
+[project.urls]
+Homepage = "https://skyboy.in"
+Source = "https://github.com/aijadugar/skyboy"
+
+[project.scripts]
+skyboy-mcp = "skyboy_mcp.__main__:main"
+
+[tool.setuptools]
+packages = ["skyboy_mcp"]
