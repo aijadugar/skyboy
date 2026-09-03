@@ -13,7 +13,10 @@
     "build": "npm --workspace apps/web run build",
     "start": "npm --workspace apps/web run start",
     "lint": "npm --workspace apps/web run lint",
-    "validate-skills": "node --experimental-strip-types scripts/validate-skill.ts"
+    "validate-skills": "node --experimental-strip-types scripts/validate-skill.ts",
+    "generate-manifests": "node --experimental-strip-types scripts/generate-manifest.ts",
+    "detect-duplicates": "node --experimental-strip-types scripts/detect-duplicates.ts",
+    "dedupe": "node --experimental-strip-types scripts/detect-duplicates.ts"
   },
   "engines": {
     "node": ">=20"

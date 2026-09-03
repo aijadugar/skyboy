@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { listSkills, getCategories, getAllTags } from "@/lib/catalog";
+import { listSkills, listPlugins, getCategories, getAllTags } from "@/lib/catalog";
 import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
 import { SkillCard } from "@/components/skill-card";
@@ -28,6 +28,7 @@ export default async function BrowsePage({
 
   const categories = getCategories();
   const tags = getAllTags();
+  const plugins = listPlugins();
   let skills = listSkills();
 
   if (category) skills = skills.filter((s) => s.category === category);
@@ -63,7 +64,7 @@ export default async function BrowsePage({
             </p>
           </div>
 
-          {skills.length === 0 ? (
+          {skills.length === 0 && plugins.length === 0 ? (
             <div className="rounded-sm border border-hairline bg-card px-6 py-16 text-center">
               <p className="font-mono text-sm uppercase tracking-[0.1em] text-mute">
                 No matches
@@ -79,6 +80,49 @@ export default async function BrowsePage({
               ))}
             </div>
           )}
+
+          {/* Vendor plugins (index + link, §3.2). Own row so they never compete
+              with hand-screened skills for the same card. */}
+          {plugins.length > 0 ? (
+            <div className="mt-16">
+              <p className="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-mute">
+                Vendor plugins
+              </p>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
+                {plugins.map((p) => (
+                  <a
+                    key={p.slug}
+                    href={`/plugin/${p.slug}`}
+                    className="group rounded-sm border border-hairline bg-card p-6 transition-colors hover:border-pen"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
+                        {p.vendor}
+                      </p>
+                      <span className="sk-badge sk-badge-official">
+                        {p.badge}
+                      </span>
+                    </div>
+                    <h3 className="mt-4 text-lg font-semibold text-ink">
+                      {p.name}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-body">
+                      {p.description}
+                    </p>
+                    <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
+                      <span className="font-mono text-xs text-mute">
+                        {p.skills.length} skill{p.skills.length === 1 ? "" : "s"}
+                        {p.mcp ? " · MCP" : ""}
+                      </span>
+                      <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
+                        Open →
+                      </span>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : null}
         </section>
       </main>
     </div>

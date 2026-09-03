@@ -3,6 +3,9 @@ import path from "node:path";
 
 export type Agent = string;
 
+export type SourceType = "skyboy-authored" | "community" | "vendor";
+export type Badge = "official" | "official (vendor)" | "verified" | "community" | "unreviewed";
+
 export interface Skill {
   slug: string; // folder name
   category: string; // metadata.category
@@ -19,8 +22,47 @@ export interface Skill {
     shell_exec: boolean;
     env_read: string[];
   };
-  badge: "official" | "official (vendor)" | "verified" | "community" | "unreviewed";
+  badge: Badge;
+  sourceType: SourceType; // how the content was published (drives badge, §3.2)
+  upstreamRepo?: string; // required when sourceType === "vendor"
+  vendorName?: string; // the named company, when sourceType === "vendor"
+  canonicalOf?: string | null; // §12.2: slug of the canonical entry this one duplicates
   path: string; // skill folder path
+}
+
+// A skill shipped inside a vendor plugin. Index-only: points at the upstream
+// repo as the source of truth (never vendor-copied, §3.2), so "preview" is an
+// outbound link to the vendor's raw SKILL.md rather than a vendored file.
+export interface PluginSkillRef {
+  name: string;
+  description: string;
+  path: string; // upstream path inside the plugin, e.g. "skills/nextjs"
+  url: string; // upstream raw URL for the SKILL.md
+}
+
+// A plugin = a bundle of skills/commands/agents/hooks (+ optional .mcp.json),
+// described by its own plugin.json manifest. Submitted or vendor-published.
+export interface Plugin {
+  slug: string;
+  name: string;
+  vendor: string; // the org/publisher
+  vendorUrl?: string;
+  sourceType: SourceType;
+  category: string;
+  tags: string[];
+  license: string;
+  upstreamRepo: string; // where the source of truth lives (always present here)
+  install: string; // the one-line command to add it
+  description: string;
+  compatibleAgents: Agent[];
+  skills: PluginSkillRef[];
+  commands: string[];
+  agents: string[];
+  mcp: string | null;
+  note: string; // skyboy context: indexed + linked, not reviewed by us
+  badge: Badge;
+  version?: string;
+  path: string; // plugin folder path
 }
 
 // Metadata a skill's SKILL.md frontmatter officially declares (portable, shared
@@ -61,6 +103,30 @@ interface RawMeta {
   verified?: boolean;
   version?: string;
   permissions?: Skill["permissions"];
+  source_type?: SourceType;
+  upstream_repo?: string;
+  vendor_name?: string;
+  canonical_of?: string | null;
+  [key: string]: unknown;
+}
+
+// Metadata a plugin's plugin.json manifest carries. Plugins are indexed + linked,
+// not vendored, so this is the subset we actually consume.
+interface RawPluginManifest {
+  name?: string;
+  description?: string;
+  vendor?: string;
+  vendor_url?: string;
+  license?: string;
+  category?: string;
+  tags?: string[];
+  compatible_agents?: string[];
+  install?: string;
+  skills?: { name?: string; description?: string; path?: string }[];
+  commands?: string[];
+  agents?: string[];
+  mcp?: string;
+  version?: string;
   [key: string]: unknown;
 }
 
@@ -115,12 +181,34 @@ function readSkill(skillDir: string, slug: string): Skill | null {
       shell_exec: false,
       env_read: [],
     },
-    badge: meta.verified ? "verified" : "official",
+    badge: badgeFromMeta(meta),
+    sourceType: meta.source_type ?? inferSourceFromBadge(meta),
+    upstreamRepo: meta.upstream_repo,
+    vendorName: meta.vendor_name,
+    canonicalOf: meta.canonical_of ?? null,
     path: skillDir,
   };
 }
 
+// Map a metadata.json to a badge. Vendor entries are never a stronger trust
+// signal than verified (see §3.2): "official (vendor)" means "published by the
+// named company", not "reviewed by skyboy".
+function badgeFromMeta(meta: RawMeta): Badge {
+  if (meta.source_type === "vendor") return "official (vendor)";
+  if (meta.verified) return "verified";
+  return "official";
+}
+
+// When source_type is absent, infer it from the badge the entry already claims:
+// `official` is a skyboy-authored reference skill, `verified` is a
+// community-submitted one that passed review.
+function inferSourceFromBadge(meta: RawMeta): SourceType {
+  if (meta.verified) return "community";
+  return "skyboy-authored";
+}
+
 const SKILLS_ROOT = path.resolve(process.cwd(), "../../skills");
+const PLUGINS_ROOT = path.resolve(process.cwd(), "../../plugins");
 
 export function listSkills(): Skill[] {
   if (!existsSync(SKILLS_ROOT)) return [];
@@ -134,6 +222,69 @@ export function listSkills(): Skill[] {
     }
   }
   return skills;
+}
+
+// --------------------------------------------------------------------------
+// Plugin catalog (vendor contributions, §3.1/§3.2). Index + link, never
+// vendor-copy. Each plugin ships a small index file we author in plugins/<vendor>/<slug>/.
+// --------------------------------------------------------------------------
+
+function readPlugin(pluginDir: string, slug: string): Plugin | null {
+  const manifestPath = path.join(pluginDir, "plugin.json");
+  if (!existsSync(manifestPath)) return null;
+  const raw: RawPluginManifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+  const vendor = raw.vendor ?? slug;
+  const upstreamRepo = (raw.vendor_url as string) || "";
+  const base = (raw.name ?? slug).toLowerCase();
+  return {
+    slug,
+    name: raw.name ?? slug,
+    vendor,
+    vendorUrl: raw.vendor_url,
+    sourceType: "vendor",
+    category: raw.category ?? "meta",
+    tags: raw.tags ?? [],
+    license: raw.license ?? "Apache-2.0",
+    upstreamRepo,
+    install: raw.install ?? `npx plugins add ${vendor}/${slug}`,
+    description: raw.description ?? "",
+    compatibleAgents: raw.compatible_agents ?? [],
+    skills: (raw.skills ?? []).map((s) => ({
+      name: s.name ?? s.path ?? "skill",
+      description: s.description ?? "",
+      path: s.path ?? "",
+      url: s.path ? `${stripSlash(upstreamRepo)}/blob/main/${s.path}` : "",
+    })),
+    commands: raw.commands ?? [],
+    agents: raw.agents ?? [],
+    mcp: raw.mcp ?? null,
+    note: "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+    badge: "official (vendor)",
+    version: raw.version,
+    path: pluginDir,
+  };
+}
+
+function stripSlash(url: string): string {
+  return url.replace(/\/+$/, "");
+}
+
+export function listPlugins(): Plugin[] {
+  if (!existsSync(PLUGINS_ROOT)) return [];
+  const plugins: Plugin[] = [];
+  for (const vendor of readdirSync(PLUGINS_ROOT)) {
+    const vendorPath = path.join(PLUGINS_ROOT, vendor);
+    if (!existsSync(vendorPath) || !statSync(vendorPath).isDirectory()) continue;
+    for (const slug of readdirSync(vendorPath)) {
+      const plugin = readPlugin(path.join(vendorPath, slug), slug);
+      if (plugin) plugins.push(plugin);
+    }
+  }
+  return plugins;
+}
+
+export function getPluginBySlug(slug: string): Plugin | undefined {
+  return listPlugins().find((p) => p.slug === slug);
 }
 
 // All leaf categories that actually contain skills, in filesystem order.
