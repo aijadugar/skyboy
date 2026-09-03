@@ -9,50 +9,6 @@ whichever agent you're already using, without copy-pasting. It ships the catalog
 as a website, a dual-distribution CLI, and an MCP server so a skill is one command
 away from any tool.
 
-```text
-   __                    __   __
-  / /__  __   _  ___   ___\ / /_ ____
- / _  / /  | | / _ \ /   _|  __/ _  \
-/ /_/ / /| | |/ /\ \/ /_  | / /  |_| |
-\__,_/ |__|/_/  \_/ \___/ |_| \____/
-```
-
----
-
-## Infrastructures & Entry Points
-
-Skyboy is one deployment that serves three hosts. Everything shares the same
-catalog and the same skill files; the subdomains are just different front doors.
-
-| Entry point | Purpose |
-|---|---|
-| [`skyboy.in`](https://skyboy.in) | The main web directory. Browse, preview, and search the full catalog of skills and plugins. |
-| [`docs.skyboy.in`](https://docs.skyboy.in) | Guides and reference. The skill spec, MCP setup, and agent-specific install docs. |
-| [`mcp.skyboy.in`](https://mcp.skyboy.in) | The remote MCP server. Point any MCP-compatible agent here to search, preview, and check updates without leaving the conversation. |
-
----
-
-## Key Features
-
-- **Portable SKILL.md packages.** Every skill is a folder of `SKILL.md` plus
-  optional `references/`, `scripts/`, and `assets/`. That folder is the whole
-  package, and it works the same in Claude Code, Cursor, Gemini CLI, Codex CLI,
-  Windsurf, ChatGPT, or a plain agent.
-- **Dual npm / PyPI distribution.** Get the CLI on npm (`skyboy`) or PyPI
-  (`skyboy`), and the MCP server on npm (`@skyboy/mcp-server`) or PyPI
-  (`skyboy-mcp`). Same core, whichever package manager you already use.
-- **Permissions manifests.** Every skill carries a machine-readable
-  `permissions` block (network, filesystem write, shell exec, env read).
-  Installing (by you, or by an agent on your behalf) shows the same disclosure a
-  human would see on the site.
-- **Vendor plugin indexing.** Vendor and community plugins are indexed and linked
-  as the source of truth, never copied into the repo. You get one searchable
-  surface without maintaining forks.
-- **Fuzzy resolve.** `skyboy add app-router` finds the right slug even when you
-  don't remember the exact name.
-- **Agent-aware install.** The CLI and MCP detect whether you're in Claude Code,
-  Cursor, or Windsurf and drop the skill in the folder that agent reads.
-
 ---
 
 ## Quickstart & Installation
