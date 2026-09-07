@@ -5,7 +5,7 @@ import { SkillCard } from "@/components/skill-card";
 
 export function FeaturedSkills({ skills }: { skills: Skill[] }) {
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-20">
+    <section className="mx-auto max-w-6xl px-6 pb-20 pt-20">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div>
           <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">

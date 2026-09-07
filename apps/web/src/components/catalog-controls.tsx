@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 // Client filter bar for the /browse catalog. Category and tag are read from the
@@ -19,6 +19,18 @@ export function CatalogControls({
   const activeTag = params.get("tag") ?? "";
 
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(true);
+
+  // The filter bar is sticky under the site nav; once the user scrolls past the
+  // intro it gets out of the way so the results own the viewport.
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY < 200);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  if (!show) return null;
 
   function setParam(key: string, value: string) {
     const next = new URLSearchParams(params.toString());
