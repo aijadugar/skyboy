@@ -37,7 +37,7 @@ export default async function PluginPage({ params }: Props) {
         <header className="grid grid-cols-1 gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="sk-badge sk-badge-official">official (vendor)</span>
+              <span className="sk-badge sk-badge-official">vendor</span>
               <span className="sk-badge">{plugin.license}</span>
               {plugin.version ? (
                 <span className="font-mono text-xs text-mute">v{plugin.version}</span>

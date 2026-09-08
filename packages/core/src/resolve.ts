@@ -1,13 +1,13 @@
-// Slug resolution: exact match first, then a simple, dependency-free fuzzy
-// match. These are repo-relative folder names, so we compare against the slug
-// and name (and fall back to the path). No Levenshtein dependency; a
-// containment + prefix/token heuristic is enough for a catalog this size and
-// keeps the core dependency-free.
+// Slug resolution over compact v2 records: exact match first, then a simple,
+// dependency-free fuzzy match. We compare against the id and the slug (and
+// fall back to the path). No Levenshtein dependency; a containment +
+// prefix/token heuristic is enough and keeps the core dependency-free.
 
 import type { SkillRecord } from "./types.js";
+import { skillSlug } from "./types.js";
 
 function norm(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return s.toLowerCase().replace(/[^a-z0-9@/]+/g, "-").replace(/^-+|-+$/g, "");
 }
 
 function similarity(a: string, b: string): number {
@@ -31,7 +31,7 @@ function similarity(a: string, b: string): number {
     best = Math.max(best, Math.min(a.length, b.length) / Math.max(a.length, b.length));
   }
 
-  // token overlap across -/. boundaries (always scored, since a partial segment
+  // token overlap across -_./ boundaries (always scored, since a partial segment
   // substring match like "app-router" in "nextjs-app-router-conventions" is a
   // strong signal that the containment score underweights). A full-token hit in
   // a short query scores high because the query is a meaningful fragment.
@@ -60,22 +60,23 @@ export function resolve(target: string, skills: SkillRecord[]): ResolveResult | 
   const t = norm(target);
   if (!t) return null;
 
-  // Exact on slug or name wins immediately.
+  // Exact on id wins immediately; an exact bare-slug match also resolves (the
+  // bare form is the common way users type a skyboy skill).
   for (const s of skills) {
-    if (norm(s.slug) === t || norm(s.name) === t) {
-      return { slug: s.slug, score: 1, exact: true };
+    if (norm(s.id) === t || norm(skillSlug(s)) === t) {
+      return { slug: s.id, score: 1, exact: true };
     }
   }
 
   let best: ResolveResult | null = null;
   for (const s of skills) {
     const score = Math.max(
-      similarity(t, norm(s.slug)),
-      similarity(t, norm(s.name)),
-      similarity(t, norm(s.category))
+      similarity(t, norm(s.id)),
+      similarity(t, norm(skillSlug(s))),
+      similarity(t, norm(s.c))
     );
     if (score > 0 && (!best || score > best.score)) {
-      best = { slug: s.slug, score, exact: false };
+      best = { slug: s.id, score, exact: false };
     }
   }
   // Only return a fuzzy hit above a low sanity bar so we don't silently grab an
@@ -86,5 +87,5 @@ export function resolve(target: string, skills: SkillRecord[]): ResolveResult | 
 
 export function resolveSlug(skills: SkillRecord[], target: string): SkillRecord | undefined {
   const r = resolve(target, skills);
-  return r ? skills.find((s) => s.slug === r.slug) : undefined;
+  return r ? skills.find((s) => s.id === r.slug) : undefined;
 }

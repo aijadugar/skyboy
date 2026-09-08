@@ -5,9 +5,10 @@
 // `install_skill` tool.
 
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
-import { join, dirname, basename } from "node:path";
+import { join, dirname } from "node:path";
 import { API_BASE, RAW_BASE, GITHUB_BLAME } from "./types.js";
 import type { SkillRecord } from "./types.js";
+import { skillSlug } from "./types.js";
 import { safeSkillFolderName } from "./agent-context.js";
 
 interface GhEntry {
@@ -37,13 +38,13 @@ async function fetchFile(url: string): Promise<Buffer> {
   return Buffer.from(await res.arrayBuffer());
 }
 
-// Resolve the repo-relative folder for a skill. Uses the manifest `path` when
-// present (`skills/<category>/<slug>`); falls back to the API search if a
-// consumer only has a slug and a category string.
+// Resolve the repo-relative folder for a skill. Uses the manifest `p` field
+// (`skills/<category>/[<owner>/]<slug>`); falls back to the API search if a
+// consumer only has an id and a category string.
 export function skillFolder(skill: SkillRecord): string {
-  if (skill.path) return skill.path;
-  // No path in the manifest: derive from the raw API tree by slug match.
-  return `skills/${skill.category.split("/")[0]}/${skill.slug}`;
+  if (skill.p) return skill.p;
+  // No path in the record: derive from the raw API tree by slug match.
+  return `skills/${skill.c.split("/")[0]}/${skillSlug(skill)}`;
 }
 
 export interface InstallResult {
@@ -60,7 +61,7 @@ export async function installSkill(
   opts?: { cwd?: string }
 ): Promise<InstallResult> {
   const base = opts?.cwd ?? process.cwd();
-  const destDir = join(base, targetRoot, safeSkillFolderName(skill.slug));
+  const destDir = join(base, targetRoot, safeSkillFolderName(skillSlug(skill)));
   const folder = skillFolder(skill);
 
   // Enumerate the folder recursively.
@@ -75,12 +76,14 @@ export async function installSkill(
     }
   }
   if (entries.length === 0) {
-    throw new Error(`skyboy: no files found for skill ${skill.slug} in ${folder}`);
+    throw new Error(`skyboy: no files found for skill ${skill.id} in ${folder}`);
   }
 
   mkdirSync(destDir, { recursive: true });
 
-  // Download and write each file under the skill folder.
+  // Download and write each file under the skill folder. The generated
+  // meta.json shard ships in the repo, so it lands in the install too; that is
+  // fine, it is small and documents the skill's own metadata.
   let filesWritten = 0;
   for (const entry of entries) {
     const local = join(destDir, entry.path.slice(folder.length + 1));
@@ -91,7 +94,7 @@ export async function installSkill(
   }
 
   return {
-    slug: skill.slug,
+    slug: skillSlug(skill),
     destDir,
     filesWritten,
     sourceUrl: `${GITHUB_BLAME}/${folder}/SKILL.md`,
@@ -104,12 +107,15 @@ export function targetExists(cwd: string, targetDir: string): boolean {
   return existsSync(join(cwd, targetDir));
 }
 
-// Lightweight guard so a slug can never produce a path that escapes the target.
+// Lightweight guard so an id can never produce a path that escapes the target.
+// Accepts scoped ids (@owner/slug): the owner segment never reaches the
+// filesystem path anyway, only the slug part becomes the folder name.
 export function isSafeSlug(slug: string): boolean {
-  return !slug.includes("/") && !slug.includes("\\") && slug !== ".." && slug !== ".";
+  const bare = slug.startsWith("@") ? slug.slice(slug.indexOf("/") + 1) : slug;
+  return !bare.includes("/") && !bare.includes("\\") && bare !== ".." && bare !== ".";
 }
 
 // Derive a plain install directory name without fetching anything.
-export function installDirName(slug: string): string {
-  return safeSkillFolderName(slug);
+export function installDirName(id: string): string {
+  return safeSkillFolderName(skillSlug({ id }));
 }

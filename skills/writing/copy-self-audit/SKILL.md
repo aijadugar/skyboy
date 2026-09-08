@@ -1,8 +1,7 @@
 ---
 name: copy-self-audit
-description: Use before shipping any user-facing copy. Re-reads every visible string for AI-slop tells - fake-cute phrases, unclear referents, hallucinated precision, forced metaphors - and rewrites them as plain, functional, human copy. Complements a landing-page or docs build.
+description: Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.
 license: MIT
-compatible_agents: claude-code, claude-desktop, cursor, gemini-cli
 ---
 
 # Copy Self-Audit

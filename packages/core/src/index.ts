@@ -3,17 +3,29 @@
 // not, so they consume the committed catalog.json via the manifest loader.
 
 export type {
-  SourceType,
+  Origin,
   Badge,
   Permissions,
   SkillRecord,
+  SkillMetaShard,
   PluginSkillRef,
   PluginRecord,
   Agent,
   CatalogManifest,
 } from "./types.js";
 
-export { RAW_BASE, REPO, API_BASE, GITHUB_BLAME, skillMarkdownUrl, skillSlotUrl } from "./types.js";
+export {
+  RAW_BASE,
+  REPO,
+  API_BASE,
+  GITHUB_BLAME,
+  skillMarkdownUrl,
+  skillMetaUrl,
+  skillSlotUrl,
+  skillSlug,
+  skillOwner,
+  badgeFor,
+} from "./types.js";
 
 export {
   resolveManifestUrl,

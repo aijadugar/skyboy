@@ -1,8 +1,7 @@
 ---
 name: nextjs-app-router-conventions
-description: Use when scaffolding, reviewing, or modifying Next.js App Router projects. Enforces server/client component boundaries, routing conventions, data-fetching patterns, and cache/revalidation discipline for a Next.js 15 App Router codebase.
+description: Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.
 license: MIT
-compatible_agents: claude-code, claude-desktop, cursor, gemini-cli
 ---
 
 # Next.js App Router Conventions

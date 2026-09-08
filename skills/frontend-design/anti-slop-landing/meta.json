@@ -1,5 +1,7 @@
 {
   "id": "anti-slop-landing",
+  "slug": "anti-slop-landing",
+  "description": "Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.",
   "category": "frontend-design",
   "tags": [
     "design",
@@ -12,11 +14,12 @@
     "cursor",
     "gemini-cli"
   ],
+  "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
-  "version": "1.0.0",
   "origin": "skyboy",
   "verified": false,
+  "upstream_repo": null,
   "canonical_of": null,
   "permissions": {
     "network": false,
@@ -25,5 +28,12 @@
     "env_read": [],
     "generated_by": "generate-manifest.ts@1.0.0",
     "generated_at": "2026-09-08T15:48:55.531Z"
-  }
+  },
+  "frontmatter": {
+    "name": "anti-slop-landing",
+    "license": "MIT"
+  },
+  "hash": "71d71d1681dde7e0",
+  "path": "skills/frontend-design/anti-slop-landing",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/frontend-design/anti-slop-landing/SKILL.md"
 }

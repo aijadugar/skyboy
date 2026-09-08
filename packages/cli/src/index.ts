@@ -1,31 +1,37 @@
 #!/usr/bin/env node
-// skyboy CLI. Resolves a skill slug against the skyboy catalog, detects the
+// skyboy CLI. Resolves a skill id against the skyboy catalog, detects the
 // calling agent context, and downloads just that skill folder into place. This
 // is the npm reference implementation of §8 method C.
+//
+// v2: search hits the hosted /api/search endpoint first (one HTTP request, no
+// local catalog download). add/resolve fall back to the catalog.json manifest
+// for offline and dev use. Ids may be bare slugs (skyboy skills) or scoped
+// @owner/slug (vendor and community skills).
 //
 // Note on style: this whole package is written without em-dashes (U+2014) or
 // en-dashes (U+2013) in any user-facing string. The site and docs enforce the
 // same ban; keep it here too.
 
 import { resolveManifestUrl, fetchCatalog, detectAgentContext, DEFAULT_TARGET_DIR } from "@skyboy/core";
-import { addSkill } from "./commands/add.js";
+import { addSkill, hostedSearch } from "./commands/add.js";
 
 function printHelp(): void {
   console.log(`skyboy - the portable skill directory, from the command line.
 
 Usage:
-  skyboy add <slug> [--dir <path>] [--agent <name>] [--yes]
+  skyboy add <slug|@owner/slug> [--dir <path>] [--agent <name>] [--yes]
   skyboy search <query> [--category <name>] [--agent <name>]
   skyboy list [--category <name>] [--agent <name>]
-  skyboy resolve <slug>
+  skyboy resolve <slug|@owner/slug>
   skyboy version
   skyboy help
 
 Commands:
-  add       Resolve a slug, detect the agent target folder, and drop the skill in place.
-  search    Fuzzy-search the catalog by slug, name, description, or tag.
+  add       Resolve an id, detect the agent target folder, and drop the skill in place.
+  search    Fuzzy-search the catalog by id, description, or tag. Uses the hosted
+            search endpoint when reachable, the catalog manifest otherwise.
   list      List every skill, optionally filtered by category or agent.
-  resolve   Print the resolved repo-relative path and raw URL for a slug. No write.
+  resolve   Print the resolved repo-relative path and raw URL for an id. No write.
   version   Print the CLI version and the catalog manifest version.
   help      Show this help.
 
@@ -37,6 +43,7 @@ Options:
 
 Examples:
   skyboy add nextjs-app-router-conventions
+  skyboy add @vercel/nextjs-plugin
   skyboy add context-window-management --dir .claude/skills
   skyboy search "app router"
   skyboy resolve anti-slop-landing`);
@@ -73,14 +80,19 @@ async function main() {
       const query = rest.find((a) => !a.startsWith("-"));
       const category = flagValue(rest, "--category");
       const agent = flagValue(rest, "--agent");
-      const cat = await loadCatalog(cwd);
-      const results = cat.search(query ?? "", { category, agent });
+      // Hot path: one request to the hosted endpoint. Falls back to the local
+      // manifest when offline or when the endpoint is unreachable.
+      let results = await hostedSearch(query ?? "", { category, agent });
+      if (results === null) {
+        const cat = await loadCatalog(cwd);
+        results = cat.search(query ?? "", { category, agent });
+      }
       if (results.length === 0) {
         console.log("skyboy: no skills match that query.");
         return;
       }
       for (const s of results) {
-        console.log(`${s.slug}\t${s.name}\t(${s.category})`);
+        console.log(`${s.id}\t${s.d}\t(${s.c})\tv${s.v}`);
       }
       return;
     }
@@ -89,11 +101,11 @@ async function main() {
       const agent = flagValue(rest, "--agent");
       const cat = await loadCatalog(cwd);
       let skills = cat.skills;
-      if (category) skills = skills.filter((s) => s.category === category);
-      if (agent) skills = skills.filter((s) => s.compatibleAgents.includes(agent));
-      skills.sort((a, b) => a.name.localeCompare(b.name));
+      if (category) skills = skills.filter((s) => s.c === category);
+      if (agent) skills = skills.filter((s) => s.a.includes(agent));
+      skills.sort((a, b) => a.id.localeCompare(b.id));
       for (const s of skills) {
-        console.log(`${s.slug}\t${s.name}\t(${s.category})\tv${s.version}`);
+        console.log(`${s.id}\t${s.d}\t(${s.c})\tv${s.v}`);
       }
       return;
     }
@@ -109,11 +121,12 @@ async function main() {
         console.error(`skyboy: could not resolve '${slug}' to a skill. Try 'skyboy search ${slug}'.`);
         process.exit(1);
       }
-      console.log(`slug: ${skill.slug}`);
-      console.log(`path: ${skill.path}`);
-      console.log(`name: ${skill.name}`);
-      console.log(`version: v${skill.version}`);
-      console.log(`raw: https://raw.githubusercontent.com/aijadugar/skyboy/main/${skill.path}/SKILL.md`);
+      console.log(`id: ${skill.id}`);
+      console.log(`path: ${skill.p}`);
+      console.log(`description: ${skill.d}`);
+      console.log(`version: v${skill.v}`);
+      console.log(`hash: ${skill.h}`);
+      console.log(`raw: https://raw.githubusercontent.com/aijadugar/skyboy/main/${skill.p}/SKILL.md`);
       return;
     }
     default:

@@ -1,5 +1,7 @@
 {
   "id": "context-window-management",
+  "slug": "context-window-management",
+  "description": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
   "category": "memory",
   "tags": [
     "context",
@@ -13,11 +15,12 @@
     "gemini-cli",
     "codex-cli"
   ],
+  "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
-  "version": "1.0.0",
   "origin": "skyboy",
   "verified": false,
+  "upstream_repo": null,
   "canonical_of": null,
   "permissions": {
     "network": false,
@@ -26,5 +29,12 @@
     "env_read": [],
     "generated_by": "generate-manifest.ts@1.0.0",
     "generated_at": "2026-09-08T15:48:55.531Z"
-  }
+  },
+  "frontmatter": {
+    "name": "context-window-management",
+    "license": "MIT"
+  },
+  "hash": "d74b14d6a1496712",
+  "path": "skills/memory/context-window-management",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/memory/context-window-management/SKILL.md"
 }

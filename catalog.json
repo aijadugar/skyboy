@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-03T03:43:07.950Z",
-  "version": 1,
+  "generatedAt": "2026-09-08T15:48:56.641Z",
+  "version": 2,
   "categories": [
     "coding",
     "frontend-design",
@@ -39,134 +39,89 @@
   ],
   "skills": [
     {
-      "slug": "nextjs-app-router-conventions",
-      "category": "coding/frontend",
-      "name": "nextjs-app-router-conventions",
-      "description": "Use when scaffolding, reviewing, or modifying Next.js App Router projects. Enforces server/client component boundaries, routing conventions, data-fetching patterns, and cache/revalidation discipline for a Next.js 15 App Router codebase.",
-      "tags": [
+      "id": "nextjs-app-router-conventions",
+      "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
+      "c": "coding/frontend",
+      "t": [
         "nextjs",
         "app-router",
         "react"
       ],
-      "compatibleAgents": [
+      "a": [
         "claude-code",
         "claude-desktop",
         "cursor",
         "gemini-cli"
       ],
-      "license": "MIT",
-      "verified": false,
-      "version": "1.0.0",
-      "permissions": {
-        "network": false,
-        "filesystem_write_outside_target": false,
-        "shell_exec": false,
-        "env_read": [],
-        "generated_by": "generate-manifest.ts@1.0.0",
-        "generated_at": "2026-09-02T10:27:59.078Z"
-      },
-      "badge": "official",
-      "sourceType": "skyboy-authored",
-      "canonicalOf": null,
-      "path": "skills/coding/nextjs-app-router-conventions"
+      "v": "1.0.0",
+      "h": "aa01598edd56d747",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/coding/nextjs-app-router-conventions"
     },
     {
-      "slug": "anti-slop-landing",
-      "category": "frontend-design",
-      "name": "anti-slop-landing",
-      "description": "Use when building or reviewing a marketing landing page, portfolio, or redesign. Reads the brief first, infers the design direction, and ships interfaces that avoid the templated AI look - per the taste-skill rulebook (design read, dials, pre-flight check).",
-      "tags": [
+      "id": "anti-slop-landing",
+      "d": "Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.",
+      "c": "frontend-design",
+      "t": [
         "design",
         "landing-page",
         "anti-slop"
       ],
-      "compatibleAgents": [
+      "a": [
         "claude-code",
         "claude-desktop",
         "cursor",
         "gemini-cli"
       ],
-      "license": "MIT",
-      "verified": false,
-      "version": "1.0.0",
-      "permissions": {
-        "network": false,
-        "filesystem_write_outside_target": false,
-        "shell_exec": false,
-        "env_read": [],
-        "generated_by": "generate-manifest.ts@1.0.0",
-        "generated_at": "2026-09-02T10:27:59.078Z"
-      },
-      "badge": "official",
-      "sourceType": "skyboy-authored",
-      "canonicalOf": null,
-      "path": "skills/frontend-design/anti-slop-landing"
+      "v": "1.0.0",
+      "h": "71d71d1681dde7e0",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/frontend-design/anti-slop-landing"
     },
     {
-      "slug": "context-window-management",
-      "category": "memory",
-      "name": "context-window-management",
-      "description": "Use when an agent session is running long or losing coherence. Applies context-compaction and state-preservation strategies: rolling summaries, externalized scratch files, and progressive-disclosure loads to keep a working session accurate inside a fixed context budget.",
-      "tags": [
+      "id": "context-window-management",
+      "d": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
+      "c": "memory",
+      "t": [
         "context",
         "long-session",
-        "state",
-        "compaction"
+        "state"
       ],
-      "compatibleAgents": [
+      "a": [
         "claude-code",
         "claude-desktop",
         "cursor",
         "gemini-cli",
         "codex-cli"
       ],
-      "license": "MIT",
-      "verified": false,
-      "version": "1.0.0",
-      "permissions": {
-        "network": false,
-        "filesystem_write_outside_target": false,
-        "shell_exec": false,
-        "env_read": [],
-        "generated_by": "generate-manifest.ts@1.0.0",
-        "generated_at": "2026-09-02T10:27:59.078Z"
-      },
-      "badge": "official",
-      "sourceType": "skyboy-authored",
-      "canonicalOf": null,
-      "path": "skills/memory/context-window-management"
+      "v": "1.0.0",
+      "h": "d74b14d6a1496712",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/memory/context-window-management"
     },
     {
-      "slug": "copy-self-audit",
-      "category": "writing",
-      "name": "copy-self-audit",
-      "description": "Use before shipping any user-facing copy. Re-reads every visible string for AI-slop tells - fake-cute phrases, unclear referents, hallucinated precision, forced metaphors - and rewrites them as plain, functional, human copy. Complements a landing-page or docs build.",
-      "tags": [
+      "id": "copy-self-audit",
+      "d": "Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.",
+      "c": "writing",
+      "t": [
         "copy",
         "editing",
         "anti-slop"
       ],
-      "compatibleAgents": [
+      "a": [
         "claude-code",
         "claude-desktop",
         "cursor",
         "gemini-cli"
       ],
-      "license": "MIT",
-      "verified": false,
-      "version": "1.0.0",
-      "permissions": {
-        "network": false,
-        "filesystem_write_outside_target": false,
-        "shell_exec": false,
-        "env_read": [],
-        "generated_by": "generate-manifest.ts@1.0.0",
-        "generated_at": "2026-09-02T10:27:59.078Z"
-      },
-      "badge": "official",
-      "sourceType": "skyboy-authored",
-      "canonicalOf": null,
-      "path": "skills/writing/copy-self-audit"
+      "v": "1.0.0",
+      "h": "b6c33ecae31d926f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/writing/copy-self-audit"
     }
   ],
   "plugins": [
@@ -177,6 +132,7 @@
       "vendorUrl": "https://github.com/microsoft/markitdown",
       "path": "plugins/microsoft/markitdown-mcp",
       "sourceType": "vendor",
+      "origin": "vendor",
       "category": "meta",
       "tags": [
         "mcp",
@@ -210,6 +166,7 @@
       "vendorUrl": "https://github.com/vercel/vercel-plugin",
       "path": "plugins/vercel/vercel-plugin",
       "sourceType": "vendor",
+      "origin": "vendor",
       "category": "meta",
       "tags": [
         "vercel",
