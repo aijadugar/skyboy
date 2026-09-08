@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 // stdio entry point for @skyboy/mcp-server. Runs the full tool surface
 // (including install_skill) over stdio, so it is the local install-capable
 // package. Implements §8 method F.
