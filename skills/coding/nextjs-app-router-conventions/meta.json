@@ -1,5 +1,7 @@
 {
   "id": "nextjs-app-router-conventions",
+  "slug": "nextjs-app-router-conventions",
+  "description": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
   "category": "coding/frontend",
   "tags": [
     "nextjs",
@@ -12,11 +14,12 @@
     "cursor",
     "gemini-cli"
   ],
+  "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
-  "version": "1.0.0",
   "origin": "skyboy",
   "verified": false,
+  "upstream_repo": null,
   "canonical_of": null,
   "permissions": {
     "network": false,
@@ -25,5 +28,12 @@
     "env_read": [],
     "generated_by": "generate-manifest.ts@1.0.0",
     "generated_at": "2026-09-08T15:48:55.531Z"
-  }
+  },
+  "frontmatter": {
+    "name": "nextjs-app-router-conventions",
+    "license": "MIT"
+  },
+  "hash": "aa01598edd56d747",
+  "path": "skills/coding/nextjs-app-router-conventions",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/coding/nextjs-app-router-conventions/SKILL.md"
 }

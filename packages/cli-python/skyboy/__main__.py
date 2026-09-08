@@ -6,6 +6,11 @@ Python-only audience (data science, Kaggle, ML eval, etc.) that §8 method C
 wants to reach. It shares the same install-manifest format (catalog.json) as the
 npm CLI.
 
+v2: catalog records are compact (id, d, c, t, a, v, h, o, y, p per
+docs/skill-spec.md §6). Ids may be bare slugs (skyboy skills) or scoped
+@owner/slug (vendor and community skills); the install folder is always the
+slug part.
+
 Scope for this release: `add`, `search`, `list`, `resolve`, `version`.
 Agent-context detection and the interactive target-folder prompt are documented
 follow-ups on the npm package; here we accept an explicit `--dir` or default to
@@ -36,18 +41,24 @@ def _resolve_manifest(cwd):
     return _fetch_json(MANIFEST_URL)
 
 
-def _skill_folder(skill):
-    if skill.get("path"):
-        return skill["path"]
-    return "skills/{}/{}".format(skill.get("category", "uncategorized").split("/")[0], skill["slug"])
+def _slug(record):
+    """The slug part of an id: 'x' for bare, 'slug' for @owner/slug."""
+    rid = record.get("id", "")
+    return rid.split("/", 1)[1] if rid.startswith("@") else rid
+
+
+def _skill_folder(record):
+    if record.get("p"):
+        return record["p"]
+    return "skills/{}/{}".format(record.get("c", "uncategorized").split("/")[0], _slug(record))
 
 
 def _add(args):
     if not args:
         print("skyboy: add requires a <slug>. Run 'skyboy help' for usage.")
         return 1
-    slug = args[0]
-    target_dir = ".claude/skills"
+    skill_id = args[0]
+    target_dir = DEFAULT_TARGET_DIR
     if "--dir" in args:
         idx = args.index("--dir")
         if idx + 1 < len(args):
@@ -55,13 +66,13 @@ def _add(args):
 
     catalog = _resolve_manifest(Path.cwd())
     skills = catalog.get("skills", [])
-    match = next((s for s in skills if s["slug"] == slug), None)
+    match = next((s for s in skills if s.get("id") == skill_id or _slug(s) == skill_id), None)
     if not match:
-        print("skyboy: could not resolve '{}' to a skill. Try 'skyboy search {}'.".format(slug, slug))
+        print("skyboy: could not resolve '{}' to a skill. Try 'skyboy search {}'.".format(skill_id, skill_id))
         return 1
 
     folder = _skill_folder(match)
-    dest = Path(target_dir) / slug
+    dest = Path(target_dir) / _slug(match)
     dest.mkdir(parents=True, exist_ok=True)
 
     # Enumerate the folder with the GitHub contents API (recursive).
@@ -83,13 +94,12 @@ def _add(args):
         rel = entry["path"][len(folder) + 1 :]
         local = dest / Path(rel)
         local.parent.mkdir(parents=True, exist_ok=True)
-        data = _fetch_json(None) if False else _download(entry)
-        local.write_bytes(data)
+        local.write_bytes(_download(entry))
         written += 1
 
-    print("skyboy: added '{}' to {}/{}.".format(slug, target_dir, slug))
-    print("  version: v{}  |  license: {}  |  category: {}".format(
-        match.get("version", "1.0.0"), match.get("license", "MIT"), match.get("category", "uncategorized")))
+    print("skyboy: added '{}' to {}/{}.".format(match.get("id"), target_dir, _slug(match)))
+    print("  version: v{}  |  origin: {}  |  category: {}".format(
+        match.get("v", "1.0.0"), match.get("o", "community"), match.get("c", "uncategorized")))
     print("  {} file(s) written.".format(written))
     print("  next steps: https://skyboy.in/agents/mcp")
 
@@ -108,32 +118,34 @@ def _search(args):
     catalog = _resolve_manifest(Path.cwd())
     terms = [t for t in query.split() if t]
     for s in catalog.get("skills", []):
-        hay = " ".join([s["slug"], s["name"], s.get("description", ""), " ".join(s.get("tags", []))]).lower()
+        hay = " ".join([s.get("id", ""), s.get("d", ""), " ".join(s.get("t", []))]).lower()
         if all(t in hay for t in terms):
-            print("{}\t{}\t({})".format(s["slug"], s["name"], s.get("category", "uncategorized")))
+            print("{}\t{}\t({})".format(s.get("id"), s.get("d", ""), s.get("c", "uncategorized")))
 
 
 def _list(_args):
     catalog = _resolve_manifest(Path.cwd())
-    for s in sorted(catalog.get("skills", []), key=lambda x: x["name"].lower()):
-        print("{}\t{}\t({})\tv{}".format(s["slug"], s["name"], s.get("category", "uncategorized"), s.get("version", "1.0.0")))
+    for s in sorted(catalog.get("skills", []), key=lambda x: x.get("id", "").lower()):
+        print("{}\t{}\t({})\tv{}".format(
+            s.get("id"), s.get("d", ""), s.get("c", "uncategorized"), s.get("v", "1.0.0")))
 
 
 def _resolve(args):
     if not args:
         print("skyboy: resolve requires a <slug>.")
         return 1
-    slug = args[0]
+    skill_id = args[0]
     catalog = _resolve_manifest(Path.cwd())
-    match = next((s for s in catalog.get("skills", []) if s["slug"] == slug), None)
+    match = next((s for s in catalog.get("skills", []) if s.get("id") == skill_id or _slug(s) == skill_id), None)
     if not match:
-        print("skyboy: could not resolve '{}'.".format(slug))
+        print("skyboy: could not resolve '{}'.".format(skill_id))
         return 1
     folder = _skill_folder(match)
-    print("slug:", match["slug"])
+    print("id:", match.get("id"))
     print("path:", folder)
-    print("name:", match["name"])
-    print("version: v{}".format(match.get("version", "1.0.0")))
+    print("description:", match.get("d", ""))
+    print("version: v{}".format(match.get("v", "1.0.0")))
+    print("hash:", match.get("h", ""))
     print("raw: {}/{}".format(RAW_BASE, folder) + "/SKILL.md")
 
 
@@ -146,10 +158,10 @@ def _help(_args):
     print("""skyboy - add portable SKILL.md skills to your project.
 
 Usage:
-  skyboy add <slug> [--dir <path>]
+  skyboy add <slug|@owner/slug> [--dir <path>]
   skyboy search <query>
   skyboy list
-  skyboy resolve <slug>
+  skyboy resolve <slug|@owner/slug>
   skyboy version
   skyboy help
 

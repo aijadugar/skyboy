@@ -1,5 +1,7 @@
 {
   "id": "copy-self-audit",
+  "slug": "copy-self-audit",
+  "description": "Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.",
   "category": "writing",
   "tags": [
     "copy",
@@ -12,11 +14,12 @@
     "cursor",
     "gemini-cli"
   ],
+  "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
-  "version": "1.0.0",
   "origin": "skyboy",
   "verified": false,
+  "upstream_repo": null,
   "canonical_of": null,
   "permissions": {
     "network": false,
@@ -25,5 +28,12 @@
     "env_read": [],
     "generated_by": "generate-manifest.ts@1.0.0",
     "generated_at": "2026-09-08T15:48:55.531Z"
-  }
+  },
+  "frontmatter": {
+    "name": "copy-self-audit",
+    "license": "MIT"
+  },
+  "hash": "b6c33ecae31d926f",
+  "path": "skills/writing/copy-self-audit",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/writing/copy-self-audit/SKILL.md"
 }

@@ -1,8 +1,7 @@
 ---
 name: anti-slop-landing
-description: Use when building or reviewing a marketing landing page, portfolio, or redesign. Reads the brief first, infers the design direction, and ships interfaces that avoid the templated AI look - per the taste-skill rulebook (design read, dials, pre-flight check).
+description: Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.
 license: MIT
-compatible_agents: claude-code, claude-desktop, cursor, gemini-cli
 ---
 
 # Anti-Slop Landing Skill

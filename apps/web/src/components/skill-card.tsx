@@ -19,7 +19,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
         </p>
         <span
           className={`sk-badge ${
-            skill.badge === "verified" || skill.badge === "official"
+            skill.badge === "official" || skill.badge === "verified"
               ? "sk-badge-official"
               : ""
           }`}

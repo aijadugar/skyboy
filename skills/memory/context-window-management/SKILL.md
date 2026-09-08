@@ -1,8 +1,7 @@
 ---
 name: context-window-management
-description: Use when an agent session is running long or losing coherence. Applies context-compaction and state-preservation strategies: rolling summaries, externalized scratch files, and progressive-disclosure loads to keep a working session accurate inside a fixed context budget.
+description: Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.
 license: MIT
-compatible_agents: claude-code, claude-desktop, cursor, gemini-cli, codex-cli
 ---
 
 # Context Window Management

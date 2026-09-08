@@ -49,6 +49,7 @@ export default async function SkillPage({ params }: Props) {
   if (!skill) notFound();
 
   const bodyHtml = renderMarkdown(skill.body);
+  const degitPath = skill.repoPath; // repo-relative, owner-aware (spec §1)
 
   return (
     <div className="min-h-[100dvh]">
@@ -65,20 +66,19 @@ export default async function SkillPage({ params }: Props) {
           <span className="text-pen">{skill.name}</span>
         </nav>
 
-        {/* Header */}
+        {/* Header: the display contract, nothing more */}
         <header className="grid grid-cols-1 gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <span
                 className={`sk-badge ${
-                  skill.badge === "verified" || skill.badge === "official"
+                  skill.badge === "official" || skill.badge === "verified"
                     ? "sk-badge-official"
                     : ""
                 }`}
               >
                 {skill.badge}
               </span>
-              <span className="sk-badge">{skill.license}</span>
               <span className="font-mono text-xs text-mute">v{skill.version}</span>
             </div>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
@@ -107,10 +107,6 @@ export default async function SkillPage({ params }: Props) {
             <div className="mt-3">
               <PermissionsRow skill={skill} />
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-mute">
-              What this skill&apos;s bundled scripts may touch. A flagged
-              permission is disclosure, not a rejection.
-            </p>
             <div className="mt-5 space-y-3 border-t border-hairline pt-4">
               <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
               <div>
@@ -158,10 +154,6 @@ export default async function SkillPage({ params }: Props) {
             <h2 className="mb-4 text-xl font-semibold tracking-tight text-ink">
               Bundled files
             </h2>
-            <p className="mb-6 max-w-[58ch] text-sm text-body">
-              Loaded on demand, not up front. Progressively disclosing these is
-              what keeps a skill cheap to invoke.
-            </p>
             <div className="space-y-6">
               {(
                 [
@@ -220,16 +212,11 @@ export default async function SkillPage({ params }: Props) {
           </section>
         ) : null}
 
-        {/* Install note */}
+        {/* Install */}
         <section className="mt-14 rounded-sm border border-hairline bg-card p-6 sm:p-8">
           <h2 className="text-xl font-semibold tracking-tight text-ink">
             Install
           </h2>
-          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
-            Copy the SKILL.md above, or pull this one skill directly for your
-            agent. The degit command needs Node; the CLI and MCP paths work for
-            both npm and pip users.
-          </p>
 
           <div className="mt-5 space-y-5">
             <div>
@@ -237,11 +224,11 @@ export default async function SkillPage({ params }: Props) {
                 degit (npm)
               </p>
               <pre className="md-code mt-2">
-                <code className="hljs language-bash">{`npx degit aijadugar/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}</code>
+                <code className="hljs language-bash">{`npx degit aijadugar/skyboy/${degitPath} .claude/skills/${skill.slug}`}</code>
               </pre>
               <div className="mt-2">
                 <CopyButton
-                  text={`npx degit aijadugar/skyboy/skills/${skill.category}/${skill.slug} .claude/skills/${skill.slug}`}
+                  text={`npx degit aijadugar/skyboy/${degitPath} .claude/skills/${skill.slug}`}
                   label="Copy degit command"
                 />
               </div>
@@ -252,13 +239,13 @@ export default async function SkillPage({ params }: Props) {
                 CLI
               </p>
               <pre className="md-code mt-2">
-                <code className="hljs language-bash">{`skyboy add ${skill.slug}`}</code>
+                <code className="hljs language-bash">{`skyboy add ${skill.id}`}</code>
               </pre>
               <div className="mt-2">
-                <CopyButton text={`skyboy add ${skill.slug}`} label="Copy CLI command" />
+                <CopyButton text={`skyboy add ${skill.id}`} label="Copy CLI command" />
               </div>
               <p className="mt-2 text-xs leading-relaxed text-mute">
-                Or the PyPI equivalent: <code className="text-ink">pipx run skyboy add {skill.slug}</code>
+                Or the PyPI equivalent: <code className="text-ink">pipx run skyboy add {skill.id}</code>
               </p>
             </div>
           </div>
@@ -269,12 +256,6 @@ export default async function SkillPage({ params }: Props) {
           <h2 className="text-xl font-semibold tracking-tight text-ink">
             Connect via MCP
           </h2>
-          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
-            Point an MCP-compatible agent at the Skyboy MCP server and it can pull
-            this skill (or search the catalog) without leaving the conversation.
-            The hosted endpoint is read-only; the stdio server also installs
-            locally.
-          </p>
           <pre className="mt-5 md-code">{`{"mcpServers":{"skyboy":{"type":"http","url":"https://mcp.skyboy.in"}}}`}</pre>
           <div className="mt-2">
             <CopyButton
@@ -284,8 +265,8 @@ export default async function SkillPage({ params }: Props) {
           </div>
           <p className="mt-4 max-w-[58ch] text-sm leading-relaxed text-body">
             Then ask the agent:{" "}
-            <code className="text-ink">get_skill &apos;{skill.slug}&apos;</code> to preview it,
-            or <code className="text-ink">install_skill &apos;{skill.slug}&apos;</code> over stdio.
+            <code className="text-ink">get_skill &apos;{skill.id}&apos;</code> to preview it,
+            or <code className="text-ink">install_skill &apos;{skill.id}&apos;</code> over stdio.
           </p>
           <a
             href="/docs/mcp"

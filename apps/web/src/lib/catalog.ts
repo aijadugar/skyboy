@@ -3,18 +3,28 @@ import path from "node:path";
 
 export type Agent = string;
 
-export type SourceType = "skyboy-authored" | "community" | "vendor";
-export type Badge = "official" | "official (vendor)" | "verified" | "community" | "unreviewed";
+export type Origin = "skyboy" | "vendor" | "community";
+export type Badge = "official" | "vendor" | "verified" | "community";
 
+// v2 skill shape (docs/skill-spec.md §6). The site reads the skills/ tree
+// directly (source of truth) but exposes the same display contract the compact
+// index records use: name, description, category, badge, version, permissions.
+// License, author, upstream repo, and permissions detail come from
+// metadata.json, read here at build time (no runtime cost).
 export interface Skill {
-  slug: string; // folder name
-  category: string; // metadata.category
-  name: string; // SKILL.md frontmatter name
-  description: string; // SKILL.md frontmatter description
+  id: string; // bare slug (skyboy) or @owner/slug
+  slug: string; // last segment of id; equals the folder name
+  owner: string | null; // the @owner namespace, when scoped
+  category: string;
+  name: string; // == slug: one name, ever (spec §1)
+  description: string;
   tags: string[];
   compatibleAgents: Agent[];
   license: string;
+  author: string;
+  origin: Origin;
   verified: boolean;
+  badge: Badge; // derived from origin + verified, stored nowhere
   version: string;
   permissions: {
     network: boolean;
@@ -22,12 +32,10 @@ export interface Skill {
     shell_exec: boolean;
     env_read: string[];
   };
-  badge: Badge;
-  sourceType: SourceType; // how the content was published (drives badge, §3.2)
-  upstreamRepo?: string; // required when sourceType === "vendor"
-  vendorName?: string; // the named company, when sourceType === "vendor"
-  canonicalOf?: string | null; // §12.2: slug of the canonical entry this one duplicates
-  path: string; // skill folder path
+  canonicalOf?: string | null;
+  upstreamRepo?: string;
+  path: string; // absolute skill folder path
+  repoPath: string; // repo-relative, e.g. "skills/coding/@vercel/slug"
 }
 
 // A skill shipped inside a vendor plugin. Index-only: points at the upstream
@@ -47,7 +55,7 @@ export interface Plugin {
   name: string;
   vendor: string; // the org/publisher
   vendorUrl?: string;
-  sourceType: SourceType;
+  origin: Origin;
   category: string;
   tags: string[];
   license: string;
@@ -67,11 +75,11 @@ export interface Plugin {
 
 // Metadata a skill's SKILL.md frontmatter officially declares (portable, shared
 // with the agent that will consume it, separate from skyboy-only metadata.json).
+// v2: name + description (+ optional license). compatible_agents moved out.
 export interface SkillFrontmatter {
   name: string;
   description: string;
   license?: string;
-  compatible_agents?: string;
 }
 
 // A bundled file (inside references/, scripts/, assets/) shown on the detail
@@ -96,17 +104,19 @@ export interface SkillDetail extends Skill {
 }
 
 interface RawMeta {
+  id?: string;
   category?: string;
   tags?: string[];
   compatible_agents?: string[];
   license?: string;
+  author?: string;
   verified?: boolean;
   version?: string;
-  permissions?: Skill["permissions"];
-  source_type?: SourceType;
+  origin?: Origin;
+  source_type?: Origin; // v1 name, read for migration tolerance
   upstream_repo?: string;
-  vendor_name?: string;
   canonical_of?: string | null;
+  permissions?: Skill["permissions"];
   [key: string]: unknown;
 }
 
@@ -131,10 +141,11 @@ interface RawPluginManifest {
 }
 
 function parseFrontmatter(contents: string): { name?: string; description?: string; [k: string]: string | undefined } {
-  const m = contents.match(/^---\n([\s\S]*?)\n---/);
+  // \r?\n: Windows contributors commit CRLF; the fence must still parse.
+  const m = contents.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   const out: { name?: string; description?: string; [k: string]: string | undefined } = {};
   if (!m) return out;
-  for (const line of m[1].split("\n")) {
+  for (const line of m[1].split(/\r?\n/)) {
     const idx = line.indexOf(":");
     if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
@@ -142,14 +153,13 @@ function parseFrontmatter(contents: string): { name?: string; description?: stri
     if (key === "name") out.name = val;
     if (key === "description") out.description = val;
     if (key === "license") out.license = val;
-    if (key === "compatible_agents") out.compatible_agents = val;
   }
   return out;
 }
 
 // Split a SKILL.md into its frontmatter and the body below the closing fence.
 function splitFrontmatter(contents: string): { fm: SkillFrontmatter; body: string } {
-  const m = contents.match(/^---\n([\s\S]*?)\n---\n?/);
+  const m = contents.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (!m) {
     // No fence: treat the whole file as body, fall back to slug for name.
     return { fm: { name: "", description: "" }, body: contents };
@@ -157,7 +167,15 @@ function splitFrontmatter(contents: string): { fm: SkillFrontmatter; body: strin
   return { fm: parseFrontmatter(m[0]) as SkillFrontmatter, body: contents.slice(m[0].length).trimStart() };
 }
 
-function readSkill(skillDir: string, slug: string): Skill | null {
+// Badge derivation (spec §4): origin + verified decide everything. Vendor is
+// never a stronger trust signal than reviewed.
+function badgeFrom(origin: Origin, verified: boolean): Badge {
+  if (origin === "skyboy") return "official";
+  if (origin === "vendor") return "vendor";
+  return verified ? "verified" : "community";
+}
+
+function readSkill(skillDir: string, repoPath: string): Skill | null {
   const skillPath = path.join(skillDir, "SKILL.md");
   const metaPath = path.join(skillDir, "metadata.json");
   if (!existsSync(skillPath) || !existsSync(metaPath)) return null;
@@ -165,15 +183,28 @@ function readSkill(skillDir: string, slug: string): Skill | null {
   const fm = parseFrontmatter(readFileSync(skillPath, "utf8"));
   const meta: RawMeta = JSON.parse(readFileSync(metaPath, "utf8"));
 
+  // Identity: the folder name is the slug. A scoped folder nests under @owner/.
+  const slug = path.basename(skillDir);
+  const parent = path.basename(path.dirname(skillDir));
+  const owner = parent.startsWith("@") ? parent.slice(1) : null;
+  const id = owner ? `@${owner}/${slug}` : slug;
+
+  const origin: Origin = meta.origin ?? meta.source_type ?? (meta.verified ? "community" : "skyboy");
+
   return {
+    id,
     slug,
+    owner,
     category: meta.category ?? "uncategorized",
-    name: fm.name ?? slug,
+    name: slug, // one name, ever (spec §1)
     description: fm.description ?? "",
     tags: meta.tags ?? [],
     compatibleAgents: meta.compatible_agents ?? [],
     license: meta.license ?? "MIT",
+    author: meta.author ?? owner ?? "skyboy",
+    origin,
     verified: meta.verified ?? false,
+    badge: badgeFrom(origin, meta.verified ?? false),
     version: meta.version ?? "1.0.0",
     permissions: meta.permissions ?? {
       network: false,
@@ -181,47 +212,52 @@ function readSkill(skillDir: string, slug: string): Skill | null {
       shell_exec: false,
       env_read: [],
     },
-    badge: badgeFromMeta(meta),
-    sourceType: meta.source_type ?? inferSourceFromBadge(meta),
-    upstreamRepo: meta.upstream_repo,
-    vendorName: meta.vendor_name,
     canonicalOf: meta.canonical_of ?? null,
+    upstreamRepo: meta.upstream_repo,
     path: skillDir,
+    repoPath,
   };
-}
-
-// Map a metadata.json to a badge. Vendor entries are never a stronger trust
-// signal than verified (see §3.2): "official (vendor)" means "published by the
-// named company", not "reviewed by skyboy".
-function badgeFromMeta(meta: RawMeta): Badge {
-  if (meta.source_type === "vendor") return "official (vendor)";
-  if (meta.verified) return "verified";
-  return "official";
-}
-
-// When source_type is absent, infer it from the badge the entry already claims:
-// `official` is a skyboy-authored reference skill, `verified` is a
-// community-submitted one that passed review.
-function inferSourceFromBadge(meta: RawMeta): SourceType {
-  if (meta.verified) return "community";
-  return "skyboy-authored";
 }
 
 const SKILLS_ROOT = path.resolve(process.cwd(), "../../skills");
 const PLUGINS_ROOT = path.resolve(process.cwd(), "../../plugins");
 
-export function listSkills(): Skill[] {
+// Memoized catalog. listSkills() walks every folder under skills/; at four
+// skills that is free, at hundreds of thousands it must happen exactly once per
+// process (Next.js build or server start), never per page render.
+let _skills: Skill[] | null = null;
+let _plugins: Plugin[] | null = null;
+
+// Walk skills/<category>/[<owner>/]<slug>/. The @owner level is exactly one
+// deep (spec §1); anything deeper is ignored.
+function walkSkills(): Skill[] {
   if (!existsSync(SKILLS_ROOT)) return [];
   const skills: Skill[] = [];
   for (const category of readdirSync(SKILLS_ROOT)) {
     const catPath = path.join(SKILLS_ROOT, category);
-    if (!existsSync(catPath)) continue;
-    for (const slug of readdirSync(catPath)) {
-      const skill = readSkill(path.join(catPath, slug), slug);
-      if (skill) skills.push(skill);
+    if (!existsSync(catPath) || !statSync(catPath).isDirectory()) continue;
+    for (const entry of readdirSync(catPath)) {
+      const entryPath = path.join(catPath, entry);
+      if (!statSync(entryPath).isDirectory()) continue;
+      if (entry.startsWith("@")) {
+        for (const slug of readdirSync(entryPath)) {
+          const skillDir = path.join(entryPath, slug);
+          if (!statSync(skillDir).isDirectory()) continue;
+          const skill = readSkill(skillDir, `skills/${category}/${entry}/${slug}`);
+          if (skill) skills.push(skill);
+        }
+      } else {
+        const skill = readSkill(entryPath, `skills/${category}/${entry}`);
+        if (skill) skills.push(skill);
+      }
     }
   }
   return skills;
+}
+
+export function listSkills(): Skill[] {
+  if (_skills === null) _skills = walkSkills();
+  return _skills;
 }
 
 // --------------------------------------------------------------------------
@@ -241,7 +277,7 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
     name: raw.name ?? slug,
     vendor,
     vendorUrl: raw.vendor_url,
-    sourceType: "vendor",
+    origin: "vendor",
     category: raw.category ?? "meta",
     tags: raw.tags ?? [],
     license: raw.license ?? "Apache-2.0",
@@ -259,7 +295,7 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
     agents: raw.agents ?? [],
     mcp: raw.mcp ?? null,
     note: "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
-    badge: "official (vendor)",
+    badge: "vendor",
     version: raw.version,
     path: pluginDir,
   };
@@ -270,17 +306,20 @@ function stripSlash(url: string): string {
 }
 
 export function listPlugins(): Plugin[] {
-  if (!existsSync(PLUGINS_ROOT)) return [];
-  const plugins: Plugin[] = [];
-  for (const vendor of readdirSync(PLUGINS_ROOT)) {
-    const vendorPath = path.join(PLUGINS_ROOT, vendor);
-    if (!existsSync(vendorPath) || !statSync(vendorPath).isDirectory()) continue;
-    for (const slug of readdirSync(vendorPath)) {
-      const plugin = readPlugin(path.join(vendorPath, slug), slug);
-      if (plugin) plugins.push(plugin);
+  if (_plugins === null) {
+    _plugins = [];
+    if (existsSync(PLUGINS_ROOT)) {
+      for (const vendor of readdirSync(PLUGINS_ROOT)) {
+        const vendorPath = path.join(PLUGINS_ROOT, vendor);
+        if (!existsSync(vendorPath) || !statSync(vendorPath).isDirectory()) continue;
+        for (const slug of readdirSync(vendorPath)) {
+          const plugin = readPlugin(path.join(vendorPath, slug), slug);
+          if (plugin) _plugins.push(plugin);
+        }
+      }
     }
   }
-  return plugins;
+  return _plugins;
 }
 
 export function getPluginBySlug(slug: string): Plugin | undefined {
@@ -296,7 +335,21 @@ export function getCategories(): string[] {
   });
 }
 
+const _byId = new Map<string, Skill>();
+function byId(id: string): Skill | undefined {
+  if (_byId.size === 0) for (const s of listSkills()) _byId.set(s.id, s);
+  return _byId.get(id);
+}
+
+export function getSkillById(id: string): Skill | undefined {
+  return byId(id);
+}
+
 export function getSkillBySlug(slug: string): Skill | undefined {
+  // Slugs are unique across the catalog only within their id namespace; a bare
+  // lookup matches bare ids first, then the slug part of scoped ids.
+  const direct = byId(slug);
+  if (direct) return direct;
   return listSkills().find((s) => s.slug === slug);
 }
 
@@ -314,8 +367,8 @@ function listBundledFiles(skillDir: string): BundledFile[] {
   return out;
 }
 
-export function getSkillDetail(slug: string): SkillDetail | null {
-  const skill = getSkillBySlug(slug);
+export function getSkillDetail(idOrSlug: string): SkillDetail | null {
+  const skill = getSkillBySlug(idOrSlug);
   if (!skill) return null;
   const rawMarkdown = readFileSync(path.join(skill.path, "SKILL.md"), "utf8");
   const { fm, body } = splitFrontmatter(rawMarkdown);
@@ -325,7 +378,7 @@ export function getSkillDetail(slug: string): SkillDetail | null {
   }
   return {
     ...skill,
-    skill: { name: fm.name || skill.name, description: fm.description || skill.description, license: fm.license, compatible_agents: fm.compatible_agents },
+    skill: { name: fm.name || skill.name, description: fm.description || skill.description, license: fm.license },
     body,
     rawMarkdown,
     files: listBundledFiles(skill.path),
