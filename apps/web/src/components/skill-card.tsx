@@ -9,7 +9,7 @@ export function SkillCard({ skill }: { skill: Skill }) {
   const router = useRouter();
   return (
     <DrawablyCard
-      className="sk-card--bare flex h-full flex-col p-6"
+      className="sk-card--bare flex h-full cursor-pointer flex-col p-6"
       seed={skill.slug.length * 7919}
       onClick={() => router.push(`/skill/${skill.slug}`)}
     >

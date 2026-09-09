@@ -25,6 +25,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* Clickable chrome shows the hand: Tailwind v4 preflight leaves <button> at
+   the UA default arrow, and the pointer affordance is part of the sketch feel. */
+button:not(:disabled),
+[role="button"]:not(:disabled) {
+  cursor: pointer;
+}
+
 /* Hairline borders instead of heavy drop shadows (drawably invariant). Cards
    sit on the page held by a hairline + the pen stroke, not a shadow. */
 .sk-card {
