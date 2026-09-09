@@ -36,14 +36,7 @@ export default async function PluginPage({ params }: Props) {
 
         <header className="grid grid-cols-1 gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="sk-badge sk-badge-official">vendor</span>
-              <span className="sk-badge">{plugin.license}</span>
-              {plugin.version ? (
-                <span className="font-mono text-xs text-mute">v{plugin.version}</span>
-              ) : null}
-            </div>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
               {plugin.name}
             </h1>
             <p className="mt-3 max-w-[60ch] text-lg leading-relaxed text-body">
@@ -127,31 +120,6 @@ export default async function PluginPage({ params }: Props) {
                 </a>
               ))}
             </div>
-          </section>
-        ) : null}
-
-        {/* MCP */}
-        {plugin.mcp ? (
-          <section className="mt-14 rounded-sm border border-hairline bg-card p-6 sm:p-8">
-            <h2 className="text-xl font-semibold tracking-tight text-ink">
-              MCP server
-            </h2>
-            <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
-              This plugin ships an MCP server. Point an MCP-capable host at it
-              with the config below, or run it directly.
-            </p>
-            <div className="mt-5 overflow-x-auto">
-              <pre className="md-code">
-                <code className="hljs language-json">{JSON.stringify({
-                  mcpServers: {
-                    [plugin.slug]: { type: "http", url: plugin.mcp },
-                  },
-                }, null, 2)}</code>
-              </pre>
-            </div>
-            <p className="mt-3 font-mono text-xs text-mute">
-              {plugin.mcp}
-            </p>
           </section>
         ) : null}
       </main>

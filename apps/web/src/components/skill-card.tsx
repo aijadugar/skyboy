@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { DrawablyCard } from "drawably/react";
 import type { Skill } from "@/lib/catalog";
-import { PermissionsRow } from "@/components/permissions";
 
 export function SkillCard({ skill }: { skill: Skill }) {
   const router = useRouter();
@@ -31,17 +30,9 @@ export function SkillCard({ skill }: { skill: Skill }) {
       <p className="mt-2 flex-1 text-sm leading-relaxed text-body">
         {skill.description}
       </p>
-      <div className="mt-5 border-t border-hairline pt-4">
-        <PermissionsRow skill={skill} />
-        <div className="mt-3 flex items-center justify-between gap-3">
-          <span className="font-mono text-xs text-mute">
-            {skill.license} · v{skill.version}
-          </span>
-          <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
-            Open →
-          </span>
-        </div>
-      </div>
+      <span className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-pen">
+        Open →
+      </span>
     </DrawablyCard>
   );
 }

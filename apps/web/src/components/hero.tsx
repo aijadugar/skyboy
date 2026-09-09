@@ -53,14 +53,9 @@ export function Hero({ feature }: { feature: Skill }) {
           </div>
           <h2 className="mt-4 text-xl font-semibold text-ink">{feature.name}</h2>
           <p className="mt-3 text-sm leading-relaxed text-body">{feature.description}</p>
-          <div className="mt-6 flex items-center justify-between gap-3 border-t border-hairline pt-4">
-            <span className="font-mono text-xs text-mute">
-              {feature.license} · v{feature.version}
-            </span>
-            <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
-              Preview → Copy
-            </span>
-          </div>
+          <span className="mt-6 font-mono text-xs uppercase tracking-[0.1em] text-pen">
+            Preview → Copy
+          </span>
         </div>
       </DrawablyCard>
     </section>
