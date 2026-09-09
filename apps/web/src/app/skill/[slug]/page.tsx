@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getSkillDetail, listSkills, readBundledFile } from "@/lib/catalog";
 import { renderMarkdown } from "@/lib/markdown";
 import { SiteNav } from "@/components/site-nav";
-import { PermissionsRow } from "@/components/permissions";
 import { CopyButton } from "@/components/copy-button";
 type Props = { params: Promise<{ slug: string }> };
 
@@ -69,45 +68,16 @@ export default async function SkillPage({ params }: Props) {
         {/* Header: the display contract, nothing more */}
         <header className="grid grid-cols-1 gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <span
-                className={`sk-badge ${
-                  skill.badge === "official" || skill.badge === "verified"
-                    ? "sk-badge-official"
-                    : ""
-                }`}
-              >
-                {skill.badge}
-              </span>
-              <span className="font-mono text-xs text-mute">v{skill.version}</span>
-            </div>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
               {skill.name}
             </h1>
             <p className="mt-4 max-w-[62ch] text-lg leading-relaxed text-body">
               {skill.description}
             </p>
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              {skill.tags.map((t) => (
-                <a
-                  key={t}
-                  href={`/browse?tag=${encodeURIComponent(t)}`}
-                  className="sk-chip transition-colors hover:border-pen hover:text-pen"
-                >
-                  #{t}
-                </a>
-              ))}
-            </div>
           </div>
 
           <aside className="sk-card--bare rounded-sm border border-hairline p-6">
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-              Permissions
-            </p>
-            <div className="mt-3">
-              <PermissionsRow skill={skill} />
-            </div>
-            <div className="mt-5 space-y-3 border-t border-hairline pt-4">
+            <div className="space-y-3">
               <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
               <div>
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
