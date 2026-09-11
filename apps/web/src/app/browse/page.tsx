@@ -1,8 +1,11 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { listSkills, listPlugins, getCategories, getAllTags } from "@/lib/catalog";
 import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
+import { CategorySidebar } from "@/components/category-sidebar";
 import { SkillCard } from "@/components/skill-card";
+import { SelectionProvider, SelectionDownloadButton } from "@/components/selection";
 
 export const metadata: Metadata = {
   title: "Browse the catalog · skyboy.in",
@@ -37,94 +40,104 @@ export default async function BrowsePage({
   skills.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <div className="min-h-[100dvh]">
-      <SiteNav current="/browse" />
-      <main className="pb-24">
-        <section className="mx-auto max-w-6xl px-6 pb-2 pt-10">
-          <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
-            Catalog
-          </p>
-          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            Browse the directory
-          </h1>
-          <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-body">
-            Every entry is hand-screened, not scraped. Filter by category or
-            tag, open a card, and read the full SKILL.md before you install.
-          </p>
-        </section>
-
-        <CatalogControls categories={categories} tags={tags} />
-
-        <section className="mx-auto max-w-6xl px-6 pt-8">
-          <div className="mb-5 flex items-baseline justify-between gap-4">
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-              {skills.length} skill{skills.length === 1 ? "" : "s"}
-              {category ? ` · ${category}` : ""}
-              {tag ? ` · #${tag}` : ""}
+    <SelectionProvider>
+      <div className="min-h-[100dvh]">
+        <SiteNav current="/browse" />
+        <main className="pb-24">
+          <section className="mx-auto max-w-6xl px-6 pb-2 pt-10">
+            <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
+              Catalog
             </p>
-          </div>
+            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+              Browse the directory
+            </h1>
+            <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-body">
+              Every entry is hand-screened, not scraped. Tick the cards you want,
+              download them as one bundle, or open a card and read the full
+              SKILL.md before you install.
+            </p>
+          </section>
 
-          {skills.length === 0 && plugins.length === 0 ? (
-            <div className="rounded-sm border border-hairline bg-card px-6 py-16 text-center">
-              <p className="font-mono text-sm uppercase tracking-[0.1em] text-mute">
-                No matches
-              </p>
-              <p className="mt-3 text-sm text-body">
-                Try a different category or tag, or clear the filters.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
-              {skills.map((skill) => (
-                <SkillCard key={skill.slug} skill={skill} />
-              ))}
-            </div>
-          )}
+          <Suspense fallback={null}>
+            <CategorySidebar categories={categories} />
+          </Suspense>
 
-          {/* Vendor plugins (index + link, §3.2). Own row so they never compete
-              with hand-screened skills for the same card. */}
-          {plugins.length > 0 ? (
-            <div className="mt-16">
-              <p className="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-mute">
-                Vendor plugins
+          <CatalogControls categories={categories} tags={tags} />
+
+          <section className="mx-auto max-w-6xl px-6 pt-8">
+            <div className="mb-5 flex items-baseline justify-between gap-4">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
+                {skills.length} skill{skills.length === 1 ? "" : "s"}
+                {category ? ` · ${category}` : ""}
+                {tag ? ` · #${tag}` : ""}
               </p>
+              <Suspense fallback={null}>
+                <SelectionDownloadButton />
+              </Suspense>
+            </div>
+
+            {skills.length === 0 && plugins.length === 0 ? (
+              <div className="rounded-sm border border-hairline bg-card px-6 py-16 text-center">
+                <p className="font-mono text-sm uppercase tracking-[0.1em] text-mute">
+                  No matches
+                </p>
+                <p className="mt-3 text-sm text-body">
+                  Try a different category or tag, or clear the filters.
+                </p>
+              </div>
+            ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
-                {plugins.map((p) => (
-                  <a
-                    key={p.slug}
-                    href={`/plugin/${p.slug}`}
-                    className="group rounded-sm border border-hairline bg-card p-6 transition-colors hover:border-pen"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-                        {p.vendor}
-                      </p>
-                      <span className="sk-badge sk-badge-official">
-                        {p.badge}
-                      </span>
-                    </div>
-                    <h3 className="mt-4 text-lg font-semibold text-ink">
-                      {p.name}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-body">
-                      {p.description}
-                    </p>
-                    <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
-                      <span className="font-mono text-xs text-mute">
-                        {p.skills.length} skill{p.skills.length === 1 ? "" : "s"}
-                        {p.mcp ? " · MCP" : ""}
-                      </span>
-                      <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
-                        Open →
-                      </span>
-                    </div>
-                  </a>
+                {skills.map((skill) => (
+                  <SkillCard key={skill.slug} skill={skill} />
                 ))}
               </div>
-            </div>
-          ) : null}
-        </section>
-      </main>
-    </div>
+            )}
+
+            {/* Vendor plugins (index + link, §3.2). Own row so they never compete
+                with hand-screened skills for the same card. */}
+            {plugins.length > 0 ? (
+              <div className="mt-16">
+                <p className="mb-5 font-mono text-xs uppercase tracking-[0.15em] text-mute">
+                  Vendor plugins
+                </p>
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
+                  {plugins.map((p) => (
+                    <a
+                      key={p.slug}
+                      href={`/plugin/${p.slug}`}
+                      className="group rounded-sm border border-hairline bg-card p-6 transition-colors hover:border-pen"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
+                          {p.vendor}
+                        </p>
+                        <span className="sk-badge sk-badge-official">
+                          {p.badge}
+                        </span>
+                      </div>
+                      <h3 className="mt-4 text-lg font-semibold text-ink">
+                        {p.name}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-body">
+                        {p.description}
+                      </p>
+                      <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
+                        <span className="font-mono text-xs text-mute">
+                          {p.skills.length} skill{p.skills.length === 1 ? "" : "s"}
+                          {p.mcp ? " · MCP" : ""}
+                        </span>
+                        <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
+                          Open →
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </section>
+        </main>
+      </div>
+    </SelectionProvider>
   );
 }

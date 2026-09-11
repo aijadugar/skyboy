@@ -4,6 +4,7 @@ import { getSkillDetail, listSkills, readBundledFile } from "@/lib/catalog";
 import { renderMarkdown } from "@/lib/markdown";
 import { SiteNav } from "@/components/site-nav";
 import { CopyButton } from "@/components/copy-button";
+import { DownloadButton } from "@/components/download-button";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
@@ -79,6 +80,7 @@ export default async function SkillPage({ params }: Props) {
           <aside className="sk-card--bare rounded-sm border border-hairline p-6">
             <div className="space-y-3">
               <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
+              <DownloadButton slug={skill.id} />
               <div>
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
                   Compatible with
@@ -191,6 +193,24 @@ export default async function SkillPage({ params }: Props) {
           <div className="mt-5 space-y-5">
             <div>
               <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                CLI
+              </p>
+              <pre className="md-code mt-2">
+                <code className="hljs language-bash">{`skyboy add ${skill.id}`}</code>
+              </pre>
+              <div className="mt-2">
+                <CopyButton text={`skyboy add ${skill.id}`} label="Copy CLI command" />
+              </div>
+              <p className="mt-2 text-xs leading-relaxed text-mute">
+                No CLI yet? Install it with{" "}
+                <code className="text-ink">curl -fsSL https://skyboy.in/install.sh | sh</code>{" "}
+                (Windows: <code className="text-ink">irm https://skyboy.in/install.ps1 | iex</code>).
+                The CLI installs into <code className="text-ink">./.skyboy/skills/</code>.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
                 degit (npm)
               </p>
               <pre className="md-code mt-2">
@@ -202,21 +222,6 @@ export default async function SkillPage({ params }: Props) {
                   label="Copy degit command"
                 />
               </div>
-            </div>
-
-            <div>
-              <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
-                CLI
-              </p>
-              <pre className="md-code mt-2">
-                <code className="hljs language-bash">{`skyboy add ${skill.id}`}</code>
-              </pre>
-              <div className="mt-2">
-                <CopyButton text={`skyboy add ${skill.id}`} label="Copy CLI command" />
-              </div>
-              <p className="mt-2 text-xs leading-relaxed text-mute">
-                Or the PyPI equivalent: <code className="text-ink">pipx run skyboy add {skill.id}</code>
-              </p>
             </div>
           </div>
         </section>

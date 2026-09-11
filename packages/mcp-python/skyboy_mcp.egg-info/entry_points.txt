@@ -1,2 +1,0 @@
-[console_scripts]
-skyboy-mcp = skyboy_mcp.__main__:main

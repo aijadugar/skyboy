@@ -1,19 +1,13 @@
 {
   "name": "markitdown-mcp",
-  "version": "0.0.1",
-  "vendor": "Microsoft",
-  "vendor_url": "https://github.com/microsoft/markitdown",
-  "source_type": "vendor",
-  "category": "meta",
-  "tags": ["mcp", "markdown", "file-conversion", "documents"],
-  "license": "MIT",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "windsurf", "claude-ai"],
-  "install": "uvx markitdown-mcp",
-  "mcp": "uvx markitdown-mcp",
   "description": "Microsoft's MCP server that converts files and office documents (PDF, Word, Excel, PowerPoint, images, audio, HTML, ZIP, YouTube URLs, EPUB) into Markdown inside any MCP-compliant agent.",
-  "skills": [],
-  "commands": [],
-  "agents": [],
-  "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream in microsoft/markitdown.",
-  "badge": "official (vendor)"
+  "source_url": "https://github.com/microsoft/markitdown",
+  "contents": {
+    "skills": []
+  },
+  "vendor": "Microsoft",
+  "license": "MIT",
+  "version": "0.0.1",
+  "category": "meta",
+  "mcp": "uvx markitdown-mcp"
 }

@@ -4,6 +4,16 @@ description: Use before shipping user-facing copy. Re-reads every visible string
 license: MIT
 ---
 
+## Command
+
+Install this skill with:
+
+```bash
+skyboy add copy-self-audit
+```
+
+Or preview it first with `skyboy info copy-self-audit`.
+
 # Copy Self-Audit
 
 Use this at the end of writing any page, post, email, or docs update - right before

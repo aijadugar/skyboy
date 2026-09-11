@@ -105,28 +105,37 @@ export interface SkillDetail extends Skill {
 
 interface RawMeta {
   id?: string;
+  name?: string;
   category?: string;
   tags?: string[];
   compatible_agents?: string[];
+  description?: string;
+  command?: string;
   license?: string;
   author?: string;
   verified?: boolean;
   version?: string;
   origin?: Origin;
   source_type?: Origin; // v1 name, read for migration tolerance
+  source_url?: string | null;
   upstream_repo?: string;
   canonical_of?: string | null;
   permissions?: Skill["permissions"];
   [key: string]: unknown;
 }
 
-// Metadata a plugin's plugin.json manifest carries. Plugins are indexed + linked,
-// not vendored, so this is the subset we actually consume.
+// Metadata a plugin's plugin.json manifest carries (Part 3 schema shape).
+// Plugins are indexed + linked, not vendored, so this is the subset we consume.
 interface RawPluginManifest {
   name?: string;
   description?: string;
+  source_url?: string;
+  contents?: {
+    skills?: string[];
+    hooks?: string[];
+    agents?: string[];
+  };
   vendor?: string;
-  vendor_url?: string;
   license?: string;
   category?: string;
   tags?: string[];
@@ -177,7 +186,7 @@ function badgeFrom(origin: Origin, verified: boolean): Badge {
 
 function readSkill(skillDir: string, repoPath: string): Skill | null {
   const skillPath = path.join(skillDir, "SKILL.md");
-  const metaPath = path.join(skillDir, "metadata.json");
+  const metaPath = path.join(skillDir, "skill.json");
   if (!existsSync(skillPath) || !existsSync(metaPath)) return null;
 
   const fm = parseFrontmatter(readFileSync(skillPath, "utf8"));
@@ -189,7 +198,7 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
   const owner = parent.startsWith("@") ? parent.slice(1) : null;
   const id = owner ? `@${owner}/${slug}` : slug;
 
-  const origin: Origin = meta.origin ?? meta.source_type ?? (meta.verified ? "community" : "skyboy");
+  const origin: Origin = meta.origin ?? meta.source_type ?? (meta.author === "skyboy" ? "skyboy" : "community");
 
   return {
     id,
@@ -197,7 +206,7 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
     owner,
     category: meta.category ?? "uncategorized",
     name: slug, // one name, ever (spec §1)
-    description: fm.description ?? "",
+    description: meta.description ?? fm.description ?? "",
     tags: meta.tags ?? [],
     compatibleAgents: meta.compatible_agents ?? [],
     license: meta.license ?? "MIT",
@@ -213,7 +222,7 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
       env_read: [],
     },
     canonicalOf: meta.canonical_of ?? null,
-    upstreamRepo: meta.upstream_repo,
+    upstreamRepo: meta.source_url ?? meta.upstream_repo,
     path: skillDir,
     repoPath,
   };
@@ -270,29 +279,39 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
   if (!existsSync(manifestPath)) return null;
   const raw: RawPluginManifest = JSON.parse(readFileSync(manifestPath, "utf8"));
   const vendor = raw.vendor ?? slug;
-  const upstreamRepo = (raw.vendor_url as string) || "";
+  const upstreamRepo = raw.source_url ?? (raw.vendor_url as string) ?? "";
+  const contents = raw.contents ?? {};
   const base = (raw.name ?? slug).toLowerCase();
   return {
     slug,
     name: raw.name ?? slug,
     vendor,
-    vendorUrl: raw.vendor_url,
+    vendorUrl: raw.source_url ?? (raw.vendor_url as string | undefined),
     origin: "vendor",
     category: raw.category ?? "meta",
     tags: raw.tags ?? [],
     license: raw.license ?? "Apache-2.0",
     upstreamRepo,
-    install: raw.install ?? `npx plugins add ${vendor}/${slug}`,
+    install: raw.install ?? `skyboy add ${base}`,
     description: raw.description ?? "",
     compatibleAgents: raw.compatible_agents ?? [],
-    skills: (raw.skills ?? []).map((s) => ({
-      name: s.name ?? s.path ?? "skill",
-      description: s.description ?? "",
-      path: s.path ?? "",
-      url: s.path ? `${stripSlash(upstreamRepo)}/blob/main/${s.path}` : "",
-    })),
-    commands: raw.commands ?? [],
-    agents: raw.agents ?? [],
+    // Part 3 shape: contents.skills is a list of names (resolved against the
+    // catalog). The legacy object form is still read for tolerance.
+    skills: (contents.skills ?? []).map((name) => ({
+      name,
+      description: "",
+      path: `skills/${name}`,
+      url: `${stripSlash(upstreamRepo)}/blob/main/skills/${name}`,
+    })).concat(
+      (raw.skills ?? []).map((s) => ({
+        name: s.name ?? s.path ?? "skill",
+        description: s.description ?? "",
+        path: s.path ?? "",
+        url: s.path ? `${stripSlash(upstreamRepo)}/blob/main/${s.path}` : "",
+      }))
+    ),
+    commands: contents.hooks ?? raw.commands ?? [],
+    agents: contents.agents ?? raw.agents ?? [],
     mcp: raw.mcp ?? null,
     note: "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
     badge: "vendor",
@@ -326,8 +345,21 @@ export function getPluginBySlug(slug: string): Plugin | undefined {
   return listPlugins().find((p) => p.slug === slug);
 }
 
-// All leaf categories that actually contain skills, in filesystem order.
+// The dynamic category list (Part 4). Derived, never hardcoded: read from the
+// generated catalog.json's categories key (which build-catalog derives from
+// the skills/ tree), falling back to scanning the tree itself during local
+// dev before catalog.json exists. Either way the sidebar renders whatever the
+// catalog says, so a new category needs no code change.
 export function getCategories(): string[] {
+  const catalogPath = path.resolve(process.cwd(), "../../catalog.json");
+  if (existsSync(catalogPath)) {
+    try {
+      const parsed = JSON.parse(readFileSync(catalogPath, "utf8")) as { categories?: string[] };
+      if (Array.isArray(parsed.categories) && parsed.categories.length > 0) return parsed.categories;
+    } catch {
+      // Fall through to the filesystem scan.
+    }
+  }
   if (!existsSync(SKILLS_ROOT)) return [];
   return readdirSync(SKILLS_ROOT).filter((c) => {
     const p = path.join(SKILLS_ROOT, c);

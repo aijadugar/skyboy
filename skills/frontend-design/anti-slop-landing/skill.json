@@ -1,0 +1,21 @@
+{
+  "name": "anti-slop-landing",
+  "category": "frontend-design",
+  "version": "1.0.0",
+  "description": "Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.",
+  "command": "skyboy add anti-slop-landing",
+  "tags": [
+    "design",
+    "landing-page",
+    "anti-slop"
+  ],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ]
+}

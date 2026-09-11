@@ -6,8 +6,8 @@ agents, memory systems, and reasoning workflows reusable, expert-level behavior.
 
 Skyboy is the curated directory where you find a skill once and pull it into
 whichever agent you're already using, without copy-pasting. It ships the catalog
-as a website, a dual-distribution CLI, and an MCP server so a skill is one command
-away from any tool.
+as a website, a single dependency-free CLI binary, and an MCP server, so a skill
+is one command away from any tool.
 
 ---
 
@@ -15,26 +15,55 @@ away from any tool.
 
 ### The CLI
 
+One static binary, written in Go, no runtime required:
+
 ```bash
-# npm
-npx skyboy add <slug>
+# macOS / Linux
+curl -fsSL https://skyboy.in/install.sh | sh
 
-# pipx / pip (Python-only audience)
-pipx run skyboy add <slug>
-
-# a custom folder
-skyboy add <slug> --dir .cursor/rules
+# Windows (PowerShell)
+irm https://skyboy.in/install.ps1 | iex
 ```
 
-Or install globally:
+Or grab a prebuilt binary straight from
+[GitHub Releases](https://github.com/aijadugar/skyboy/releases)
+(linux, macOS, Windows; amd64 + arm64), drop it on your `PATH`, and:
 
 ```bash
-npm install -g skyboy        # or: pipx install skyboy
-skyboy search "app router"
-skyboy list
-skyboy resolve <slug>
+skyboy add <name1,name2,...>   # download into ./.skyboy/skills/ + track in ~/.skyboy/state.json
+skyboy update <name>           # re-fetch and report what changed
+skyboy list                    # what you have locally
+skyboy list --all              # the full catalog, grouped by category
+skyboy zip <name1,name2,...>   # one ZIP + a generated _CONTEXT_SUMMARY.md for ChatGPT/Claude/Gemini uploads
+skyboy info <name>             # print a skill's SKILL.md
+skyboy doc --print             # the docs, in the terminal
+skyboy mcp --transport stdio   # the MCP server (or --transport http)
 skyboy version
 ```
+
+`add` installs every named skill (comma-separated) into `./.skyboy/skills/`
+and records it in `~/.skyboy/state.json`, so `list`, `info`, `update`, and
+`zip` all work offline against the cache. Scoped ids work too:
+`skyboy add @vercel/nextjs-plugin`. `zip` always writes a generated
+`_CONTEXT_SUMMARY.md` at the archive root: a short, first-class brief that
+tells the receiving LLM what is loaded and how to use it, which is what makes
+the upload-the-zip workflow actually work.
+
+### Skill & plugin format
+
+Every skill folder (`skills/<category>/<name>/`) carries:
+
+- `SKILL.md` with frontmatter name/description and a `## Command` section
+  holding the exact `skyboy add <name>` invocation
+- `skill.json`, validated against [`scripts/schemas/skill.schema.json`](scripts/schemas/skill.schema.json)
+
+Every plugin (`plugins/<vendor>/<name>/`) carries a `plugin.json` validated
+against [`scripts/schemas/plugin.schema.json`](scripts/schemas/plugin.schema.json).
+CI runs the Go validator (`skyboy validate`) on every PR, and
+`skyboy build-catalog` regenerates `catalog.json`, including the **dynamic
+category list**: categories are derived from the top-level folders under
+`skills/`, so adding a category is just adding a folder and a PR, with no code
+change anywhere in the site or CLI.
 
 ### Direct download (no CLI, no file server)
 
@@ -51,8 +80,9 @@ curl -O https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/<category
 ## MCP Server Setup
 
 The Skyboy MCP server exposes the catalog as callable tools. Use the hosted
-endpoint for a zero-install, read-only connection, or the local stdio server if
-you also want `install_skill` (which writes to your filesystem).
+endpoint for a zero-install, read-only connection, or the same `skyboy` binary
+in stdio mode if you also want `install_skill` (which writes to your
+filesystem).
 
 ### Hosted endpoint (`mcp.skyboy.in`)
 
@@ -67,40 +97,20 @@ you also want `install_skill` (which writes to your filesystem).
 }
 ```
 
-Read-only: search, preview, list, check updates. No filesystem writes.
+Read-only: search, preview, list, bundle. No filesystem writes.
 
 ### Local stdio (install-capable)
 
-**npm:**
-
 ```bash
-npx -y @skyboy/mcp-server
+skyboy mcp --transport stdio
 ```
 
 ```json
 {
   "mcpServers": {
     "skyboy": {
-      "command": "npx",
-      "args": ["-y", "@skyboy/mcp-server"],
-      "type": "stdio"
-    }
-  }
-}
-```
-
-**PyPI (requires Node at runtime):**
-
-```bash
-uvx skyboy-mcp
-```
-
-```json
-{
-  "mcpServers": {
-    "skyboy": {
-      "command": "uvx",
-      "args": ["skyboy-mcp"],
+      "command": "skyboy",
+      "args": ["mcp", "--transport", "stdio"],
       "type": "stdio"
     }
   }
@@ -111,15 +121,18 @@ uvx skyboy-mcp
 
 | Tool | Transport | Description |
 |---|---|---|
-| `search_skills(query, category?, agent?)` | remote + stdio | Fuzzy search slug, name, description, or tag. |
-| `get_skill(slug)` | remote + stdio | SKILL.md + metadata + **permissions** manifest. |
-| `get_plugin(slug)` | remote + stdio | Plugin manifest + **permissions** (index + link only). |
-| `list_categories()` | remote + stdio | Taxonomy tree and compatible agents. |
-| `check_updates(installed_slugs[])` | remote + stdio | Compare installed versions against the catalog. |
+| `search_catalog(query, category?)` | remote + stdio | Fuzzy search slug, name, description, or tag. |
+| `get_skill(slug)` | remote + stdio | Full SKILL.md body + skill.json metadata in one call. |
+| `get_plugin(slug)` | remote + stdio | Nested skills, hooks, and agents; index + link, never vendored. |
+| `list_categories()` | remote + stdio | The dynamic taxonomy tree and compatible agents. |
+| `prepare_context_zip(slugs[])` | remote + stdio | The exact `skyboy zip` bundle. stdio returns a file path; http returns a signed download URL. |
 | `install_skill(slug, target_dir?)` | **stdio only** | Write a skill to a local folder. |
 
-The hosted endpoint serves only the read-only tools. `install_skill` is local-only
-because it writes to a filesystem and therefore requires local trust.
+One server implementation, transport selected by `--transport stdio|http`.
+The hosted endpoint serves only the read-only tools. `install_skill` is
+local-only because it writes to a filesystem and therefore requires local
+trust. Full config snippets for Claude Desktop and Cursor are in
+[docs/mcp.md](docs/mcp.md) and on the site at /docs/mcp.
 
 ---
 
@@ -131,38 +144,45 @@ Full guides and per-agent install steps live at [`docs.skyboy.in`](https://docs.
 |---|---|
 | Claude Code | `.claude/skills/<slug>/` |
 | Cursor | `.cursor/rules/<slug>/` |
-| Windshsurf | `.windsurf/skills/<slug>/` |
+| Windsurf | `.windsurf/skills/<slug>/` |
 | Gemini CLI | `.gemini/skills/<slug>/` |
 | Codex CLI | `.codex/<slug>/` |
-| ChatGPT | paste the SKILL.md into a custom GPT |
+| ChatGPT | paste the SKILL.md into a custom GPT (or `skyboy zip <slug>` for a bundle) |
 | Claude Desktop | upload the SKILL.md |
 
 ---
 
-## Monorepo Architecture
+## Repository Architecture
 
 ```
 skyboy/
 ├── apps/
-│   └── web/                 Next.js 15 site (catalog, docs, MCP endpoint)
-│       └── src/
-│           └── app/api/mcp/  Hosted read-only MCP route
-├── packages/
-│   ├── core/                @skyboy/core: catalog, resolve, search, install
-│   ├── cli/                 skyboy (npm): the reference CLI
-│   ├── cli-python/          skyboy (PyPI): stdlib-native, Python-only audience
-│   ├── mcp/                 @skyboy/mcp-server: stdio + handler factory
-│   └── mcp-python/          skyboy-mcp (PyPI): npx wrapper
-├── skills/                  THE catalog, one folder per skill
-├── plugins/                 vendor/community plugins (index + link, never copied)
-├── scripts/                 export-catalog, validate-skill, generate-manifest,
-│                            detect-duplicates
-└── docs/skill-spec.md       the canonical SKILL.md format
+│   └── web/                     Next.js 15 site (catalog, docs, hosted MCP endpoint)
+│       ├── src/server/catalog/  In-app catalog reader (types, search, resolve, manifest)
+│       ├── src/server/mcp/      Hosted read-only MCP server logic
+│       └── public/install.sh    curl install script (+ install.ps1 for Windows)
+├── cli/                         The skyboy Go binary: CLI + stdio MCP server,
+│                                Go stdlib only, zero third-party dependencies
+├── skills/                      THE catalog, one folder per skill
+├── plugins/                     vendor/community plugins (index + link, never copied)
+├── scripts/                     export-catalog, validate-skill, generate-manifest,
+│                                detect-duplicates
+└── docs/skill-spec.md           the canonical SKILL.md format
 ```
 
 `catalog.json` at the repo root is the single shareable manifest: generated from
 the real `skills/` and `plugins/` trees by `scripts/export-catalog.ts`, and
-consumed by the CLI and MCP when they run outside the repo.
+consumed by the website, the Go CLI, and the stdio MCP server.
+
+The Go binary talks to the same raw.githubusercontent URLs and the same hosted
+`/api/search` endpoint the site serves, so the CLI works outside a checkout
+with no local state. Building it yourself:
+
+```bash
+cd cli
+go build -o skyboy .
+go test ./...
+```
 
 ---
 
@@ -171,18 +191,19 @@ consumed by the CLI and MCP when they run outside the repo.
 ### Submit a skill
 
 1. Create `skills/<category>/<slug>/SKILL.md` with a frontmatter `name` and
-   `description`, plus `metadata.json` for category, tags, compatible agents,
-   license, and version. See [`docs/skill-spec.md`](docs/skill-spec.md) for the
-   full format.
-2. Run the validation, permissions, and duplicate checks locally:
+   `description` and a `## Command` section, plus `skill.json` for category,
+   tags, command, author, license, and version. Both files are validated
+   against the schemas in [`scripts/schemas/`](scripts/schemas). See
+   [`docs/skill-spec.md`](docs/skill-spec.md) for the full format.
+2. Run the validation and catalog build locally (requires Go 1.24+):
    ```bash
-   npm run validate-skills      # required fields, size limits
-   npm run generate-manifests   # (re)regenerate the trusted permissions block
-   npm run detect-duplicates    # flag near-duplicate submissions
-   npm run export-catalog       # refresh the shared catalog.json
+   skyboy validate        # or: go run ./cli validate
+   skyboy build-catalog   # or: go run ./cli build-catalog
    ```
-3. Open a pull request. CI runs the same checks and fails on a missing license,
-   missing name/description, oversized broad scripts, or undisclosed capabilities.
+3. Open a pull request using the
+   [skill-submission template](.github/PULL_REQUEST_TEMPLATE/skill-submission.md).
+   CI runs the Go validator against the JSON Schemas, rebuilds the catalog and
+   fails on drift, then runs the web build and `go test`/`go vet`.
 
 ### Submit a plugin
 
@@ -190,6 +211,12 @@ Vendor and community plugins are indexed, never copied. Add a `plugin.json`
 manifest under `plugins/<vendor>/<slug>/` pointing at the upstream repo as the
 source of truth, and it is linked into the catalog with an "official (vendor)"
 badge. Content issues are reported upstream.
+
+### Releasing the CLI
+
+Releases are tag-driven: push a `v*` tag and the release workflow
+cross-compiles the binary for every supported platform and attaches the
+artifacts to a GitHub Release, which is what the install scripts download.
 
 ### Conventions
 

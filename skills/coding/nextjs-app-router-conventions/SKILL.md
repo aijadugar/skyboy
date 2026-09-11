@@ -4,6 +4,16 @@ description: Use when scaffolding or reviewing Next.js App Router projects. Enfo
 license: MIT
 ---
 
+## Command
+
+Install this skill with:
+
+```bash
+skyboy add nextjs-app-router-conventions
+```
+
+Or preview it first with `skyboy info nextjs-app-router-conventions`.
+
 # Next.js App Router Conventions
 
 Use this skill whenever you touch a Next.js App Router project (Next.js 13+,

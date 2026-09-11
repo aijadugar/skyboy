@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skyboy.in/schemas/skill.schema.json",
+  "title": "Skyboy skill metadata",
+  "description": "Machine-readable metadata for one skill folder under skills/<category>/<skill-name>/. The file must be named skill.json and live beside that folder's SKILL.md.",
+  "type": "object",
+  "required": ["name", "category", "version", "description", "command", "tags", "author", "license"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "maxLength": 64,
+      "description": "The skill's bare slug. Must equal the folder name under skills/<category>/."
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*(/[a-z0-9][a-z0-9_-]*)?$",
+      "maxLength": 64,
+      "description": "Category derived from the folder path under skills/ (top-level folder, optionally subcategory). Must not be invented: it has to match the folder the skill lives in."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semver. Bump on every content change; the catalog exporter hashes folder contents to detect drift."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 200,
+      "description": "The 160-char display line shown on cards and in search results. No marketing fluff."
+    },
+    "command": {
+      "type": "string",
+      "pattern": "^skyboy add [a-z0-9][a-z0-9._-]*$",
+      "description": "The exact CLI invocation: 'skyboy add <name>' where <name> equals this file's name field. Cross-checked by validate-skill.go."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "maxLength": 32 },
+      "minItems": 1,
+      "maxItems": 10,
+      "uniqueItems": true
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Community handle or org name."
+    },
+    "source_url": {
+      "type": ["string", "null"],
+      "format": "uri",
+      "description": "Upstream repo when the skill is forked or mirrored; null for originals."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "description": "SPDX identifier (MIT, Apache-2.0, ...)."
+    },
+    "compatible_agents": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true,
+      "description": "Agent slugs from the catalog's agents list (claude-code, cursor, gemini-cli, ...)."
+    }
+  }
+}

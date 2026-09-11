@@ -5,29 +5,46 @@ import { CopyButton } from "@/components/copy-button";
 export const metadata: Metadata = {
   title: "Skyboy MCP server · skyboy.in",
   description:
-    "Set up the Skyboy MCP server: search, preview, and install skills from inside any MCP-compatible agent. npm and pip/uvx commands shown side by side.",
+    "Set up the Skyboy MCP server: search, preview, bundle, and install skills from inside any MCP-compatible agent. One binary, stdio or hosted, no package manager required.",
 };
 
 export default function DocsMcpPage() {
-  const npmConfig = JSON.stringify(
+  // Claude Desktop reads ~/Library/Application Support/Claude/claude_desktop_config.json
+  const claudeDesktopConfig = JSON.stringify(
     {
       mcpServers: {
-        skyboy: { command: "npx", args: ["-y", "@skyboy/mcp-server"] },
+        skyboy: {
+          command: "skyboy",
+          args: ["mcp", "--transport", "stdio"],
+        },
       },
     },
     null,
     2
   );
-  const uvxConfig = JSON.stringify(
+  // Cursor reads ~/.cursor/mcp.json (project: .cursor/mcp.json)
+  const cursorConfig = JSON.stringify(
     {
       mcpServers: {
-        skyboy: { command: "uvx", args: ["skyboy-mcp"] },
+        skyboy: {
+          command: "skyboy",
+          args: ["mcp", "--transport", "stdio"],
+        },
       },
     },
     null,
     2
   );
-  const remoteConfig = JSON.stringify(
+  const httpConfig = JSON.stringify(
+    {
+      mcpServers: {
+        skyboy: { type: "http", url: "http://127.0.0.1:8765" },
+      },
+    },
+    null,
+    2
+  );
+  const hostedConfig = JSON.stringify(
     {
       mcpServers: {
         skyboy: { type: "http", url: "https://mcp.skyboy.in" },
@@ -57,8 +74,10 @@ export default function DocsMcpPage() {
         </h1>
         <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-body">
           Expose the whole skyboy.in catalog as callable tools so any
-          MCP-compatible agent can search, preview, and install a skill without
-          leaving the conversation. Published on both npm and PyPI.
+          MCP-compatible agent can search, preview, bundle, and install skills
+          without leaving the conversation. One server implementation, two
+          transports, picked by flag: stdio for desktop agents, http for the
+          web app and remote agents.
         </p>
 
         <p className="mt-8 font-mono text-xs uppercase tracking-[0.15em] text-mute">
@@ -66,100 +85,115 @@ export default function DocsMcpPage() {
         </p>
         <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
           {[
-            ["search_skills", "Fuzzy search the catalog"],
-            ["get_skill", "Preview a skill + its permissions"],
-            ["get_plugin", "Return a plugin manifest (index + link)"],
-            ["list_categories", "Return the taxonomy tree"],
-            ["check_updates", "Compare installed to catalog versions"],
+            ["search_catalog(query, category?)", "Fuzzy search the catalog, ranked"],
+            ["get_skill(slug)", "Full SKILL.md + skill.json metadata in one call"],
+            ["get_plugin(slug)", "Nested skills, hooks, and agents manifest"],
+            ["list_categories()", "The dynamic category tree, never hardcoded"],
+            ["prepare_context_zip(slugs[])", "The exact skyboy zip bundle: _CONTEXT_SUMMARY.md + skills/"],
+            ["install_skill(slug, target_dir?)", "Local/stdio only. Writes to your filesystem."],
           ].map(([name, desc]) => (
             <div key={name} className="rounded-sm border border-hairline bg-card p-5">
               <p className="font-mono text-sm text-pen">{name}</p>
               <p className="mt-1 text-sm leading-relaxed text-body">{desc}</p>
             </div>
           ))}
-          <div className="rounded-sm border border-hairline bg-card p-5">
-            <p className="font-mono text-sm text-pen">install_skill</p>
-            <p className="mt-1 text-sm leading-relaxed text-body">
-              local/stdio only. Writes to your filesystem, so it never runs on the
-              hosted remote.
-            </p>
-          </div>
         </div>
 
         <section className="mt-12 rounded-sm border border-hairline bg-card p-8">
           <h2 className="text-xl font-semibold tracking-tight text-ink">
-            stdio, local, full surface
+            One transport flag, one implementation
           </h2>
           <p className="mt-2 max-w-[58ch] text-sm leading-relaxed text-body">
-            Run it yourself for the full tool set including install_skill. Both
-            package managers install the same server.
+            The stdio transport is what Claude Desktop, Cursor, and Windsurf
+            spawn. The http transport serves the same tools over JSON-RPC POST
+            on a local port, and gives prepare_context_zip a signed download
+            URL instead of a file path. install_skill exists only on stdio:
+            writing to a filesystem needs local trust.
           </p>
-
-          <p className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
-            npm
-          </p>
-          <pre className="mt-2 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-            <code className="hljs language-bash">npx -y @skyboy/mcp-server</code>
+          <pre className="mt-5 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
+            <code className="hljs language-bash">{`skyboy mcp --transport stdio   # desktop agents (default)\nskyboy mcp --transport http    # http://127.0.0.1:8765, read-only + signed zip downloads`}</code>
           </pre>
-
-          <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
-            PyPI
-          </p>
-          <pre className="mt-2 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-            <code className="hljs language-bash">uvx skyboy-mcp</code>
-          </pre>
-          <pre className="mt-2 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-            <code className="hljs language-bash">pipx install skyboy-mcp && skyboy-mcp</code>
-          </pre>
-          <pre className="mt-2 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-            <code className="hljs language-bash">pip install skyboy-mcp && python -m skyboy_mcp</code>
-          </pre>
-          <p className="mt-4 max-w-[58ch] text-xs leading-relaxed text-mute">
-            The PyPI wrapper shells to the npm package, so it needs Node available
-            at runtime. The npm package is the full-featured server.
-          </p>
         </section>
 
         <section className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="rounded-sm border border-hairline bg-card p-8">
             <h3 className="text-base font-semibold tracking-tight text-ink">
-              npm client config
+              Claude Desktop
             </h3>
+            <p className="mt-2 text-xs leading-relaxed text-mute">
+              Add to claude_desktop_config.json (Settings, Developer, Edit
+              Config), then restart Claude Desktop.
+            </p>
             <pre className="mt-3 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-              <code className="hljs language-json">{npmConfig}</code>
+              <code className="hljs language-json">{claudeDesktopConfig}</code>
             </pre>
             <div className="mt-3">
-              <CopyButton text={npmConfig} label="Copy config" />
+              <CopyButton text={claudeDesktopConfig} label="Copy Claude Desktop config" />
             </div>
           </div>
           <div className="rounded-sm border border-hairline bg-card p-8">
             <h3 className="text-base font-semibold tracking-tight text-ink">
-              uvx client config
+              Cursor
             </h3>
+            <p className="mt-2 text-xs leading-relaxed text-mute">
+              Add to ~/.cursor/mcp.json (or the project-level .cursor/mcp.json),
+              or use Cursor Settings, MCP, Add server.
+            </p>
             <pre className="mt-3 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-              <code className="hljs language-json">{uvxConfig}</code>
+              <code className="hljs language-json">{cursorConfig}</code>
             </pre>
             <div className="mt-3">
-              <CopyButton text={uvxConfig} label="Copy config" />
+              <CopyButton text={cursorConfig} label="Copy Cursor config" />
+            </div>
+          </div>
+        </section>
+
+        <section className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <div className="rounded-sm border border-hairline bg-card p-8">
+            <h3 className="text-base font-semibold tracking-tight text-ink">
+              Local http transport
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-mute">
+              Run <code>skyboy mcp --transport http</code>, then point a
+              URL-based client at it. Bundles come back as signed download
+              links valid for 15 minutes.
+            </p>
+            <pre className="mt-3 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
+              <code className="hljs language-json">{httpConfig}</code>
+            </pre>
+            <div className="mt-3">
+              <CopyButton text={httpConfig} label="Copy local http config" />
+            </div>
+          </div>
+          <div className="rounded-sm border border-hairline bg-card p-8">
+            <h3 className="text-base font-semibold tracking-tight text-ink">
+              Hosted remote, zero install
+            </h3>
+            <p className="mt-2 text-xs leading-relaxed text-mute">
+              The deployed endpoint at https://mcp.skyboy.in serves the
+              read-only surface. No local process, nothing to manage.
+            </p>
+            <pre className="mt-3 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
+              <code className="hljs language-json">{hostedConfig}</code>
+            </pre>
+            <div className="mt-3">
+              <CopyButton text={hostedConfig} label="Copy hosted config" />
             </div>
           </div>
         </section>
 
         <section className="mt-12 rounded-sm border border-hairline bg-card p-8">
           <h2 className="text-xl font-semibold tracking-tight text-ink">
-            Hosted remote, read-only
+            prepare_context_zip is skyboy zip
           </h2>
-          <p className="mt-2 max-w-[58ch] text-sm leading-relaxed text-body">
-            The deployed endpoint at https://mcp.skyboy.in serves the read-only
-            tools only. No local process, nothing to manage. install_skill is
-            omitted because it writes to a local filesystem and needs local trust.
+          <p className="mt-3 max-w-[58ch] text-sm leading-relaxed text-body">
+            The tool calls the same bundle logic the CLI uses. The archive
+            always has a generated <code>_CONTEXT_SUMMARY.md</code> at its
+            root: a short brief the receiving model reads first, telling it
+            what is in the bundle, how to apply each skill, and the boundaries
+            (nothing executes; surface declared permissions). Plugins are
+            indexed into the summary, never vendored into the archive.
           </p>
-          <pre className="mt-4 overflow-x-auto rounded-sm border border-hairline bg-paper-deep/40 px-4 py-3 font-mono text-xs text-ink md-code">
-            <code className="hljs language-json">{remoteConfig}</code>
-          </pre>
-          <div className="mt-3">
-            <CopyButton text={remoteConfig} label="Copy config" />
-          </div>
         </section>
 
         <p className="mt-8 max-w-[62ch] text-sm leading-relaxed text-body">

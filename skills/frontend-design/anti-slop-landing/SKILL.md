@@ -4,6 +4,16 @@ description: Use when building or reviewing a landing page, portfolio, or redesi
 license: MIT
 ---
 
+## Command
+
+Install this skill with:
+
+```bash
+skyboy add anti-slop-landing
+```
+
+Or preview it first with `skyboy info anti-slop-landing`.
+
 # Anti-Slop Landing Skill
 
 Landing pages, portfolios, and redesigns. **Not** dashboards, data tables, or

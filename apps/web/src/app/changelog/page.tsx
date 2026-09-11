@@ -26,6 +26,51 @@ export default function ChangelogPage() {
         <div className="mt-10 max-w-2xl space-y-8">
           <section className="border-l-2 border-hairline pl-5">
             <h2 className="text-lg font-semibold tracking-tight text-ink">
+              Part 6 MCP surface: search_catalog, prepare_context_zip
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-body">
+              The MCP tool surface moved to its final shape on both transports:
+              search_catalog, get_skill, get_plugin, list_categories, and
+              prepare_context_zip, plus install_skill over stdio. The zip tool
+              calls the same bundle logic as the CLI, so every bundle carries
+              the generated _CONTEXT_SUMMARY.md. docs/mcp.md now ships copyable
+              Claude Desktop and Cursor config snippets.
+            </p>
+            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
+          </section>
+
+          <section className="border-l-2 border-hairline pl-5">
+            <h2 className="text-lg font-semibold tracking-tight text-ink">
+              Schema validation, dynamic categories, new CLI surface
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-body">
+              skills/ now carries skill.json (validated against a JSON Schema in
+              scripts/schemas/), plugins carry the new plugin.json shape, and
+              the Go validator enforces both in CI. Categories became fully
+              dynamic: they are derived from the skills/ tree, so a new category
+              is a folder and a PR. The CLI grew doc, update, info, and
+              comma-list add into ./.skyboy/skills/ with offline support, and
+              zip now writes a generated _CONTEXT_SUMMARY.md into every bundle.
+            </p>
+            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
+          </section>
+
+          <section className="border-l-2 border-hairline pl-5">
+            <h2 className="text-lg font-semibold tracking-tight text-ink">
+              One binary: Go CLI + stdio MCP
+            </h2>
+            <p className="mt-2 text-sm leading-relaxed text-body">
+              Retired the npm and PyPI packages and rewrote the CLI and the stdio
+              MCP server as a single dependency-free Go binary (cli/). New
+              commands: skyboy zip (bundle skills for upload-style agents) and
+              skyboy mcp (local MCP server, stdio or http). Install moved to
+              curl/irm scripts and GitHub Releases.
+            </p>
+            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
+          </section>
+
+          <section className="border-l-2 border-hairline pl-5">
+            <h2 className="text-lg font-semibold tracking-tight text-ink">
               Phase 3: CLI + MCP + install guides
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">

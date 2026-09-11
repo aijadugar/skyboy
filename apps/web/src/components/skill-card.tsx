@@ -1,11 +1,20 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { DrawablyCard } from "drawably/react";
+import { DrawablyCard, DrawablyCheckbox } from "drawably/react";
 import type { Skill } from "@/lib/catalog";
+import { useSelection } from "@/components/selection";
 
+// A catalog card that doubles as a selection target: the hand-drawn checkbox
+// picks the skill for the floating "Download Selected as ZIP" bar, clicking
+// the card body still opens the detail page. The checkbox is stop-propagated
+// so ticking it never navigates. Outside a SelectionProvider (e.g. the landing
+// page's featured row) the checkbox hides and the card is plain navigation.
 export function SkillCard({ skill }: { skill: Skill }) {
   const router = useRouter();
+  const selection = useSelectionSafe();
+  const checked = selection ? selection.selected.includes(skill.id) : false;
+
   return (
     <DrawablyCard
       className="sk-card--bare flex h-full cursor-pointer flex-col p-6"
@@ -16,15 +25,26 @@ export function SkillCard({ skill }: { skill: Skill }) {
         <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
           {skill.category}
         </p>
-        <span
-          className={`sk-badge ${
-            skill.badge === "official" || skill.badge === "verified"
-              ? "sk-badge-official"
-              : ""
-          }`}
-        >
-          {skill.badge}
-        </span>
+        {selection ? (
+          <DrawablyCheckbox
+            seed={skill.slug.length * 104729 + 7}
+            aria-label={`Select ${skill.name} for download`}
+            checked={checked}
+            onChange={(e) => selection.toggle(skill.id, e.target.checked)}
+            onClick={(e) => e.stopPropagation()}
+            className="shrink-0"
+          />
+        ) : (
+          <span
+            className={`sk-badge ${
+              skill.badge === "official" || skill.badge === "verified"
+                ? "sk-badge-official"
+                : ""
+            }`}
+          >
+            {skill.badge}
+          </span>
+        )}
       </div>
       <h3 className="mt-4 text-lg font-semibold text-ink">{skill.name}</h3>
       <p className="mt-2 flex-1 text-sm leading-relaxed text-body">
@@ -35,4 +55,14 @@ export function SkillCard({ skill }: { skill: Skill }) {
       </span>
     </DrawablyCard>
   );
+}
+
+// Context is optional for this card: it renders both inside the /browse
+// SelectionProvider and on the landing page without one.
+function useSelectionSafe() {
+  try {
+    return useSelection();
+  } catch {
+    return null;
+  }
 }

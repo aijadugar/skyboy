@@ -4,6 +4,16 @@ description: Use when an agent session runs long or loses coherence. Applies com
 license: MIT
 ---
 
+## Command
+
+Install this skill with:
+
+```bash
+skyboy add context-window-management
+```
+
+Or preview it first with `skyboy info context-window-management`.
+
 # Context Window Management
 
 Use this when a long-running agent session starts to degrade: it forgets earlier
