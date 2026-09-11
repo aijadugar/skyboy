@@ -18,6 +18,7 @@ import { DrawablyButton } from "drawably/react";
 interface SelectionValue {
   selected: string[];
   toggle: (slug: string, checked: boolean) => void;
+  clearAll: () => void;
 }
 
 const SelectionContext = createContext<SelectionValue | null>(null);
@@ -47,22 +48,24 @@ export function SelectionProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const value = useMemo(() => ({ selected, toggle }), [selected, toggle]);
+  const clearAll = useCallback(() => setSelected([]), []);
+
+  const value = useMemo(() => ({ selected, toggle, clearAll }), [selected, toggle, clearAll]);
 
   return (
     <SelectionContext.Provider value={value}>
       {children}
-      <SelectionBar selected={selected} onToggle={toggle} />
+      <SelectionBar selected={selected} onClear={clearAll} />
     </SelectionContext.Provider>
   );
 }
 
 function SelectionBar({
   selected,
-  onToggle,
+  onClear,
 }: {
   selected: string[];
-  onToggle: (slug: string, checked: boolean) => void;
+  onClear: () => void;
 }) {
   const count = selected.length;
 
@@ -80,7 +83,7 @@ function SelectionBar({
         <DownloadControls selected={selected} />
         <button
           type="button"
-          onClick={() => selected.forEach((slug) => onToggle(slug, false))}
+          onClick={() => onClear()}
           className="font-mono text-xs uppercase tracking-[0.1em] text-mute transition-colors hover:text-pen"
         >
           Clear

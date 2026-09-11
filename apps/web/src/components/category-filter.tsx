@@ -87,14 +87,21 @@ export function CategoryFilter({
       </button>
 
       {open ? (
-        <div
-          role="listbox"
-          aria-label="Categories"
-          // Mobile: opens in-flow (pushes content down) — a floating panel off
-          // the stacked header would land on top of the skill cards. sm+: floats
-          // over the content so the layout never shifts.
-          className="sk-pop mt-2 w-full overflow-hidden rounded-md border border-hairline bg-card p-1.5 sm:absolute sm:left-0 sm:top-full sm:z-50"
-        >
+        <>
+          {/* Backdrop — catches clicks outside the list to dismiss it */}
+          <div
+            aria-hidden
+            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px] sm:bg-transparent sm:backdrop-blur-0"
+            onClick={() => setOpen(false)}
+          />
+          <div
+            role="listbox"
+            aria-label="Categories"
+            // Mobile: opens in-flow (pushes content down) — a floating panel off
+            // the stacked header would land on top of the skill cards. sm+: floats
+            // over the content so the layout never shifts.
+            className="sk-pop relative z-50 mt-2 w-full overflow-hidden rounded-md border border-hairline bg-card p-1.5 sm:absolute sm:left-0 sm:top-full"
+          >
           <button
             type="button"
             role="option"
@@ -126,7 +133,8 @@ export function CategoryFilter({
               <span className="shrink-0 text-mute">{c.count}</span>
             </button>
           ))}
-        </div>
+          </div>
+        </>
       ) : null}
     </div>
   );
