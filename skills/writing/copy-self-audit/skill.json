@@ -1,0 +1,11 @@
+{
+  "name": "copy-self-audit",
+  "category": "writing",
+  "version": "1.0.0",
+  "description": "Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.",
+  "command": "skyboy add copy-self-audit",
+  "tags": ["copy", "editing", "anti-slop"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT"
+}

@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
-import { Catalog, resolveManifestUrl, fetchCatalog } from "@skyboy/core";
-import { createReadOnlyServer } from "@skyboy/mcp-server/handler";
+import { Catalog, resolveManifestUrl, fetchCatalog } from "@/server/catalog";
+import { createReadOnlyServer } from "@/server/mcp/handler";
 
 // Hosted read-only MCP endpoint (Vercel serverless). Serves only the read-only
-// tools (search_skills, get_skill, get_plugin, list_categories, check_updates),
+// tools (search_catalog, get_skill, get_plugin, list_categories,
+// prepare_context_zip),
 // never install_skill: writing to a local filesystem requires local trust, so it
 // is restricted to the stdio/local package.
 //

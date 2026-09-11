@@ -2,7 +2,7 @@
   "id": "nextjs-app-router-conventions",
   "slug": "nextjs-app-router-conventions",
   "description": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
-  "category": "coding/frontend",
+  "category": "coding",
   "tags": [
     "nextjs",
     "app-router",
@@ -33,7 +33,7 @@
     "name": "nextjs-app-router-conventions",
     "license": "MIT"
   },
-  "hash": "aa01598edd56d747",
+  "hash": "28705a4c88260851",
   "path": "skills/coding/nextjs-app-router-conventions",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/coding/nextjs-app-router-conventions/SKILL.md"
 }

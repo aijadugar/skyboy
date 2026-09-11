@@ -1,0 +1,81 @@
+name: Validate changed skills
+
+# Part 8 contribution CI. The catalog must scale to hundreds of thousands of
+# entries, so a PR that touches one skill cannot pay to validate the whole
+# tree or rebuild the full catalog. This workflow validates ONLY the changed
+# skill/plugin folders, then checks that catalog.json is consistent with
+# those folders (hash comparison against the committed records).
+#
+# Full-tree validation still runs on main pushes (ci.yml) and can always be
+# triggered locally with `skyboy validate`.
+
+on:
+  pull_request:
+    paths:
+      - "skills/**"
+      - "plugins/**"
+      - "catalog.json"
+      - "scripts/schemas/**"
+
+concurrency:
+  group: validate-changed-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changed:
+    name: Validate changed entries only
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: List changed skill and plugin folders
+        id: changed
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          # Both merge-base and direct diff: use merge-base so the check covers
+          # exactly what this PR introduces, not what main moved meanwhile.
+          MERGE_BASE="$(git merge-base "$BASE" "$HEAD")"
+          CHANGED="$(git diff --name-only "$MERGE_BASE" "$HEAD" -- skills/ plugins/ | cut -d/ -f1-3 | sort -u)"
+          # A skill folder is skills/<category>/<slug>[/...]; a plugin folder is
+          # plugins/<vendor>/<slug>[/...]. Keep only paths where the third
+          # segment is a folder containing skill.json or plugin.json; deeper
+          # file changes map back to their owning folder.
+          FOLDERS=""
+          for f in $CHANGED; do
+            if [ -f "$f/skill.json" ] || [ -f "$f/plugin.json" ]; then
+              FOLDERS="$FOLDERS $f"
+            fi
+          done
+          if [ -z "$FOLDERS" ]; then
+            echo "folders=" >> "$GITHUB_OUTPUT"
+            echo "No skill or plugin folders changed."
+          else
+            # One --path argument per folder; the validator accepts many.
+            ARGS=""
+            for f in $FOLDERS; do ARGS="$ARGS --path $f"; done
+            echo "args=$ARGS" >> "$GITHUB_OUTPUT"
+            echo "Validating:$FOLDERS"
+          fi
+
+      - name: Validate changed folders
+        if: steps.changed.outputs.args != ''
+        run: go run . validate --root .. ${{ steps.changed.outputs.args }}
+
+      - name: Check catalog records for changed skills
+        if: steps.changed.outputs.args != ''
+        run: |
+          # For every changed skill folder, the committed catalog.json record
+          # hash must equal a fresh hash of the folder contents. This is what
+          # `skyboy build-catalog` would assert, computed without walking the
+          # whole tree. Plugin records carry no hash (index + link).
+          go run . validate --root .. --check-catalog ${{ steps.changed.outputs.args }}

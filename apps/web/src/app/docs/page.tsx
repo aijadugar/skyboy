@@ -36,8 +36,10 @@ export default function DocsPage() {
               Set up the Skyboy MCP server
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
-              Search, preview, and install skills from inside any MCP-compatible
-              agent. Both npm and pip/uvx install commands, side by side.
+              Search, preview, bundle, and install skills from inside any
+              MCP-compatible agent. One binary for stdio or local http, or the
+              hosted read-only endpoint. Claude Desktop and Cursor snippets
+              included.
             </p>
           </a>
 
@@ -49,10 +51,10 @@ export default function DocsPage() {
               What a skill is
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
-              A skill is a folder with a SKILL.md (name, description, body) and a
-              metadata.json (category, tags, compatible agents, license, and the
-              permissions manifest). Bundled references/ and scripts/ are loaded
-              on demand.
+              A skill is a folder with a SKILL.md (name, description, and the
+              ## Command section) and a skill.json (category, tags, version,
+              license, author). Bundled references/ and scripts/ are loaded on
+              demand.
             </p>
             <a
               href="https://github.com/aijadugar/skyboy/blob/main/docs/skill-spec.md"

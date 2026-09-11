@@ -267,7 +267,7 @@ export const AGENT_GUIDES: AgentGuide[] = [
     steps: [
       {
         title: "Pick a transport",
-        body: "Use the hosted read-only endpoint (https://mcp.skyboy.in) for search and preview, or the local stdio server to also install skills to disk.",
+        body: "Use the hosted read-only endpoint (https://mcp.skyboy.in) for search and preview, or the local stdio server (the same skyboy binary, run with `skyboy mcp --transport stdio`) to also install skills to disk.",
       },
       {
         title: "Add the MCP server to your host",
@@ -275,7 +275,7 @@ export const AGENT_GUIDES: AgentGuide[] = [
       },
       {
         title: "Ask the agent",
-        body: "Once connected, the agent can call search_skills, get_skill, list_categories, check_updates, and (over stdio) install_skill.",
+        body: "Once connected, the agent can call search_catalog, get_skill, get_plugin, list_categories, prepare_context_zip, and (over stdio) install_skill.",
       },
     ],
     extra: {
@@ -289,7 +289,7 @@ export const AGENT_GUIDES: AgentGuide[] = [
         2
       ),
       mcpType: "http",
-      command: "npx -y @skyboy/mcp-server",
+      command: "skyboy mcp --transport stdio",
     },
     links: [
       { label: "Read /docs/mcp", href: "/docs/mcp" },

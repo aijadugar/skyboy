@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  skills:
+    name: Catalog integrity (Go)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Validate skills and plugins against the JSON Schemas
+        run: go run . validate --root ..
+
+      - name: Build catalog
+        run: go run . build-catalog --root ..
+
+      - name: Fail on catalog drift
+        working-directory: .
+        run: |
+          if [ -n "$(git status --porcelain catalog.json skills/)" ]; then
+            echo "::error::catalog.json or meta.json shards are stale. Run 'skyboy build-catalog' (or 'go run ./cli build-catalog') and commit the result."
+            git status --porcelain catalog.json skills/
+            exit 1
+          fi
+
+      - name: Comment results on PR
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "Catalog checks failed: either a skill.json/plugin.json did not validate against scripts/schemas/, or catalog.json is stale. Run `skyboy validate` and `skyboy build-catalog` locally and commit the results."
+            })
+
+  web:
+    name: Web build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+  go:
+    name: Go CLI
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: cli
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+
+      - name: Vet
+        run: go vet ./...
+
+      - name: Test
+        run: go test ./...
+
+      - name: Build
+        run: go build ./...

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question or support
+    url: https://skyboy.in/contact
+    about: Reach the maintainers through the contact page.
+  - name: Docs
+    url: https://docs.skyboy.in
+    about: Install guides and the SKILL.md format spec.

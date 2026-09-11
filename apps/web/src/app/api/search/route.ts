@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Catalog, resolveManifestUrl, fetchCatalog, searchSkills } from "@skyboy/core";
+import { Catalog, resolveManifestUrl, fetchCatalog, searchSkills } from "@/server/catalog";
 
 // Hosted search endpoint over the compact v2 catalog records. The CLI's hot
 // search path hits this instead of downloading catalog.json (one request, a few
 // KB of JSON), and agents can use it directly. Same ranking as the MCP
-// search_skills tool: everything wraps core's searchSkills.
+// search_catalog tool: everything wraps the shared searchSkills.
 //
 // GET /api/search?q=<query>&category=<c>&agent=<a>&limit=<n>
 

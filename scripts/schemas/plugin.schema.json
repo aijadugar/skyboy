@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://skyboy.in/schemas/plugin.schema.json",
+  "title": "Skyboy plugin manifest",
+  "description": "Machine-readable manifest for one plugin under plugins/<plugin-name>/. The file must be named plugin.json and live in that folder. Plugins are indexed and linked, never vendored: source_url points at the upstream repo as the source of truth.",
+  "type": "object",
+  "required": ["name", "description", "source_url", "contents"],
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "maxLength": 64,
+      "description": "The plugin's slug. Must equal the folder name under plugins/."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 400,
+      "description": "What the plugin bundles and who it is for."
+    },
+    "source_url": {
+      "type": "string",
+      "pattern": "^https://",
+      "format": "uri",
+      "description": "The upstream repo. Skyboy indexes and links; it never vendors the content. `skyboy update` re-fetches from here."
+    },
+    "contents": {
+      "type": "object",
+      "required": ["skills"],
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "skills": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 64 },
+          "uniqueItems": true,
+          "description": "Skill names the plugin bundles upstream. Plugins are indexed and linked, never vendored: these names resolve against the plugin's source_url repo, not the skills/ tree."
+        },
+        "hooks": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 64 },
+          "uniqueItems": true,
+          "description": "Hook scripts the plugin ships (e.g. auto-format-on-save)."
+        },
+        "agents": {
+          "type": "array",
+          "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "maxLength": 64 },
+          "uniqueItems": true,
+          "description": "Agent definitions the plugin ships (e.g. code-reviewer-agent)."
+        }
+      },
+      "description": "What the plugin contains. At least one skill."
+    },
+    "vendor": {
+      "type": "string",
+      "maxLength": 64,
+      "description": "Display name of the publishing vendor, when the plugin is vendor-published."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 32,
+      "description": "SPDX identifier for the plugin's own manifest. Bundled content licenses are verified per file upstream."
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "category": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9_-]*(/[a-z0-9][a-z0-9_-]*)?$",
+      "description": "Optional display category. Plugin skill categories also feed the dynamic category list."
+    },
+    "mcp": {
+      "type": ["string", "null"],
+      "description": "MCP endpoint the plugin publishes, if any."
+    }
+  }
+}

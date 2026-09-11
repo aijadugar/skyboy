@@ -89,7 +89,7 @@ consume a skill folder directly. Everything Skyboy-specific lives in
 ```json
 {
   "id": "@vercel/nextjs-plugin",
-  "category": "coding/frontend",
+  "category": "coding",
   "tags": ["nextjs", "app-router", "react"],
   "compatible_agents": ["claude-code", "cursor", "gemini-cli"],
   "license": "MIT",
@@ -171,7 +171,7 @@ opened.
 |---|---|---|---|
 | Agent surface | `SKILL.md` | any agent | name, description, instructions |
 | Authority sidecar | `metadata.json` | CI, site detail page, MCP `get_skill` | full v2 schema above |
-| Index record | `catalog.json` + per-skill `meta.json` | site cards/search, CLI search, MCP `search_skills` | compact display fields + hash (below) |
+| Index record | `catalog.json` + per-skill `meta.json` | site cards/search, CLI search, MCP `search_catalog` | compact display fields + hash (below) |
 
 ### `meta.json` (generated per-skill detail shard)
 
@@ -185,7 +185,7 @@ contains the full v2 metadata plus the content hash and the SKILL.md raw URL.
 {
   "id": "@vercel/nextjs-plugin",
   "d": "Use when scaffolding or reviewing Next.js App Router projects.",
-  "c": "coding/frontend",
+  "c": "coding",
   "t": ["nextjs", "app-router"],
   "a": ["claude-code", "cursor"],
   "v": "1.0.0",
@@ -217,7 +217,8 @@ fetch `meta.json` for them.
 
 `h` is computed by `export-catalog.ts` over every file in the skill folder
 (sorted by relative path, hash of concatenated `rel\0size\0bytes`). It powers:
-- `check_updates`: hash comparison instead of trusting hand-written semver,
+- hash comparison instead of trusting hand-written semver (the `h` field is
+  what `skyboy update` and the MCP surface compare),
 - immutable caching of raw URLs,
 - duplicate detection without fetching bodies.
 

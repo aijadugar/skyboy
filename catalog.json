@@ -41,7 +41,7 @@
     {
       "id": "nextjs-app-router-conventions",
       "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
-      "c": "coding/frontend",
+      "c": "coding",
       "t": [
         "nextjs",
         "app-router",
@@ -54,7 +54,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "aa01598edd56d747",
+      "h": "6e27d93f56fc5419",
       "o": "skyboy",
       "y": false,
       "p": "skills/coding/nextjs-app-router-conventions"
@@ -75,7 +75,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "71d71d1681dde7e0",
+      "h": "29c366ecc6d2862b",
       "o": "skyboy",
       "y": false,
       "p": "skills/frontend-design/anti-slop-landing"
@@ -97,7 +97,7 @@
         "codex-cli"
       ],
       "v": "1.0.0",
-      "h": "d74b14d6a1496712",
+      "h": "7c28410fc098df18",
       "o": "skyboy",
       "y": false,
       "p": "skills/memory/context-window-management"
@@ -118,7 +118,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b6c33ecae31d926f",
+      "h": "85b92bac5ff182df",
       "o": "skyboy",
       "y": false,
       "p": "skills/writing/copy-self-audit"

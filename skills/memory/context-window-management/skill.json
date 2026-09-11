@@ -1,0 +1,22 @@
+{
+  "name": "context-window-management",
+  "category": "memory",
+  "version": "1.0.0",
+  "description": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
+  "command": "skyboy add context-window-management",
+  "tags": [
+    "context",
+    "long-session",
+    "state"
+  ],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli",
+    "codex-cli"
+  ]
+}

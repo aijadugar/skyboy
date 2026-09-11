@@ -1,0 +1,21 @@
+{
+  "name": "nextjs-app-router-conventions",
+  "category": "coding",
+  "version": "1.0.0",
+  "description": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
+  "command": "skyboy add nextjs-app-router-conventions",
+  "tags": [
+    "nextjs",
+    "app-router",
+    "react"
+  ],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ]
+}
