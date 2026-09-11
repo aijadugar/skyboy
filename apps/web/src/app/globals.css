@@ -119,6 +119,24 @@ button:not(:disabled),
   background: #eceafc;
 }
 
+/* Corner dropdown panels (the category menu on /browse). Hairline + a soft
+   lift, per the drawably invariant — no heavy shadow. */
+.sk-pop {
+  box-shadow: 0 8px 24px rgba(24, 24, 27, 0.08);
+  transform-origin: top left;
+  animation: sk-pop-in 120ms ease-out;
+}
+@keyframes sk-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* ------------- Rendered SKILL.md (md-body) ------------- */
 /* The in-page SKILL.md preview. Hairline-framed inside .md-body on a paper card.
    Type stays on Inter; mono classes land on the Geist Mono stack. */

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { listSkills, listPlugins, getCategories, getAllTags } from "@/lib/catalog";
 import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
-import { CategorySidebar } from "@/components/category-sidebar";
+import { CategoryFilter } from "@/components/category-filter";
 import { SkillCard } from "@/components/skill-card";
 import { SelectionProvider, SelectionDownloadButton } from "@/components/selection";
 
@@ -29,10 +29,16 @@ export default async function BrowsePage({
   const category = first(params.category);
   const tag = first(params.tag);
 
-  const categories = getCategories();
+  const allSkills = listSkills();
+  // Category counts come from the full catalog, so the dropdown shows how many
+  // skills each corner holds regardless of the active tag filter.
+  const categories = getCategories().map((name) => ({
+    name,
+    count: allSkills.filter((s) => s.category === name).length,
+  }));
   const tags = getAllTags();
   const plugins = listPlugins();
-  let skills = listSkills();
+  let skills = allSkills;
 
   if (category) skills = skills.filter((s) => s.category === category);
   if (tag) skills = skills.filter((s) => s.tags.includes(tag));
@@ -45,24 +51,35 @@ export default async function BrowsePage({
         <SiteNav current="/browse" />
         <main className="pb-24">
           <section className="mx-auto max-w-6xl px-6 pb-2 pt-10">
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
-              Catalog
-            </p>
-            <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-              Browse the directory
-            </h1>
-            <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-body">
-              Every entry is hand-screened, not scraped. Tick the cards you want,
-              download them as one bundle, or open a card and read the full
-              SKILL.md before you install.
-            </p>
+            <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0 flex-1">
+                {/* <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
+                  Catalog
+                </p> */}
+                <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+                  Browse the directory
+                </h1>
+                <p className="mt-3 text-base leading-relaxed text-body">
+                  Every entry in the skyboy.in catalog is a portable SKILL.md
+                  package — hand-screened by maintainers, never scraped or
+                  auto-imported. Tick the cards you want and download them as a
+                  single bundle, or open any card to read the full skill, its
+                  permissions, license, and compatible agents before you install
+                  a thing. Filter by category from the control on the right, or
+                  narrow further with the tag chips below; every selection lives
+                  in the URL, so a filtered view is shareable exactly as you see
+                  it.
+                </p>
+              </div>
+              <Suspense fallback={null}>
+                <CategoryFilter categories={categories} />
+              </Suspense>
+            </div>
           </section>
 
-          <Suspense fallback={null}>
-            <CategorySidebar categories={categories} />
-          </Suspense>
-
-          <CatalogControls categories={categories} tags={tags} />
+          {/* <Suspense fallback={null}>
+            <CatalogControls tags={tags} />
+          </Suspense> */}
 
           <section className="mx-auto max-w-6xl px-6 pt-8">
             <div className="mb-5 flex items-baseline justify-between gap-4">

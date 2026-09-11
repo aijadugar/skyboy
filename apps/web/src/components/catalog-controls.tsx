@@ -1,36 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
-// Client filter bar for the /browse catalog. Category and tag are read from the
-// URL search params so a filtered view is shareable and survives a refresh; the
-// filtering itself happens server-side (the query string drives the server page).
-export function CatalogControls({
-  categories,
-  tags,
-}: {
-  categories: string[];
-  tags: string[];
-}) {
+// Client filter bar for the /browse catalog, tag-only: categories are chosen
+// from the control beside the page header, so this bar just narrows by tag.
+// Tag is read from the URL search params so a filtered view is shareable and
+// survives a refresh; the filtering itself happens server-side.
+export function CatalogControls({ tags }: { tags: string[] }) {
   const router = useRouter();
   const params = useSearchParams();
   const activeCategory = params.get("category") ?? "";
   const activeTag = params.get("tag") ?? "";
-
-  const [open, setOpen] = useState(false);
-  const [show, setShow] = useState(true);
-
-  // The filter bar is sticky under the site nav; once the user scrolls past the
-  // intro it gets out of the way so the results own the viewport.
-  useEffect(() => {
-    const onScroll = () => setShow(window.scrollY < 200);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  if (!show) return null;
 
   function setParam(key: string, value: string) {
     const next = new URLSearchParams(params.toString());
@@ -46,58 +26,9 @@ export function CatalogControls({
   return (
     <div className="sticky top-[57px] z-30 border-y border-hairline bg-paper/90 backdrop-blur-sm">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-6 gap-y-3 px-6 py-3">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-            Category
-          </span>
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => setOpen((v) => !v)}
-              className="inline-flex items-center gap-2 rounded-sm border border-hairline bg-card px-3 py-1.5 font-mono text-xs text-ink transition-colors hover:border-pen hover:text-pen"
-              aria-expanded={open}
-            >
-              <span className={activeCategory ? "text-pen" : "text-body"}>
-                {activeCategory || "All"}
-              </span>
-              <span aria-hidden className="text-mute">
-                {open ? "▲" : "▼"}
-              </span>
-            </button>
-            {open && (
-              <div className="absolute left-0 top-full z-50 mt-2 w-56 rounded-sm border border-hairline bg-card p-2 shadow-sm">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setParam("category", "");
-                    setOpen(false);
-                  }}
-                  className={`block w-full rounded-sm px-3 py-1.5 text-left font-mono text-xs transition-colors ${
-                    activeCategory === "" ? "text-pen" : "text-body hover:text-pen"
-                  }`}
-                >
-                  All categories
-                </button>
-                {categories.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    onClick={() => {
-                      setParam("category", c);
-                      setOpen(false);
-                    }}
-                    className={`block w-full rounded-sm px-3 py-1.5 text-left font-mono text-xs transition-colors ${
-                      activeCategory === c ? "text-pen" : "text-body hover:text-pen"
-                    }`}
-                  >
-                    {c}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
+        <span className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
+          Tags
+        </span>
         <div className="flex flex-wrap items-center gap-2">
           {tags.map((t) => {
             const active = activeTag === t;

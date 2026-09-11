@@ -228,8 +228,17 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
   };
 }
 
-const SKILLS_ROOT = path.resolve(process.cwd(), "../../skills");
-const PLUGINS_ROOT = path.resolve(process.cwd(), "../../plugins");
+// Content roots: the community-contributed skills/ and plugins/ trees that
+// live at the repo root. Overridable via SKYBOY_SKILLS_ROOT /
+// SKYBOY_PLUGINS_ROOT (for deploys that vendor the content elsewhere); the
+// default walks up from the app dir to the repo root.
+const REPO_ROOT = path.resolve(process.cwd(), "../..");
+const SKILLS_ROOT = process.env.SKYBOY_SKILLS_ROOT
+  ? path.resolve(process.env.SKYBOY_SKILLS_ROOT)
+  : path.join(REPO_ROOT, "skills");
+const PLUGINS_ROOT = process.env.SKYBOY_PLUGINS_ROOT
+  ? path.resolve(process.env.SKYBOY_PLUGINS_ROOT)
+  : path.join(REPO_ROOT, "plugins");
 
 // Memoized catalog. listSkills() walks every folder under skills/; at four
 // skills that is free, at hundreds of thousands it must happen exactly once per
@@ -351,7 +360,7 @@ export function getPluginBySlug(slug: string): Plugin | undefined {
 // dev before catalog.json exists. Either way the sidebar renders whatever the
 // catalog says, so a new category needs no code change.
 export function getCategories(): string[] {
-  const catalogPath = path.resolve(process.cwd(), "../../catalog.json");
+  const catalogPath = path.join(REPO_ROOT, "catalog.json");
   if (existsSync(catalogPath)) {
     try {
       const parsed = JSON.parse(readFileSync(catalogPath, "utf8")) as { categories?: string[] };
