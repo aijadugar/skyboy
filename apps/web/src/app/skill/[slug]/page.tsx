@@ -83,7 +83,7 @@ export default async function SkillPage({ params }: Props) {
                   hairline before the metadata block. */}
               <div className="flex flex-wrap items-center gap-3">
                 <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
-                <DownloadButton slug={skill.id} />
+                <DownloadButton slug={skill.slug} markdown={skill.rawMarkdown} />
               </div>
               <div className="border-t border-hairline pt-5">
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
