@@ -1,0 +1,21 @@
+{
+  "id": "@yylo-dev/ledger-tasks-yylo",
+  "category": "coding",
+  "tags": [
+    "kanban",
+    "tasks",
+    "workflow"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "codex-cli",
+    "cursor"
+  ],
+  "license": "MIT",
+  "author": "yylo-dev",
+  "version": "0.1.0",
+  "origin": "vendor",
+  "verified": false,
+  "upstream_repo": "https://github.com/yylo-dev/yylo-skills",
+  "canonical_of": null
+}
