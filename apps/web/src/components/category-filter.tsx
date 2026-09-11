@@ -90,7 +90,10 @@ export function CategoryFilter({
         <div
           role="listbox"
           aria-label="Categories"
-          className="sk-pop absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-md border border-hairline bg-card p-1.5"
+          // Mobile: opens in-flow (pushes content down) — a floating panel off
+          // the stacked header would land on top of the skill cards. sm+: floats
+          // over the content so the layout never shifts.
+          className="sk-pop mt-2 w-full overflow-hidden rounded-md border border-hairline bg-card p-1.5 sm:absolute sm:left-0 sm:top-full sm:z-50"
         >
           <button
             type="button"

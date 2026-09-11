@@ -46,7 +46,7 @@ export function DownloadButton({ slug, label }: { slug: string; label?: string }
         disabled={busy}
         className="inline-flex items-center gap-2 rounded-sm border border-hairline bg-card px-3 py-2 font-mono text-xs uppercase tracking-[0.1em] text-ink transition-colors hover:border-pen hover:text-pen disabled:opacity-50"
       >
-        {busy ? "Bundling..." : (label ?? "Download ZIP")}
+        {busy ? "Bundling..." : (label ?? "Download skill")}
       </button>
       {error ? <span className="font-mono text-xs text-[#d12724]">{error}</span> : null}
     </span>

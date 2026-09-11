@@ -4,6 +4,7 @@ import { listSkills, listPlugins, getCategories, getAllTags } from "@/lib/catalo
 import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
 import { CategoryFilter } from "@/components/category-filter";
+import { BrowseIntro } from "@/components/browse-intro";
 import { SkillCard } from "@/components/skill-card";
 import { SelectionProvider, SelectionDownloadButton } from "@/components/selection";
 
@@ -59,17 +60,7 @@ export default async function BrowsePage({
                 <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
                   Browse the directory
                 </h1>
-                <p className="mt-3 text-base leading-relaxed text-body">
-                  Every entry in the skyboy.in catalog is a portable SKILL.md
-                  package — hand-screened by maintainers, never scraped or
-                  auto-imported. Tick the cards you want and download them as a
-                  single bundle, or open any card to read the full skill, its
-                  permissions, license, and compatible agents before you install
-                  a thing. Filter by category from the control on the right, or
-                  narrow further with the tag chips below; every selection lives
-                  in the URL, so a filtered view is shareable exactly as you see
-                  it.
-                </p>
+                <BrowseIntro />
               </div>
               <Suspense fallback={null}>
                 <CategoryFilter categories={categories} />

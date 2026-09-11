@@ -78,10 +78,14 @@ export default async function SkillPage({ params }: Props) {
           </div>
 
           <aside className="sk-card--bare rounded-sm border border-hairline p-6">
-            <div className="space-y-3">
-              <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
-              <DownloadButton slug={skill.id} />
-              <div>
+            <div className="flex flex-col gap-5">
+              {/* The two actions sit side by side, content-sized, then a
+                  hairline before the metadata block. */}
+              <div className="flex flex-wrap items-center gap-3">
+                <CopyButton text={skill.rawMarkdown} label="Copy SKILL.md" />
+                <DownloadButton slug={skill.id} />
+              </div>
+              <div className="border-t border-hairline pt-5">
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
                   Compatible with
                 </p>
