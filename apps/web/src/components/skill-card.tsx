@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { DrawablyCard, DrawablyCheckbox } from "drawably/react";
 import type { Skill } from "@/lib/catalog";
@@ -14,6 +15,14 @@ export function SkillCard({ skill }: { skill: Skill }) {
   const router = useRouter();
   const selection = useSelectionSafe();
   const checked = selection ? selection.selected.includes(skill.id) : false;
+  const checkboxWrapRef = useRef<HTMLSpanElement>(null);
+
+  // Dispatch a native change event so drawably picks up programmatic
+  // checked changes (e.g. when "Clear" resets the selection state).
+  useEffect(() => {
+    const input = checkboxWrapRef.current?.querySelector("input");
+    if (input) input.dispatchEvent(new Event("change", { bubbles: true }));
+  }, [checked]);
 
   return (
     <DrawablyCard
@@ -26,14 +35,15 @@ export function SkillCard({ skill }: { skill: Skill }) {
           {skill.category}
         </p>
         {selection ? (
-          <DrawablyCheckbox
-            seed={skill.slug.length * 104729 + 7}
-            aria-label={`Select ${skill.name} for download`}
-            checked={checked}
-            onChange={(e) => selection.toggle(skill.id, e.target.checked)}
-            onClick={(e) => e.stopPropagation()}
-            className="shrink-0"
-          />
+          <span ref={checkboxWrapRef} className="shrink-0">
+            <DrawablyCheckbox
+              seed={skill.slug.length * 104729 + 7}
+              aria-label={`Select ${skill.name} for download`}
+              checked={checked}
+              onChange={(e) => selection.toggle(skill.id, e.target.checked)}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </span>
         ) : (
           <span
             className={`sk-badge ${

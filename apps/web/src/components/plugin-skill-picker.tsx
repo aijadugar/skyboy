@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { DrawablyCheckbox } from "drawably/react";
 import type { Plugin } from "@/lib/catalog";
 import {
@@ -48,6 +49,14 @@ function PluginSkillCard({
   const { selected, toggle } = useSelection();
   const composite = `${pluginSlug}:${name}`;
   const checked = selected.includes(composite);
+  const checkboxWrapRef = useRef<HTMLSpanElement>(null);
+
+  // Dispatch a native change event so drawably picks up programmatic
+  // checked changes (e.g. when "Clear" resets the selection state).
+  useEffect(() => {
+    const input = checkboxWrapRef.current?.querySelector("input");
+    if (input) input.dispatchEvent(new Event("change", { bubbles: true }));
+  }, [checked]);
 
   return (
     <div className="group rounded-sm border border-hairline bg-card p-5 transition-colors hover:border-pen">
@@ -55,13 +64,14 @@ function PluginSkillCard({
         <p className="font-mono text-xs uppercase tracking-[0.1em] text-mute">
           skill
         </p>
-        <DrawablyCheckbox
-          seed={name.length * 7919 + pluginSlug.length}
-          aria-label={`Select ${name} for download`}
-          checked={checked}
-          onChange={(e) => toggle(composite, e.target.checked)}
-          className="shrink-0"
-        />
+        <span ref={checkboxWrapRef} className="shrink-0">
+          <DrawablyCheckbox
+            seed={name.length * 7919 + pluginSlug.length}
+            aria-label={`Select ${name} for download`}
+            checked={checked}
+            onChange={(e) => toggle(composite, e.target.checked)}
+          />
+        </span>
       </div>
       <h3 className="mt-2 text-base font-semibold text-ink">{name}</h3>
       <p className="mt-2 text-sm leading-relaxed text-body">
