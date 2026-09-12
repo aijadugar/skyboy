@@ -1,0 +1,12 @@
+{
+  "name": "agnes-ai",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Agnes AI as a model provider.",
+  "command": "skyboy add agnes-ai",
+  "tags": ["model-provider", "agnes-ai"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

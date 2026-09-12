@@ -1,0 +1,12 @@
+{
+  "name": "microsoft-azure",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Microsoft Azure as a model provider.",
+  "command": "skyboy add microsoft-azure",
+  "tags": ["model-provider", "microsoft-azure"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

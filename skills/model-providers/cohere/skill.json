@@ -1,0 +1,12 @@
+{
+  "name": "cohere",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Cohere as a model provider.",
+  "command": "skyboy add cohere",
+  "tags": ["model-provider", "cohere"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "amazon-bedrock",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+  "command": "skyboy add amazon-bedrock",
+  "tags": ["model-provider", "amazon-bedrock"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

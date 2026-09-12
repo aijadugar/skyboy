@@ -1,0 +1,12 @@
+{
+  "name": "wafer",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Wafer as a model provider.",
+  "command": "skyboy add wafer",
+  "tags": ["model-provider", "wafer"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

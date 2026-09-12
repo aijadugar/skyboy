@@ -1,0 +1,12 @@
+{
+  "name": "friendliai",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using FriendliAI as a model provider.",
+  "command": "skyboy add friendliai",
+  "tags": ["model-provider", "friendliai"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

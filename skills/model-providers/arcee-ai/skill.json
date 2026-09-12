@@ -1,0 +1,12 @@
+{
+  "name": "arcee-ai",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Arcee AI as a model provider.",
+  "command": "skyboy add arcee-ai",
+  "tags": ["model-provider", "arcee-ai"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

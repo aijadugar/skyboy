@@ -1,0 +1,12 @@
+{
+  "name": "meta",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Meta as a model provider.",
+  "command": "skyboy add meta",
+  "tags": ["model-provider", "meta"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "scaleway",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Scaleway as a model provider.",
+  "command": "skyboy add scaleway",
+  "tags": ["model-provider", "scaleway"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

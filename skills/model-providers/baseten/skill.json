@@ -1,0 +1,12 @@
+{
+  "name": "baseten",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Baseten as a model provider.",
+  "command": "skyboy add baseten",
+  "tags": ["model-provider", "baseten"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
