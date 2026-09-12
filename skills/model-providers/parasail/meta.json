@@ -1,0 +1,31 @@
+{
+  "id": "parasail",
+  "slug": "parasail",
+  "description": "Integration guide and best practices for using Parasail as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "parasail"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "parasail",
+    "license": "MIT"
+  },
+  "hash": "146d1227487b85cb",
+  "path": "skills/model-providers/parasail",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/parasail/SKILL.md"
+}

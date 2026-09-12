@@ -31,15 +31,19 @@ export default async function BrowsePage({
   const tag = first(params.tag);
 
   const allSkills = listSkills();
+  // Provider-nested children (skills inside a model provider) live under
+  // their provider's page, not in the flat grid. The browse pool is the
+  // leaf skills plus the provider container cards.
+  const topLevelSkills = allSkills.filter((s) => !s.provider);
   // Category counts come from the full catalog, so the dropdown shows how many
   // skills each corner holds regardless of the active tag filter.
   const categories = getCategories().map((name) => ({
     name,
-    count: allSkills.filter((s) => s.category === name).length,
+    count: topLevelSkills.filter((s) => s.category === name).length,
   }));
   const tags = getAllTags();
-  const plugins = listPlugins();
-  let skills = allSkills;
+  const plugins = listPlugins().filter((p) => !p.provider);
+  let skills = topLevelSkills;
 
   if (category) skills = skills.filter((s) => s.category === category);
   if (tag) skills = skills.filter((s) => s.tags.includes(tag));

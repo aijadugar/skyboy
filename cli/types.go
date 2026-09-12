@@ -141,6 +141,10 @@ type PluginRecord struct {
 	Badge            string          `json:"badge"`
 	Version          string          `json:"version,omitempty"`
 	Path             string          `json:"path"`
+	// Provider is set when the plugin is declared inside a model provider's
+	// plugins/ folder (skills/model-providers/<p>/plugins/<slug>/) instead of
+	// the top-level plugins/ tree. Empty for ordinary vendor plugins.
+	Provider string `json:"provider,omitempty"`
 }
 
 // Agent is one compatible agent target in the manifest.

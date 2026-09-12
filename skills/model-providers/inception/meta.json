@@ -1,0 +1,31 @@
+{
+  "id": "inception",
+  "slug": "inception",
+  "description": "Integration guide and best practices for using Inception as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "inception"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "inception",
+    "license": "MIT"
+  },
+  "hash": "ef7150bfc95d56e9",
+  "path": "skills/model-providers/inception",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/inception/SKILL.md"
+}

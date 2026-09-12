@@ -1,0 +1,19 @@
+{
+  "name": "plugins-quickstart",
+  "description": "Get a ChatGPT plugin up and running in under 5 minutes (archived).",
+  "source_url": "https://github.com/openai/plugins-quickstart",
+  "contents": {
+    "skills": [
+      "plugins-quickstart"
+    ]
+  },
+  "vendor": "OpenAI",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "openai",
+    "chatgpt",
+    "quickstart"
+  ]
+}

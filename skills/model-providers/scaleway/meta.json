@@ -1,0 +1,31 @@
+{
+  "id": "scaleway",
+  "slug": "scaleway",
+  "description": "Integration guide and best practices for using Scaleway as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "scaleway"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "scaleway",
+    "license": "MIT"
+  },
+  "hash": "a0d8a6baa4537553",
+  "path": "skills/model-providers/scaleway",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/scaleway/SKILL.md"
+}

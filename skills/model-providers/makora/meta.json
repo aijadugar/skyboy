@@ -1,0 +1,31 @@
+{
+  "id": "makora",
+  "slug": "makora",
+  "description": "Integration guide and best practices for using Makora as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "makora"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "makora",
+    "license": "MIT"
+  },
+  "hash": "27eccd4f08754df7",
+  "path": "skills/model-providers/makora",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/makora/SKILL.md"
+}

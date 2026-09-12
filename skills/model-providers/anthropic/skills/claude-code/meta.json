@@ -1,0 +1,33 @@
+{
+  "id": "claude-code",
+  "slug": "claude-code",
+  "description": "Anthropic's CLI for Claude Code — agentic coding in the terminal with file editing, git, and MCP support.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "anthropic",
+    "claude-code",
+    "cli"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/anthropics/claude-code",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "claude-code",
+    "license": "Apache-2.0"
+  },
+  "hash": "43d48a41fb6d1276",
+  "path": "skills/model-providers/anthropic/skills/claude-code",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-code/SKILL.md"
+}

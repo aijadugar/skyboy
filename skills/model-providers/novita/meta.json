@@ -1,0 +1,31 @@
+{
+  "id": "novita",
+  "slug": "novita",
+  "description": "Integration guide and best practices for using Novita as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "novita"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "novita",
+    "license": "MIT"
+  },
+  "hash": "e7a7a5c5f608dd8f",
+  "path": "skills/model-providers/novita",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/SKILL.md"
+}

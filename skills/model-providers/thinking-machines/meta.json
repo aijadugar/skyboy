@@ -1,0 +1,31 @@
+{
+  "id": "thinking-machines",
+  "slug": "thinking-machines",
+  "description": "Integration guide and best practices for using Thinking Machines as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "thinking-machines"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "thinking-machines",
+    "license": "MIT"
+  },
+  "hash": "bf2e1dfe7a7c2283",
+  "path": "skills/model-providers/thinking-machines",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/thinking-machines/SKILL.md"
+}

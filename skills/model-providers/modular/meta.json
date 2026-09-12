@@ -1,0 +1,31 @@
+{
+  "id": "modular",
+  "slug": "modular",
+  "description": "Integration guide and best practices for using Modular as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "modular"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "modular",
+    "license": "MIT"
+  },
+  "hash": "8beced3591a33b2b",
+  "path": "skills/model-providers/modular",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/modular/SKILL.md"
+}

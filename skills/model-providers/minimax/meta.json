@@ -1,0 +1,31 @@
+{
+  "id": "minimax",
+  "slug": "minimax",
+  "description": "Integration guide and best practices for using MiniMax as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "minimax"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "minimax",
+    "license": "MIT"
+  },
+  "hash": "fca0fe6dcfea6be6",
+  "path": "skills/model-providers/minimax",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/minimax/SKILL.md"
+}

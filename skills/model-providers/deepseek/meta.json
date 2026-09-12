@@ -1,0 +1,31 @@
+{
+  "id": "deepseek",
+  "slug": "deepseek",
+  "description": "Integration guide and best practices for using DeepSeek as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "deepseek"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "deepseek",
+    "license": "MIT"
+  },
+  "hash": "8b2a9032991d905e",
+  "path": "skills/model-providers/deepseek",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/deepseek/SKILL.md"
+}

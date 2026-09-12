@@ -1,0 +1,31 @@
+{
+  "id": "celeris",
+  "slug": "celeris",
+  "description": "Integration guide and best practices for using Celeris as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "celeris"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "celeris",
+    "license": "MIT"
+  },
+  "hash": "a3e1aa6a2e185a67",
+  "path": "skills/model-providers/celeris",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/celeris/SKILL.md"
+}

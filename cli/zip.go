@@ -4,11 +4,6 @@ package main
 // flow's temp staging. The single-skill zip helper that used to live here is
 // superseded by buildBundleFile in zipbundle.go.
 
-import (
-	"os"
-	"path/filepath"
-)
-
 // collectFolderEntries walks one repo folder recursively via the contents API.
 func collectFolderEntries(folder string) ([]ghEntry, error) {
 	var entries []ghEntry

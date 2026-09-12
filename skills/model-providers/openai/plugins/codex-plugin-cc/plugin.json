@@ -1,0 +1,20 @@
+{
+  "name": "codex-plugin-cc",
+  "description": "Use Codex from Claude Code to review code or delegate tasks.",
+  "source_url": "https://github.com/openai/codex-plugin-cc",
+  "path_prefix": "plugins",
+  "contents": {
+    "skills": [
+      "codex"
+    ]
+  },
+  "vendor": "OpenAI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "openai",
+    "codex",
+    "claude-code"
+  ]
+}

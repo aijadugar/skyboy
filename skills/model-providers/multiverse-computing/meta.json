@@ -1,0 +1,31 @@
+{
+  "id": "multiverse-computing",
+  "slug": "multiverse-computing",
+  "description": "Integration guide and best practices for using Multiverse Computing as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "multiverse-computing"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "multiverse-computing",
+    "license": "MIT"
+  },
+  "hash": "a513766b3aeb739f",
+  "path": "skills/model-providers/multiverse-computing",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/multiverse-computing/SKILL.md"
+}

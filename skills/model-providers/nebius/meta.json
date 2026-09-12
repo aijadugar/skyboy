@@ -1,0 +1,31 @@
+{
+  "id": "nebius",
+  "slug": "nebius",
+  "description": "Integration guide and best practices for using Nebius as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "nebius"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "nebius",
+    "license": "MIT"
+  },
+  "hash": "1605b744d54f1c44",
+  "path": "skills/model-providers/nebius",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/nebius/SKILL.md"
+}

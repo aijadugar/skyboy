@@ -6,14 +6,15 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
 )
 
 var exitCode = 0
 
-var stderr = os.Stderr
+var stderr io.Writer = os.Stderr
 
-var stdout = os.Stdout
+var stdout io.Writer = os.Stdout
 
 func osExit(code int) { os.Exit(code) }
 

@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Anthropic's managed agents — deploy, schedule, and iterate on autonomous Claude agents in the cloud.",
   "command": "skyboy add claude-managed-agents",
-  "tags": ["model-provider", "anthropic", "agents", "managed"],
+  "tags": ["model-provider", "anthropic", "agents", "managed-agents"],
   "author": "skyboy",
   "source_url": "https://github.com/anthropics/launch-your-agent",
   "license": "Apache-2.0",

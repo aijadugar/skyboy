@@ -1,0 +1,31 @@
+{
+  "id": "coreweave",
+  "slug": "coreweave",
+  "description": "Integration guide and best practices for using CoreWeave as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "coreweave"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "coreweave",
+    "license": "MIT"
+  },
+  "hash": "6f6350dd1a09beeb",
+  "path": "skills/model-providers/coreweave",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/coreweave/SKILL.md"
+}

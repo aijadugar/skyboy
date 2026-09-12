@@ -101,6 +101,9 @@ export interface PluginRecord {
   badge: Badge;
   version?: string;
   path: string; // repo-relative plugin folder, e.g. "plugins/<vendor>/<slug>"
+  // Set for provider-nested plugins: the model provider whose plugins/ folder
+  // declared it (skills/model-providers/<p>/plugins/<slug>/).
+  provider?: string;
 }
 
 export interface Agent {

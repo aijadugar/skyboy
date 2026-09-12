@@ -28,11 +28,11 @@ export function SkillCard({ skill }: { skill: Skill }) {
     <DrawablyCard
       className="sk-card--bare flex h-full cursor-pointer flex-col p-6"
       seed={skill.slug.length * 7919}
-      onClick={() => router.push(`/skill/${skill.slug}`)}
+      onClick={() => router.push(skill.isProvider ? `/provider/${skill.slug}` : `/skill/${skill.slug}`)}
     >
       <div className="flex items-start justify-between gap-3">
         <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-          {skill.category}
+          {skill.isProvider ? "model provider" : skill.category}
         </p>
         {selection ? (
           <span ref={checkboxWrapRef} className="shrink-0">
@@ -60,9 +60,24 @@ export function SkillCard({ skill }: { skill: Skill }) {
       <p className="mt-2 flex-1 text-sm leading-relaxed text-body">
         {skill.description}
       </p>
-      <span className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-pen">
-        Open →
-      </span>
+      {skill.isProvider ? (
+        <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
+          <span className="font-mono text-xs text-mute">
+            {skill.providerSkillCount} skill{skill.providerSkillCount === 1 ? "" : "s"}
+            {skill.providerSkillCount > 0 && skill.providerPluginCount > 0 ? " · " : ""}
+            {skill.providerPluginCount > 0
+              ? `${skill.providerPluginCount} plugin${skill.providerPluginCount === 1 ? "" : "s"}`
+              : ""}
+          </span>
+          <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
+            Browse provider →
+          </span>
+        </div>
+      ) : (
+        <span className="mt-5 font-mono text-xs uppercase tracking-[0.1em] text-pen">
+          Open →
+        </span>
+      )}
     </DrawablyCard>
   );
 }

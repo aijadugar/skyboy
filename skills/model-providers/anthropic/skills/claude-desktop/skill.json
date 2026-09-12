@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Anthropic's desktop app for Claude — native Mac/Windows client with MCP, vision, and extended thinking.",
   "command": "skyboy add claude-desktop",
-  "tags": ["model-provider", "anthropic", "claude-desktop", "desktop"],
+  "tags": ["model-provider", "anthropic", "claude-desktop", "app"],
   "author": "skyboy",
   "source_url": "https://claude.ai/download",
   "license": "Proprietary",

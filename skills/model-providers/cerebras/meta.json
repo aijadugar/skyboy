@@ -1,0 +1,31 @@
+{
+  "id": "cerebras",
+  "slug": "cerebras",
+  "description": "Integration guide and best practices for using Cerebras as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "cerebras"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "cerebras",
+    "license": "MIT"
+  },
+  "hash": "16a6a37464ea99d7",
+  "path": "skills/model-providers/cerebras",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/cerebras/SKILL.md"
+}

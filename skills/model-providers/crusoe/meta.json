@@ -1,0 +1,31 @@
+{
+  "id": "crusoe",
+  "slug": "crusoe",
+  "description": "Integration guide and best practices for using Crusoe as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "crusoe"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "crusoe",
+    "license": "MIT"
+  },
+  "hash": "6113b1bb2ac58cf9",
+  "path": "skills/model-providers/crusoe",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/crusoe/SKILL.md"
+}

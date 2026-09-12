@@ -1,0 +1,31 @@
+{
+  "id": "inco",
+  "slug": "inco",
+  "description": "Integration guide and best practices for using Inco as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "inco"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "inco",
+    "license": "MIT"
+  },
+  "hash": "64a43ef7f233b101",
+  "path": "skills/model-providers/inco",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/inco/SKILL.md"
+}

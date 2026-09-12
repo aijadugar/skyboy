@@ -1,0 +1,31 @@
+{
+  "id": "upstage",
+  "slug": "upstage",
+  "description": "Integration guide and best practices for using Upstage as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "upstage"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "upstage",
+    "license": "MIT"
+  },
+  "hash": "ced4ae76150a757e",
+  "path": "skills/model-providers/upstage",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/upstage/SKILL.md"
+}

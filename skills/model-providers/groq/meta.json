@@ -1,0 +1,31 @@
+{
+  "id": "groq",
+  "slug": "groq",
+  "description": "Integration guide and best practices for using Groq as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "groq"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "groq",
+    "license": "MIT"
+  },
+  "hash": "73d190868ca79694",
+  "path": "skills/model-providers/groq",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/groq/SKILL.md"
+}

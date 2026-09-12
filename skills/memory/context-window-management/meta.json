@@ -22,19 +22,12 @@
   "verified": false,
   "upstream_repo": null,
   "canonical_of": null,
-  "permissions": {
-    "network": false,
-    "filesystem_write_outside_target": false,
-    "shell_exec": false,
-    "env_read": [],
-    "generated_by": "generate-manifest.ts@1.0.0",
-    "generated_at": "2026-09-08T15:48:55.531Z"
-  },
+  "permissions": null,
   "frontmatter": {
     "name": "context-window-management",
     "license": "MIT"
   },
-  "hash": "c14abc02401e4acf",
+  "hash": "86737dd6e735383f",
   "path": "skills/memory/context-window-management",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/memory/context-window-management/SKILL.md"
 }

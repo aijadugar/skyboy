@@ -1,0 +1,31 @@
+{
+  "id": "gmi",
+  "slug": "gmi",
+  "description": "Integration guide and best practices for using GMI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "gmi"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "gmi",
+    "license": "MIT"
+  },
+  "hash": "1184350b9752282e",
+  "path": "skills/model-providers/gmi",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/gmi/SKILL.md"
+}

@@ -30,9 +30,10 @@ import (
 	"strings"
 )
 
-// schemaNode is one node of a parsed JSON Schema.
+// schemaNode is one node of a parsed JSON Schema. `type` may be a string or
+// an array (JSON Schema draft-07 union types, e.g. ["string","null"]), so it
+// is decoded through UnmarshalJSON into Types instead of a plain field.
 type schemaNode struct {
-	Type                 string                `json:"type"`
 	Types                []string              `json:"-"`
 	Required             []string              `json:"required"`
 	Properties           map[string]*schemaNode `json:"properties"`
@@ -51,6 +52,36 @@ type schemaNode struct {
 	Format               string                `json:"format"`
 
 	patternRe *regexp.Regexp
+}
+
+// UnmarshalJSON lets `type` be a string or an array (draft-07 union types):
+// nested nodes (source_url, mcp) declare ["string","null"], and plain struct
+// decoding would choke on the array. Types is the normalized view either way.
+func (s *schemaNode) UnmarshalJSON(data []byte) error {
+	type alias schemaNode
+	var a alias
+	if err := json.Unmarshal(data, &a); err != nil {
+		return err
+	}
+	var wrap struct {
+		Type json.RawMessage `json:"type"`
+	}
+	if err := json.Unmarshal(data, &wrap); err != nil {
+		return err
+	}
+	if len(wrap.Type) > 0 {
+		var list []string
+		if err := json.Unmarshal(wrap.Type, &list); err == nil {
+			a.Types = list
+		} else {
+			var one string
+			if err := json.Unmarshal(wrap.Type, &one); err == nil {
+				a.Types = []string{one}
+			}
+		}
+	}
+	*s = schemaNode(a)
+	return nil
 }
 
 // parseSchema decodes a schema file and precompiles its patterns.
@@ -278,6 +309,14 @@ type pluginDocFile struct {
 		Agents []string `json:"agents"`
 	} `json:"contents"`
 	Category string `json:"category"`
+	Vendor   string `json:"vendor"`
+	License  string `json:"license"`
+	MCP      string `json:"mcp"`
+	Version  string `json:"version"`
+	// PathPrefix is the upstream folder where a plugin's bundled skills live
+	// ("skills" or "plugins"); defaults to "skills". Provider-nested plugins
+	// use it when the vendor repo keeps entries somewhere other than skills/.
+	PathPrefix string `json:"path_prefix"`
 }
 
 // validateRepo walks the repo tree and validates every skill and plugin.
@@ -323,16 +362,33 @@ func validateRepo(root string) []string {
 	entries, err := os.ReadDir(pluginRoot)
 	if err != nil {
 		add("plugins/: %v", err)
-		return problems
-	}
-	for _, vendorDir := range entries {
-		if !vendorDir.IsDir() || strings.HasPrefix(vendorDir.Name(), ".") {
-			continue
+	} else {
+		for _, vendorDir := range entries {
+			if !vendorDir.IsDir() || strings.HasPrefix(vendorDir.Name(), ".") {
+				continue
+			}
+			pluginDirs := walkPluginDirs(filepath.Join(pluginRoot, vendorDir.Name()))
+			for _, pluginDir := range pluginDirs {
+				rel, _ := filepath.Rel(root, pluginDir)
+				validatePluginDir(pluginDir, rel, pluginSchema, skillNames, add)
+			}
 		}
-		pluginDirs := walkPluginDirs(filepath.Join(pluginRoot, vendorDir.Name()))
-		for _, pluginDir := range pluginDirs {
-			rel, _ := filepath.Rel(root, pluginDir)
-			validatePluginDir(pluginDir, rel, pluginSchema, skillNames, add)
+	}
+
+	// Provider-nested plugins: skills/model-providers/<p>/plugins/<slug>/.
+	// Same manifest contract as a vendor plugin, declared inside the provider
+	// container (a model folder that holds its skills and plugins).
+	providersRoot := filepath.Join(skillRoot, "model-providers")
+	if dirs, err := os.ReadDir(providersRoot); err == nil {
+		for _, providerDir := range dirs {
+			if !providerDir.IsDir() {
+				continue
+			}
+			nestedRoot := filepath.Join(providersRoot, providerDir.Name(), "plugins")
+			for _, pluginDir := range walkPluginDirs(nestedRoot) {
+				rel, _ := filepath.Rel(root, pluginDir)
+				validatePluginDir(pluginDir, rel, pluginSchema, skillNames, add)
+			}
 		}
 	}
 
@@ -399,21 +455,51 @@ func validateSkillDir(skillDir, rel string, skillSchema *schemaNode, add func(st
 // to the skills/ root: skills/coding/frontend/slug -> "coding/frontend". It
 // returns ok=false when the folder is not under a skills/ directory, which
 // only happens for ad-hoc paths (never for walked trees).
+//
+// Model provider containers nest their children one level deeper:
+// skills/model-providers/<provider>/skills/<slug>. There the category is
+// everything between the repo skills/ root and the provider folder (the
+// provider itself is a container, not a subcategory).
 func skillCategoryOf(skillDir string) (string, bool) {
 	parts := []string{filepath.Base(skillDir)}
 	dir := filepath.Dir(skillDir)
 	for {
 		if filepath.Base(dir) == "skills" {
-			// Skip the skill slug itself; categories are the levels between.
-			if len(parts) <= 1 {
-				return "", false
+			// The skill sits directly inside a "skills" folder. Two shapes
+			// reach here: a skill at the repo root (skills/<slug> — invalid,
+			// categories must exist), and a model provider's child
+			// (…/<provider>/skills/<slug> — walk up to the outer root).
+			if len(parts) > 1 {
+				// Plain category nesting: parts are collected slug-first.
+				cats := parts[1:]
+				for i, j := 0, len(cats)-1; i < j; i, j = i+1, j-1 {
+					cats[i], cats[j] = cats[j], cats[i]
+				}
+				return strings.Join(cats, "/"), true
 			}
-			cats := parts[1:]
-			// Reverse: walk collected slug-first, categories are outermost-last.
-			for i, j := 0, len(cats)-1; i < j; i, j = i+1, j-1 {
-				cats[i], cats[j] = cats[j], cats[i]
+			// Provider child: segs collects folder names inner-to-outer
+			// starting at the provider folder.
+			var segs []string
+			walk := filepath.Dir(dir)
+			for {
+				if filepath.Base(walk) == "skills" {
+					// Reached the repo skills/ root.
+					if len(segs) < 2 {
+						return "", false
+					}
+					cats := segs[1:]
+					for i, j := 0, len(cats)-1; i < j; i, j = i+1, j-1 {
+						cats[i], cats[j] = cats[j], cats[i]
+					}
+					return strings.Join(cats, "/"), true
+				}
+				segs = append(segs, filepath.Base(walk))
+				up := filepath.Dir(walk)
+				if up == walk {
+					return "", false
+				}
+				walk = up
 			}
-			return strings.Join(cats, "/"), true
 		}
 		parent := filepath.Dir(dir)
 		if parent == dir {
@@ -478,11 +564,10 @@ func walkSkillDirs(dir string) []string {
 		}
 	}
 	if hasSkillJSON {
-		// This folder is itself a skill folder; it should not also be walked
-		// as a category.
-		if len(out) == 0 {
-			out = append(out, dir)
-		}
+		// This folder is itself a skill folder. A model provider container is
+		// both a skill (its own SKILL.md) and a parent of nested child skills
+		// (provider/skills/<slug>/) — validate the container and the children.
+		out = append(out, dir)
 	}
 	return out
 }

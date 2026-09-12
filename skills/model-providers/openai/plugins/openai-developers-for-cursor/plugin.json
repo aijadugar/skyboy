@@ -1,0 +1,13 @@
+{
+  "name": "openai-developers-for-cursor",
+  "description": "OpenAI Developers plugin for Cursor.",
+  "source_url": "https://github.com/openai/openai-developers-for-cursor",
+  "path_prefix": "plugins",
+  "contents": {
+    "skills": ["openai-developers"]
+  },
+  "vendor": "OpenAI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "openai", "cursor", "developers"]
+}
