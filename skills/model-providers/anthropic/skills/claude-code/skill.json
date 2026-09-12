@@ -1,0 +1,12 @@
+{
+  "name": "claude-code",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Anthropic's CLI for Claude Code — agentic coding in the terminal with file editing, git, and MCP support.",
+  "command": "skyboy add claude-code",
+  "tags": ["model-provider", "anthropic", "claude-code", "cli"],
+  "author": "skyboy",
+  "source_url": "https://github.com/anthropics/claude-code",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

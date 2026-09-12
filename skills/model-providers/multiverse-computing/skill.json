@@ -1,0 +1,12 @@
+{
+  "name": "multiverse-computing",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Multiverse Computing as a model provider.",
+  "command": "skyboy add multiverse-computing",
+  "tags": ["model-provider", "multiverse-computing"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

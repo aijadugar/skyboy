@@ -123,6 +123,32 @@ func buildCatalog(root string) (*buildResult, error) {
 			}
 			skills = append(skills, *rec)
 			shards = append(shards, shardPair{*rec, *shard})
+
+			// Model provider containers: skills/model-providers/<p>/ holds the
+			// provider's own SKILL.md plus a skills/ subfolder of child skills.
+			// Children are indexed with their bare slug as the id (the folder
+			// path carries the provider); the site groups them via `p`.
+			nestedRoot := filepath.Join(entryPath, "skills")
+			if catEntry.Name() == "model-providers" && isDir(nestedRoot) {
+				children, err := os.ReadDir(nestedRoot)
+				if err == nil {
+					for _, child := range children {
+						if !child.IsDir() {
+							continue
+						}
+						childRel := rel + "/skills/" + child.Name()
+						crec, cshard, cok, cerr := readSkillFolder(filepath.Join(nestedRoot, child.Name()), child.Name(), catEntry.Name(), childRel)
+						if cerr != nil {
+							return nil, fmt.Errorf("%s: %w", childRel, cerr)
+						}
+						if !cok {
+							continue
+						}
+						skills = append(skills, *crec)
+						shards = append(shards, shardPair{*crec, *cshard})
+					}
+				}
+			}
 		}
 	}
 
@@ -160,12 +186,48 @@ func buildCatalog(root string) (*buildResult, error) {
 			if !slugEntry.IsDir() {
 				continue
 			}
-			rec, err := readPluginFolder(filepath.Join(vendorPath, slugEntry.Name()), slugEntry.Name(), vendorEntry.Name())
+			rec, err := readPluginFolder(filepath.Join(vendorPath, slugEntry.Name()), slugEntry.Name(), "plugins/"+vendorEntry.Name()+"/"+slugEntry.Name(), "")
 			if err != nil {
 				return nil, fmt.Errorf("plugins/%s/%s: %w", vendorEntry.Name(), slugEntry.Name(), err)
 			}
 			if rec != nil {
 				plugins = append(plugins, *rec)
+			}
+		}
+	}
+
+	// Provider-nested plugins: skills/model-providers/<p>/plugins/<slug>/.
+	// Same manifest format as a vendor plugin, but declared inside the provider
+	// container so the provider's own SKILL.md and its plugins travel together.
+	providersRoot := filepath.Join(skillsRoot, "model-providers")
+	if isDir(providersRoot) {
+		providerEntries, err := os.ReadDir(providersRoot)
+		if err == nil {
+			for _, providerEntry := range providerEntries {
+				if !providerEntry.IsDir() {
+					continue
+				}
+				nestedPlugins := filepath.Join(providersRoot, providerEntry.Name(), "plugins")
+				if !isDir(nestedPlugins) {
+					continue
+				}
+				pluginDirs, err := os.ReadDir(nestedPlugins)
+				if err != nil {
+					continue
+				}
+				for _, pluginEntry := range pluginDirs {
+					if !pluginEntry.IsDir() {
+						continue
+					}
+					rel := "skills/model-providers/" + providerEntry.Name() + "/plugins/" + pluginEntry.Name()
+					rec, err := readPluginFolder(filepath.Join(nestedPlugins, pluginEntry.Name()), pluginEntry.Name(), rel, providerEntry.Name())
+					if err != nil {
+						return nil, fmt.Errorf("%s: %w", rel, err)
+					}
+					if rec != nil {
+						plugins = append(plugins, *rec)
+					}
+				}
 			}
 		}
 	}
@@ -299,8 +361,11 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 	return record, shard, true, nil
 }
 
-// readPluginFolder reads one plugin.json into an index record.
-func readPluginFolder(dir, slug, vendorDir string) (*PluginRecord, error) {
+// readPluginFolder reads one plugin.json into an index record. relPath is the
+// repo-relative folder path ("plugins/<vendor>/<slug>" for vendor plugins,
+// "skills/model-providers/<p>/plugins/<slug>" for provider-nested ones);
+// provider is the model provider slug for nested plugins, "" otherwise.
+func readPluginFolder(dir, slug, relPath, provider string) (*PluginRecord, error) {
 	pjPath := filepath.Join(dir, "plugin.json")
 	if !fileExists(pjPath) {
 		return nil, nil
@@ -318,6 +383,12 @@ func readPluginFolder(dir, slug, vendorDir string) (*PluginRecord, error) {
 	// Plugins may declare an mcp endpoint (a string, possibly an install
 	// command like "uvx markitdown-mcp"); pass it through when present.
 	mcpField := doc.MCP
+	// Upstream folder where bundled skills live; "skills" unless the manifest
+	// says otherwise (plugin directories keep them under "plugins/").
+	skillPrefix := doc.PathPrefix
+	if skillPrefix == "" {
+		skillPrefix = "skills"
+	}
 	rec := &PluginRecord{
 		Slug:         slug,
 		Name:         doc.Name,
@@ -334,7 +405,8 @@ func readPluginFolder(dir, slug, vendorDir string) (*PluginRecord, error) {
 		Note:         "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
 		Badge:        "official (vendor)",
 		Version:      doc.Version,
-		Path:         "plugins/" + vendorDir + "/" + slug,
+		Path:         relPath,
+		Provider:     provider,
 	}
 	if rec.Category == "" {
 		rec.Category = "meta"
@@ -348,7 +420,8 @@ func readPluginFolder(dir, slug, vendorDir string) (*PluginRecord, error) {
 	for _, s := range doc.Contents.Skills {
 		rec.Skills = append(rec.Skills, PluginSkillRef{
 			Name: s,
-			URL:  upstream + "/blob/main/skills/" + s,
+			Path: skillPrefix + "/" + s,
+			URL:  upstream + "/blob/main/" + skillPrefix + "/" + s,
 		})
 	}
 	rec.Commands = doc.Contents.Hooks
@@ -428,6 +501,11 @@ func parseFrontmatterFile(path string) map[string]string {
 func fileExists(path string) bool {
 	st, err := os.Stat(path)
 	return err == nil && !st.IsDir()
+}
+
+func isDir(path string) bool {
+	st, err := os.Stat(path)
+	return err == nil && st.IsDir()
 }
 
 func truncateRunes(s string, n int) string {

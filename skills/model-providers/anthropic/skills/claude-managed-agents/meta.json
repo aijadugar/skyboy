@@ -1,0 +1,33 @@
+{
+  "id": "claude-managed-agents",
+  "slug": "claude-managed-agents",
+  "description": "Anthropic's managed agents — deploy, schedule, and iterate on autonomous Claude agents in the cloud.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "anthropic",
+    "agents",
+    "managed-agents"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/anthropics/launch-your-agent",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "claude-managed-agents",
+    "license": "Apache-2.0"
+  },
+  "hash": "ca43d57215c82679",
+  "path": "skills/model-providers/anthropic/skills/claude-managed-agents",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-managed-agents/SKILL.md"
+}

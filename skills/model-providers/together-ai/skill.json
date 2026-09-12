@@ -1,0 +1,12 @@
+{
+  "name": "together-ai",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Together AI as a model provider.",
+  "command": "skyboy add together-ai",
+  "tags": ["model-provider", "together-ai"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

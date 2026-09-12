@@ -1,0 +1,31 @@
+{
+  "id": "together-ai",
+  "slug": "together-ai",
+  "description": "Integration guide and best practices for using Together AI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "together-ai"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "together-ai",
+    "license": "MIT"
+  },
+  "hash": "485ae60df67ab48c",
+  "path": "skills/model-providers/together-ai",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/together-ai/SKILL.md"
+}

@@ -72,9 +72,30 @@
       "pattern": "^[a-z0-9][a-z0-9_-]*(/[a-z0-9][a-z0-9_-]*)?$",
       "description": "Optional display category. Plugin skill categories also feed the dynamic category list."
     },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$", "maxLength": 32 },
+      "uniqueItems": true,
+      "description": "Discovery tags."
+    },
+    "compatible_agents": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "uniqueItems": true,
+      "description": "Agent slugs the plugin targets."
+    },
+    "install": {
+      "type": "string",
+      "description": "One-line install command shown on the plugin page."
+    },
     "mcp": {
       "type": ["string", "null"],
       "description": "MCP endpoint the plugin publishes, if any."
+    },
+    "path_prefix": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._/-]*$",
+      "description": "Upstream folder where the bundled skills live (e.g. 'skills' or 'plugins'). Defaults to 'skills'."
     }
   }
 }

@@ -1,0 +1,33 @@
+{
+  "id": "anthropic",
+  "slug": "anthropic",
+  "description": "Integration guide and best practices for using Anthropic as a model provider. Includes links to official skill repositories.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "anthropic",
+    "claude",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "anthropic",
+    "license": "MIT"
+  },
+  "hash": "143d60596a2287e8",
+  "path": "skills/model-providers/anthropic",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/SKILL.md"
+}

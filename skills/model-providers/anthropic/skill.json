@@ -1,0 +1,12 @@
+{
+  "name": "anthropic",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Anthropic as a model provider. Includes links to official skill repositories.",
+  "command": "skyboy add anthropic",
+  "tags": ["model-provider", "anthropic", "claude", "skills"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

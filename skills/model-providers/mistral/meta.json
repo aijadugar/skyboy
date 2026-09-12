@@ -1,0 +1,31 @@
+{
+  "id": "mistral",
+  "slug": "mistral",
+  "description": "Integration guide and best practices for using Mistral as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "mistral"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "mistral",
+    "license": "MIT"
+  },
+  "hash": "d3b3857e057c0984",
+  "path": "skills/model-providers/mistral",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/mistral/SKILL.md"
+}

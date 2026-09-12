@@ -1,0 +1,33 @@
+{
+  "id": "claude-desktop",
+  "slug": "claude-desktop",
+  "description": "Anthropic's desktop app for Claude — native Mac/Windows client with MCP, vision, and extended thinking.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "anthropic",
+    "claude-desktop",
+    "app"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Proprietary",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://claude.ai/download",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "claude-desktop",
+    "license": "Proprietary"
+  },
+  "hash": "d85892bbaeaaa0cb",
+  "path": "skills/model-providers/anthropic/skills/claude-desktop",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-desktop/SKILL.md"
+}

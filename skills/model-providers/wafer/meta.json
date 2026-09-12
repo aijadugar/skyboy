@@ -1,0 +1,31 @@
+{
+  "id": "wafer",
+  "slug": "wafer",
+  "description": "Integration guide and best practices for using Wafer as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "wafer"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "wafer",
+    "license": "MIT"
+  },
+  "hash": "1ab4115cfeda0a1f",
+  "path": "skills/model-providers/wafer",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/wafer/SKILL.md"
+}

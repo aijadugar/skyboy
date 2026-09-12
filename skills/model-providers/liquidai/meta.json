@@ -1,0 +1,31 @@
+{
+  "id": "liquidai",
+  "slug": "liquidai",
+  "description": "Integration guide and best practices for using Liquid AI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "liquidai"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "liquidai",
+    "license": "MIT"
+  },
+  "hash": "c37632c42940a945",
+  "path": "skills/model-providers/liquidai",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/liquidai/SKILL.md"
+}

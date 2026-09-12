@@ -36,6 +36,15 @@ export interface Skill {
   upstreamRepo?: string;
   path: string; // absolute skill folder path
   repoPath: string; // repo-relative, e.g. "skills/coding/@vercel/slug"
+  // Model provider containers (skills/model-providers/<provider>/): a provider
+  // is a model folder that carries its own SKILL.md plus nested skills/ and
+  // plugins/ sub-folders. `provider` is set on nested children (the provider
+  // slug they live under); `isProvider` marks the container itself; the
+  // counts drive the browse card ("N skills · M plugins").
+  provider: string | null;
+  isProvider: boolean;
+  providerSkillCount: number;
+  providerPluginCount: number;
 }
 
 // A skill shipped inside a vendor plugin. Index-only: points at the upstream
@@ -71,6 +80,10 @@ export interface Plugin {
   badge: Badge;
   version?: string;
   path: string; // plugin folder path
+  // Set when the plugin is declared inside a model provider's plugins/
+  // folder (skills/model-providers/<provider>/plugins/<slug>/) rather than
+  // the top-level plugins/ tree. Null for ordinary vendor plugins.
+  provider: string | null;
 }
 
 // Metadata a skill's SKILL.md frontmatter officially declares (portable, shared
@@ -146,6 +159,10 @@ interface RawPluginManifest {
   agents?: string[];
   mcp?: string;
   version?: string;
+  // Provider-nested plugins: the upstream folder where the bundled skills
+  // actually live ("skills" or "plugins"), since not every vendor repo keeps
+  // them under skills/. Defaults to "skills".
+  path_prefix?: string;
   [key: string]: unknown;
 }
 
@@ -184,7 +201,7 @@ function badgeFrom(origin: Origin, verified: boolean): Badge {
   return verified ? "verified" : "community";
 }
 
-function readSkill(skillDir: string, repoPath: string): Skill | null {
+function readSkill(skillDir: string, repoPath: string, provider: string | null = null): Skill | null {
   const skillPath = path.join(skillDir, "SKILL.md");
   const metaPath = path.join(skillDir, "skill.json");
   if (!existsSync(skillPath) || !existsSync(metaPath)) return null;
@@ -199,6 +216,13 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
   const id = owner ? `@${owner}/${slug}` : slug;
 
   const origin: Origin = meta.origin ?? meta.source_type ?? (meta.author === "skyboy" ? "skyboy" : "community");
+
+  // A model-provider folder is a container (a "model" that holds skills and
+  // plugins), not a leaf skill: skills/model-providers/<provider>/[skills/…|plugins/…].
+  // Children under <provider>/skills/ come back with `provider` set.
+  const nestedSkills = countChildSkillDirs(path.join(skillDir, "skills"));
+  const nestedPlugins = countChildPluginDirs(path.join(skillDir, "plugins"));
+  const isProvider = provider === null && (meta.category ?? "") === "model-providers";
 
   return {
     id,
@@ -225,7 +249,34 @@ function readSkill(skillDir: string, repoPath: string): Skill | null {
     upstreamRepo: meta.source_url ?? meta.upstream_repo,
     path: skillDir,
     repoPath,
+    provider,
+    isProvider,
+    providerSkillCount: isProvider ? nestedSkills : 0,
+    providerPluginCount: isProvider ? nestedPlugins : 0,
   };
+}
+
+// A child folder is a nested skill when it carries skill.json + SKILL.md, a
+// nested plugin when it carries plugin.json. Counts are shallow (one level) —
+// the container layout never nests deeper than provider/skills/<slug>.
+function countChildSkillDirs(dir: string): number {
+  if (!existsSync(dir)) return 0;
+  let n = 0;
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory() && existsSync(path.join(full, "skill.json"))) n++;
+  }
+  return n;
+}
+
+function countChildPluginDirs(dir: string): number {
+  if (!existsSync(dir)) return 0;
+  let n = 0;
+  for (const entry of readdirSync(dir)) {
+    const full = path.join(dir, entry);
+    if (statSync(full).isDirectory() && existsSync(path.join(full, "plugin.json"))) n++;
+  }
+  return n;
 }
 
 // Content roots: the community-contributed skills/ and plugins/ trees that
@@ -247,7 +298,10 @@ let _skills: Skill[] | null = null;
 let _plugins: Plugin[] | null = null;
 
 // Walk skills/<category>/[<owner>/]<slug>/. The @owner level is exactly one
-// deep (spec §1); anything deeper is ignored.
+// deep (spec §1); anything deeper is ignored. Model providers are the one
+// exception: a provider folder doubles as a container whose skills/ sub-level
+// holds the provider's own skills (skills/model-providers/<p>/skills/<slug>/),
+// indexed with `provider` set so browse can group them under the provider card.
 function walkSkills(): Skill[] {
   if (!existsSync(SKILLS_ROOT)) return [];
   const skills: Skill[] = [];
@@ -267,6 +321,21 @@ function walkSkills(): Skill[] {
       } else {
         const skill = readSkill(entryPath, `skills/${category}/${entry}`);
         if (skill) skills.push(skill);
+        if (skill?.isProvider) {
+          const nestedRoot = path.join(entryPath, "skills");
+          if (existsSync(nestedRoot) && statSync(nestedRoot).isDirectory()) {
+            for (const slug of readdirSync(nestedRoot)) {
+              const skillDir = path.join(nestedRoot, slug);
+              if (!statSync(skillDir).isDirectory()) continue;
+              const child = readSkill(
+                skillDir,
+                `skills/${category}/${entry}/skills/${slug}`,
+                entry
+              );
+              if (child) skills.push(child);
+            }
+          }
+        }
       }
     }
   }
@@ -283,7 +352,9 @@ export function listSkills(): Skill[] {
 // vendor-copy. Each plugin ships a small index file we author in plugins/<vendor>/<slug>/.
 // --------------------------------------------------------------------------
 
-function readPlugin(pluginDir: string, slug: string): Plugin | null {
+// provider is set when the manifest lives inside a model provider's plugins/
+// folder rather than the top-level plugins/ tree (the container layout).
+function readPlugin(pluginDir: string, slug: string, provider: string | null = null): Plugin | null {
   const manifestPath = path.join(pluginDir, "plugin.json");
   if (!existsSync(manifestPath)) return null;
   const raw: RawPluginManifest = JSON.parse(readFileSync(manifestPath, "utf8"));
@@ -291,6 +362,7 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
   const upstreamRepo = raw.source_url ?? (raw.vendor_url as string) ?? "";
   const contents = raw.contents ?? {};
   const base = (raw.name ?? slug).toLowerCase();
+  const prefix = raw.path_prefix ?? "skills";
   return {
     slug,
     name: raw.name ?? slug,
@@ -309,8 +381,8 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
     skills: (contents.skills ?? []).map((name) => ({
       name,
       description: "",
-      path: `skills/${name}`,
-      url: `${stripSlash(upstreamRepo)}/blob/main/skills/${name}`,
+      path: `${prefix}/${name}`,
+      url: `${stripSlash(upstreamRepo)}/blob/main/${prefix}/${name}`,
     })).concat(
       (raw.skills ?? []).map((s) => ({
         name: s.name ?? s.path ?? "skill",
@@ -326,6 +398,7 @@ function readPlugin(pluginDir: string, slug: string): Plugin | null {
     badge: "vendor",
     version: raw.version,
     path: pluginDir,
+    provider,
   };
 }
 
@@ -346,12 +419,49 @@ export function listPlugins(): Plugin[] {
         }
       }
     }
+    // Provider-nested plugins: skills/model-providers/<provider>/plugins/<slug>/.
+    // Same manifest format as a vendor plugin, but declared inside the
+    // provider container so the provider page can list them as its plugins.
+    const providersRoot = path.join(SKILLS_ROOT, "model-providers");
+    if (existsSync(providersRoot)) {
+      for (const provider of readdirSync(providersRoot)) {
+        const nestedRoot = path.join(providersRoot, provider, "plugins");
+        if (!existsSync(nestedRoot) || !statSync(nestedRoot).isDirectory()) continue;
+        for (const slug of readdirSync(nestedRoot)) {
+          const pluginDir = path.join(nestedRoot, slug);
+          if (!statSync(pluginDir).isDirectory()) continue;
+          const plugin = readPlugin(pluginDir, slug, provider);
+          if (plugin) _plugins.push(plugin);
+        }
+      }
+    }
   }
   return _plugins;
 }
 
 export function getPluginBySlug(slug: string): Plugin | undefined {
   return listPlugins().find((p) => p.slug === slug);
+}
+
+// Model provider containers: the model-providers entries that hold skills
+// and/or plugins. A provider is a model folder you open to find its skills
+// and plugins, so browse renders it as a container card.
+export function listProviders(): Skill[] {
+  return listSkills().filter((s) => s.isProvider);
+}
+
+export function getProviderBySlug(slug: string): Skill | undefined {
+  return listProviders().find((p) => p.slug === slug);
+}
+
+// The skills nested inside a provider (its skills/ folder).
+export function getProviderSkills(providerSlug: string): Skill[] {
+  return listSkills().filter((s) => s.provider === providerSlug);
+}
+
+// The plugins a provider declares (its plugins/ folder).
+export function getProviderPlugins(providerSlug: string): Plugin[] {
+  return listPlugins().filter((p) => p.provider === providerSlug);
 }
 
 // The dynamic category list (Part 4). Derived, never hardcoded: read from the
@@ -462,12 +572,38 @@ export function getFeaturedSkills(): Skill[] {
 }
 
 export const SUPPORTED_AGENTS: { name: string; note: string; slug?: string }[] = [
-  { name: "Claude Code", note: "folder drop", slug: "claude-code" },
-  { name: "Claude Desktop", note: "upload", slug: "claude-desktop" },
-  { name: "Cursor", note: ".cursor/rules", slug: "cursor" },
-  { name: "ChatGPT", note: "paste config", slug: "chatgpt" },
-  { name: "Gemini CLI", note: "SKILL.md", slug: "gemini-cli" },
-  { name: "Codex CLI", note: "SKILL.md", slug: "codex-cli" },
-  { name: "Windsurf", note: "skills", slug: "windsurf" },
-  { name: "MCP", note: "remote endpoint", slug: "mcp" },
+  { name: "Claude Code", note: "AI coding", slug: "claude-code" },
+  { name: "Claude Desktop", note: "AI assistant", slug: "claude-desktop" },
+  { name: "Cursor", note: "AI coding", slug: "cursor" },
+  { name: "ChatGPT", note: "AI assistant", slug: "chatgpt" },
+  { name: "Gemini CLI", note: "AI coding", slug: "gemini-cli" },
+  { name: "Codex CLI", note: "AI coding", slug: "codex-cli" },
+  { name: "Windsurf", note: "AI coding", slug: "windsurf" },
+  { name: "MCP", note: "tool protocol", slug: "mcp" },
+
+  { name: "Anthropic", note: "AI models", slug: "anthropic" },
+  { name: "OpenAI", note: "AI models", slug: "openai" },
+  { name: "Meta", note: "open models", slug: "meta" },
+  { name: "Zai", note: "AI models", slug: "zai" },
+  { name: "xAI", note: "AI models", slug: "xai" },
+  { name: "Kimi", note: "AI models", slug: "kimi" },
+  { name: "Google", note: "AI models", slug: "google" },
+  { name: "Alibaba Cloud", note: "AI models", slug: "alibaba-cloud" },
+  { name: "DeepSeek", note: "AI models", slug: "deepseek" },
+  { name: "MiniMax", note: "AI models", slug: "minimax" },
+  { name: "Upstage", note: "AI models", slug: "upstage" },
+  { name: "Multiverse Computing", note: "AI optimization", slug: "multiverse-computing" },
+  { name: "Xiaomi", note: "AI models", slug: "xiaomi" },
+  { name: "Thinking Machines", note: "AI research", slug: "thinking-machines" },
+  { name: "InclusionAI", note: "AI models", slug: "inclusionai" },
+  { name: "StepFun", note: "AI models", slug: "stepfun" },
+  { name: "Mistral", note: "AI models", slug: "mistral" },
+  { name: "Amazon Bedrock", note: "model platform", slug: "amazon-bedrock" },
+  { name: "Cohere", note: "AI models", slug: "cohere" },
+  { name: "Inception", note: "AI models", slug: "inception" },
+  { name: "Arcee AI", note: "AI models", slug: "arcee-ai" },
+  { name: "Liquid AI", note: "AI models", slug: "liquid-ai" },
+  { name: "Microsoft Azure", note: "cloud platform", slug: "microsoft-azure" },
+  { name: "Baseten", note: "model serving", slug: "baseten" },
+  { name: "Databricks", note: "AI platform", slug: "databricks" },
 ];

@@ -1,0 +1,12 @@
+{
+  "name": "upstage",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Upstage as a model provider.",
+  "command": "skyboy add upstage",
+  "tags": ["model-provider", "upstage"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

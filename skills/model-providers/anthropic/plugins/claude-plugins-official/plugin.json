@@ -1,0 +1,13 @@
+{
+  "name": "claude-plugins-official",
+  "description": "The official Anthropic-managed directory of high-quality Claude Code plugins: code-review, security-guidance, feature-dev, pr-review-toolkit, LSP integrations, hookify, plugin-dev, and more.",
+  "source_url": "https://github.com/anthropics/claude-plugins-official",
+  "path_prefix": "plugins",
+  "contents": {
+    "skills": ["agent-sdk-dev", "clangd-lsp", "claude-code-setup", "claude-md-management", "claude-security", "code-modernization", "code-review", "code-simplifier", "commit-commands", "csharp-lsp", "cwc-makers", "example-plugin", "explanatory-output-style", "feature-dev", "frontend-design", "gopls-lsp", "hookify", "jdtls-lsp", "kotlin-lsp", "learning-output-style", "lua-lsp", "math-olympiad", "mcp-server-dev", "mcp-tunnels", "php-lsp", "playground", "plugin-dev", "pr-review-toolkit", "project-artifact", "pyright-lsp", "ralph-loop", "receipts", "ruby-lsp", "rust-analyzer-lsp", "security-guidance", "session-report", "skill-creator", "swift-lsp"]
+  },
+  "vendor": "Anthropic",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "anthropic", "claude-code", "plugins"]
+}

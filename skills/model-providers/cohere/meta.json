@@ -1,0 +1,31 @@
+{
+  "id": "cohere",
+  "slug": "cohere",
+  "description": "Integration guide and best practices for using Cohere as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "cohere"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "cohere",
+    "license": "MIT"
+  },
+  "hash": "a8aa68bda1eafa72",
+  "path": "skills/model-providers/cohere",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/cohere/SKILL.md"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "chatgpt-retrieval-plugin",
+  "description": "The ChatGPT Retrieval Plugin lets you easily find personal or work documents by asking questions in natural language.",
+  "source_url": "https://github.com/openai/chatgpt-retrieval-plugin",
+  "contents": {
+    "skills": [
+      "chatgpt-retrieval-plugin"
+    ]
+  },
+  "vendor": "OpenAI",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "openai",
+    "chatgpt",
+    "retrieval"
+  ]
+}

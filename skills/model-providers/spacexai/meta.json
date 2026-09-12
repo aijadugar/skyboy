@@ -1,0 +1,31 @@
+{
+  "id": "spacexai",
+  "slug": "spacexai",
+  "description": "Integration guide and best practices for using SpaceXAI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "spacexai"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "spacexai",
+    "license": "MIT"
+  },
+  "hash": "2a43c943af17953b",
+  "path": "skills/model-providers/spacexai",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/spacexai/SKILL.md"
+}

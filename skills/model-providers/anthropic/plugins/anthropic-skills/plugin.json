@@ -1,0 +1,13 @@
+{
+  "name": "anthropic-skills",
+  "description": "Anthropic's public Agent Skills repository: document skills (docx, pdf, pptx, xlsx), creative and design skills (canvas-design, algorithmic-art, frontend-design), and developer skills (skill-creator, mcp-builder, webapp-testing, claude-api).",
+  "source_url": "https://github.com/anthropics/skills",
+  "path_prefix": "skills",
+  "contents": {
+    "skills": ["academy-guide", "algorithmic-art", "brand-guidelines", "canvas-design", "claude-api", "discernment-nudge", "doc-coauthoring", "docx", "frontend-design", "internal-comms", "mcp-builder", "pdf", "pptx", "skill-creator", "slack-gif-creator", "theme-factory", "web-artifacts-builder", "webapp-testing", "xlsx"]
+  },
+  "vendor": "Anthropic",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "anthropic", "skills"]
+}

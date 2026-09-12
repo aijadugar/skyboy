@@ -1,0 +1,31 @@
+{
+  "id": "stepfun",
+  "slug": "stepfun",
+  "description": "Integration guide and best practices for using StepFun as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "stepfun"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "stepfun",
+    "license": "MIT"
+  },
+  "hash": "7adaae19bec7a132",
+  "path": "skills/model-providers/stepfun",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/stepfun/SKILL.md"
+}

@@ -44,6 +44,18 @@ export default async function PluginPage({ params }: Props) {
             <p className="mt-3 max-w-[60ch] text-lg leading-relaxed text-body">
               by {plugin.vendor}
             </p>
+            {plugin.provider ? (
+              <p className="mt-2 font-mono text-xs uppercase tracking-[0.1em] text-mute">
+                part of the{" "}
+                <a
+                  href={`/provider/${plugin.provider}`}
+                  className="text-pen transition-colors hover:text-pen-deep"
+                >
+                  {plugin.provider}
+                </a>{" "}
+                model provider
+              </p>
+            ) : null}
             <p className="mt-4 max-w-[62ch] text-base leading-relaxed text-body">
               {plugin.description}
             </p>

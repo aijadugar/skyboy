@@ -1,0 +1,12 @@
+{
+  "name": "claude-api",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Anthropic's Messages API — direct API access to Claude models with streaming, tool use, and prompt caching.",
+  "command": "skyboy add claude-api",
+  "tags": ["model-provider", "anthropic", "claude-api", "api"],
+  "author": "skyboy",
+  "source_url": "https://github.com/anthropics/anthropic-sdk-python",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

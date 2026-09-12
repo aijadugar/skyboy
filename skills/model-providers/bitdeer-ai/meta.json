@@ -1,0 +1,31 @@
+{
+  "id": "bitdeer-ai",
+  "slug": "bitdeer-ai",
+  "description": "Integration guide and best practices for using Bitdeer AI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "bitdeer-ai"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "bitdeer-ai",
+    "license": "MIT"
+  },
+  "hash": "5813e55285b59638",
+  "path": "skills/model-providers/bitdeer-ai",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/bitdeer-ai/SKILL.md"
+}

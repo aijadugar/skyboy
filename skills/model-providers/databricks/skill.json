@@ -1,0 +1,12 @@
+{
+  "name": "databricks",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Databricks as a model provider.",
+  "command": "skyboy add databricks",
+  "tags": ["model-provider", "databricks"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

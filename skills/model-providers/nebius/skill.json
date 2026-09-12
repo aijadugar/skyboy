@@ -1,0 +1,12 @@
+{
+  "name": "nebius",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Integration guide and best practices for using Nebius as a model provider.",
+  "command": "skyboy add nebius",
+  "tags": ["model-provider", "nebius"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,10 +1,12 @@
 {
-  "generatedAt": "2026-09-08T15:48:56.641Z",
+  "generatedAt": "2026-09-12T17:11:50.375Z",
   "version": 2,
   "categories": [
     "coding",
     "frontend-design",
     "memory",
+    "meta",
+    "model-providers",
     "writing"
   ],
   "agents": [
@@ -39,13 +41,12 @@
   ],
   "skills": [
     {
-      "id": "nextjs-app-router-conventions",
-      "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
-      "c": "coding",
+      "id": "agnes-ai",
+      "d": "Integration guide and best practices for using Agnes AI as a model provider.",
+      "c": "model-providers",
       "t": [
-        "nextjs",
-        "app-router",
-        "react"
+        "model-provider",
+        "agnes-ai"
       ],
       "a": [
         "claude-code",
@@ -54,10 +55,72 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "6e27d93f56fc5419",
+      "h": "d8ed68d7ef476297",
       "o": "skyboy",
       "y": false,
-      "p": "skills/coding/nextjs-app-router-conventions"
+      "p": "skills/model-providers/agnes-ai"
+    },
+    {
+      "id": "alibaba-cloud",
+      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "alibaba-cloud"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8252a336728445ef",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/alibaba-cloud"
+    },
+    {
+      "id": "amazon-bedrock",
+      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "50b8bd62539903da",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/amazon-bedrock"
+    },
+    {
+      "id": "anthropic",
+      "d": "Integration guide and best practices for using Anthropic as a model provider. Includes links to official skill repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "143d60596a2287e8",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic"
     },
     {
       "id": "anti-slop-landing",
@@ -75,10 +138,218 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "29c366ecc6d2862b",
+      "h": "616e7aa15379795e",
       "o": "skyboy",
       "y": false,
       "p": "skills/frontend-design/anti-slop-landing"
+    },
+    {
+      "id": "arcee-ai",
+      "d": "Integration guide and best practices for using Arcee AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "arcee-ai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d91d79eebe48ad01",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/arcee-ai"
+    },
+    {
+      "id": "baseten",
+      "d": "Integration guide and best practices for using Baseten as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "3c752454038d39fb",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/baseten"
+    },
+    {
+      "id": "bitdeer-ai",
+      "d": "Integration guide and best practices for using Bitdeer AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "bitdeer-ai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5813e55285b59638",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/bitdeer-ai"
+    },
+    {
+      "id": "celeris",
+      "d": "Integration guide and best practices for using Celeris as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "celeris"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a3e1aa6a2e185a67",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/celeris"
+    },
+    {
+      "id": "cerebras",
+      "d": "Integration guide and best practices for using Cerebras as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cerebras"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "16a6a37464ea99d7",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/cerebras"
+    },
+    {
+      "id": "claude-api",
+      "d": "Anthropic's Messages API — direct API access to Claude models with streaming, tool use, and prompt caching.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude-api",
+        "api"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c5e7f6e33108699e",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic/skills/claude-api"
+    },
+    {
+      "id": "claude-code",
+      "d": "Anthropic's CLI for Claude Code — agentic coding in the terminal with file editing, git, and MCP support.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude-code",
+        "cli"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "43d48a41fb6d1276",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic/skills/claude-code"
+    },
+    {
+      "id": "claude-desktop",
+      "d": "Anthropic's desktop app for Claude — native Mac/Windows client with MCP, vision, and extended thinking.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude-desktop",
+        "app"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d85892bbaeaaa0cb",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic/skills/claude-desktop"
+    },
+    {
+      "id": "claude-managed-agents",
+      "d": "Anthropic's managed agents — deploy, schedule, and iterate on autonomous Claude agents in the cloud.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "agents",
+        "managed-agents"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ca43d57215c82679",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic/skills/claude-managed-agents"
+    },
+    {
+      "id": "cohere",
+      "d": "Integration guide and best practices for using Cohere as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cohere"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a8aa68bda1eafa72",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/cohere"
     },
     {
       "id": "context-window-management",
@@ -97,7 +368,7 @@
         "codex-cli"
       ],
       "v": "1.0.0",
-      "h": "7c28410fc098df18",
+      "h": "86737dd6e735383f",
       "o": "skyboy",
       "y": false,
       "p": "skills/memory/context-window-management"
@@ -111,6 +382,21 @@
         "editing",
         "anti-slop"
       ],
+      "a": null,
+      "v": "1.0.0",
+      "h": "0b72a0440de50918",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/writing/copy-self-audit"
+    },
+    {
+      "id": "coreweave",
+      "d": "Integration guide and best practices for using CoreWeave as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "coreweave"
+      ],
       "a": [
         "claude-code",
         "claude-desktop",
@@ -118,287 +404,2316 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "85b92bac5ff182df",
+      "h": "6f6350dd1a09beeb",
       "o": "skyboy",
       "y": false,
-      "p": "skills/writing/copy-self-audit"
+      "p": "skills/model-providers/coreweave"
+    },
+    {
+      "id": "crusoe",
+      "d": "Integration guide and best practices for using Crusoe as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "crusoe"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "6113b1bb2ac58cf9",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/crusoe"
+    },
+    {
+      "id": "databricks",
+      "d": "Integration guide and best practices for using Databricks as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "databricks"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "36d50bacaa6d622d",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/databricks"
+    },
+    {
+      "id": "deepinfra",
+      "d": "Integration guide and best practices for using DeepInfra as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "deepinfra"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f49e2feed34ed504",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/deepinfra"
+    },
+    {
+      "id": "deepseek",
+      "d": "Integration guide and best practices for using DeepSeek as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "deepseek"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8b2a9032991d905e",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/deepseek"
+    },
+    {
+      "id": "digitalocean",
+      "d": "Integration guide and best practices for using DigitalOcean as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "cfa0efd9d25b220c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/digitalocean"
+    },
+    {
+      "id": "fireworks",
+      "d": "Integration guide and best practices for using Fireworks as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "fireworks"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "dc1e8c5532928697",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/fireworks"
+    },
+    {
+      "id": "friendliai",
+      "d": "Integration guide and best practices for using FriendliAI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "friendliai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "14e6d15a0937668d",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/friendliai"
+    },
+    {
+      "id": "gmi",
+      "d": "Integration guide and best practices for using GMI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "gmi"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1184350b9752282e",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/gmi"
+    },
+    {
+      "id": "google",
+      "d": "Integration guide and best practices for using Google as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "google"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "78cebb55fefb07b7",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/google"
+    },
+    {
+      "id": "groq",
+      "d": "Integration guide and best practices for using Groq as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "groq"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "73d190868ca79694",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/groq"
+    },
+    {
+      "id": "inception",
+      "d": "Integration guide and best practices for using Inception as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inception"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ef7150bfc95d56e9",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/inception"
+    },
+    {
+      "id": "inclusionai",
+      "d": "Integration guide and best practices for using InclusionAI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inclusionai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f8e14d939b6425da",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/inclusionai"
+    },
+    {
+      "id": "inco",
+      "d": "Integration guide and best practices for using Inco as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inco"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "64a43ef7f233b101",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/inco"
+    },
+    {
+      "id": "kimi",
+      "d": "Integration guide and best practices for using Kimi as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "kimi"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "9357e90cc2c7b8e3",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/kimi"
+    },
+    {
+      "id": "liquidai",
+      "d": "Integration guide and best practices for using Liquid AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "liquidai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c37632c42940a945",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/liquidai"
+    },
+    {
+      "id": "makora",
+      "d": "Integration guide and best practices for using Makora as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "makora"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "27eccd4f08754df7",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/makora"
+    },
+    {
+      "id": "mcp-server",
+      "d": "Model Context Protocol — Anthropic's open standard for connecting AI models to external tools and data sources.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "mcp",
+        "protocol"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "25eafaec74f78f12",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/anthropic/skills/mcp-server"
+    },
+    {
+      "id": "meta",
+      "d": "Integration guide and best practices for using Meta as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "meta"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f0f4ffd3ae5fe243",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/meta"
+    },
+    {
+      "id": "microsoft-azure",
+      "d": "Integration guide and best practices for using Microsoft Azure as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "microsoft-azure"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "07cf0578bd05c8b4",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/microsoft-azure"
+    },
+    {
+      "id": "minimax",
+      "d": "Integration guide and best practices for using MiniMax as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "minimax"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "fca0fe6dcfea6be6",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/minimax"
+    },
+    {
+      "id": "mistral",
+      "d": "Integration guide and best practices for using Mistral as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "mistral"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d3b3857e057c0984",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/mistral"
+    },
+    {
+      "id": "modal",
+      "d": "Integration guide and best practices for using Modal as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8d086f456b74f986",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modal"
+    },
+    {
+      "id": "modular",
+      "d": "Integration guide and best practices for using Modular as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modular"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8beced3591a33b2b",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modular"
+    },
+    {
+      "id": "multiverse-computing",
+      "d": "Integration guide and best practices for using Multiverse Computing as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "multiverse-computing"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a513766b3aeb739f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/multiverse-computing"
+    },
+    {
+      "id": "nebius",
+      "d": "Integration guide and best practices for using Nebius as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "nebius"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1605b744d54f1c44",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/nebius"
+    },
+    {
+      "id": "nextjs-app-router-conventions",
+      "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
+      "c": "coding",
+      "t": [
+        "nextjs",
+        "app-router",
+        "react"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "abdb543b74acf8e8",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/coding/nextjs-app-router-conventions"
+    },
+    {
+      "id": "novita",
+      "d": "Integration guide and best practices for using Novita as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e7a7a5c5f608dd8f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita"
+    },
+    {
+      "id": "openai",
+      "d": "Integration guide and best practices for using OpenAI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "openai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d38a2d2159643c72",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/openai"
+    },
+    {
+      "id": "parasail",
+      "d": "Integration guide and best practices for using Parasail as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "parasail"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "146d1227487b85cb",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/parasail"
+    },
+    {
+      "id": "replicate",
+      "d": "Integration guide and best practices for using Replicate as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "replicate"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c788f5a4265c2667",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/replicate"
+    },
+    {
+      "id": "sambanova",
+      "d": "Integration guide and best practices for using SambaNova as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "sambanova"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0a5d07b6f8e6258a",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/sambanova"
+    },
+    {
+      "id": "scaleway",
+      "d": "Integration guide and best practices for using Scaleway as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "scaleway"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a0d8a6baa4537553",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/scaleway"
+    },
+    {
+      "id": "siliconflow",
+      "d": "Integration guide and best practices for using SiliconFlow as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "siliconflow"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "591dfdeacf65d7ad",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/siliconflow"
+    },
+    {
+      "id": "spacexai",
+      "d": "Integration guide and best practices for using SpaceXAI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "spacexai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2a43c943af17953b",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/spacexai"
+    },
+    {
+      "id": "stepfun",
+      "d": "Integration guide and best practices for using StepFun as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "stepfun"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "7adaae19bec7a132",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/stepfun"
+    },
+    {
+      "id": "thinking-machines",
+      "d": "Integration guide and best practices for using Thinking Machines as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "thinking-machines"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "bf2e1dfe7a7c2283",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/thinking-machines"
+    },
+    {
+      "id": "together-ai",
+      "d": "Integration guide and best practices for using Together AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "485ae60df67ab48c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/together-ai"
+    },
+    {
+      "id": "upstage",
+      "d": "Integration guide and best practices for using Upstage as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "upstage"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ced4ae76150a757e",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/upstage"
+    },
+    {
+      "id": "wafer",
+      "d": "Integration guide and best practices for using Wafer as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "wafer"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1ab4115cfeda0a1f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/wafer"
+    },
+    {
+      "id": "xiaomi",
+      "d": "Integration guide and best practices for using Xiaomi as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "xiaomi"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f24e8d8f256d6012",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/xiaomi"
+    },
+    {
+      "id": "zai",
+      "d": "Integration guide and best practices for using Zai as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "zai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "07b351d470080f15",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/zai"
     }
   ],
   "plugins": [
+    {
+      "slug": "anthropic-skills",
+      "name": "anthropic-skills",
+      "vendor": "Anthropic",
+      "vendorUrl": "https://github.com/anthropics/skills",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/anthropics/skills",
+      "install": "https://github.com/anthropics/skills",
+      "description": "Anthropic's public Agent Skills repository: document skills (docx, pdf, pptx, xlsx), creative and design skills (canvas-design, algorithmic-art, frontend-design), and developer skills (skill-creator, mcp-builder, webapp-testing, claude-api).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "academy-guide",
+          "description": "",
+          "path": "skills/academy-guide",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/academy-guide"
+        },
+        {
+          "name": "algorithmic-art",
+          "description": "",
+          "path": "skills/algorithmic-art",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/algorithmic-art"
+        },
+        {
+          "name": "brand-guidelines",
+          "description": "",
+          "path": "skills/brand-guidelines",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/brand-guidelines"
+        },
+        {
+          "name": "canvas-design",
+          "description": "",
+          "path": "skills/canvas-design",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/canvas-design"
+        },
+        {
+          "name": "claude-api",
+          "description": "",
+          "path": "skills/claude-api",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/claude-api"
+        },
+        {
+          "name": "discernment-nudge",
+          "description": "",
+          "path": "skills/discernment-nudge",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/discernment-nudge"
+        },
+        {
+          "name": "doc-coauthoring",
+          "description": "",
+          "path": "skills/doc-coauthoring",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/doc-coauthoring"
+        },
+        {
+          "name": "docx",
+          "description": "",
+          "path": "skills/docx",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/docx"
+        },
+        {
+          "name": "frontend-design",
+          "description": "",
+          "path": "skills/frontend-design",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/frontend-design"
+        },
+        {
+          "name": "internal-comms",
+          "description": "",
+          "path": "skills/internal-comms",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/internal-comms"
+        },
+        {
+          "name": "mcp-builder",
+          "description": "",
+          "path": "skills/mcp-builder",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/mcp-builder"
+        },
+        {
+          "name": "pdf",
+          "description": "",
+          "path": "skills/pdf",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pdf"
+        },
+        {
+          "name": "pptx",
+          "description": "",
+          "path": "skills/pptx",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/pptx"
+        },
+        {
+          "name": "skill-creator",
+          "description": "",
+          "path": "skills/skill-creator",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/skill-creator"
+        },
+        {
+          "name": "slack-gif-creator",
+          "description": "",
+          "path": "skills/slack-gif-creator",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/slack-gif-creator"
+        },
+        {
+          "name": "theme-factory",
+          "description": "",
+          "path": "skills/theme-factory",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/theme-factory"
+        },
+        {
+          "name": "web-artifacts-builder",
+          "description": "",
+          "path": "skills/web-artifacts-builder",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/web-artifacts-builder"
+        },
+        {
+          "name": "webapp-testing",
+          "description": "",
+          "path": "skills/webapp-testing",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/webapp-testing"
+        },
+        {
+          "name": "xlsx",
+          "description": "",
+          "path": "skills/xlsx",
+          "url": "https://github.com/anthropics/skills/blob/main/skills/xlsx"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/anthropic/plugins/anthropic-skills",
+      "provider": "anthropic"
+    },
+    {
+      "slug": "chatgpt-retrieval-plugin",
+      "name": "chatgpt-retrieval-plugin",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/chatgpt-retrieval-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/openai/chatgpt-retrieval-plugin",
+      "install": "https://github.com/openai/chatgpt-retrieval-plugin",
+      "description": "The ChatGPT Retrieval Plugin lets you easily find personal or work documents by asking questions in natural language.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "chatgpt-retrieval-plugin",
+          "description": "",
+          "path": "skills/chatgpt-retrieval-plugin",
+          "url": "https://github.com/openai/chatgpt-retrieval-plugin/blob/main/skills/chatgpt-retrieval-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/chatgpt-retrieval-plugin",
+      "provider": "openai"
+    },
+    {
+      "slug": "claude-plugins-official",
+      "name": "claude-plugins-official",
+      "vendor": "Anthropic",
+      "vendorUrl": "https://github.com/anthropics/claude-plugins-official",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/anthropics/claude-plugins-official",
+      "install": "https://github.com/anthropics/claude-plugins-official",
+      "description": "The official Anthropic-managed directory of high-quality Claude Code plugins: code-review, security-guidance, feature-dev, pr-review-toolkit, LSP integrations, hookify, plugin-dev, and more.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "agent-sdk-dev",
+          "description": "",
+          "path": "plugins/agent-sdk-dev",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/agent-sdk-dev"
+        },
+        {
+          "name": "clangd-lsp",
+          "description": "",
+          "path": "plugins/clangd-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/clangd-lsp"
+        },
+        {
+          "name": "claude-code-setup",
+          "description": "",
+          "path": "plugins/claude-code-setup",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/claude-code-setup"
+        },
+        {
+          "name": "claude-md-management",
+          "description": "",
+          "path": "plugins/claude-md-management",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/claude-md-management"
+        },
+        {
+          "name": "claude-security",
+          "description": "",
+          "path": "plugins/claude-security",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/claude-security"
+        },
+        {
+          "name": "code-modernization",
+          "description": "",
+          "path": "plugins/code-modernization",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-modernization"
+        },
+        {
+          "name": "code-review",
+          "description": "",
+          "path": "plugins/code-review",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-review"
+        },
+        {
+          "name": "code-simplifier",
+          "description": "",
+          "path": "plugins/code-simplifier",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier"
+        },
+        {
+          "name": "commit-commands",
+          "description": "",
+          "path": "plugins/commit-commands",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/commit-commands"
+        },
+        {
+          "name": "csharp-lsp",
+          "description": "",
+          "path": "plugins/csharp-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/csharp-lsp"
+        },
+        {
+          "name": "cwc-makers",
+          "description": "",
+          "path": "plugins/cwc-makers",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/cwc-makers"
+        },
+        {
+          "name": "example-plugin",
+          "description": "",
+          "path": "plugins/example-plugin",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/example-plugin"
+        },
+        {
+          "name": "explanatory-output-style",
+          "description": "",
+          "path": "plugins/explanatory-output-style",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/explanatory-output-style"
+        },
+        {
+          "name": "feature-dev",
+          "description": "",
+          "path": "plugins/feature-dev",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/feature-dev"
+        },
+        {
+          "name": "frontend-design",
+          "description": "",
+          "path": "plugins/frontend-design",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/frontend-design"
+        },
+        {
+          "name": "gopls-lsp",
+          "description": "",
+          "path": "plugins/gopls-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/gopls-lsp"
+        },
+        {
+          "name": "hookify",
+          "description": "",
+          "path": "plugins/hookify",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/hookify"
+        },
+        {
+          "name": "jdtls-lsp",
+          "description": "",
+          "path": "plugins/jdtls-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/jdtls-lsp"
+        },
+        {
+          "name": "kotlin-lsp",
+          "description": "",
+          "path": "plugins/kotlin-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/kotlin-lsp"
+        },
+        {
+          "name": "learning-output-style",
+          "description": "",
+          "path": "plugins/learning-output-style",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/learning-output-style"
+        },
+        {
+          "name": "lua-lsp",
+          "description": "",
+          "path": "plugins/lua-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/lua-lsp"
+        },
+        {
+          "name": "math-olympiad",
+          "description": "",
+          "path": "plugins/math-olympiad",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/math-olympiad"
+        },
+        {
+          "name": "mcp-server-dev",
+          "description": "",
+          "path": "plugins/mcp-server-dev",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/mcp-server-dev"
+        },
+        {
+          "name": "mcp-tunnels",
+          "description": "",
+          "path": "plugins/mcp-tunnels",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/mcp-tunnels"
+        },
+        {
+          "name": "php-lsp",
+          "description": "",
+          "path": "plugins/php-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/php-lsp"
+        },
+        {
+          "name": "playground",
+          "description": "",
+          "path": "plugins/playground",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/playground"
+        },
+        {
+          "name": "plugin-dev",
+          "description": "",
+          "path": "plugins/plugin-dev",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/plugin-dev"
+        },
+        {
+          "name": "pr-review-toolkit",
+          "description": "",
+          "path": "plugins/pr-review-toolkit",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/pr-review-toolkit"
+        },
+        {
+          "name": "project-artifact",
+          "description": "",
+          "path": "plugins/project-artifact",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/project-artifact"
+        },
+        {
+          "name": "pyright-lsp",
+          "description": "",
+          "path": "plugins/pyright-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/pyright-lsp"
+        },
+        {
+          "name": "ralph-loop",
+          "description": "",
+          "path": "plugins/ralph-loop",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/ralph-loop"
+        },
+        {
+          "name": "receipts",
+          "description": "",
+          "path": "plugins/receipts",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/receipts"
+        },
+        {
+          "name": "ruby-lsp",
+          "description": "",
+          "path": "plugins/ruby-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/ruby-lsp"
+        },
+        {
+          "name": "rust-analyzer-lsp",
+          "description": "",
+          "path": "plugins/rust-analyzer-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/rust-analyzer-lsp"
+        },
+        {
+          "name": "security-guidance",
+          "description": "",
+          "path": "plugins/security-guidance",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/security-guidance"
+        },
+        {
+          "name": "session-report",
+          "description": "",
+          "path": "plugins/session-report",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/session-report"
+        },
+        {
+          "name": "skill-creator",
+          "description": "",
+          "path": "plugins/skill-creator",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/skill-creator"
+        },
+        {
+          "name": "swift-lsp",
+          "description": "",
+          "path": "plugins/swift-lsp",
+          "url": "https://github.com/anthropics/claude-plugins-official/blob/main/plugins/swift-lsp"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/anthropic/plugins/claude-plugins-official",
+      "provider": "anthropic"
+    },
+    {
+      "slug": "codex-plugin-cc",
+      "name": "codex-plugin-cc",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/codex-plugin-cc",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/openai/codex-plugin-cc",
+      "install": "https://github.com/openai/codex-plugin-cc",
+      "description": "Use Codex from Claude Code to review code or delegate tasks.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "codex",
+          "description": "",
+          "path": "plugins/codex",
+          "url": "https://github.com/openai/codex-plugin-cc/blob/main/plugins/codex"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/codex-plugin-cc",
+      "provider": "openai"
+    },
     {
       "slug": "markitdown-mcp",
       "name": "markitdown-mcp",
       "vendor": "Microsoft",
       "vendorUrl": "https://github.com/microsoft/markitdown",
-      "path": "plugins/microsoft/markitdown-mcp",
       "sourceType": "vendor",
       "origin": "vendor",
       "category": "meta",
-      "tags": [
-        "mcp",
-        "markdown",
-        "file-conversion",
-        "documents"
-      ],
+      "tags": null,
       "license": "MIT",
       "upstreamRepo": "https://github.com/microsoft/markitdown",
-      "install": "uvx markitdown-mcp",
+      "install": "https://github.com/microsoft/markitdown",
       "description": "Microsoft's MCP server that converts files and office documents (PDF, Word, Excel, PowerPoint, images, audio, HTML, ZIP, YouTube URLs, EPUB) into Markdown inside any MCP-compliant agent.",
-      "compatibleAgents": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "windsurf",
-        "claude-ai"
-      ],
-      "skills": [],
-      "commands": [],
-      "agents": [],
+      "compatibleAgents": null,
+      "skills": null,
+      "commands": null,
+      "agents": null,
       "mcp": "uvx markitdown-mcp",
       "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
       "badge": "official (vendor)",
-      "version": "0.0.1"
+      "version": "0.0.1",
+      "path": "plugins/microsoft/markitdown-mcp"
+    },
+    {
+      "slug": "openai-developers-for-claude",
+      "name": "openai-developers-for-claude",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/openai-developers-for-claude",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/openai/openai-developers-for-claude",
+      "install": "https://github.com/openai/openai-developers-for-claude",
+      "description": "OpenAI Developers plugin for Claude Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openai-developers",
+          "description": "",
+          "path": "plugins/openai-developers",
+          "url": "https://github.com/openai/openai-developers-for-claude/blob/main/plugins/openai-developers"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/openai-developers-for-claude",
+      "provider": "openai"
+    },
+    {
+      "slug": "openai-developers-for-cursor",
+      "name": "openai-developers-for-cursor",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/openai-developers-for-cursor",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/openai/openai-developers-for-cursor",
+      "install": "https://github.com/openai/openai-developers-for-cursor",
+      "description": "OpenAI Developers plugin for Cursor.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openai-developers",
+          "description": "",
+          "path": "plugins/openai-developers",
+          "url": "https://github.com/openai/openai-developers-for-cursor/blob/main/plugins/openai-developers"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/openai-developers-for-cursor",
+      "provider": "openai"
+    },
+    {
+      "slug": "openai-plugins",
+      "name": "openai-plugins",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/openai/plugins",
+      "install": "https://github.com/openai/plugins",
+      "description": "OpenAI's plugin directory for ChatGPT and Codex: connectors for Adobe, Atlassian, Canva, Cloudflare, Figma, GitHub, Gmail, Google Workspace, Linear, Notion, Shopify, Slack, Stripe, Supabase, Vercel, Zoom, and dozens more.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "adobe",
+          "description": "",
+          "path": "plugins/adobe",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/adobe"
+        },
+        {
+          "name": "airtable",
+          "description": "",
+          "path": "plugins/airtable",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/airtable"
+        },
+        {
+          "name": "atlassian-rovo",
+          "description": "",
+          "path": "plugins/atlassian-rovo",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/atlassian-rovo"
+        },
+        {
+          "name": "boltz-api-cli",
+          "description": "",
+          "path": "plugins/boltz-api-cli",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/boltz-api-cli"
+        },
+        {
+          "name": "build-ios-apps",
+          "description": "",
+          "path": "plugins/build-ios-apps",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/build-ios-apps"
+        },
+        {
+          "name": "build-macos-apps",
+          "description": "",
+          "path": "plugins/build-macos-apps",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/build-macos-apps"
+        },
+        {
+          "name": "build-web-apps",
+          "description": "",
+          "path": "plugins/build-web-apps",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/build-web-apps"
+        },
+        {
+          "name": "build-web-data-visualization",
+          "description": "",
+          "path": "plugins/build-web-data-visualization",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/build-web-data-visualization"
+        },
+        {
+          "name": "canva",
+          "description": "",
+          "path": "plugins/canva",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/canva"
+        },
+        {
+          "name": "chatcut",
+          "description": "",
+          "path": "plugins/chatcut",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/chatcut"
+        },
+        {
+          "name": "circleci",
+          "description": "",
+          "path": "plugins/circleci",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/circleci"
+        },
+        {
+          "name": "clickup",
+          "description": "",
+          "path": "plugins/clickup",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/clickup"
+        },
+        {
+          "name": "cloudflare",
+          "description": "",
+          "path": "plugins/cloudflare",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/cloudflare"
+        },
+        {
+          "name": "coderabbit",
+          "description": "",
+          "path": "plugins/coderabbit",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/coderabbit"
+        },
+        {
+          "name": "codex-security",
+          "description": "",
+          "path": "plugins/codex-security",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/codex-security"
+        },
+        {
+          "name": "consensus",
+          "description": "",
+          "path": "plugins/consensus",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/consensus"
+        },
+        {
+          "name": "creative-production",
+          "description": "",
+          "path": "plugins/creative-production",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/creative-production"
+        },
+        {
+          "name": "data-analytics",
+          "description": "",
+          "path": "plugins/data-analytics",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/data-analytics"
+        },
+        {
+          "name": "datadog",
+          "description": "",
+          "path": "plugins/datadog",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/datadog"
+        },
+        {
+          "name": "dropbox",
+          "description": "",
+          "path": "plugins/dropbox",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/dropbox"
+        },
+        {
+          "name": "expo",
+          "description": "",
+          "path": "plugins/expo",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/expo"
+        },
+        {
+          "name": "figma",
+          "description": "",
+          "path": "plugins/figma",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/figma"
+        },
+        {
+          "name": "game-studio",
+          "description": "",
+          "path": "plugins/game-studio",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/game-studio"
+        },
+        {
+          "name": "github",
+          "description": "",
+          "path": "plugins/github",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/github"
+        },
+        {
+          "name": "gmail",
+          "description": "",
+          "path": "plugins/gmail",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/gmail"
+        },
+        {
+          "name": "google-calendar",
+          "description": "",
+          "path": "plugins/google-calendar",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/google-calendar"
+        },
+        {
+          "name": "google-drive",
+          "description": "",
+          "path": "plugins/google-drive",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/google-drive"
+        },
+        {
+          "name": "granola",
+          "description": "",
+          "path": "plugins/granola",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/granola"
+        },
+        {
+          "name": "higgsfield",
+          "description": "",
+          "path": "plugins/higgsfield",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/higgsfield"
+        },
+        {
+          "name": "hyperframes",
+          "description": "",
+          "path": "plugins/hyperframes",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/hyperframes"
+        },
+        {
+          "name": "life-science-research",
+          "description": "",
+          "path": "plugins/life-science-research",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/life-science-research"
+        },
+        {
+          "name": "linear",
+          "description": "",
+          "path": "plugins/linear",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/linear"
+        },
+        {
+          "name": "lovable",
+          "description": "",
+          "path": "plugins/lovable",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/lovable"
+        },
+        {
+          "name": "magicpath",
+          "description": "",
+          "path": "plugins/magicpath",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/magicpath"
+        },
+        {
+          "name": "mixpanel-headless",
+          "description": "",
+          "path": "plugins/mixpanel-headless",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/mixpanel-headless"
+        },
+        {
+          "name": "monday-com",
+          "description": "",
+          "path": "plugins/monday-com",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/monday-com"
+        },
+        {
+          "name": "ngs-analysis",
+          "description": "",
+          "path": "plugins/ngs-analysis",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/ngs-analysis"
+        },
+        {
+          "name": "notion",
+          "description": "",
+          "path": "plugins/notion",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/notion"
+        },
+        {
+          "name": "nvidia",
+          "description": "",
+          "path": "plugins/nvidia",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/nvidia"
+        },
+        {
+          "name": "openai-ads-conversions",
+          "description": "",
+          "path": "plugins/openai-ads-conversions",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/openai-ads-conversions"
+        },
+        {
+          "name": "openai-developers",
+          "description": "",
+          "path": "plugins/openai-developers",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/openai-developers"
+        },
+        {
+          "name": "outlook-calendar",
+          "description": "",
+          "path": "plugins/outlook-calendar",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/outlook-calendar"
+        },
+        {
+          "name": "outlook-email",
+          "description": "",
+          "path": "plugins/outlook-email",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/outlook-email"
+        },
+        {
+          "name": "plugin-eval",
+          "description": "",
+          "path": "plugins/plugin-eval",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/plugin-eval"
+        },
+        {
+          "name": "posthog",
+          "description": "",
+          "path": "plugins/posthog",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/posthog"
+        },
+        {
+          "name": "product-design",
+          "description": "",
+          "path": "plugins/product-design",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/product-design"
+        },
+        {
+          "name": "public-equity-investing",
+          "description": "",
+          "path": "plugins/public-equity-investing",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/public-equity-investing"
+        },
+        {
+          "name": "remotion",
+          "description": "",
+          "path": "plugins/remotion",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/remotion"
+        },
+        {
+          "name": "sentry",
+          "description": "",
+          "path": "plugins/sentry",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/sentry"
+        },
+        {
+          "name": "sharepoint",
+          "description": "",
+          "path": "plugins/sharepoint",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/sharepoint"
+        },
+        {
+          "name": "shopify",
+          "description": "",
+          "path": "plugins/shopify",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/shopify"
+        },
+        {
+          "name": "slack",
+          "description": "",
+          "path": "plugins/slack",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/slack"
+        },
+        {
+          "name": "stripe",
+          "description": "",
+          "path": "plugins/stripe",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/stripe"
+        },
+        {
+          "name": "supabase",
+          "description": "",
+          "path": "plugins/supabase",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/supabase"
+        },
+        {
+          "name": "superpowers",
+          "description": "",
+          "path": "plugins/superpowers",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/superpowers"
+        },
+        {
+          "name": "teams",
+          "description": "",
+          "path": "plugins/teams",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/teams"
+        },
+        {
+          "name": "temporal",
+          "description": "",
+          "path": "plugins/temporal",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/temporal"
+        },
+        {
+          "name": "test-android-apps",
+          "description": "",
+          "path": "plugins/test-android-apps",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/test-android-apps"
+        },
+        {
+          "name": "twilio-developer-kit",
+          "description": "",
+          "path": "plugins/twilio-developer-kit",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/twilio-developer-kit"
+        },
+        {
+          "name": "vercel",
+          "description": "",
+          "path": "plugins/vercel",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/vercel"
+        },
+        {
+          "name": "zoom",
+          "description": "",
+          "path": "plugins/zoom",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/zoom"
+        },
+        {
+          "name": "zotero",
+          "description": "",
+          "path": "plugins/zotero",
+          "url": "https://github.com/openai/plugins/blob/main/plugins/zotero"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/openai-plugins",
+      "provider": "openai"
+    },
+    {
+      "slug": "openai-skills",
+      "name": "openai-skills",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/skills",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/openai/skills",
+      "install": "https://github.com/openai/skills",
+      "description": "OpenAI's Skills Catalog for Codex: curated skills for Figma, Notion, Linear, GitHub, security, deployment (Vercel, Netlify, Cloudflare), document work, and more, plus system skills (skill-creator, plugin-creator, skill-installer).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aspnet-core",
+          "description": "",
+          "path": "skills/.curated/aspnet-core",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/aspnet-core"
+        },
+        {
+          "name": "chatgpt-apps",
+          "description": "",
+          "path": "skills/.curated/chatgpt-apps",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/chatgpt-apps"
+        },
+        {
+          "name": "cli-creator",
+          "description": "",
+          "path": "skills/.curated/cli-creator",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/cli-creator"
+        },
+        {
+          "name": "cloudflare-deploy",
+          "description": "",
+          "path": "skills/.curated/cloudflare-deploy",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/cloudflare-deploy"
+        },
+        {
+          "name": "define-goal",
+          "description": "",
+          "path": "skills/.curated/define-goal",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/define-goal"
+        },
+        {
+          "name": "figma-code-connect-components",
+          "description": "",
+          "path": "skills/.curated/figma-code-connect-components",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-code-connect-components"
+        },
+        {
+          "name": "figma-create-design-system-rules",
+          "description": "",
+          "path": "skills/.curated/figma-create-design-system-rules",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-create-design-system-rules"
+        },
+        {
+          "name": "figma-create-new-file",
+          "description": "",
+          "path": "skills/.curated/figma-create-new-file",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-create-new-file"
+        },
+        {
+          "name": "figma-generate-design",
+          "description": "",
+          "path": "skills/.curated/figma-generate-design",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-generate-design"
+        },
+        {
+          "name": "figma-generate-library",
+          "description": "",
+          "path": "skills/.curated/figma-generate-library",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-generate-library"
+        },
+        {
+          "name": "figma-implement-design",
+          "description": "",
+          "path": "skills/.curated/figma-implement-design",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-implement-design"
+        },
+        {
+          "name": "figma-use",
+          "description": "",
+          "path": "skills/.curated/figma-use",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/figma-use"
+        },
+        {
+          "name": "gh-address-comments",
+          "description": "",
+          "path": "skills/.curated/gh-address-comments",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/gh-address-comments"
+        },
+        {
+          "name": "gh-fix-ci",
+          "description": "",
+          "path": "skills/.curated/gh-fix-ci",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/gh-fix-ci"
+        },
+        {
+          "name": "hatch-pet",
+          "description": "",
+          "path": "skills/.curated/hatch-pet",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/hatch-pet"
+        },
+        {
+          "name": "jupyter-notebook",
+          "description": "",
+          "path": "skills/.curated/jupyter-notebook",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/jupyter-notebook"
+        },
+        {
+          "name": "linear",
+          "description": "",
+          "path": "skills/.curated/linear",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/linear"
+        },
+        {
+          "name": "migrate-to-codex",
+          "description": "",
+          "path": "skills/.curated/migrate-to-codex",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/migrate-to-codex"
+        },
+        {
+          "name": "netlify-deploy",
+          "description": "",
+          "path": "skills/.curated/netlify-deploy",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/netlify-deploy"
+        },
+        {
+          "name": "notion-knowledge-capture",
+          "description": "",
+          "path": "skills/.curated/notion-knowledge-capture",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/notion-knowledge-capture"
+        },
+        {
+          "name": "notion-meeting-intelligence",
+          "description": "",
+          "path": "skills/.curated/notion-meeting-intelligence",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/notion-meeting-intelligence"
+        },
+        {
+          "name": "notion-research-documentation",
+          "description": "",
+          "path": "skills/.curated/notion-research-documentation",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/notion-research-documentation"
+        },
+        {
+          "name": "notion-spec-to-implementation",
+          "description": "",
+          "path": "skills/.curated/notion-spec-to-implementation",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/notion-spec-to-implementation"
+        },
+        {
+          "name": "openai-docs",
+          "description": "",
+          "path": "skills/.curated/openai-docs",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/openai-docs"
+        },
+        {
+          "name": "pdf",
+          "description": "",
+          "path": "skills/.curated/pdf",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/pdf"
+        },
+        {
+          "name": "playwright",
+          "description": "",
+          "path": "skills/.curated/playwright",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/playwright"
+        },
+        {
+          "name": "playwright-interactive",
+          "description": "",
+          "path": "skills/.curated/playwright-interactive",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/playwright-interactive"
+        },
+        {
+          "name": "render-deploy",
+          "description": "",
+          "path": "skills/.curated/render-deploy",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/render-deploy"
+        },
+        {
+          "name": "screenshot",
+          "description": "",
+          "path": "skills/.curated/screenshot",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/screenshot"
+        },
+        {
+          "name": "security-best-practices",
+          "description": "",
+          "path": "skills/.curated/security-best-practices",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/security-best-practices"
+        },
+        {
+          "name": "security-ownership-map",
+          "description": "",
+          "path": "skills/.curated/security-ownership-map",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/security-ownership-map"
+        },
+        {
+          "name": "security-threat-model",
+          "description": "",
+          "path": "skills/.curated/security-threat-model",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/security-threat-model"
+        },
+        {
+          "name": "sentry",
+          "description": "",
+          "path": "skills/.curated/sentry",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/sentry"
+        },
+        {
+          "name": "speech",
+          "description": "",
+          "path": "skills/.curated/speech",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/speech"
+        },
+        {
+          "name": "transcribe",
+          "description": "",
+          "path": "skills/.curated/transcribe",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/transcribe"
+        },
+        {
+          "name": "vercel-deploy",
+          "description": "",
+          "path": "skills/.curated/vercel-deploy",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/vercel-deploy"
+        },
+        {
+          "name": "winui-app",
+          "description": "",
+          "path": "skills/.curated/winui-app",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/winui-app"
+        },
+        {
+          "name": "yeet",
+          "description": "",
+          "path": "skills/.curated/yeet",
+          "url": "https://github.com/openai/skills/blob/main/skills/.curated/yeet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/openai-skills",
+      "provider": "openai"
+    },
+    {
+      "slug": "plugins-quickstart",
+      "name": "plugins-quickstart",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/plugins-quickstart",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/openai/plugins-quickstart",
+      "install": "https://github.com/openai/plugins-quickstart",
+      "description": "Get a ChatGPT plugin up and running in under 5 minutes (archived).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "plugins-quickstart",
+          "description": "",
+          "path": "skills/plugins-quickstart",
+          "url": "https://github.com/openai/plugins-quickstart/blob/main/skills/plugins-quickstart"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/plugins-quickstart",
+      "provider": "openai"
+    },
+    {
+      "slug": "role-specific-plugins",
+      "name": "role-specific-plugins",
+      "vendor": "OpenAI",
+      "vendorUrl": "https://github.com/openai/role-specific-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/openai/role-specific-plugins",
+      "install": "https://github.com/openai/role-specific-plugins",
+      "description": "Role-specific Codex plugin templates.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "data-analytics",
+          "description": "",
+          "path": "plugins/data-analytics",
+          "url": "https://github.com/openai/role-specific-plugins/blob/main/plugins/data-analytics"
+        },
+        {
+          "name": "product-design",
+          "description": "",
+          "path": "plugins/product-design",
+          "url": "https://github.com/openai/role-specific-plugins/blob/main/plugins/product-design"
+        },
+        {
+          "name": "sales",
+          "description": "",
+          "path": "plugins/sales",
+          "url": "https://github.com/openai/role-specific-plugins/blob/main/plugins/sales"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/openai/plugins/role-specific-plugins",
+      "provider": "openai"
     },
     {
       "slug": "vercel-plugin",
       "name": "vercel-plugin",
       "vendor": "Vercel",
       "vendorUrl": "https://github.com/vercel/vercel-plugin",
-      "path": "plugins/vercel/vercel-plugin",
       "sourceType": "vendor",
       "origin": "vendor",
       "category": "meta",
-      "tags": [
-        "vercel",
-        "nextjs",
-        "ai-sdk",
-        "deployment"
-      ],
+      "tags": null,
       "license": "Apache-2.0",
       "upstreamRepo": "https://github.com/vercel/vercel-plugin",
-      "install": "npx plugins add vercel/vercel-plugin",
+      "install": "https://github.com/vercel/vercel-plugin",
       "description": "Comprehensive Vercel ecosystem plugin: a relational knowledge graph, skills for every major product, specialized agents, and Vercel conventions. Turns any AI agent into a Vercel expert.",
-      "compatibleAgents": [
-        "claude-code",
-        "cursor",
-        "copilot-cli",
-        "codex-cli",
-        "grok-build",
-        "kimi-code"
-      ],
+      "compatibleAgents": null,
       "skills": [
         {
           "name": "access-protected-vercel-deployment",
-          "description": "Configure and troubleshoot protected deployments.",
+          "description": "",
           "path": "skills/access-protected-vercel-deployment",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/access-protected-vercel-deployment"
         },
         {
           "name": "ai-gateway",
-          "description": "Use Vercel AI Gateway for model routing, token usage, and observability.",
+          "description": "",
           "path": "skills/ai-gateway",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/ai-gateway"
         },
         {
           "name": "ai-sdk",
-          "description": "Build with Vercel AI SDK: models, tool calling, streams, and RSC.",
+          "description": "",
           "path": "skills/ai-sdk",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/ai-sdk"
         },
         {
           "name": "auth",
-          "description": "Implement auth with Vercel's first-party auth package.",
+          "description": "",
           "path": "skills/auth",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/auth"
         },
         {
           "name": "bootstrap",
-          "description": "Scaffold a new Vercel project end to end.",
+          "description": "",
           "path": "skills/bootstrap",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/bootstrap"
         },
         {
           "name": "build-agents",
-          "description": "Design and build AI agents on the Vercel stack.",
+          "description": "",
           "path": "skills/build-agents",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/build-agents"
         },
         {
           "name": "cdn-caching",
-          "description": "Cache and revalidate assets at the Vercel CDN edge.",
+          "description": "",
           "path": "skills/cdn-caching",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/cdn-caching"
         },
         {
           "name": "chat-sdk",
-          "description": "Build chat UIs with Vercel Chat SDK.",
+          "description": "",
           "path": "skills/chat-sdk",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/chat-sdk"
         },
         {
           "name": "create-a-backend",
-          "description": "Create serverless backends with Vercel functions.",
+          "description": "",
           "path": "skills/create-a-backend",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/create-a-backend"
         },
         {
           "name": "deployments-cicd",
-          "description": "Set up deployments and CI/CD on Vercel.",
+          "description": "",
           "path": "skills/deployments-cicd",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/deployments-cicd"
         },
         {
           "name": "env-vars",
-          "description": "Manage environment variables and secrets on Vercel.",
+          "description": "",
           "path": "skills/env-vars",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/env-vars"
         },
         {
           "name": "eve",
-          "description": "Use Vercel Eve, the deployment safety tool.",
+          "description": "",
           "path": "skills/eve",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/eve"
         },
         {
           "name": "flags-sdk",
-          "description": "Ship feature flags with Vercel Flags SDK.",
+          "description": "",
           "path": "skills/flags-sdk",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/flags-sdk"
         },
         {
           "name": "knowledge-update",
-          "description": "Update the plugin knowledge graph.",
+          "description": "",
           "path": "skills/knowledge-update",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/knowledge-update"
         },
         {
           "name": "marketplace",
-          "description": "Use the Vercel Marketplace to add integrations.",
+          "description": "",
           "path": "skills/marketplace",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/marketplace"
         },
         {
           "name": "microfrontends",
-          "description": "Architect microfrontends on Vercel.",
+          "description": "",
           "path": "skills/microfrontends",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/microfrontends"
         },
         {
           "name": "next-cache-components",
-          "description": "Use Next.js Cache Components for fine-grained caching.",
+          "description": "",
           "path": "skills/next-cache-components",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/next-cache-components"
         },
         {
           "name": "next-forge",
-          "description": "Work with the Next Forge starter.",
+          "description": "",
           "path": "skills/next-forge",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/next-forge"
         },
         {
           "name": "next-upgrade",
-          "description": "Upgrade Next.js versions with confidence.",
+          "description": "",
           "path": "skills/next-upgrade",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/next-upgrade"
         },
         {
           "name": "nextjs",
-          "description": "Next.js App Router expert guidance: routing, Server Components, Server Actions, caching, and deployment on Vercel.",
+          "description": "",
           "path": "skills/nextjs",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/nextjs"
         },
         {
           "name": "react-best-practices",
-          "description": "React best practices aligned with the Vercel stack.",
+          "description": "",
           "path": "skills/react-best-practices",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/react-best-practices"
         },
         {
           "name": "routing-middleware",
-          "description": "Routing, middleware, and proxies in Next.js.",
+          "description": "",
           "path": "skills/routing-middleware",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/routing-middleware"
         },
         {
           "name": "runtime-cache",
-          "description": "Cache data at the runtime with the Vercel runtime cache.",
+          "description": "",
           "path": "skills/runtime-cache",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/runtime-cache"
         },
         {
           "name": "shadcn",
-          "description": "Use shadcn/ui components with the Vercel stack.",
+          "description": "",
           "path": "skills/shadcn",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/shadcn"
         },
         {
           "name": "turbopack",
-          "description": "Configure and debug Turbopack.",
+          "description": "",
           "path": "skills/turbopack",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/turbopack"
         },
         {
           "name": "vercel-agent",
-          "description": "Use the Vercel agent for autonomous tasks.",
+          "description": "",
           "path": "skills/vercel-agent",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-agent"
         },
         {
           "name": "vercel-cli",
-          "description": "Use the Vercel CLI for local development and deployments.",
+          "description": "",
           "path": "skills/vercel-cli",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-cli"
         },
         {
           "name": "vercel-connect",
-          "description": "Connect external services to Vercel.",
+          "description": "",
           "path": "skills/vercel-connect",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-connect"
         },
         {
           "name": "vercel-firewall",
-          "description": "Configure the Vercel firewall and WAF rules.",
+          "description": "",
           "path": "skills/vercel-firewall",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-firewall"
         },
         {
           "name": "vercel-functions",
-          "description": "Write serverless functions on Vercel.",
+          "description": "",
           "path": "skills/vercel-functions",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-functions"
         },
         {
           "name": "vercel-sandbox",
-          "description": "Use Vercel Sandbox for isolated preview environments.",
+          "description": "",
           "path": "skills/vercel-sandbox",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-sandbox"
         },
         {
           "name": "vercel-services",
-          "description": "Configure Vercel infrastructure services.",
+          "description": "",
           "path": "skills/vercel-services",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-services"
         },
         {
           "name": "vercel-storage",
-          "description": "Use Vercel Storage: Postgres, Blob, KV, and Edge Config.",
+          "description": "",
           "path": "skills/vercel-storage",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/vercel-storage"
         },
         {
           "name": "verification",
-          "description": "Simulate a fresh clone to verify the plugin installs cleanly.",
+          "description": "",
           "path": "skills/verification",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/verification"
         },
         {
           "name": "workflow",
-          "description": "Orchestrate multi-step work with Vercel Workflow.",
+          "description": "",
           "path": "skills/workflow",
           "url": "https://github.com/vercel/vercel-plugin/blob/main/skills/workflow"
         }
       ],
-      "commands": [],
+      "commands": null,
       "agents": [
         "vercel-agent",
         "build-agents"
@@ -406,7 +2721,8 @@
       "mcp": "https://mcp.vercel.com",
       "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
       "badge": "official (vendor)",
-      "version": "0.48.2"
+      "version": "0.48.2",
+      "path": "plugins/vercel/vercel-plugin"
     }
   ]
 }

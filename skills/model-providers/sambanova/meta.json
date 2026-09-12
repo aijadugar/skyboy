@@ -1,0 +1,31 @@
+{
+  "id": "sambanova",
+  "slug": "sambanova",
+  "description": "Integration guide and best practices for using SambaNova as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "sambanova"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "sambanova",
+    "license": "MIT"
+  },
+  "hash": "0a5d07b6f8e6258a",
+  "path": "skills/model-providers/sambanova",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/sambanova/SKILL.md"
+}

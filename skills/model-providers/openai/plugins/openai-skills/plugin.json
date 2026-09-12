@@ -1,0 +1,13 @@
+{
+  "name": "openai-skills",
+  "description": "OpenAI's Skills Catalog for Codex: curated skills for Figma, Notion, Linear, GitHub, security, deployment (Vercel, Netlify, Cloudflare), document work, and more, plus system skills (skill-creator, plugin-creator, skill-installer).",
+  "source_url": "https://github.com/openai/skills",
+  "path_prefix": "skills/.curated",
+  "contents": {
+    "skills": ["aspnet-core", "chatgpt-apps", "cli-creator", "cloudflare-deploy", "define-goal", "figma-code-connect-components", "figma-create-design-system-rules", "figma-create-new-file", "figma-generate-design", "figma-generate-library", "figma-implement-design", "figma-use", "gh-address-comments", "gh-fix-ci", "hatch-pet", "jupyter-notebook", "linear", "migrate-to-codex", "netlify-deploy", "notion-knowledge-capture", "notion-meeting-intelligence", "notion-research-documentation", "notion-spec-to-implementation", "openai-docs", "pdf", "playwright", "playwright-interactive", "render-deploy", "screenshot", "security-best-practices", "security-ownership-map", "security-threat-model", "sentry", "speech", "transcribe", "vercel-deploy", "winui-app", "yeet"]
+  },
+  "vendor": "OpenAI",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "openai", "codex", "skills"]
+}

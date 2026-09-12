@@ -1,0 +1,31 @@
+{
+  "id": "inclusionai",
+  "slug": "inclusionai",
+  "description": "Integration guide and best practices for using InclusionAI as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "inclusionai"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "inclusionai",
+    "license": "MIT"
+  },
+  "hash": "f8e14d939b6425da",
+  "path": "skills/model-providers/inclusionai",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/inclusionai/SKILL.md"
+}

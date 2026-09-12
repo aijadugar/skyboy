@@ -1,0 +1,31 @@
+{
+  "id": "amazon-bedrock",
+  "slug": "amazon-bedrock",
+  "description": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "amazon-bedrock"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": null,
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "amazon-bedrock",
+    "license": "MIT"
+  },
+  "hash": "50b8bd62539903da",
+  "path": "skills/model-providers/amazon-bedrock",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/SKILL.md"
+}
