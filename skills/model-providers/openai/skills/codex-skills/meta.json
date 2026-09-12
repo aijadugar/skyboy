@@ -1,0 +1,33 @@
+{
+  "id": "codex-skills",
+  "slug": "codex-skills",
+  "description": "OpenAI's Skills Catalog for Codex — curated skills for Figma, Notion, Linear, GitHub, security, deployment, and document work, plus system skills.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "openai",
+    "codex",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/openai/skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "codex-skills",
+    "license": "MIT"
+  },
+  "hash": "d61685f7a18d86b3",
+  "path": "skills/model-providers/openai/skills/codex-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/skills/codex-skills/SKILL.md"
+}

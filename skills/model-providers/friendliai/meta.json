@@ -25,7 +25,7 @@
     "name": "friendliai",
     "license": "MIT"
   },
-  "hash": "14e6d15a0937668d",
+  "hash": "ebb84ff4c01f2a19",
   "path": "skills/model-providers/friendliai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/friendliai/SKILL.md"
 }

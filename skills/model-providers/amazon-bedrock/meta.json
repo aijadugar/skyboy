@@ -25,7 +25,7 @@
     "name": "amazon-bedrock",
     "license": "MIT"
   },
-  "hash": "50b8bd62539903da",
+  "hash": "31374e3d0ba16f3a",
   "path": "skills/model-providers/amazon-bedrock",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/SKILL.md"
 }

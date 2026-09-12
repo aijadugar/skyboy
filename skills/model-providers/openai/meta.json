@@ -25,7 +25,7 @@
     "name": "openai",
     "license": "MIT"
   },
-  "hash": "d38a2d2159643c72",
+  "hash": "b53e20e044cad186",
   "path": "skills/model-providers/openai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/SKILL.md"
 }

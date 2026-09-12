@@ -6,7 +6,7 @@ import { CatalogControls } from "@/components/catalog-controls";
 import { CategoryFilter } from "@/components/category-filter";
 import { BrowseIntro } from "@/components/browse-intro";
 import { SkillCard } from "@/components/skill-card";
-import { SelectionProvider, SelectionDownloadButton } from "@/components/selection";
+import { SelectionProvider } from "@/components/selection";
 
 export const metadata: Metadata = {
   title: "Browse the catalog · skyboy.in",
@@ -77,17 +77,6 @@ export default async function BrowsePage({
           </Suspense> */}
 
           <section className="mx-auto max-w-6xl px-6 pt-8">
-            <div className="mb-5 flex items-baseline justify-between gap-4">
-              <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-                {skills.length} skill{skills.length === 1 ? "" : "s"}
-                {category ? ` · ${category}` : ""}
-                {tag ? ` · #${tag}` : ""}
-              </p>
-              <Suspense fallback={null}>
-                <SelectionDownloadButton />
-              </Suspense>
-            </div>
-
             {skills.length === 0 && plugins.length === 0 ? (
               <div className="rounded-sm border border-hairline bg-card px-6 py-16 text-center">
                 <p className="font-mono text-sm uppercase tracking-[0.1em] text-mute">

@@ -27,7 +27,7 @@
     "name": "claude-managed-agents",
     "license": "Apache-2.0"
   },
-  "hash": "ca43d57215c82679",
+  "hash": "983bbf373fddbdae",
   "path": "skills/model-providers/anthropic/skills/claude-managed-agents",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-managed-agents/SKILL.md"
 }

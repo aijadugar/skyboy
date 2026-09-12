@@ -25,7 +25,7 @@
     "name": "together-ai",
     "license": "MIT"
   },
-  "hash": "485ae60df67ab48c",
+  "hash": "363f84ddb922f148",
   "path": "skills/model-providers/together-ai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/together-ai/SKILL.md"
 }

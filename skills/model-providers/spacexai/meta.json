@@ -25,7 +25,7 @@
     "name": "spacexai",
     "license": "MIT"
   },
-  "hash": "2a43c943af17953b",
+  "hash": "092d86c9b2cc9cb2",
   "path": "skills/model-providers/spacexai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/spacexai/SKILL.md"
 }

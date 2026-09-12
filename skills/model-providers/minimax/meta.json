@@ -25,7 +25,7 @@
     "name": "minimax",
     "license": "MIT"
   },
-  "hash": "fca0fe6dcfea6be6",
+  "hash": "05ae7666c42b8db4",
   "path": "skills/model-providers/minimax",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/minimax/SKILL.md"
 }

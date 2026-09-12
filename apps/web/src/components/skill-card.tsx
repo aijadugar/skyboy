@@ -64,10 +64,8 @@ export function SkillCard({ skill }: { skill: Skill }) {
         <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
           <span className="font-mono text-xs text-mute">
             {skill.providerSkillCount} skill{skill.providerSkillCount === 1 ? "" : "s"}
-            {skill.providerSkillCount > 0 && skill.providerPluginCount > 0 ? " · " : ""}
-            {skill.providerPluginCount > 0
-              ? `${skill.providerPluginCount} plugin${skill.providerPluginCount === 1 ? "" : "s"}`
-              : ""}
+            {" · "}
+            {skill.providerPluginCount} plugin{skill.providerPluginCount === 1 ? "" : "s"}
           </span>
           <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
             Browse provider →

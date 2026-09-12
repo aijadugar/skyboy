@@ -25,7 +25,7 @@
     "name": "scaleway",
     "license": "MIT"
   },
-  "hash": "a0d8a6baa4537553",
+  "hash": "ab3a254724bbf23f",
   "path": "skills/model-providers/scaleway",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/scaleway/SKILL.md"
 }
