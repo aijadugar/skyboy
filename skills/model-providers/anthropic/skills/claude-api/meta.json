@@ -27,7 +27,7 @@
     "name": "claude-api",
     "license": "Apache-2.0"
   },
-  "hash": "c5e7f6e33108699e",
+  "hash": "92d683f1544db2ae",
   "path": "skills/model-providers/anthropic/skills/claude-api",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-api/SKILL.md"
 }

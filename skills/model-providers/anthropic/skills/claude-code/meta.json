@@ -27,7 +27,7 @@
     "name": "claude-code",
     "license": "Apache-2.0"
   },
-  "hash": "43d48a41fb6d1276",
+  "hash": "c59b4b20eb98b3f8",
   "path": "skills/model-providers/anthropic/skills/claude-code",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-code/SKILL.md"
 }

@@ -1,0 +1,12 @@
+{
+  "name": "codex-skills",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "OpenAI's Skills Catalog for Codex — curated skills for Figma, Notion, Linear, GitHub, security, deployment, and document work, plus system skills.",
+  "command": "skyboy add codex-skills",
+  "tags": ["model-provider", "openai", "codex", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/openai/skills",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -25,7 +25,7 @@
     "name": "cohere",
     "license": "MIT"
   },
-  "hash": "a8aa68bda1eafa72",
+  "hash": "026204e84c89759e",
   "path": "skills/model-providers/cohere",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/cohere/SKILL.md"
 }

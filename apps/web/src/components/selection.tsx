@@ -68,6 +68,10 @@ function SelectionBar({
   onClear: () => void;
 }) {
   const count = selected.length;
+  // Hovering the ZIP trigger frosts the page behind the bar — the same
+  // treatment the category dropdown gives its open list — so the action
+  // reads as a layer above the grid instead of floating over it noisily.
+  const [zipHovered, setZipHovered] = useState(false);
 
   return (
     <div
@@ -76,11 +80,23 @@ function SelectionBar({
         count > 0 ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
       }`}
     >
+      <div
+        aria-hidden
+        className={`pointer-events-none fixed inset-0 -z-10 bg-black/20 backdrop-blur-[2px] transition-opacity duration-200 ${
+          zipHovered ? "opacity-100" : "opacity-0"
+        }`}
+      />
       <div className="flex items-center gap-4 rounded-lg border border-hairline bg-card px-5 py-3">
         <span className="font-mono text-xs text-body">
           <span className="text-ink">{count}</span> selected
         </span>
-        <DownloadControls selected={selected} />
+        <span
+          onMouseEnter={() => setZipHovered(true)}
+          onMouseLeave={() => setZipHovered(false)}
+          className="contents"
+        >
+          <DownloadControls selected={selected} />
+        </span>
         <button
           type="button"
           onClick={() => onClear()}

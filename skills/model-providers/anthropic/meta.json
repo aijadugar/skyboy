@@ -27,7 +27,7 @@
     "name": "anthropic",
     "license": "MIT"
   },
-  "hash": "143d60596a2287e8",
+  "hash": "e1edfd015cdb8b37",
   "path": "skills/model-providers/anthropic",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/SKILL.md"
 }

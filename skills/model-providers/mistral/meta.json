@@ -25,7 +25,7 @@
     "name": "mistral",
     "license": "MIT"
   },
-  "hash": "d3b3857e057c0984",
+  "hash": "51ceab11a3049c7f",
   "path": "skills/model-providers/mistral",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/mistral/SKILL.md"
 }

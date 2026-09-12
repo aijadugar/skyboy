@@ -27,7 +27,7 @@
     "name": "claude-desktop",
     "license": "Proprietary"
   },
-  "hash": "d85892bbaeaaa0cb",
+  "hash": "328a3839668e3cee",
   "path": "skills/model-providers/anthropic/skills/claude-desktop",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/claude-desktop/SKILL.md"
 }

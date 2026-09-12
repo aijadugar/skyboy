@@ -25,7 +25,7 @@
     "name": "replicate",
     "license": "MIT"
   },
-  "hash": "c788f5a4265c2667",
+  "hash": "f7c1070921f937ac",
   "path": "skills/model-providers/replicate",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/replicate/SKILL.md"
 }

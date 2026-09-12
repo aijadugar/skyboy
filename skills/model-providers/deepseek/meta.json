@@ -25,7 +25,7 @@
     "name": "deepseek",
     "license": "MIT"
   },
-  "hash": "8b2a9032991d905e",
+  "hash": "7d0b2c90d9b1a82e",
   "path": "skills/model-providers/deepseek",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/deepseek/SKILL.md"
 }

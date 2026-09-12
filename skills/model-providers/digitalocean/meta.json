@@ -25,7 +25,7 @@
     "name": "digitalocean",
     "license": "MIT"
   },
-  "hash": "cfa0efd9d25b220c",
+  "hash": "ef69c12e48fd490f",
   "path": "skills/model-providers/digitalocean",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/digitalocean/SKILL.md"
 }

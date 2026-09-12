@@ -25,7 +25,7 @@
     "name": "groq",
     "license": "MIT"
   },
-  "hash": "73d190868ca79694",
+  "hash": "1fead4edb87c94a6",
   "path": "skills/model-providers/groq",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/groq/SKILL.md"
 }

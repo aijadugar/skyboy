@@ -27,7 +27,7 @@
     "name": "mcp-server",
     "license": "Apache-2.0"
   },
-  "hash": "25eafaec74f78f12",
+  "hash": "357a9ea4cb13f2fd",
   "path": "skills/model-providers/anthropic/skills/mcp-server",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/mcp-server/SKILL.md"
 }
