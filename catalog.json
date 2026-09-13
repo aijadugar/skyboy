@@ -626,11 +626,12 @@
     },
     {
       "id": "deepinfra",
-      "d": "Integration guide and best practices for using DeepInfra as a model provider.",
+      "d": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepinfra"
+        "deepinfra",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -639,7 +640,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b0c6d41570f95e64",
+      "h": "95d82c2e21cf4c15",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/deepinfra"
@@ -4271,6 +4272,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/databricks/plugins/intellij-jsonnet",
       "provider": "databricks"
+    },
+    {
+      "slug": "deepinfra-hermes-sandbox",
+      "name": "deepinfra-hermes-sandbox",
+      "vendor": "DeepInfra",
+      "vendorUrl": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "install": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "description": "DeepInfra cloud sandbox (deep_sands) terminal backend plugin for hermes-agent.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "deepinfra-hermes-sandbox",
+          "description": "",
+          "path": "skills/deepinfra-hermes-sandbox",
+          "url": "https://github.com/deepinfra/deepinfra-hermes-sandbox/blob/main/skills/deepinfra-hermes-sandbox"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/deepinfra/plugins/deepinfra-hermes-sandbox",
+      "provider": "deepinfra"
     }
   ]
 }

@@ -1,11 +1,12 @@
 {
   "id": "deepinfra",
   "slug": "deepinfra",
-  "description": "Integration guide and best practices for using DeepInfra as a model provider.",
+  "description": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "deepinfra"
+    "deepinfra",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "deepinfra",
     "license": "MIT"
   },
-  "hash": "b0c6d41570f95e64",
+  "hash": "95d82c2e21cf4c15",
   "path": "skills/model-providers/deepinfra",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/deepinfra/SKILL.md"
 }

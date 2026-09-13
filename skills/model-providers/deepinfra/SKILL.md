@@ -69,3 +69,11 @@ DeepInfra offers models across capability tiers. Choose based on your use case:
 
 - DeepInfra official documentation
 - DeepInfra API reference
+
+## DeepInfra Plugins
+
+DeepInfra's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [deepinfra-hermes-sandbox](https://github.com/deepinfra/deepinfra-hermes-sandbox) | DeepInfra cloud sandbox (deep_sands) terminal backend plugin for hermes-agent | Python | MIT |
