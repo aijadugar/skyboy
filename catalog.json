@@ -408,11 +408,12 @@
     },
     {
       "id": "cohere",
-      "d": "Integration guide and best practices for using Cohere as a model provider.",
+      "d": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "cohere"
+        "cohere",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -421,10 +422,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "026204e84c89759e",
+      "h": "999c7a2510b52e83",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/cohere"
+    },
+    {
+      "id": "vllm-skills",
+      "d": "Cohere's vLLM skills — Agent Skills for serving and operating open models on the vLLM inference engine.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cohere",
+        "vllm",
+        "inference",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "6e5bbf6ee22bff75",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/cohere/skills/vllm-skills"
     },
     {
       "id": "context-window-management",
