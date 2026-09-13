@@ -736,11 +736,13 @@
     },
     {
       "id": "fireworks",
-      "d": "Integration guide and best practices for using Fireworks as a model provider.",
+      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "fireworks"
+        "fireworks",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -749,10 +751,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "950e708cb56cbf09",
+      "h": "febed4a2f429bb2c",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/fireworks"
+    },
+    {
+      "id": "fireworks-cookbook",
+      "d": "Fireworks AI Cookbook — portable Agent Skills (Markdown) with routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "fireworks",
+        "cookbook",
+        "training",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b1b742a47d24998f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/fireworks/skills/fireworks-cookbook"
     },
     {
       "id": "friendliai",
@@ -4500,6 +4525,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/digitalocean/plugins/velero-plugin",
       "provider": "digitalocean"
+    },
+    {
+      "slug": "fireworks-cookbook",
+      "name": "fireworks-cookbook",
+      "vendor": "Fireworks AI",
+      "vendorUrl": "https://github.com/fw-ai/cookbook",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/fw-ai/cookbook",
+      "install": "https://github.com/fw-ai/cookbook",
+      "description": "The Fireworks AI Cookbook packaged as a plugin: .codex-plugin/plugin.json and .claude-plugin configurations ship the same Agent Skills as an installable Codex or Claude plugin — portable skills for AI assistants like Cursor, Codex, and Claude Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "fireworks-training",
+          "description": "",
+          "path": "skills/fireworks-training",
+          "url": "https://github.com/fw-ai/cookbook/blob/main/skills/fireworks-training"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/fireworks/plugins/fireworks-cookbook",
+      "provider": "fireworks"
     }
   ]
 }
