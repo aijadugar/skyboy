@@ -1,0 +1,13 @@
+{
+  "name": "sambanova-plugin-cc",
+  "description": "Claude Code plugin for SambaNova Cloud (also indexed as a skill above) — explicitly structured as a plugin (.mcp.json, plugins/samba-plugin, marketplace.json) exposing model-management and task-delegation skills as MCP tools; builds an isolated virtual environment automatically on session start so skills and the MCP server are ready without manual setup.",
+  "source_url": "https://github.com/sambanova/sambanova-plugin-cc",
+  "contents": {
+    "skills": ["sambanova-plugin-cc"]
+  },
+  "vendor": "SambaNova",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "sambanova", "claude-code", "mcp", "plugin", "virtual-environment"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

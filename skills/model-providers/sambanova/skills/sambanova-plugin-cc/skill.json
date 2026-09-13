@@ -1,0 +1,12 @@
+{
+  "name": "sambanova-plugin-cc",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools backed by a shared Python package.",
+  "command": "skyboy add sambanova-plugin-cc",
+  "tags": ["model-provider", "sambanova", "claude-code", "mcp", "sub-agent", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/sambanova/sambanova-plugin-cc",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

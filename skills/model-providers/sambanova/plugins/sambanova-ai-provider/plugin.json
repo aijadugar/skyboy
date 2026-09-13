@@ -1,0 +1,13 @@
+{
+  "name": "sambanova-ai-provider",
+  "description": "Vercel AI SDK provider for running LLMs on SambaNova models — plugs SambaNova's API (chat completion, image input, tool calling, embeddings) into Vercel AI applications as a provider/plugin integration.",
+  "source_url": "https://github.com/sambanova/sambanova-ai-provider",
+  "contents": {
+    "skills": ["sambanova-ai-provider"]
+  },
+  "vendor": "SambaNova",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "sambanova", "vercel-ai-sdk", "typescript", "embeddings", "tool-calling", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

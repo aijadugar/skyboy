@@ -1546,11 +1546,13 @@
     },
     {
       "id": "sambanova",
-      "d": "Integration guide and best practices for using SambaNova as a model provider.",
+      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "sambanova"
+        "sambanova",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1559,10 +1561,34 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a7014deb18f538be",
+      "h": "c045ad820881841e",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/sambanova"
+    },
+    {
+      "id": "sambanova-plugin-cc",
+      "d": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools b",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "sambanova",
+        "claude-code",
+        "mcp",
+        "sub-agent",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b19aeccf3cadd617",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/sambanova/skills/sambanova-plugin-cc"
     },
     {
       "id": "scaleway",
@@ -5372,6 +5398,66 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/scaleway/plugins/waypoint-plugin-scaleway",
       "provider": "scaleway"
+    },
+    {
+      "slug": "sambanova-ai-provider",
+      "name": "sambanova-ai-provider",
+      "vendor": "SambaNova",
+      "vendorUrl": "https://github.com/sambanova/sambanova-ai-provider",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/sambanova/sambanova-ai-provider",
+      "install": "https://github.com/sambanova/sambanova-ai-provider",
+      "description": "Vercel AI SDK provider for running LLMs on SambaNova models — plugs SambaNova's API (chat completion, image input, tool calling, embeddings) into Vercel AI applications as a provider/plugin integration.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sambanova-ai-provider",
+          "description": "",
+          "path": "skills/sambanova-ai-provider",
+          "url": "https://github.com/sambanova/sambanova-ai-provider/blob/main/skills/sambanova-ai-provider"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/sambanova/plugins/sambanova-ai-provider",
+      "provider": "sambanova"
+    },
+    {
+      "slug": "sambanova-plugin-cc",
+      "name": "sambanova-plugin-cc",
+      "vendor": "SambaNova",
+      "vendorUrl": "https://github.com/sambanova/sambanova-plugin-cc",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/sambanova/sambanova-plugin-cc",
+      "install": "https://github.com/sambanova/sambanova-plugin-cc",
+      "description": "Claude Code plugin for SambaNova Cloud (also indexed as a skill above) — explicitly structured as a plugin (.mcp.json, plugins/samba-plugin, marketplace.json) exposing model-management and task-delegation skills as MCP tools; builds an isolated virtual environment automatically on session start so skills and the MCP server are ready without manual setup.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sambanova-plugin-cc",
+          "description": "",
+          "path": "skills/sambanova-plugin-cc",
+          "url": "https://github.com/sambanova/sambanova-plugin-cc/blob/main/skills/sambanova-plugin-cc"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/sambanova/plugins/sambanova-plugin-cc",
+      "provider": "sambanova"
     }
   ]
 }
