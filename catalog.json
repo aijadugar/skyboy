@@ -379,11 +379,12 @@
     },
     {
       "id": "cerebras",
-      "d": "Integration guide and best practices for using Cerebras as a model provider.",
+      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "cerebras"
+        "cerebras",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -392,7 +393,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "354c62d52322ce37",
+      "h": "8b4667a8a86bf113",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/cerebras"
@@ -5639,6 +5640,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/groq/plugins/tailscale-buildkite-plugin",
       "provider": "groq"
+    },
+    {
+      "slug": "vscode-cerebras-chat",
+      "name": "vscode-cerebras-chat",
+      "vendor": "Cerebras",
+      "vendorUrl": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "install": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "description": "Cerebras VS Code extension — makes GitHub Copilot run 10x faster with Cerebras Inference (2,000+ tokens/sec), powering instant code generation and super-fast agentic flows directly in VS Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "vscode-cerebras-chat",
+          "description": "",
+          "path": "skills/vscode-cerebras-chat",
+          "url": "https://github.com/Cerebras/vscode-cerebras-chat/blob/main/skills/vscode-cerebras-chat"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/cerebras/plugins/vscode-cerebras-chat",
+      "provider": "cerebras"
     }
   ]
 }

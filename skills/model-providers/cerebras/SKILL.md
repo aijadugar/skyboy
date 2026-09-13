@@ -69,3 +69,17 @@ Cerebras offers models across capability tiers. Choose based on your use case:
 
 - Cerebras official documentation
 - Cerebras API reference
+
+## Cerebras Skills & Plugins
+
+Cerebras's public plugin ecosystem (`plugins/` in this folder):
+
+### Skills
+
+No public Cerebras repositories dedicated to agent skills were found; the folder ships plugins/extensions only.
+
+### Plugins / Extensions
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [vscode-cerebras-chat](https://github.com/Cerebras/vscode-cerebras-chat) | Cerebras VS Code extension — makes GitHub Copilot run 10x faster via Cerebras Inference (world's fastest inference API, 2,000+ tokens/sec) for instant code generation and super-fast agentic flows in VS Code | TypeScript, JavaScript | MIT |
