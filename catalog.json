@@ -1231,11 +1231,14 @@
     },
     {
       "id": "upstage",
-      "d": "Integration guide and best practices for using Upstage as a model provider.",
+      "d": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "upstage"
+        "upstage",
+        "solar",
+        "n8n",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1244,7 +1247,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a00274c7dc7773f4",
+      "h": "a706e956cc445f85",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/upstage"
@@ -3308,6 +3311,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/minimax/plugins/minimax-desgin-plugin",
       "provider": "minimax"
+    },
+    {
+      "slug": "n8n-nodes-upstage",
+      "name": "n8n-nodes-upstage",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "install": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "description": "Upstage LLM and Embeddings nodes for n8n workflow automation.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-upstage",
+          "description": "",
+          "path": "skills/n8n-nodes-upstage",
+          "url": "https://github.com/UpstageAI/n8n-nodes-upstage/blob/main/skills/n8n-nodes-upstage"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/n8n-nodes-upstage",
+      "provider": "upstage"
+    },
+    {
+      "slug": "n8n-nodes-solar",
+      "name": "n8n-nodes-solar",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "install": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "description": "Solar LLM and Embeddings nodes for n8n workflow automation platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-solar",
+          "description": "",
+          "path": "skills/n8n-nodes-solar",
+          "url": "https://github.com/UpstageAI/n8n-nodes-solar/blob/main/skills/n8n-nodes-solar"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/n8n-nodes-solar",
+      "provider": "upstage"
+    },
+    {
+      "slug": "upstage-extensions-hub",
+      "name": "upstage-extensions-hub",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "install": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "description": "Extensions hub for Upstage — modular extensions for Upstage's document AI and LLM platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "upstage-extensions-hub",
+          "description": "",
+          "path": "skills/upstage-extensions-hub",
+          "url": "https://github.com/UpstageAI/upstage-extensions-hub/blob/main/skills/upstage-extensions-hub"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/upstage-extensions-hub",
+      "provider": "upstage"
     }
   ]
 }
