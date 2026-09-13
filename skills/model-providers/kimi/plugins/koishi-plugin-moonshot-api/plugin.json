@@ -1,0 +1,13 @@
+{
+  "name": "koishi-plugin-moonshot-api",
+  "description": "Official moonshot api for koishi.",
+  "source_url": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+  "contents": {
+    "skills": ["koishi-plugin-moonshot-api"]
+  },
+  "vendor": "Kimi",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "kimi", "moonshot", "koishi", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

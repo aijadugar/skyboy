@@ -69,3 +69,11 @@ Mistral offers models across capability tiers. Choose based on your use case:
 
 - Mistral official documentation
 - Mistral API reference
+
+## Mistral Plugins
+
+Mistral's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date). In code editors like Zed, extensions serve the same modular purpose as plugins:
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [zed-extensions](https://github.com/mistralai/zed-extensions) | Extensions for the Zed editor | JavaScript | — |

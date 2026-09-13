@@ -1,11 +1,13 @@
 {
   "id": "kimi",
   "slug": "kimi",
-  "description": "Integration guide and best practices for using Kimi as a model provider.",
+  "description": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "kimi"
+    "kimi",
+    "moonshot",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "kimi",
     "license": "MIT"
   },
-  "hash": "2258fb042e5f9742",
+  "hash": "73eebdf4b06eb2b7",
   "path": "skills/model-providers/kimi",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/kimi/SKILL.md"
 }

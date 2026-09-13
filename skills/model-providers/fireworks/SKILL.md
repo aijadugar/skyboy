@@ -69,3 +69,19 @@ Fireworks offers models across capability tiers. Choose based on your use case:
 
 - Fireworks official documentation
 - Fireworks API reference
+
+## Fireworks AI Skills & Plugins
+
+Fireworks' public skills and plugin ecosystem (`skills/` and `plugins/` in this folder). The Cookbook repo intentionally ships the same content both ways:
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| fireworks-cookbook | [fw-ai/cookbook](https://github.com/fw-ai/cookbook) (`skills/`) | Portable Agent Skills Markdown (e.g. `skills/fireworks-training/`) — routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks | Python, Jupyter, Markdown | Apache-2.0 |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [fw-ai/cookbook](https://github.com/fw-ai/cookbook) (`.codex-plugin`, `.claude-plugin`) | The same Agent Skills packaged as a Codex / Claude plugin — installable via the skills CLI in Cursor, Codex, and Claude Code | Python, Markdown, JSON | Apache-2.0 |

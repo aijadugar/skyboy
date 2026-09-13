@@ -69,3 +69,21 @@ Scaleway offers models across capability tiers. Choose based on your use case:
 
 - Scaleway official documentation
 - Scaleway API reference
+
+## Scaleway Skills & Plugins
+
+Scaleway's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| scaleway-skills | [scaleway/scaleway-skills](https://github.com/scaleway/scaleway-skills) | Official collection of agent skills for Scaleway services and CLI tools; doubles as an agent plugin providing skills and MCP server configurations for Scaleway scenarios | Makefile | Apache-2.0 |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [packer-plugin-scaleway](https://github.com/scaleway/packer-plugin-scaleway) | Packer plugin for the Scaleway Builder — create custom images on Scaleway infrastructure with HashiCorp Packer | Go, MDX, Shell | MPL-2.0 |
+| [waypoint-plugin-scaleway](https://github.com/scaleway/waypoint-plugin-scaleway) | Waypoint plugins adding Scaleway support — container plugin deploying containers to Scaleway | Go, Makefile, Dockerfile, Shell | Apache-2.0 |
+| [serverless-scaleway-functions](https://github.com/scaleway/serverless-scaleway-functions) | Serverless Framework plugin for deploying serverless Functions and Containers on Scaleway | JavaScript | MIT |

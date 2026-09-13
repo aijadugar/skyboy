@@ -69,3 +69,22 @@ Meta offers models across capability tiers. Choose based on your use case:
 
 - Meta official documentation
 - Meta API reference
+
+## Meta Skills & Plugins
+
+Meta's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| agentic-tools | [facebook/agentic-tools](https://github.com/facebook/agentic-tools) | Agentic tools plugin and skills | Python | MIT |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [facebook-for-woocommerce](https://github.com/facebook/facebook-for-woocommerce) | Official Meta plugin, now owned by Meta's Partner Engineering team; community contributions welcome | PHP | GPL-2.0 |
+| [meta-embeds-for-wordpress](https://github.com/facebook/meta-embeds-for-wordpress) | Official WordPress plugin for embedding Threads, Instagram, and Facebook content — paste a URL into the editor | PHP | GPL-2.0 |
+| [dont-use-facebook-for-woocommerce](https://github.com/facebook/dont-use-facebook-for-woocommerce) | A first-party extension plugin built for WooCommerce (archived) | PHP | GPL-2.0 |
+| [meta-instant-games-unity-plugin](https://github.com/facebook/meta-instant-games-unity-plugin) | Unity plugin supporting Instant Games SDK v8.0 with the latest features, APIs, and code snippets | C# | Apache-2.0 |

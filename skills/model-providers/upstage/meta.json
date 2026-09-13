@@ -1,11 +1,14 @@
 {
   "id": "upstage",
   "slug": "upstage",
-  "description": "Integration guide and best practices for using Upstage as a model provider.",
+  "description": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "upstage"
+    "upstage",
+    "solar",
+    "n8n",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +28,7 @@
     "name": "upstage",
     "license": "MIT"
   },
-  "hash": "a00274c7dc7773f4",
+  "hash": "a706e956cc445f85",
   "path": "skills/model-providers/upstage",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/upstage/SKILL.md"
 }

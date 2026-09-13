@@ -1,0 +1,12 @@
+{
+  "name": "novita-cli",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Command-line interface for Novita AI — generate text, images, video, and audio, manage GPU/sandbox runtimes, with first-class agent skill integration.",
+  "command": "skyboy add novita-cli",
+  "tags": ["model-provider", "novita", "cli", "gpu", "sandbox", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/novitalabs/novita-cli",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "doctl-sandbox-plugin",
+  "description": "Supports certain doctl serverless subcommands by incorporating the DigitalOcean Functions Deployer via a plugin (historically 'the sandbox plugin').",
+  "source_url": "https://github.com/digitalocean/doctl-sandbox-plugin",
+  "contents": {
+    "skills": ["doctl-sandbox-plugin"]
+  },
+  "vendor": "DigitalOcean",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "digitalocean", "doctl", "serverless", "functions", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

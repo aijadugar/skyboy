@@ -1,0 +1,13 @@
+{
+  "name": "deepinfra-hermes-sandbox",
+  "description": "DeepInfra cloud sandbox (deep_sands) terminal backend plugin for hermes-agent.",
+  "source_url": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+  "contents": {
+    "skills": ["deepinfra-hermes-sandbox"]
+  },
+  "vendor": "DeepInfra",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "deepinfra", "sandbox", "hermes-agent", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

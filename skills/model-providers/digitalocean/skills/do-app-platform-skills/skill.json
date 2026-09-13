@@ -1,0 +1,12 @@
+{
+  "name": "do-app-platform-skills",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Claude/Agent Skills for DigitalOcean App Platform — deployment, migration, networking, database configuration, and troubleshooting.",
+  "command": "skyboy add do-app-platform-skills",
+  "tags": ["model-provider", "digitalocean", "app-platform", "deployment", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/digitalocean-labs/do-app-platform-skills",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

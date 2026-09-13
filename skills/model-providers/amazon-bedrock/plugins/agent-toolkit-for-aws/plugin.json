@@ -1,0 +1,13 @@
+{
+  "name": "agent-toolkit-for-aws",
+  "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS. (Also indexed under this provider's skills — the toolkit covers both.)",
+  "source_url": "https://github.com/aws/agent-toolkit-for-aws",
+  "contents": {
+    "skills": ["agent-toolkit-for-aws"]
+  },
+  "vendor": "Amazon Web Services",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "amazon-bedrock", "aws", "mcp", "plugins", "agents"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

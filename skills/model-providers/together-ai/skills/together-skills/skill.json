@@ -1,0 +1,12 @@
+{
+  "name": "together-skills",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, SDK usage, CLI commands, and best practices.",
+  "command": "skyboy add together-skills",
+  "tags": ["model-provider", "together-ai", "skills", "inference", "training", "embeddings"],
+  "author": "skyboy",
+  "source_url": "https://github.com/togethercomputer/skills",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

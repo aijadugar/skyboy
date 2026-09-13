@@ -1,0 +1,13 @@
+{
+  "name": "pytest-markdown-docs",
+  "description": "A plugin for pytest that uses markdown code snippets from markdown files and docstrings as tests — detects Python code fences in .md, .mdx, .svx, and .py files and runs them, supporting fixtures, async fixtures, and continuation blocks.",
+  "source_url": "https://github.com/modal-labs/pytest-markdown-docs",
+  "contents": {
+    "skills": ["pytest-markdown-docs"]
+  },
+  "vendor": "Modal",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "modal", "pytest", "testing", "markdown", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

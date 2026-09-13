@@ -1,0 +1,13 @@
+{
+  "name": "kimi-code-zed-extension",
+  "description": "Kimi CLI Zed extension.",
+  "source_url": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+  "contents": {
+    "skills": ["kimi-code-zed-extension"]
+  },
+  "vendor": "Kimi",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "kimi", "moonshot", "zed", "cli", "extension"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

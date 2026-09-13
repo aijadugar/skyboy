@@ -1,11 +1,13 @@
 {
   "id": "spacexai",
   "slug": "spacexai",
-  "description": "Integration guide and best practices for using SpaceXAI as a model provider.",
+  "description": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "spacexai"
+    "spacexai",
+    "xai",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "spacexai",
     "license": "MIT"
   },
-  "hash": "092d86c9b2cc9cb2",
+  "hash": "67a37b5d5f81b413",
   "path": "skills/model-providers/spacexai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/spacexai/SKILL.md"
 }

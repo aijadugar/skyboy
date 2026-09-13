@@ -1,0 +1,35 @@
+{
+  "id": "scaleway-skills",
+  "slug": "scaleway-skills",
+  "description": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "scaleway",
+    "agent-skill",
+    "mcp",
+    "cli",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/scaleway/scaleway-skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "scaleway-skills",
+    "license": "Apache-2.0"
+  },
+  "hash": "822f05ca3114dd91",
+  "path": "skills/model-providers/scaleway/skills/scaleway-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/scaleway/skills/scaleway-skills/SKILL.md"
+}

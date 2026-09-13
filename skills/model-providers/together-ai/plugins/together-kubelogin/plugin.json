@@ -1,0 +1,13 @@
+{
+  "name": "together-kubelogin",
+  "description": "Kubernetes Authentication Plugin for Together AI — a kubectl OIDC credential plugin for client-go that authenticates to Kubernetes clusters via the Together AI identity provider.",
+  "source_url": "https://github.com/togethercomputer/together-kubelogin",
+  "contents": {
+    "skills": ["together-kubelogin"]
+  },
+  "vendor": "Together AI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "together-ai", "kubernetes", "kubectl", "oidc", "authentication", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "deepseek-harness",
+  "description": "DeepSeek Harness: Everything is a Plugin — plugin-first agent harness (dsh) for building and running AI-agent plugins.",
+  "source_url": "https://github.com/deepseek-ai/deepseek-harness",
+  "contents": {
+    "skills": ["deepseek-harness"]
+  },
+  "vendor": "DeepSeek",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "deepseek", "dsh", "ai-agents", "cordis", "dsh-plugin", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

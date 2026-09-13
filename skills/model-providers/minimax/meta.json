@@ -1,11 +1,13 @@
 {
   "id": "minimax",
   "slug": "minimax",
-  "description": "Integration guide and best practices for using MiniMax as a model provider.",
+  "description": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "minimax"
+    "minimax",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "minimax",
     "license": "MIT"
   },
-  "hash": "05ae7666c42b8db4",
+  "hash": "6545684093dabd8f",
   "path": "skills/model-providers/minimax",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/minimax/SKILL.md"
 }

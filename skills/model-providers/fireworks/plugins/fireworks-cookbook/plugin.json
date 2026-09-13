@@ -1,0 +1,14 @@
+{
+  "name": "fireworks-cookbook",
+  "description": "The Fireworks AI Cookbook packaged as a plugin: .codex-plugin/plugin.json and .claude-plugin configurations ship the same Agent Skills as an installable Codex or Claude plugin — portable skills for AI assistants like Cursor, Codex, and Claude Code.",
+  "source_url": "https://github.com/fw-ai/cookbook",
+  "path_prefix": "skills",
+  "contents": {
+    "skills": ["fireworks-training"]
+  },
+  "vendor": "Fireworks AI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "fireworks", "cookbook", "codex", "claude-code", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

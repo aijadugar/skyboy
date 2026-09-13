@@ -1,11 +1,12 @@
 {
   "id": "groq",
   "slug": "groq",
-  "description": "Integration guide and best practices for using Groq as a model provider.",
+  "description": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "groq"
+    "groq",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "groq",
     "license": "MIT"
   },
-  "hash": "1fead4edb87c94a6",
+  "hash": "8313f9761691b049",
   "path": "skills/model-providers/groq",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/groq/SKILL.md"
 }

@@ -1,0 +1,12 @@
+{
+  "name": "agnescode",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusable orchestrated capabilities.",
+  "command": "skyboy add agnescode",
+  "tags": ["model-provider", "agnes-ai", "desktop", "workspace", "mcp", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/AgnesAI-Labs/AgnesCode",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

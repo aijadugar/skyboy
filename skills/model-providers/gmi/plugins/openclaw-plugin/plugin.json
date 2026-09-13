@@ -1,0 +1,12 @@
+{
+  "name": "openclaw-plugin",
+  "description": "GMI Cloud Provider Plugin for OpenClaw — adds GMI Cloud as a model provider for its OpenAI-compatible inference API (https://api.gmi-serving.com/v1), with API-key provider auth, a static catalog of common GMI Cloud models, and dynamic model resolution.",
+  "source_url": "https://github.com/GMISWE/openclaw-plugin",
+  "contents": {
+    "skills": ["openclaw-plugin"]
+  },
+  "vendor": "GMI",
+  "category": "model-providers",
+  "tags": ["model-provider", "gmi", "openclaw", "openai-compatible", "inference-api", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

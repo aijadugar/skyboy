@@ -42,11 +42,12 @@
   "skills": [
     {
       "id": "agnes-ai",
-      "d": "Integration guide and best practices for using Agnes AI as a model provider.",
+      "d": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "agnes-ai"
+        "agnes-ai",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -55,18 +56,22 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ffadd2205abd2c38",
+      "h": "61330c4a07abeed8",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/agnes-ai"
     },
     {
-      "id": "alibaba-cloud",
-      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider.",
+      "id": "agnes-skills",
+      "d": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, ge",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "alibaba-cloud"
+        "agnes-ai",
+        "codex",
+        "openai-compatible",
+        "api-gateway",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -75,18 +80,67 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "32de3e4abeefdd0f",
+      "h": "b7f13b471318b81c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/agnes-ai/skills/agnes-skills"
+    },
+    {
+      "id": "agnescode",
+      "d": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusa",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "agnes-ai",
+        "desktop",
+        "workspace",
+        "mcp",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "3fc25ac9d92be356",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/agnes-ai/skills/agnescode"
+    },
+    {
+      "id": "alibaba-cloud",
+      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "alibaba-cloud",
+        "qwen",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d63f176e7be88424",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/alibaba-cloud"
     },
     {
       "id": "amazon-bedrock",
-      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "amazon-bedrock"
+        "amazon-bedrock",
+        "aws",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -95,10 +149,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "31374e3d0ba16f3a",
+      "h": "7bed5b7c6ef4c6d4",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/amazon-bedrock"
+    },
+    {
+      "id": "agent-toolkit-for-aws",
+      "d": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
+        "mcp",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a991b9606de2d8b5",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws"
+    },
+    {
+      "id": "tools-for-devops-agent",
+      "d": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
+        "devops",
+        "incident-response",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5c44255a51aeaccf",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent"
     },
     {
       "id": "anthropic",
@@ -145,11 +247,13 @@
     },
     {
       "id": "arcee-ai",
-      "d": "Integration guide and best practices for using Arcee AI as a model provider.",
+      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "arcee-ai"
+        "arcee-ai",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -158,18 +262,23 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "349166c2079ffe42",
+      "h": "d4540aa58a2575c3",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/arcee-ai"
     },
     {
-      "id": "baseten",
-      "d": "Integration guide and best practices for using Baseten as a model provider.",
+      "id": "nac",
+      "d": "Arcee's open-source harness for long-running agentic tasks — a central orchestrator, threads, and structure so agents can take on ambitious work without losing the plot.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "baseten"
+        "arcee-ai",
+        "nac",
+        "mcp",
+        "agent-orchestration",
+        "multi-agent-systems",
+        "agent-skills"
       ],
       "a": [
         "claude-code",
@@ -178,10 +287,55 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "5d178562396bd2ad",
+      "h": "8d33e9a2f2b0ff86",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/arcee-ai/skills/nac"
+    },
+    {
+      "id": "baseten",
+      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "24a93c752c6f087f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/baseten"
+    },
+    {
+      "id": "baseten-skills",
+      "d": "Skills for using Baseten effectively — deploy, scale, and serve models on Baseten through agent workflows.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten",
+        "skills",
+        "inference",
+        "deployment"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b7634f7e2821d7fe",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/baseten/skills/baseten-skills"
     },
     {
       "id": "bitdeer-ai",
@@ -225,11 +379,12 @@
     },
     {
       "id": "cerebras",
-      "d": "Integration guide and best practices for using Cerebras as a model provider.",
+      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "cerebras"
+        "cerebras",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -238,7 +393,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "354c62d52322ce37",
+      "h": "8b4667a8a86bf113",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/cerebras"
@@ -355,11 +510,12 @@
     },
     {
       "id": "cohere",
-      "d": "Integration guide and best practices for using Cohere as a model provider.",
+      "d": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "cohere"
+        "cohere",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -368,10 +524,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "026204e84c89759e",
+      "h": "999c7a2510b52e83",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/cohere"
+    },
+    {
+      "id": "vllm-skills",
+      "d": "Cohere's vLLM skills — Agent Skills for serving and operating open models on the vLLM inference engine.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cohere",
+        "vllm",
+        "inference",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "6e5bbf6ee22bff75",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/cohere/skills/vllm-skills"
     },
     {
       "id": "context-window-management",
@@ -433,11 +612,13 @@
     },
     {
       "id": "crusoe",
-      "d": "Integration guide and best practices for using Crusoe as a model provider.",
+      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "crusoe"
+        "crusoe",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -446,18 +627,23 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f842c784f430b5b7",
+      "h": "021b6b353940e0d7",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/crusoe"
     },
     {
-      "id": "databricks",
-      "d": "Integration guide and best practices for using Databricks as a model provider.",
+      "id": "terraform-provider-crusoe",
+      "d": "Official Terraform Provider for Crusoe Cloud — infrastructure-as-code for Crusoe GPU cloud, with active AI agent workflows: a Claude Code skill (/derive-schema-descriptions) for schema generation and ",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "databricks"
+        "crusoe",
+        "terraform",
+        "gpu-cloud",
+        "infrastructure-as-code",
+        "claude-code",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -466,18 +652,42 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "d70ad2698ef32957",
+      "h": "78bfdb86ab296c2a",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/crusoe/skills/terraform-provider-crusoe"
+    },
+    {
+      "id": "databricks",
+      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "databricks",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f82b0ce3c3522635",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/databricks"
     },
     {
-      "id": "deepinfra",
-      "d": "Integration guide and best practices for using DeepInfra as a model provider.",
+      "id": "databricks-agent-skills",
+      "d": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepinfra"
+        "databricks",
+        "agents",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -486,18 +696,40 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b0c6d41570f95e64",
+      "h": "b5fb90b6291b24f4",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/databricks/skills/databricks-agent-skills"
+    },
+    {
+      "id": "deepinfra",
+      "d": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "deepinfra",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "95d82c2e21cf4c15",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/deepinfra"
     },
     {
       "id": "deepseek",
-      "d": "Integration guide and best practices for using DeepSeek as a model provider.",
+      "d": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepseek"
+        "deepseek",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -506,18 +738,20 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "7d0b2c90d9b1a82e",
+      "h": "7792cb065ffc5a06",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/deepseek"
     },
     {
       "id": "digitalocean",
-      "d": "Integration guide and best practices for using DigitalOcean as a model provider.",
+      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "digitalocean"
+        "digitalocean",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -526,18 +760,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ef69c12e48fd490f",
+      "h": "81386cf2b606eca6",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/digitalocean"
     },
     {
-      "id": "fireworks",
-      "d": "Integration guide and best practices for using Fireworks as a model provider.",
+      "id": "action-gateway-skill",
+      "d": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "fireworks"
+        "digitalocean",
+        "action-gateway",
+        "mcp",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -546,18 +783,66 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "950e708cb56cbf09",
+      "h": "5ebcb0ac835f4b90",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/digitalocean/skills/action-gateway-skill"
+    },
+    {
+      "id": "do-app-platform-skills",
+      "d": "Claude/Agent Skills for DigitalOcean App Platform — deployment, migration, networking, database configuration, and troubleshooting.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean",
+        "app-platform",
+        "deployment",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d1228ce2ce7df5a1",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/digitalocean/skills/do-app-platform-skills"
+    },
+    {
+      "id": "fireworks",
+      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "fireworks",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "febed4a2f429bb2c",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/fireworks"
     },
     {
-      "id": "friendliai",
-      "d": "Integration guide and best practices for using FriendliAI as a model provider.",
+      "id": "fireworks-cookbook",
+      "d": "Fireworks AI Cookbook — portable Agent Skills (Markdown) with routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "friendliai"
+        "fireworks",
+        "cookbook",
+        "training",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -566,18 +851,42 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ebb84ff4c01f2a19",
+      "h": "b1b742a47d24998f",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/fireworks/skills/fireworks-cookbook"
+    },
+    {
+      "id": "friendliai",
+      "d": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "friendliai",
+        "hermes",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2ec19518ba666166",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/friendliai"
     },
     {
       "id": "gmi",
-      "d": "Integration guide and best practices for using GMI as a model provider.",
+      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "gmi"
+        "gmi",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -586,10 +895,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "9b4fd94918932fd1",
+      "h": "ab90f58de133e8de",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/gmi"
+    },
+    {
+      "id": "ieops-aihub",
+      "d": "GMI's AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "gmi",
+        "ai-memory",
+        "agent-coordination",
+        "mcp",
+        "polyforge",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b9f1f401702b7c87",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/gmi/skills/ieops-aihub"
     },
     {
       "id": "google",
@@ -613,11 +947,12 @@
     },
     {
       "id": "groq",
-      "d": "Integration guide and best practices for using Groq as a model provider.",
+      "d": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "groq"
+        "groq",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -626,7 +961,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "1fead4edb87c94a6",
+      "h": "8313f9761691b049",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/groq"
@@ -653,11 +988,13 @@
     },
     {
       "id": "inclusionai",
-      "d": "Integration guide and best practices for using InclusionAI as a model provider.",
+      "d": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "inclusionai"
+        "inclusionai",
+        "avernet",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -666,7 +1003,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f7525925ec4b3712",
+      "h": "eb290bf19237b634",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/inclusionai"
@@ -693,11 +1030,13 @@
     },
     {
       "id": "kimi",
-      "d": "Integration guide and best practices for using Kimi as a model provider.",
+      "d": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "kimi"
+        "kimi",
+        "moonshot",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -706,7 +1045,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "2258fb042e5f9742",
+      "h": "73eebdf4b06eb2b7",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/kimi"
@@ -775,11 +1114,13 @@
     },
     {
       "id": "meta",
-      "d": "Integration guide and best practices for using Meta as a model provider.",
+      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "meta"
+        "meta",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -788,18 +1129,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "3ab670a6cdc437a8",
+      "h": "b48ecb243202e89c",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/meta"
     },
     {
-      "id": "microsoft-azure",
-      "d": "Integration guide and best practices for using Microsoft Azure as a model provider.",
+      "id": "agentic-tools",
+      "d": "Meta's agentic tools plugin and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "microsoft-azure"
+        "meta",
+        "facebook",
+        "agentic-tools",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -808,18 +1152,41 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "8526d66a6b9cdea7",
+      "h": "93b7c4539606eca5",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/meta/skills/agentic-tools"
+    },
+    {
+      "id": "microsoft-azure",
+      "d": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "microsoft-azure",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e3fc5224f84d87ee",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/microsoft-azure"
     },
     {
       "id": "minimax",
-      "d": "Integration guide and best practices for using MiniMax as a model provider.",
+      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "minimax"
+        "minimax",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -828,18 +1195,19 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "05ae7666c42b8db4",
+      "h": "6545684093dabd8f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/minimax"
     },
     {
-      "id": "mistral",
-      "d": "Integration guide and best practices for using Mistral as a model provider.",
+      "id": "minimax-skills",
+      "d": "MiniMax's official Agent Skills repository — skills published by MiniMax-AI for use with coding agents and the MiniMax model family.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "mistral"
+        "minimax",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -848,18 +1216,41 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "51ceab11a3049c7f",
+      "h": "c01157a02761a8b1",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/minimax/skills/minimax-skills"
+    },
+    {
+      "id": "mistral",
+      "d": "Integration guide and best practices for using Mistral as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "mistral",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d936b84a942dd118",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/mistral"
     },
     {
       "id": "modal",
-      "d": "Integration guide and best practices for using Modal as a model provider.",
+      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "modal"
+        "modal",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -868,10 +1259,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "9ac38a45006d0a79",
+      "h": "1d5635885dad2dfe",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/modal"
+    },
+    {
+      "id": "modal-client",
+      "d": "Modal's official Python, JavaScript/TypeScript, and Go SDKs — distributes an agent skill (modal skills install / npx skills add) that gives coding assistants version-aligned Modal documentation.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "sdk",
+        "serverless",
+        "skills",
+        "agent-skill"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a7938b04029429d4",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modal/skills/modal-client"
+    },
+    {
+      "id": "openai-agents-python-example",
+      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "openai-agents-sdk",
+        "sandboxes",
+        "agent-harness",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ed65fd099445a45c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modal/skills/openai-agents-python-example"
     },
     {
       "id": "modular",
@@ -956,11 +1395,13 @@
     },
     {
       "id": "novita",
-      "d": "Integration guide and best practices for using Novita as a model provider.",
+      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "novita"
+        "novita",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -969,10 +1410,81 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "63a6a1b295f6f678",
+      "h": "35b6918feb1bcc1a",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/novita"
+    },
+    {
+      "id": "novita-cli",
+      "d": "Command-line interface for Novita AI — generate text, images, video, and audio, manage GPU/sandbox runtimes, with first-class agent skill integration.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "cli",
+        "gpu",
+        "sandbox",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5fabd23f9a810745",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-cli"
+    },
+    {
+      "id": "novita-multimodal-skill",
+      "d": "Novita AI multimodal skill for OpenClaw — text-to-image, text-to-video, TTS, and more; compatible with Claude Code, Cursor, Gemini CLI, and other mainstream agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "multimodal",
+        "text-to-image",
+        "text-to-video",
+        "tts",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0b2f7c936a2f7070",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-multimodal-skill"
+    },
+    {
+      "id": "novita-skills",
+      "d": "Official Novita Skills repository — reusable SKILL.md skills for agent ecosystems that support skill-based workflows on Novita AI.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "skills",
+        "agent-workflows"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5abd535171da7616",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-skills"
     },
     {
       "id": "openai",
@@ -1016,11 +1528,13 @@
     },
     {
       "id": "replicate",
-      "d": "Integration guide and best practices for using Replicate as a model provider.",
+      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "replicate"
+        "replicate",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1029,18 +1543,23 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f7c1070921f937ac",
+      "h": "9609cd00ebfb5cec",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/replicate"
     },
     {
-      "id": "sambanova",
-      "d": "Integration guide and best practices for using SambaNova as a model provider.",
+      "id": "replicate-skills",
+      "d": "Replicate's collection of Agent Skills for building AI-powered apps — find-models, video prompting, and image generation workflows auto-invoked by AI coding agents on matching tasks.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "sambanova"
+        "replicate",
+        "agent-skill",
+        "find-models",
+        "image-generation",
+        "video-prompting",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1049,18 +1568,44 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a7014deb18f538be",
+      "h": "f6fc7285b6e2c276",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/replicate/skills/replicate-skills"
+    },
+    {
+      "id": "sambanova",
+      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "sambanova",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c045ad820881841e",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/sambanova"
     },
     {
-      "id": "scaleway",
-      "d": "Integration guide and best practices for using Scaleway as a model provider.",
+      "id": "sambanova-plugin-cc",
+      "d": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools b",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "scaleway"
+        "sambanova",
+        "claude-code",
+        "mcp",
+        "sub-agent",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1069,18 +1614,44 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ab3a254724bbf23f",
+      "h": "b19aeccf3cadd617",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/sambanova/skills/sambanova-plugin-cc"
+    },
+    {
+      "id": "scaleway",
+      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "scaleway",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1cf9df62acddd039",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/scaleway"
     },
     {
-      "id": "siliconflow",
-      "d": "Integration guide and best practices for using SiliconFlow as a model provider.",
+      "id": "scaleway-skills",
+      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "siliconflow"
+        "scaleway",
+        "agent-skill",
+        "mcp",
+        "cli",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1089,18 +1660,45 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "505ffcabec5892dc",
+      "h": "822f05ca3114dd91",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/scaleway/skills/scaleway-skills"
+    },
+    {
+      "id": "siliconflow",
+      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "siliconflow",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "681f672fa6afbc1f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/siliconflow"
     },
     {
-      "id": "spacexai",
-      "d": "Integration guide and best practices for using SpaceXAI as a model provider.",
+      "id": "bizyair-skill",
+      "d": "BizyAir's AIGC skill package for mainstream AI agents — natural-language image/video generation, AI application execution, and ModelZoo model calling on BizyAir cloud with zero configuration.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "spacexai"
+        "siliconflow",
+        "aigc",
+        "text-to-image",
+        "agent-skill",
+        "bizyair",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1109,18 +1707,41 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "092d86c9b2cc9cb2",
+      "h": "7d1133e82accf36a",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/siliconflow/skills/bizyair-skill"
+    },
+    {
+      "id": "spacexai",
+      "d": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "spacexai",
+        "xai",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "67a37b5d5f81b413",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/spacexai"
     },
     {
       "id": "stepfun",
-      "d": "Integration guide and best practices for using StepFun as a model provider.",
+      "d": "Integration guide and best practices for using StepFun as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "stepfun"
+        "stepfun",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1129,10 +1750,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a33406aa58ed50b9",
+      "h": "c92cca72475d6b4e",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/stepfun"
+    },
+    {
+      "id": "stepaudio-skills",
+      "d": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "stepfun",
+        "audio",
+        "skills",
+        "claw"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "68f7500d2bbb8fcd",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/stepfun/skills/stepaudio-skills"
     },
     {
       "id": "thinking-machines",
@@ -1156,11 +1800,13 @@
     },
     {
       "id": "together-ai",
-      "d": "Integration guide and best practices for using Together AI as a model provider.",
+      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "together-ai"
+        "together-ai",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1169,18 +1815,22 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "363f84ddb922f148",
+      "h": "ab4c6820cb27e20f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/together-ai"
     },
     {
-      "id": "upstage",
-      "d": "Integration guide and best practices for using Upstage as a model provider.",
+      "id": "together-skills",
+      "d": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, ",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "upstage"
+        "together-ai",
+        "skills",
+        "inference",
+        "training",
+        "embeddings"
       ],
       "a": [
         "claude-code",
@@ -1189,7 +1839,54 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a00274c7dc7773f4",
+      "h": "20ce3645a30b73a0",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/together-ai/skills/together-skills"
+    },
+    {
+      "id": "together-storage-claude-skills",
+      "d": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "kubernetes",
+        "storage",
+        "claude-code",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0448db4670968ef6",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/together-ai/skills/together-storage-claude-skills"
+    },
+    {
+      "id": "upstage",
+      "d": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "upstage",
+        "solar",
+        "n8n",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a706e956cc445f85",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/upstage"
@@ -1216,11 +1913,12 @@
     },
     {
       "id": "xiaomi",
-      "d": "Integration guide and best practices for using Xiaomi as a model provider.",
+      "d": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "xiaomi"
+        "xiaomi",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1229,18 +1927,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "09d76ddcd97cb2cd",
+      "h": "a90dc6f516d28d18",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/xiaomi"
     },
     {
       "id": "zai",
-      "d": "Integration guide and best practices for using Zai as a model provider.",
+      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "zai"
+        "zai",
+        "glm",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1249,10 +1950,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "4c813f1fbc1456d5",
+      "h": "4d8897878cd4cef4",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/zai"
+    },
+    {
+      "id": "glm-skills",
+      "d": "Official skills for the GLM family of models — OCR, vision, and multimodal skills published by zai-org for GLM agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "zai",
+        "glm",
+        "skills",
+        "ocr",
+        "vision",
+        "multimodal"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "379d29d13fc21749",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/zai/skills/glm-skills"
     }
   ],
   "plugins": [
@@ -2745,6 +3471,2262 @@
       "badge": "official (vendor)",
       "version": "0.48.2",
       "path": "plugins/vercel/vercel-plugin"
+    },
+    {
+      "slug": "facebook-for-woocommerce",
+      "name": "facebook-for-woocommerce",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/facebook-for-woocommerce",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/facebook-for-woocommerce",
+      "install": "https://github.com/facebook/facebook-for-woocommerce",
+      "description": "The official Meta plugin for WooCommerce. Now officially owned by Meta's Partner Engineering team; community contributions welcome.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "facebook-for-woocommerce",
+          "description": "",
+          "path": "skills/facebook-for-woocommerce",
+          "url": "https://github.com/facebook/facebook-for-woocommerce/blob/main/skills/facebook-for-woocommerce"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/facebook-for-woocommerce",
+      "provider": "meta"
+    },
+    {
+      "slug": "meta-embeds-for-wordpress",
+      "name": "meta-embeds-for-wordpress",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "install": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "description": "Official WordPress plugin for embedding Threads, Instagram, and Facebook content — paste a Threads, Instagram, or Facebook URL into the WordPress editor.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "meta-embeds-for-wordpress",
+          "description": "",
+          "path": "skills/meta-embeds-for-wordpress",
+          "url": "https://github.com/facebook/meta-embeds-for-wordpress/blob/main/skills/meta-embeds-for-wordpress"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/meta-embeds-for-wordpress",
+      "provider": "meta"
+    },
+    {
+      "slug": "meta-instant-games-unity-plugin",
+      "name": "meta-instant-games-unity-plugin",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "install": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "description": "Meta Instant Games Unity plugin — supports the Instant Games SDK v8.0 with the latest features and APIs, plus code snippets shipped in the SDK.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "meta-instant-games-unity-plugin",
+          "description": "",
+          "path": "skills/meta-instant-games-unity-plugin",
+          "url": "https://github.com/facebook/meta-instant-games-unity-plugin/blob/main/skills/meta-instant-games-unity-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/meta-instant-games-unity-plugin",
+      "provider": "meta"
+    },
+    {
+      "slug": "dont-use-facebook-for-woocommerce",
+      "name": "dont-use-facebook-for-woocommerce",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "install": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "description": "A first-party extension plugin built for WooCommerce.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dont-use-facebook-for-woocommerce",
+          "description": "",
+          "path": "skills/dont-use-facebook-for-woocommerce",
+          "url": "https://github.com/facebook/dont-use-facebook-for-woocommerce/blob/main/skills/dont-use-facebook-for-woocommerce"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/dont-use-facebook-for-woocommerce",
+      "provider": "meta"
+    },
+    {
+      "slug": "zcode-plugins",
+      "name": "zcode-plugins",
+      "vendor": "Z.ai",
+      "vendorUrl": "https://github.com/zai-org/zcode-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/zai-org/zcode-plugins",
+      "install": "https://github.com/zai-org/zcode-plugins",
+      "description": "ZCode Plugins Marketplace — official built-in and community plugins for ZCode.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zcode-plugins",
+          "description": "",
+          "path": "skills/zcode-plugins",
+          "url": "https://github.com/zai-org/zcode-plugins/blob/main/skills/zcode-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/zai/plugins/zcode-plugins",
+      "provider": "zai"
+    },
+    {
+      "slug": "zai-coding-plugins",
+      "name": "zai-coding-plugins",
+      "vendor": "Z.ai",
+      "vendorUrl": "https://github.com/zai-org/zai-coding-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/zai-org/zai-coding-plugins",
+      "install": "https://github.com/zai-org/zai-coding-plugins",
+      "description": "Z.ai Coding Plugins Marketplace in Claude Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zai-coding-plugins",
+          "description": "",
+          "path": "skills/zai-coding-plugins",
+          "url": "https://github.com/zai-org/zai-coding-plugins/blob/main/skills/zai-coding-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/zai/plugins/zai-coding-plugins",
+      "provider": "zai"
+    },
+    {
+      "slug": "plugin-marketplace",
+      "name": "plugin-marketplace",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/xai-org/plugin-marketplace",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/xai-org/plugin-marketplace",
+      "install": "https://github.com/xai-org/plugin-marketplace",
+      "description": "Official xAI plugin marketplace.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "plugin-marketplace",
+          "description": "",
+          "path": "skills/plugin-marketplace",
+          "url": "https://github.com/xai-org/plugin-marketplace/blob/main/skills/plugin-marketplace"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/spacexai/plugins/plugin-marketplace",
+      "provider": "spacexai"
+    },
+    {
+      "slug": "grok-build-plugin-cc",
+      "name": "grok-build-plugin-cc",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/xai-org/grok-build-plugin-cc",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/xai-org/grok-build-plugin-cc",
+      "install": "https://github.com/xai-org/grok-build-plugin-cc",
+      "description": "Claude Code plugin that delegates reviews, rescue tasks, and session transfer to the Grok Build CLI.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "grok-build-plugin-cc",
+          "description": "",
+          "path": "skills/grok-build-plugin-cc",
+          "url": "https://github.com/xai-org/grok-build-plugin-cc/blob/main/skills/grok-build-plugin-cc"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/spacexai/plugins/grok-build-plugin-cc",
+      "provider": "spacexai"
+    },
+    {
+      "slug": "koishi-plugin-moonshot-api-plus",
+      "name": "koishi-plugin-moonshot-api-plus",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "install": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "description": "Advanced moonshot api for koishi.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "koishi-plugin-moonshot-api-plus",
+          "description": "",
+          "path": "skills/koishi-plugin-moonshot-api-plus",
+          "url": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus/blob/main/skills/koishi-plugin-moonshot-api-plus"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/koishi-plugin-moonshot-api-plus",
+      "provider": "kimi"
+    },
+    {
+      "slug": "koishi-plugin-moonshot-api",
+      "name": "koishi-plugin-moonshot-api",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "install": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "description": "Official moonshot api for koishi.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "koishi-plugin-moonshot-api",
+          "description": "",
+          "path": "skills/koishi-plugin-moonshot-api",
+          "url": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api/blob/main/skills/koishi-plugin-moonshot-api"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/koishi-plugin-moonshot-api",
+      "provider": "kimi"
+    },
+    {
+      "slug": "kimi-code-zed-extension",
+      "name": "kimi-code-zed-extension",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "install": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "description": "Kimi CLI Zed extension.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kimi-code-zed-extension",
+          "description": "",
+          "path": "skills/kimi-code-zed-extension",
+          "url": "https://github.com/MoonshotAI/kimi-code-zed-extension/blob/main/skills/kimi-code-zed-extension"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/kimi-code-zed-extension",
+      "provider": "kimi"
+    },
+    {
+      "slug": "Qwen-MM-Plugins",
+      "name": "Qwen-MM-Plugins",
+      "vendor": "Alibaba Cloud",
+      "vendorUrl": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "install": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "description": "Make any agent harness multimodal-native. Official Qwen multimodal plugins from the QwenLM team.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "Qwen-MM-Plugins",
+          "description": "",
+          "path": "skills/Qwen-MM-Plugins",
+          "url": "https://github.com/QwenLM/Qwen-MM-Plugins/blob/main/skills/Qwen-MM-Plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/alibaba-cloud/plugins/Qwen-MM-Plugins",
+      "provider": "alibaba-cloud"
+    },
+    {
+      "slug": "qwen-mm-plugins-hub",
+      "name": "qwen-mm-plugins-hub",
+      "vendor": "Alibaba Cloud",
+      "vendorUrl": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "install": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "description": "Documentation for Qwen-MM-Plugins — setup, usage, and plugin reference for making agent harnesses multimodal-native.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "qwen-mm-plugins-hub",
+          "description": "",
+          "path": "skills/qwen-mm-plugins-hub",
+          "url": "https://github.com/QwenLM/qwen-mm-plugins-hub/blob/main/skills/qwen-mm-plugins-hub"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/alibaba-cloud/plugins/qwen-mm-plugins-hub",
+      "provider": "alibaba-cloud"
+    },
+    {
+      "slug": "deepseek-harness",
+      "name": "deepseek-harness",
+      "vendor": "DeepSeek",
+      "vendorUrl": "https://github.com/deepseek-ai/deepseek-harness",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/deepseek-ai/deepseek-harness",
+      "install": "https://github.com/deepseek-ai/deepseek-harness",
+      "description": "DeepSeek Harness: Everything is a Plugin — plugin-first agent harness (dsh) for building and running AI-agent plugins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "deepseek-harness",
+          "description": "",
+          "path": "skills/deepseek-harness",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/main/skills/deepseek-harness"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/deepseek/plugins/deepseek-harness",
+      "provider": "deepseek"
+    },
+    {
+      "slug": "MiniMax-Code-Plugins",
+      "name": "MiniMax-Code-Plugins",
+      "vendor": "MiniMax",
+      "vendorUrl": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "install": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "description": "Community registry and contribution toolkit for MiniMax Code plugins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "MiniMax-Code-Plugins",
+          "description": "",
+          "path": "skills/MiniMax-Code-Plugins",
+          "url": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins/blob/main/skills/MiniMax-Code-Plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/minimax/plugins/MiniMax-Code-Plugins",
+      "provider": "minimax"
+    },
+    {
+      "slug": "minimax-desgin-plugin",
+      "name": "minimax-desgin-plugin",
+      "vendor": "MiniMax",
+      "vendorUrl": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "install": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "description": "MiniMax design plugin for agent workflows.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "minimax-desgin-plugin",
+          "description": "",
+          "path": "skills/minimax-desgin-plugin",
+          "url": "https://github.com/MiniMax-AI/minimax-desgin-plugin/blob/main/skills/minimax-desgin-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/minimax/plugins/minimax-desgin-plugin",
+      "provider": "minimax"
+    },
+    {
+      "slug": "n8n-nodes-upstage",
+      "name": "n8n-nodes-upstage",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "install": "https://github.com/UpstageAI/n8n-nodes-upstage",
+      "description": "Upstage LLM and Embeddings nodes for n8n workflow automation.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-upstage",
+          "description": "",
+          "path": "skills/n8n-nodes-upstage",
+          "url": "https://github.com/UpstageAI/n8n-nodes-upstage/blob/main/skills/n8n-nodes-upstage"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/n8n-nodes-upstage",
+      "provider": "upstage"
+    },
+    {
+      "slug": "n8n-nodes-solar",
+      "name": "n8n-nodes-solar",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "install": "https://github.com/UpstageAI/n8n-nodes-solar",
+      "description": "Solar LLM and Embeddings nodes for n8n workflow automation platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-solar",
+          "description": "",
+          "path": "skills/n8n-nodes-solar",
+          "url": "https://github.com/UpstageAI/n8n-nodes-solar/blob/main/skills/n8n-nodes-solar"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/n8n-nodes-solar",
+      "provider": "upstage"
+    },
+    {
+      "slug": "upstage-extensions-hub",
+      "name": "upstage-extensions-hub",
+      "vendor": "Upstage",
+      "vendorUrl": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "install": "https://github.com/UpstageAI/upstage-extensions-hub",
+      "description": "Extensions hub for Upstage — modular extensions for Upstage's document AI and LLM platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "upstage-extensions-hub",
+          "description": "",
+          "path": "skills/upstage-extensions-hub",
+          "url": "https://github.com/UpstageAI/upstage-extensions-hub/blob/main/skills/upstage-extensions-hub"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/upstage/plugins/upstage-extensions-hub",
+      "provider": "upstage"
+    },
+    {
+      "slug": "pegasus-YCSB",
+      "name": "pegasus-YCSB",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/pegasus-YCSB",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/pegasus-YCSB",
+      "install": "https://github.com/XiaoMi/pegasus-YCSB",
+      "description": "Provide pegasus plugin in YCSB — benchmark Pegasus through the Yahoo! Cloud Serving Benchmark harness (see 'Test Pegasus' in the README).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pegasus-YCSB",
+          "description": "",
+          "path": "skills/pegasus-YCSB",
+          "url": "https://github.com/XiaoMi/pegasus-YCSB/blob/main/skills/pegasus-YCSB"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/pegasus-YCSB",
+      "provider": "xiaomi"
+    },
+    {
+      "slug": "pegasus-datax",
+      "name": "pegasus-datax",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/pegasus-datax",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/pegasus-datax",
+      "install": "https://github.com/XiaoMi/pegasus-datax",
+      "description": "Provide pegasus plugin in alibaba/DataX — read/write Pegasus from DataX pipelines (see 'pegasuswriter/doc/pegasuswriter.md').",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pegasus-datax",
+          "description": "",
+          "path": "skills/pegasus-datax",
+          "url": "https://github.com/XiaoMi/pegasus-datax/blob/main/skills/pegasus-datax"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/pegasus-datax",
+      "provider": "xiaomi"
+    },
+    {
+      "slug": "ha_xiaomi_home",
+      "name": "ha_xiaomi_home",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "install": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "description": "Xiaomi Home Integration for Home Assistant — connect Xiaomi MIoT smart-home devices to Home Assistant.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "ha_xiaomi_home",
+          "description": "",
+          "path": "skills/ha_xiaomi_home",
+          "url": "https://github.com/XiaoMi/ha_xiaomi_home/blob/main/skills/ha_xiaomi_home"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/ha_xiaomi_home",
+      "provider": "xiaomi"
+    },
+    {
+      "slug": "avernet",
+      "name": "avernet",
+      "vendor": "InclusionAI",
+      "vendorUrl": "https://github.com/inclusionAI/Avernet",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/inclusionAI/Avernet",
+      "install": "https://github.com/inclusionAI/Avernet",
+      "description": "Distributed agent coordination platform where agents live, connect, coordinate, execute, and evolve together.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "avernet",
+          "description": "",
+          "path": "skills/avernet",
+          "url": "https://github.com/inclusionAI/Avernet/blob/main/skills/avernet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/inclusionai/plugins/avernet",
+      "provider": "inclusionai"
+    },
+    {
+      "slug": "zed-extensions",
+      "name": "zed-extensions",
+      "vendor": "Mistral",
+      "vendorUrl": "https://github.com/mistralai/zed-extensions",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/mistralai/zed-extensions",
+      "install": "https://github.com/mistralai/zed-extensions",
+      "description": "Extensions for the Zed editor by Mistral AI — editor extensions are Mistral's plugin-equivalents for the Zed coding environment.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zed-extensions",
+          "description": "",
+          "path": "skills/zed-extensions",
+          "url": "https://github.com/mistralai/zed-extensions/blob/main/skills/zed-extensions"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/mistral/plugins/zed-extensions",
+      "provider": "mistral"
+    },
+    {
+      "slug": "agent-toolkit-for-aws",
+      "name": "agent-toolkit-for-aws",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/agent-toolkit-for-aws",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/agent-toolkit-for-aws",
+      "install": "https://github.com/aws/agent-toolkit-for-aws",
+      "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS. (Also indexed under this provider's skills — the toolkit covers both.)",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "agent-toolkit-for-aws",
+          "description": "",
+          "path": "skills/agent-toolkit-for-aws",
+          "url": "https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/agent-toolkit-for-aws"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/agent-toolkit-for-aws",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "amazon-inspector-container-image-scanner-jenkins-plugin",
+      "name": "amazon-inspector-container-image-scanner-jenkins-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "install": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "description": "Jenkins CI/CD plugin for Amazon Inspector container image scanning.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "amazon-inspector-container-image-scanner-jenkins-plugin",
+          "description": "",
+          "path": "skills/amazon-inspector-container-image-scanner-jenkins-plugin",
+          "url": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin/blob/main/skills/amazon-inspector-container-image-scanner-jenkins-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "amazon-vpc-cni-k8s",
+      "name": "amazon-vpc-cni-k8s",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "install": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "description": "Networking plugin repository for pod networking in Kubernetes using Elastic Network Interfaces on AWS.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "amazon-vpc-cni-k8s",
+          "description": "",
+          "path": "skills/amazon-vpc-cni-k8s",
+          "url": "https://github.com/aws/amazon-vpc-cni-k8s/blob/main/skills/amazon-vpc-cni-k8s"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/amazon-vpc-cni-k8s",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "audit-plugin-for-mysql",
+      "name": "audit-plugin-for-mysql",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/audit-plugin-for-mysql",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/aws/audit-plugin-for-mysql",
+      "install": "https://github.com/aws/audit-plugin-for-mysql",
+      "description": "Audit Plugin for MySQL Server.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "audit-plugin-for-mysql",
+          "description": "",
+          "path": "skills/audit-plugin-for-mysql",
+          "url": "https://github.com/aws/audit-plugin-for-mysql/blob/main/skills/audit-plugin-for-mysql"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/audit-plugin-for-mysql",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-ofi-nccl",
+      "name": "aws-ofi-nccl",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-ofi-nccl",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-ofi-nccl",
+      "install": "https://github.com/aws/aws-ofi-nccl",
+      "description": "Plugin that lets EC2 developers use libfabric as a network provider while running NCCL applications.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-ofi-nccl",
+          "description": "",
+          "path": "skills/aws-ofi-nccl",
+          "url": "https://github.com/aws/aws-ofi-nccl/blob/main/skills/aws-ofi-nccl"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-ofi-nccl",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-signer-notation-plugin",
+      "name": "aws-signer-notation-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-signer-notation-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-signer-notation-plugin",
+      "install": "https://github.com/aws/aws-signer-notation-plugin",
+      "description": "AWS Signer Plugin for Notation — sign and verify OCI artifacts with AWS Signer.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-signer-notation-plugin",
+          "description": "",
+          "path": "skills/aws-signer-notation-plugin",
+          "url": "https://github.com/aws/aws-signer-notation-plugin/blob/main/skills/aws-signer-notation-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-signer-notation-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "description": "SigV4 authentication plugin for the gocql Cassandra driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-gocql-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-java-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-java-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "description": "SigV4 authentication plugin for the Apache Cassandra Java driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-java-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-java-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-java-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "description": "SigV4 authentication plugin for the Node.js Cassandra driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-nodejs-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-python-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-python-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "description": "SigV4 authentication plugin for the Apache Cassandra Python driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-python-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-python-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-python-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-toolkit-jetbrains",
+      "name": "aws-toolkit-jetbrains",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-toolkit-jetbrains",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-toolkit-jetbrains",
+      "install": "https://github.com/aws/aws-toolkit-jetbrains",
+      "description": "AWS Toolkit for JetBrains — a plugin for interacting with AWS from JetBrains IDEs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-toolkit-jetbrains",
+          "description": "",
+          "path": "skills/aws-toolkit-jetbrains",
+          "url": "https://github.com/aws/aws-toolkit-jetbrains/blob/main/skills/aws-toolkit-jetbrains"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-toolkit-jetbrains",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-toolkit-visual-studio",
+      "name": "aws-toolkit-visual-studio",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-toolkit-visual-studio",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-toolkit-visual-studio",
+      "install": "https://github.com/aws/aws-toolkit-visual-studio",
+      "description": "AWS Toolkit for Visual Studio — a plugin to interact with AWS.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-toolkit-visual-studio",
+          "description": "",
+          "path": "skills/aws-toolkit-visual-studio",
+          "url": "https://github.com/aws/aws-toolkit-visual-studio/blob/main/skills/aws-toolkit-visual-studio"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-toolkit-visual-studio",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "pipelines",
+      "name": "pipelines",
+      "vendor": "Arcee AI",
+      "vendorUrl": "https://github.com/arcee-ai/pipelines",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/arcee-ai/pipelines",
+      "install": "https://github.com/arcee-ai/pipelines",
+      "description": "Pipelines: Versatile, UI-Agnostic OpenAI-Compatible Plugin Framework.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pipelines",
+          "description": "",
+          "path": "skills/pipelines",
+          "url": "https://github.com/arcee-ai/pipelines/blob/main/skills/pipelines"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/arcee-ai/plugins/pipelines",
+      "provider": "arcee-ai"
+    },
+    {
+      "slug": "kubelogin",
+      "name": "kubelogin",
+      "vendor": "Microsoft",
+      "vendorUrl": "https://github.com/Azure/kubelogin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Azure/kubelogin",
+      "install": "https://github.com/Azure/kubelogin",
+      "description": "A Kubernetes credential (exec) plugin implementing azure authentication.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kubelogin",
+          "description": "",
+          "path": "skills/kubelogin",
+          "url": "https://github.com/Azure/kubelogin/blob/main/skills/kubelogin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/microsoft-azure/plugins/kubelogin",
+      "provider": "microsoft-azure"
+    },
+    {
+      "slug": "vagrant-azure",
+      "name": "vagrant-azure",
+      "vendor": "Microsoft",
+      "vendorUrl": "https://github.com/Azure/vagrant-azure",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Azure/vagrant-azure",
+      "install": "https://github.com/Azure/vagrant-azure",
+      "description": "Enable Vagrant to manage virtual machines in Microsoft Azure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "vagrant-azure",
+          "description": "",
+          "path": "skills/vagrant-azure",
+          "url": "https://github.com/Azure/vagrant-azure/blob/main/skills/vagrant-azure"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/microsoft-azure/plugins/vagrant-azure",
+      "provider": "microsoft-azure"
+    },
+    {
+      "slug": "n8n-nodes-baseten",
+      "name": "n8n-nodes-baseten",
+      "vendor": "Baseten",
+      "vendorUrl": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "install": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "description": "n8n community node for Baseten chat model integration.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-baseten",
+          "description": "",
+          "path": "skills/n8n-nodes-baseten",
+          "url": "https://github.com/basetenlabs/n8n-nodes-baseten/blob/main/skills/n8n-nodes-baseten"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/baseten/plugins/n8n-nodes-baseten",
+      "provider": "baseten"
+    },
+    {
+      "slug": "ec2-plugin",
+      "name": "ec2-plugin",
+      "vendor": "Databricks",
+      "vendorUrl": "https://github.com/databricks/ec2-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/databricks/ec2-plugin",
+      "install": "https://github.com/databricks/ec2-plugin",
+      "description": "Jenkins ec2 plugin — provision and manage Amazon EC2 agents from Jenkins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "ec2-plugin",
+          "description": "",
+          "path": "skills/ec2-plugin",
+          "url": "https://github.com/databricks/ec2-plugin/blob/main/skills/ec2-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/databricks/plugins/ec2-plugin",
+      "provider": "databricks"
+    },
+    {
+      "slug": "intellij-jsonnet",
+      "name": "intellij-jsonnet",
+      "vendor": "Databricks",
+      "vendorUrl": "https://github.com/databricks/intellij-jsonnet",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/databricks/intellij-jsonnet",
+      "install": "https://github.com/databricks/intellij-jsonnet",
+      "description": "IntelliJ Jsonnet Plugin — Jsonnet language support for IntelliJ-based IDEs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "intellij-jsonnet",
+          "description": "",
+          "path": "skills/intellij-jsonnet",
+          "url": "https://github.com/databricks/intellij-jsonnet/blob/main/skills/intellij-jsonnet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/databricks/plugins/intellij-jsonnet",
+      "provider": "databricks"
+    },
+    {
+      "slug": "deepinfra-hermes-sandbox",
+      "name": "deepinfra-hermes-sandbox",
+      "vendor": "DeepInfra",
+      "vendorUrl": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "install": "https://github.com/deepinfra/deepinfra-hermes-sandbox",
+      "description": "DeepInfra cloud sandbox (deep_sands) terminal backend plugin for hermes-agent.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "deepinfra-hermes-sandbox",
+          "description": "",
+          "path": "skills/deepinfra-hermes-sandbox",
+          "url": "https://github.com/deepinfra/deepinfra-hermes-sandbox/blob/main/skills/deepinfra-hermes-sandbox"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/deepinfra/plugins/deepinfra-hermes-sandbox",
+      "provider": "deepinfra"
+    },
+    {
+      "slug": "CodexPlugin",
+      "name": "CodexPlugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/CodexPlugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/CodexPlugin",
+      "install": "https://github.com/digitalocean/CodexPlugin",
+      "description": "A Codex plugin that provisions a DigitalOcean droplet and wires it up as a remote SSH workspace for the Codex desktop app, including a nested provision-droplet sub-skill.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "provision-droplet",
+          "description": "",
+          "path": "skills/provision-droplet",
+          "url": "https://github.com/digitalocean/CodexPlugin/blob/main/skills/provision-droplet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/CodexPlugin",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "do-markdownit",
+      "name": "do-markdownit",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/do-markdownit",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/do-markdownit",
+      "install": "https://github.com/digitalocean/do-markdownit",
+      "description": "Markdown-It plugin for the DigitalOcean Community — custom syntax highlighting, video embeds, and more.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "do-markdownit",
+          "description": "",
+          "path": "skills/do-markdownit",
+          "url": "https://github.com/digitalocean/do-markdownit/blob/main/skills/do-markdownit"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/do-markdownit",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "doctl-sandbox-plugin",
+      "name": "doctl-sandbox-plugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "install": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "description": "Supports certain doctl serverless subcommands by incorporating the DigitalOcean Functions Deployer via a plugin (historically 'the sandbox plugin').",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "doctl-sandbox-plugin",
+          "description": "",
+          "path": "skills/doctl-sandbox-plugin",
+          "url": "https://github.com/digitalocean/doctl-sandbox-plugin/blob/main/skills/doctl-sandbox-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/doctl-sandbox-plugin",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "packer-plugin-digitalocean",
+      "name": "packer-plugin-digitalocean",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MPL-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "install": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "description": "Packer plugin for DigitalOcean Builder — create custom machine images on DigitalOcean with HashiCorp Packer.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-digitalocean",
+          "description": "",
+          "path": "skills/packer-plugin-digitalocean",
+          "url": "https://github.com/digitalocean/packer-plugin-digitalocean/blob/main/skills/packer-plugin-digitalocean"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/packer-plugin-digitalocean",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "velero-plugin",
+      "name": "velero-plugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/velero-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/velero-plugin",
+      "install": "https://github.com/digitalocean/velero-plugin",
+      "description": "DigitalOcean plugin for Velero — filesystem snapshots of Block Storage persistent volumes in Kubernetes for backup and restore.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "velero-plugin",
+          "description": "",
+          "path": "skills/velero-plugin",
+          "url": "https://github.com/digitalocean/velero-plugin/blob/main/skills/velero-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/velero-plugin",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "fireworks-cookbook",
+      "name": "fireworks-cookbook",
+      "vendor": "Fireworks AI",
+      "vendorUrl": "https://github.com/fw-ai/cookbook",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/fw-ai/cookbook",
+      "install": "https://github.com/fw-ai/cookbook",
+      "description": "The Fireworks AI Cookbook packaged as a plugin: .codex-plugin/plugin.json and .claude-plugin configurations ship the same Agent Skills as an installable Codex or Claude plugin — portable skills for AI assistants like Cursor, Codex, and Claude Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "fireworks-training",
+          "description": "",
+          "path": "skills/fireworks-training",
+          "url": "https://github.com/fw-ai/cookbook/blob/main/skills/fireworks-training"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/fireworks/plugins/fireworks-cookbook",
+      "provider": "fireworks"
+    },
+    {
+      "slug": "hermes-friendliai-provider",
+      "name": "hermes-friendliai-provider",
+      "vendor": "FriendliAI",
+      "vendorUrl": "https://github.com/friendliai/hermes-friendliai-provider",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/friendliai/hermes-friendliai-provider",
+      "install": "https://github.com/friendliai/hermes-friendliai-provider",
+      "description": "FriendliAI serverless model provider plugin for Hermes Agent — live model catalog, reasoning_effort/enable_thinking mapping, no built-in adapter required; handles Friendli-specific API quirks like disabling reasoning.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "hermes-friendliai-provider",
+          "description": "",
+          "path": "skills/hermes-friendliai-provider",
+          "url": "https://github.com/friendliai/hermes-friendliai-provider/blob/main/skills/hermes-friendliai-provider"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/friendliai/plugins/hermes-friendliai-provider",
+      "provider": "friendliai"
+    },
+    {
+      "slug": "dify-plugin-novita",
+      "name": "dify-plugin-novita",
+      "vendor": "Novita",
+      "vendorUrl": "https://github.com/novitalabs/dify-plugin-novita",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/novitalabs/dify-plugin-novita",
+      "install": "https://github.com/novitalabs/dify-plugin-novita",
+      "description": "Novita AI plugin for Dify — use Novita AI models directly within the Dify workflow automation platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dify-plugin-novita",
+          "description": "",
+          "path": "skills/dify-plugin-novita",
+          "url": "https://github.com/novitalabs/dify-plugin-novita/blob/main/skills/dify-plugin-novita"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/novita/plugins/dify-plugin-novita",
+      "provider": "novita"
+    },
+    {
+      "slug": "sd-webui-cleaner",
+      "name": "sd-webui-cleaner",
+      "vendor": "Novita",
+      "vendorUrl": "https://github.com/novitalabs/sd-webui-cleaner",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/novitalabs/sd-webui-cleaner",
+      "install": "https://github.com/novitalabs/sd-webui-cleaner",
+      "description": "Extension (plugin) for stable-diffusion-webui to remove any object from an image — UI and API powered by the LaMa model.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sd-webui-cleaner",
+          "description": "",
+          "path": "skills/sd-webui-cleaner",
+          "url": "https://github.com/novitalabs/sd-webui-cleaner/blob/main/skills/sd-webui-cleaner"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/novita/plugins/sd-webui-cleaner",
+      "provider": "novita"
+    },
+    {
+      "slug": "k8s_gateway-fork",
+      "name": "k8s_gateway-fork",
+      "vendor": "Together AI",
+      "vendorUrl": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "install": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "description": "CoreDNS plugin that resolves Kubernetes resources with their external IP addresses based on configured zones — supports Ingress, Service (LoadBalancer), and Gateway API resources. Together AI fork for internal infrastructure routing.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "k8s_gateway-fork",
+          "description": "",
+          "path": "skills/k8s_gateway-fork",
+          "url": "https://github.com/togethercomputer/k8s_gateway-fork/blob/main/skills/k8s_gateway-fork"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/together-ai/plugins/k8s_gateway-fork",
+      "provider": "together-ai"
+    },
+    {
+      "slug": "together-kubelogin",
+      "name": "together-kubelogin",
+      "vendor": "Together AI",
+      "vendorUrl": "https://github.com/togethercomputer/together-kubelogin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/togethercomputer/together-kubelogin",
+      "install": "https://github.com/togethercomputer/together-kubelogin",
+      "description": "Kubernetes Authentication Plugin for Together AI — a kubectl OIDC credential plugin for client-go that authenticates to Kubernetes clusters via the Together AI identity provider.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "together-kubelogin",
+          "description": "",
+          "path": "skills/together-kubelogin",
+          "url": "https://github.com/togethercomputer/together-kubelogin/blob/main/skills/together-kubelogin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/together-ai/plugins/together-kubelogin",
+      "provider": "together-ai"
+    },
+    {
+      "slug": "cni-plugins",
+      "name": "cni-plugins",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/cni-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/modal-labs/cni-plugins",
+      "install": "https://github.com/modal-labs/cni-plugins",
+      "description": "Reference and example CNI networking plugins maintained by the CNI team (Modal fork of containernetworking/plugins) — main interface-creating plugins (bridge, ipvlan, macvlan), IPAM plugins (dhcp, host-local), and meta plugins (tuning, portmap, bandwidth, firewall).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "cni-plugins",
+          "description": "",
+          "path": "skills/cni-plugins",
+          "url": "https://github.com/modal-labs/cni-plugins/blob/main/skills/cni-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/cni-plugins",
+      "provider": "modal"
+    },
+    {
+      "slug": "packer-plugin-crusoe",
+      "name": "packer-plugin-crusoe",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "install": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "description": "A Packer plugin that enables automated creation of custom VM images on Crusoe Cloud — automated image building, flexible SSH authentication, multi-region support, HMAC-based authentication, and automatic cleanup of temporary resources. Maintained by Modal Labs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-crusoe",
+          "description": "",
+          "path": "skills/packer-plugin-crusoe",
+          "url": "https://github.com/modal-labs/packer-plugin-crusoe/blob/main/skills/packer-plugin-crusoe"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/packer-plugin-crusoe",
+      "provider": "modal"
+    },
+    {
+      "slug": "pytest-markdown-docs",
+      "name": "pytest-markdown-docs",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/pytest-markdown-docs",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/modal-labs/pytest-markdown-docs",
+      "install": "https://github.com/modal-labs/pytest-markdown-docs",
+      "description": "A plugin for pytest that uses markdown code snippets from markdown files and docstrings as tests — detects Python code fences in .md, .mdx, .svx, and .py files and runs them, supporting fixtures, async fixtures, and continuation blocks.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pytest-markdown-docs",
+          "description": "",
+          "path": "skills/pytest-markdown-docs",
+          "url": "https://github.com/modal-labs/pytest-markdown-docs/blob/main/skills/pytest-markdown-docs"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/pytest-markdown-docs",
+      "provider": "modal"
+    },
+    {
+      "slug": "openclaw-plugin",
+      "name": "openclaw-plugin",
+      "vendor": "GMI",
+      "vendorUrl": "https://github.com/GMISWE/openclaw-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/GMISWE/openclaw-plugin",
+      "install": "https://github.com/GMISWE/openclaw-plugin",
+      "description": "GMI Cloud Provider Plugin for OpenClaw — adds GMI Cloud as a model provider for its OpenAI-compatible inference API (https://api.gmi-serving.com/v1), with API-key provider auth, a static catalog of common GMI Cloud models, and dynamic model resolution.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openclaw-plugin",
+          "description": "",
+          "path": "skills/openclaw-plugin",
+          "url": "https://github.com/GMISWE/openclaw-plugin/blob/main/skills/openclaw-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/gmi/plugins/openclaw-plugin",
+      "provider": "gmi"
+    },
+    {
+      "slug": "BizyAirPlus",
+      "name": "BizyAirPlus",
+      "vendor": "SiliconFlow",
+      "vendorUrl": "https://github.com/siliconflow/BizyAirPlus",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/siliconflow/BizyAirPlus",
+      "install": "https://github.com/siliconflow/BizyAirPlus",
+      "description": "ComfyUI plugin that brings BizyAir cloud execution to ComfyUI while preserving the familiar local workflow editing experience — build and edit workflows locally, submit them to BizyAir for execution, and receive progress updates and results directly in the ComfyUI interface.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "BizyAirPlus",
+          "description": "",
+          "path": "skills/BizyAirPlus",
+          "url": "https://github.com/siliconflow/BizyAirPlus/blob/main/skills/BizyAirPlus"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/siliconflow/plugins/BizyAirPlus",
+      "provider": "siliconflow"
+    },
+    {
+      "slug": "dsh-plugins",
+      "name": "dsh-plugins",
+      "vendor": "SiliconFlow",
+      "vendorUrl": "https://github.com/siliconflow/dsh-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/siliconflow/dsh-plugins",
+      "install": "https://github.com/siliconflow/dsh-plugins",
+      "description": "DeepSeek Harness (DSH) local plugin collection — central management and distribution of custom DSH plugins. Includes dsh-tool-oss (multi-bucket OSS object-storage file browser with upload and recursive deletion, compatible with SiliconFlow, Tencent Cloud COS, Alibaba Cloud OSS) and dsh-ui-archived-local (archived sidebar panel with view/open/unarchive/delete and custom confirmation modals).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dsh-tool-oss",
+          "description": "",
+          "path": "skills/dsh-tool-oss",
+          "url": "https://github.com/siliconflow/dsh-plugins/blob/main/skills/dsh-tool-oss"
+        },
+        {
+          "name": "dsh-ui-archived-local",
+          "description": "",
+          "path": "skills/dsh-ui-archived-local",
+          "url": "https://github.com/siliconflow/dsh-plugins/blob/main/skills/dsh-ui-archived-local"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/siliconflow/plugins/dsh-plugins",
+      "provider": "siliconflow"
+    },
+    {
+      "slug": "autoclusters-controller-helm-charts",
+      "name": "autoclusters-controller-helm-charts",
+      "vendor": "Crusoe",
+      "vendorUrl": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "install": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "description": "Helm charts for Crusoe's infrastructure, including deployment of the Node Problem Detector DaemonSet configured with specialized GPU health monitoring plugins to ensure cluster reliability.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "autoclusters-controller-helm-charts",
+          "description": "",
+          "path": "skills/autoclusters-controller-helm-charts",
+          "url": "https://github.com/crusoecloud/autoclusters-controller-helm-charts/blob/main/skills/autoclusters-controller-helm-charts"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/crusoe/plugins/autoclusters-controller-helm-charts",
+      "provider": "crusoe"
+    },
+    {
+      "slug": "terraform-provider-crusoe",
+      "name": "terraform-provider-crusoe",
+      "vendor": "Crusoe",
+      "vendorUrl": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "install": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "description": "Official Terraform Provider for Crusoe Cloud — in the HashiCorp ecosystem a Provider functions as a plugin that lets Terraform interact with and manage resources on a specific cloud platform (Crusoe's GPU cloud).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "terraform-provider-crusoe",
+          "description": "",
+          "path": "skills/terraform-provider-crusoe",
+          "url": "https://github.com/crusoecloud/terraform-provider-crusoe/blob/main/skills/terraform-provider-crusoe"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/crusoe/plugins/terraform-provider-crusoe",
+      "provider": "crusoe"
+    },
+    {
+      "slug": "packer-plugin-scaleway",
+      "name": "packer-plugin-scaleway",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/packer-plugin-scaleway",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MPL-2.0",
+      "upstreamRepo": "https://github.com/scaleway/packer-plugin-scaleway",
+      "install": "https://github.com/scaleway/packer-plugin-scaleway",
+      "description": "Packer plugin for the Scaleway Builder — a multi-component plugin used with HashiCorp Packer to create custom images on Scaleway infrastructure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-scaleway",
+          "description": "",
+          "path": "skills/packer-plugin-scaleway",
+          "url": "https://github.com/scaleway/packer-plugin-scaleway/blob/main/skills/packer-plugin-scaleway"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/packer-plugin-scaleway",
+      "provider": "scaleway"
+    },
+    {
+      "slug": "serverless-scaleway-functions",
+      "name": "serverless-scaleway-functions",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/serverless-scaleway-functions",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/scaleway/serverless-scaleway-functions",
+      "install": "https://github.com/scaleway/serverless-scaleway-functions",
+      "description": "Plugin for the Serverless Framework that lets users deploy serverless applications (Functions and Containers) on Scaleway infrastructure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "serverless-scaleway-functions",
+          "description": "",
+          "path": "skills/serverless-scaleway-functions",
+          "url": "https://github.com/scaleway/serverless-scaleway-functions/blob/main/skills/serverless-scaleway-functions"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/serverless-scaleway-functions",
+      "provider": "scaleway"
+    },
+    {
+      "slug": "waypoint-plugin-scaleway",
+      "name": "waypoint-plugin-scaleway",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "install": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "description": "HashiCorp Waypoint plugins adding Scaleway support — currently a container plugin that deploys containers to Scaleway.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "waypoint-plugin-scaleway",
+          "description": "",
+          "path": "skills/waypoint-plugin-scaleway",
+          "url": "https://github.com/scaleway/waypoint-plugin-scaleway/blob/main/skills/waypoint-plugin-scaleway"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/waypoint-plugin-scaleway",
+      "provider": "scaleway"
+    },
+    {
+      "slug": "sambanova-ai-provider",
+      "name": "sambanova-ai-provider",
+      "vendor": "SambaNova",
+      "vendorUrl": "https://github.com/sambanova/sambanova-ai-provider",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/sambanova/sambanova-ai-provider",
+      "install": "https://github.com/sambanova/sambanova-ai-provider",
+      "description": "Vercel AI SDK provider for running LLMs on SambaNova models — plugs SambaNova's API (chat completion, image input, tool calling, embeddings) into Vercel AI applications as a provider/plugin integration.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sambanova-ai-provider",
+          "description": "",
+          "path": "skills/sambanova-ai-provider",
+          "url": "https://github.com/sambanova/sambanova-ai-provider/blob/main/skills/sambanova-ai-provider"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/sambanova/plugins/sambanova-ai-provider",
+      "provider": "sambanova"
+    },
+    {
+      "slug": "sambanova-plugin-cc",
+      "name": "sambanova-plugin-cc",
+      "vendor": "SambaNova",
+      "vendorUrl": "https://github.com/sambanova/sambanova-plugin-cc",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/sambanova/sambanova-plugin-cc",
+      "install": "https://github.com/sambanova/sambanova-plugin-cc",
+      "description": "Claude Code plugin for SambaNova Cloud (also indexed as a skill above) — explicitly structured as a plugin (.mcp.json, plugins/samba-plugin, marketplace.json) exposing model-management and task-delegation skills as MCP tools; builds an isolated virtual environment automatically on session start so skills and the MCP server are ready without manual setup.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sambanova-plugin-cc",
+          "description": "",
+          "path": "skills/sambanova-plugin-cc",
+          "url": "https://github.com/sambanova/sambanova-plugin-cc/blob/main/skills/sambanova-plugin-cc"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/sambanova/plugins/sambanova-plugin-cc",
+      "provider": "sambanova"
+    },
+    {
+      "slug": "groq-desktop-beta",
+      "name": "groq-desktop-beta",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/groq-desktop-beta",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/groq-desktop-beta",
+      "install": "https://github.com/groq/groq-desktop-beta",
+      "description": "Local Groq Desktop chat app with MCP (Model Context Protocol) support for Windows, macOS, and Linux — MCP support functions as a plugin system extending the desktop app's capabilities with function-calling models.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "groq-desktop-beta",
+          "description": "",
+          "path": "skills/groq-desktop-beta",
+          "url": "https://github.com/groq/groq-desktop-beta/blob/main/skills/groq-desktop-beta"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/groq-desktop-beta",
+      "provider": "groq"
+    },
+    {
+      "slug": "groq-mcp-server",
+      "name": "groq-mcp-server",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/groq-mcp-server",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/groq-mcp-server",
+      "install": "https://github.com/groq/groq-mcp-server",
+      "description": "Groq MCP (Model Context Protocol) server — lets MCP clients like Claude query models hosted on Groq for lightning-fast inference, enabling agentic tasks, vision analysis, speech synthesis/transcription, and batch processing directly through the MCP plugin architecture.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "groq-mcp-server",
+          "description": "",
+          "path": "skills/groq-mcp-server",
+          "url": "https://github.com/groq/groq-mcp-server/blob/main/skills/groq-mcp-server"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/groq-mcp-server",
+      "provider": "groq"
+    },
+    {
+      "slug": "kustomize-upsert",
+      "name": "kustomize-upsert",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/kustomize-upsert",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/kustomize-upsert",
+      "install": "https://github.com/groq/kustomize-upsert",
+      "description": "A generic Go plugin for Kustomize providing 'append if exists, else create' behavior for array fields in Kubernetes resources, with regex-based resource targeting for gradual rollouts.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kustomize-upsert",
+          "description": "",
+          "path": "skills/kustomize-upsert",
+          "url": "https://github.com/groq/kustomize-upsert/blob/main/skills/kustomize-upsert"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/kustomize-upsert",
+      "provider": "groq"
+    },
+    {
+      "slug": "openbench",
+      "name": "openbench",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/openbench",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/openbench",
+      "install": "https://github.com/groq/openbench",
+      "description": "A provider-agnostic, open-source evaluation framework for language models with native plugin support via Python entry points — developers can package custom benchmarks and distribute them independently.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openbench",
+          "description": "",
+          "path": "skills/openbench",
+          "url": "https://github.com/groq/openbench/blob/main/skills/openbench"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/openbench",
+      "provider": "groq"
+    },
+    {
+      "slug": "openbench-cyber",
+      "name": "openbench-cyber",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/openbench-cyber",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/openbench-cyber",
+      "install": "https://github.com/groq/openbench-cyber",
+      "description": "A cybersecurity evaluation plugin for openbench — moves cybersecurity-heavy benchmarks (CTI-Bench, CyBench) into a separate optional dependency, keeping the core openbench distribution lean while supporting advanced security workloads.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openbench-cyber",
+          "description": "",
+          "path": "skills/openbench-cyber",
+          "url": "https://github.com/groq/openbench-cyber/blob/main/skills/openbench-cyber"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/openbench-cyber",
+      "provider": "groq"
+    },
+    {
+      "slug": "tailscale-buildkite-plugin",
+      "name": "tailscale-buildkite-plugin",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/tailscale-buildkite-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/tailscale-buildkite-plugin",
+      "install": "https://github.com/groq/tailscale-buildkite-plugin",
+      "description": "A Buildkite plugin designed to connect CI/CD pipelines securely to a Tailscale network.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "tailscale-buildkite-plugin",
+          "description": "",
+          "path": "skills/tailscale-buildkite-plugin",
+          "url": "https://github.com/groq/tailscale-buildkite-plugin/blob/main/skills/tailscale-buildkite-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/tailscale-buildkite-plugin",
+      "provider": "groq"
+    },
+    {
+      "slug": "vscode-cerebras-chat",
+      "name": "vscode-cerebras-chat",
+      "vendor": "Cerebras",
+      "vendorUrl": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "install": "https://github.com/Cerebras/vscode-cerebras-chat",
+      "description": "Cerebras VS Code extension — makes GitHub Copilot run 10x faster with Cerebras Inference (2,000+ tokens/sec), powering instant code generation and super-fast agentic flows directly in VS Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "vscode-cerebras-chat",
+          "description": "",
+          "path": "skills/vscode-cerebras-chat",
+          "url": "https://github.com/Cerebras/vscode-cerebras-chat/blob/main/skills/vscode-cerebras-chat"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/cerebras/plugins/vscode-cerebras-chat",
+      "provider": "cerebras"
+    },
+    {
+      "slug": "replicate-models-chatgpt-plugin",
+      "name": "replicate-models-chatgpt-plugin",
+      "vendor": "Replicate",
+      "vendorUrl": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "install": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "description": "OpenAI plugins quickstart-based plugin that runs Replicate models directly from within ChatGPT — ships the OpenAPI spec (openapi.yaml) and Node.js backend (app.js) that let ChatGPT discover and execute Replicate model predictions.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "replicate-models-chatgpt-plugin",
+          "description": "",
+          "path": "skills/replicate-models-chatgpt-plugin",
+          "url": "https://github.com/replicate/replicate-models-chatgpt-plugin/blob/main/skills/replicate-models-chatgpt-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/replicate/plugins/replicate-models-chatgpt-plugin",
+      "provider": "replicate"
     }
   ]
 }

@@ -1,0 +1,13 @@
+{
+  "name": "grok-build-plugin-cc",
+  "description": "Claude Code plugin that delegates reviews, rescue tasks, and session transfer to the Grok Build CLI.",
+  "source_url": "https://github.com/xai-org/grok-build-plugin-cc",
+  "contents": {
+    "skills": ["grok-build-plugin-cc"]
+  },
+  "vendor": "xAI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "spacexai", "xai", "grok", "claude-code", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

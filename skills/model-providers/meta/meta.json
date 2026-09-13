@@ -1,11 +1,13 @@
 {
   "id": "meta",
   "slug": "meta",
-  "description": "Integration guide and best practices for using Meta as a model provider.",
+  "description": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "meta"
+    "meta",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "meta",
     "license": "MIT"
   },
-  "hash": "3ab670a6cdc437a8",
+  "hash": "b48ecb243202e89c",
   "path": "skills/model-providers/meta",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/meta/SKILL.md"
 }

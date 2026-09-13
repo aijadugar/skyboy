@@ -1,0 +1,13 @@
+{
+  "name": "replicate-models-chatgpt-plugin",
+  "description": "OpenAI plugins quickstart-based plugin that runs Replicate models directly from within ChatGPT — ships the OpenAPI spec (openapi.yaml) and Node.js backend (app.js) that let ChatGPT discover and execute Replicate model predictions.",
+  "source_url": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+  "contents": {
+    "skills": ["replicate-models-chatgpt-plugin"]
+  },
+  "vendor": "Replicate",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "replicate", "chatgpt", "openai-plugin", "nodejs", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

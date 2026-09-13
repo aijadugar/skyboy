@@ -1,0 +1,12 @@
+{
+  "name": "stepaudio-skills",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+  "command": "skyboy add stepaudio-skills",
+  "tags": ["model-provider", "stepfun", "audio", "skills", "claw"],
+  "author": "skyboy",
+  "source_url": "https://github.com/stepfun-ai/StepAudio-Skills",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

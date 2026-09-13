@@ -1,11 +1,12 @@
 {
   "id": "agnes-ai",
   "slug": "agnes-ai",
-  "description": "Integration guide and best practices for using Agnes AI as a model provider.",
+  "description": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "agnes-ai"
+    "agnes-ai",
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "agnes-ai",
     "license": "MIT"
   },
-  "hash": "ffadd2205abd2c38",
+  "hash": "61330c4a07abeed8",
   "path": "skills/model-providers/agnes-ai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/agnes-ai/SKILL.md"
 }

@@ -1,0 +1,12 @@
+{
+  "name": "agent-toolkit-for-aws",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS.",
+  "command": "skyboy add agent-toolkit-for-aws",
+  "tags": ["model-provider", "amazon-bedrock", "aws", "mcp", "skills", "plugins"],
+  "author": "skyboy",
+  "source_url": "https://github.com/aws/agent-toolkit-for-aws",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

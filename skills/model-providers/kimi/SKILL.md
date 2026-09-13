@@ -69,3 +69,13 @@ Kimi offers models across capability tiers. Choose based on your use case:
 
 - Kimi official documentation
 - Kimi API reference
+
+## Kimi / MoonshotAI Plugins
+
+MoonshotAI's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [koishi-plugin-moonshot-api-plus](https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus) | Advanced moonshot api for koishi | TypeScript | — |
+| [koishi-plugin-moonshot-api](https://github.com/MoonshotAI/koishi-plugin-moonshot-api) | Official moonshot api for koishi | JavaScript | MIT |
+| [kimi-code-zed-extension](https://github.com/MoonshotAI/kimi-code-zed-extension) | Kimi CLI Zed extension | — | Apache-2.0 |

@@ -69,3 +69,13 @@ FriendliAI offers models across capability tiers. Choose based on your use case:
 
 - FriendliAI official documentation
 - FriendliAI API reference
+
+## FriendliAI Plugins
+
+FriendliAI's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [hermes-friendliai-provider](https://github.com/friendliai/hermes-friendliai-provider) | FriendliAI serverless model provider plugin for Hermes Agent — live model catalog, reasoning_effort/enable_thinking mapping, handles Friendli-specific API quirks | Python | MIT |
+
+> Note: the "Friendli Design Token Exporter" plugin is referenced in the public fai-design-system docs but its repository is not publicly reachable, so it is not indexed.

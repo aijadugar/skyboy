@@ -1,11 +1,14 @@
 {
   "id": "amazon-bedrock",
   "slug": "amazon-bedrock",
-  "description": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+  "description": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "amazon-bedrock"
+    "amazon-bedrock",
+    "aws",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +28,7 @@
     "name": "amazon-bedrock",
     "license": "MIT"
   },
-  "hash": "31374e3d0ba16f3a",
+  "hash": "7bed5b7c6ef4c6d4",
   "path": "skills/model-providers/amazon-bedrock",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/SKILL.md"
 }

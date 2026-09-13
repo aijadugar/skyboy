@@ -69,3 +69,22 @@ Modal offers models across capability tiers. Choose based on your use case:
 
 - Modal official documentation
 - Modal API reference
+
+## Modal Skills & Plugins
+
+Modal's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| modal-client | [modal-labs/modal-client](https://github.com/modal-labs/modal-client) | Modal's official SDKs (Python, JavaScript/TypeScript, Go) — distributes an agent skill (`modal skills install` / `npx skills add modal-labs/modal-client`) that gives coding assistants version-aligned Modal documentation | Python, Go, TypeScript | Apache-2.0 |
+| openai-agents-python-example | [modal-labs/openai-agents-python-example](https://github.com/modal-labs/openai-agents-python-example) | Coding agent harness built on the OpenAI Agents SDK + Modal Sandboxes with async parallel workers; includes an opt-in `/skills` markdown plugin system (e.g., `skills/parameter_golf.md`) for targeted agent context | Python | — |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [pytest-markdown-docs](https://github.com/modal-labs/pytest-markdown-docs) | pytest plugin that runs Python code fences in .md/.mdx/.svx/.py files as tests — supports fixtures, async fixtures, and continuation blocks | Python | MIT |
+| [packer-plugin-crusoe](https://github.com/modal-labs/packer-plugin-crusoe) | Packer plugin for automated custom VM image building on Crusoe Cloud — flexible SSH auth, multi-region, HMAC authentication, automatic cleanup of temporary resources | Go | — |
+| [cni-plugins](https://github.com/modal-labs/cni-plugins) | Reference/example CNI networking plugins (Modal fork of containernetworking/plugins) — bridge/ipvlan/macvlan, IPAM (dhcp, host-local), and meta plugins (tuning, portmap, bandwidth, firewall) | Go | Apache-2.0 |

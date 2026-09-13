@@ -69,3 +69,24 @@ DigitalOcean offers models across capability tiers. Choose based on your use cas
 
 - DigitalOcean official documentation
 - DigitalOcean API reference
+
+## DigitalOcean Skills & Plugins
+
+DigitalOcean's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| do-app-platform-skills | [digitalocean-labs/do-app-platform-skills](https://github.com/digitalocean-labs/do-app-platform-skills) | Claude/Agent Skills for App Platform — deployment, migration, networking, database configuration, troubleshooting; modular skills with routing guidance, reference material, templates, and scripts | Python, Shell | MIT |
+| action-gateway-skill | [digitalocean/action-gateway-skill](https://github.com/digitalocean/action-gateway-skill) | Agent skill for setting up the Action Gateway from a single URL — register the Action Gateway MCP server, discover and invoke catalog tools | Markdown / MDX | — |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [CodexPlugin](https://github.com/digitalocean/CodexPlugin) | Codex plugin that provisions a droplet and wires it as a remote SSH workspace for the Codex desktop app, with a nested provision-droplet sub-skill | Python, Go Template | — |
+| [packer-plugin-digitalocean](https://github.com/digitalocean/packer-plugin-digitalocean) | Packer plugin for the DigitalOcean Builder — custom machine images via HashiCorp Packer | Go | MPL-2.0 |
+| [velero-plugin](https://github.com/digitalocean/velero-plugin) | Velero plugin — Block Storage volume snapshots for Kubernetes backup/restore | Go | Apache-2.0 |
+| [doctl-sandbox-plugin](https://github.com/digitalocean/doctl-sandbox-plugin) | doctl serverless subcommand support via the DigitalOcean Functions Deployer ("the sandbox plugin") | Shell, JS/TS | Apache-2.0 |
+| [do-markdownit](https://github.com/digitalocean/do-markdownit) | Markdown-It plugin for the DigitalOcean Community — syntax highlighting, video embeds, and more | JavaScript | Apache-2.0 |

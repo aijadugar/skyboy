@@ -69,3 +69,11 @@ Cohere offers models across capability tiers. Choose based on your use case:
 
 - Cohere official documentation
 - Cohere API reference
+
+## Cohere Skills
+
+Cohere's public skills ecosystem (`skills/` in this folder; no dedicated plugin repositories published to date):
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| vllm-skills | [cohere-ai/vllm-skills](https://github.com/cohere-ai/vllm-skills) | Agent Skills for serving and operating open models on the vLLM inference engine | — | Apache-2.0 |

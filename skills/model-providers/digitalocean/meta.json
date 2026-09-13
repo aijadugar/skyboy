@@ -1,11 +1,13 @@
 {
   "id": "digitalocean",
   "slug": "digitalocean",
-  "description": "Integration guide and best practices for using DigitalOcean as a model provider.",
+  "description": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "digitalocean"
+    "digitalocean",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "digitalocean",
     "license": "MIT"
   },
-  "hash": "ef69c12e48fd490f",
+  "hash": "81386cf2b606eca6",
   "path": "skills/model-providers/digitalocean",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/digitalocean/SKILL.md"
 }

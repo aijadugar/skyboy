@@ -69,3 +69,20 @@ MiniMax offers models across capability tiers. Choose based on your use case:
 
 - MiniMax official documentation
 - MiniMax API reference
+
+## MiniMax Skills & Plugins
+
+MiniMax's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| minimax-skills | [MiniMax-AI/skills](https://github.com/MiniMax-AI/skills) | MiniMax's official Agent Skills repository | C# | MIT |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [MiniMax-Code-Plugins](https://github.com/MiniMax-AI/MiniMax-Code-Plugins) | Community registry and contribution toolkit for MiniMax Code plugins | JavaScript | Apache-2.0 |
+| [minimax-desgin-plugin](https://github.com/MiniMax-AI/minimax-desgin-plugin) | MiniMax design plugin for agent workflows | TypeScript | — |

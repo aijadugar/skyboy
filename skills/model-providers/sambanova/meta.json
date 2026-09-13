@@ -1,11 +1,13 @@
 {
   "id": "sambanova",
   "slug": "sambanova",
-  "description": "Integration guide and best practices for using SambaNova as a model provider.",
+  "description": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "sambanova"
+    "sambanova",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "sambanova",
     "license": "MIT"
   },
-  "hash": "a7014deb18f538be",
+  "hash": "c045ad820881841e",
   "path": "skills/model-providers/sambanova",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/sambanova/SKILL.md"
 }

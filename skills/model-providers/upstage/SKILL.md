@@ -69,3 +69,13 @@ Upstage offers models across capability tiers. Choose based on your use case:
 
 - Upstage official documentation
 - Upstage API reference
+
+## Upstage Plugins
+
+Upstage's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date). Upstage ships n8n nodes and platform extensions — the functional equivalents of plugins for those ecosystems:
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [n8n-nodes-upstage](https://github.com/UpstageAI/n8n-nodes-upstage) | Upstage LLM and Embeddings nodes for n8n | TypeScript | MIT |
+| [n8n-nodes-solar](https://github.com/UpstageAI/n8n-nodes-solar) | Solar LLM and Embeddings nodes for the n8n workflow automation platform | TypeScript | MIT |
+| [upstage-extensions-hub](https://github.com/UpstageAI/upstage-extensions-hub) | Extensions hub — modular extensions for Upstage's document AI and LLM platform | Shell | MIT |

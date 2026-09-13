@@ -1,11 +1,13 @@
 {
   "id": "fireworks",
   "slug": "fireworks",
-  "description": "Integration guide and best practices for using Fireworks as a model provider.",
+  "description": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "fireworks"
+    "fireworks",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "fireworks",
     "license": "MIT"
   },
-  "hash": "950e708cb56cbf09",
+  "hash": "febed4a2f429bb2c",
   "path": "skills/model-providers/fireworks",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/fireworks/SKILL.md"
 }

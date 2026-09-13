@@ -1,0 +1,13 @@
+{
+  "name": "Qwen-MM-Plugins",
+  "description": "Make any agent harness multimodal-native. Official Qwen multimodal plugins from the QwenLM team.",
+  "source_url": "https://github.com/QwenLM/Qwen-MM-Plugins",
+  "contents": {
+    "skills": ["Qwen-MM-Plugins"]
+  },
+  "vendor": "Alibaba Cloud",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "alibaba-cloud", "qwen", "multimodal", "plugins", "agent-harness"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

@@ -1,0 +1,34 @@
+{
+  "id": "action-gateway-skill",
+  "slug": "action-gateway-skill",
+  "description": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "digitalocean",
+    "action-gateway",
+    "mcp",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/digitalocean/action-gateway-skill",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "action-gateway-skill",
+    "license": "MIT"
+  },
+  "hash": "5ebcb0ac835f4b90",
+  "path": "skills/model-providers/digitalocean/skills/action-gateway-skill",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/digitalocean/skills/action-gateway-skill/SKILL.md"
+}

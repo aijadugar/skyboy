@@ -69,3 +69,22 @@ Groq offers models across capability tiers. Choose based on your use case:
 
 - Groq official documentation
 - Groq API reference
+
+## Groq Skills & Plugins
+
+Groq's public plugin ecosystem (`plugins/` in this folder):
+
+### Skills
+
+No public Groq repositories dedicated to agent skills were found; the folder ships plugins only.
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [groq-mcp-server](https://github.com/groq/groq-mcp-server) | Groq MCP server — MCP clients (e.g., Claude) query Groq-hosted models for fast inference, agentic tasks, vision, speech, and batch processing through the MCP plugin architecture | Python, Shell | MIT |
+| [groq-desktop-beta](https://github.com/groq/groq-desktop-beta) | Local Groq Desktop chat app (Windows/macOS/Linux) whose MCP support acts as a plugin system extending capabilities with function-calling models | JavaScript | MIT |
+| [tailscale-buildkite-plugin](https://github.com/groq/tailscale-buildkite-plugin) | Buildkite plugin connecting CI/CD pipelines securely to a Tailscale network | Shell | MIT |
+| [openbench-cyber](https://github.com/groq/openbench-cyber) | Cybersecurity evaluation plugin for openbench — optional CTI-Bench / CyBench benchmarks keeping the core distribution lean | Python, JavaScript, Rust | — |
+| [kustomize-upsert](https://github.com/groq/kustomize-upsert) | Generic Go plugin for Kustomize — "append if exists, else create" for array fields in Kubernetes resources, with regex targeting for gradual rollouts | Go | — |
+| [openbench](https://github.com/groq/openbench) | Provider-agnostic LLM evaluation framework with native plugin support via Python entry points for independently packaged benchmarks | Python | — |

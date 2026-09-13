@@ -1,0 +1,35 @@
+{
+  "id": "agnescode",
+  "slug": "agnescode",
+  "description": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusa",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "agnes-ai",
+    "desktop",
+    "workspace",
+    "mcp",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/AgnesAI-Labs/AgnesCode",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agnescode",
+    "license": "Apache-2.0"
+  },
+  "hash": "3fc25ac9d92be356",
+  "path": "skills/model-providers/agnes-ai/skills/agnescode",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/agnes-ai/skills/agnescode/SKILL.md"
+}

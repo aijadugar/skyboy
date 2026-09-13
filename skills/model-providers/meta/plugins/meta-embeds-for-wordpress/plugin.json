@@ -1,0 +1,13 @@
+{
+  "name": "meta-embeds-for-wordpress",
+  "description": "Official WordPress plugin for embedding Threads, Instagram, and Facebook content — paste a Threads, Instagram, or Facebook URL into the WordPress editor.",
+  "source_url": "https://github.com/facebook/meta-embeds-for-wordpress",
+  "contents": {
+    "skills": ["meta-embeds-for-wordpress"]
+  },
+  "vendor": "Meta",
+  "license": "GPL-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "meta", "facebook", "wordpress", "instagram", "oembed", "threads", "embeds"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

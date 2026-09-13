@@ -1,0 +1,13 @@
+{
+  "name": "dont-use-facebook-for-woocommerce",
+  "description": "A first-party extension plugin built for WooCommerce.",
+  "source_url": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+  "contents": {
+    "skills": ["dont-use-facebook-for-woocommerce"]
+  },
+  "vendor": "Meta",
+  "license": "GPL-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "meta", "facebook", "woocommerce", "wordpress", "plugin", "archived"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

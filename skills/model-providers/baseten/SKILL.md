@@ -69,3 +69,19 @@ Baseten offers models across capability tiers. Choose based on your use case:
 
 - Baseten official documentation
 - Baseten API reference
+
+## Baseten Skills & Plugins
+
+Baseten's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| baseten-skills | [basetenlabs/baseten-skills](https://github.com/basetenlabs/baseten-skills) | Skills for using Baseten effectively | Python | MIT |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [n8n-nodes-baseten](https://github.com/basetenlabs/n8n-nodes-baseten) | n8n community node for Baseten chat model integration (n8n nodes are the plugin-equivalents of that ecosystem) | TypeScript | — |

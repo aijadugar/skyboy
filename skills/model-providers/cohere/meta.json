@@ -1,11 +1,12 @@
 {
   "id": "cohere",
   "slug": "cohere",
-  "description": "Integration guide and best practices for using Cohere as a model provider.",
+  "description": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "cohere"
+    "cohere",
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "cohere",
     "license": "MIT"
   },
-  "hash": "026204e84c89759e",
+  "hash": "999c7a2510b52e83",
   "path": "skills/model-providers/cohere",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/cohere/SKILL.md"
 }

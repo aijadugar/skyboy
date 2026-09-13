@@ -1,0 +1,13 @@
+{
+  "name": "amazon-inspector-container-image-scanner-jenkins-plugin",
+  "description": "Jenkins CI/CD plugin for Amazon Inspector container image scanning.",
+  "source_url": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+  "contents": {
+    "skills": ["amazon-inspector-container-image-scanner-jenkins-plugin"]
+  },
+  "vendor": "Amazon Web Services",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "amazon-bedrock", "aws", "jenkins", "inspector", "cicd", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
