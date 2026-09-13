@@ -69,3 +69,20 @@ Crusoe offers models across capability tiers. Choose based on your use case:
 
 - Crusoe official documentation
 - Crusoe API reference
+
+## Crusoe Skills & Plugins
+
+Crusoe's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| terraform-provider-crusoe | [crusoecloud/terraform-provider-crusoe](https://github.com/crusoecloud/terraform-provider-crusoe) | Official Terraform Provider for Crusoe Cloud — also a reference for AI agent workflows in IaC development: uses a Claude Code skill (/derive-schema-descriptions) for schema field generation and a release-prep skill in its pipeline | Go, Python | — |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [terraform-provider-crusoe](https://github.com/crusoecloud/terraform-provider-crusoe) | Terraform provider — a HashiCorp-ecosystem plugin letting Terraform manage resources on Crusoe's GPU cloud (also indexed as a skill above for its agent-workflow usage) | Go, Python | — |
+| [autoclusters-controller-helm-charts](https://github.com/crusoecloud/autoclusters-controller-helm-charts) | Helm charts for Crusoe infrastructure, including the Node Problem Detector DaemonSet with GPU health monitoring plugins for cluster reliability | Go Template | MIT |

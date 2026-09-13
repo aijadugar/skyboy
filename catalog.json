@@ -562,11 +562,13 @@
     },
     {
       "id": "crusoe",
-      "d": "Integration guide and best practices for using Crusoe as a model provider.",
+      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "crusoe"
+        "crusoe",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -575,10 +577,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f842c784f430b5b7",
+      "h": "021b6b353940e0d7",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/crusoe"
+    },
+    {
+      "id": "terraform-provider-crusoe",
+      "d": "Official Terraform Provider for Crusoe Cloud — infrastructure-as-code for Crusoe GPU cloud, with active AI agent workflows: a Claude Code skill (/derive-schema-descriptions) for schema generation and ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "crusoe",
+        "terraform",
+        "gpu-cloud",
+        "infrastructure-as-code",
+        "claude-code",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "78bfdb86ab296c2a",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/crusoe/skills/terraform-provider-crusoe"
     },
     {
       "id": "databricks",
@@ -5120,6 +5147,66 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/siliconflow/plugins/dsh-plugins",
       "provider": "siliconflow"
+    },
+    {
+      "slug": "autoclusters-controller-helm-charts",
+      "name": "autoclusters-controller-helm-charts",
+      "vendor": "Crusoe",
+      "vendorUrl": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "install": "https://github.com/crusoecloud/autoclusters-controller-helm-charts",
+      "description": "Helm charts for Crusoe's infrastructure, including deployment of the Node Problem Detector DaemonSet configured with specialized GPU health monitoring plugins to ensure cluster reliability.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "autoclusters-controller-helm-charts",
+          "description": "",
+          "path": "skills/autoclusters-controller-helm-charts",
+          "url": "https://github.com/crusoecloud/autoclusters-controller-helm-charts/blob/main/skills/autoclusters-controller-helm-charts"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/crusoe/plugins/autoclusters-controller-helm-charts",
+      "provider": "crusoe"
+    },
+    {
+      "slug": "terraform-provider-crusoe",
+      "name": "terraform-provider-crusoe",
+      "vendor": "Crusoe",
+      "vendorUrl": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "install": "https://github.com/crusoecloud/terraform-provider-crusoe",
+      "description": "Official Terraform Provider for Crusoe Cloud — in the HashiCorp ecosystem a Provider functions as a plugin that lets Terraform interact with and manage resources on a specific cloud platform (Crusoe's GPU cloud).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "terraform-provider-crusoe",
+          "description": "",
+          "path": "skills/terraform-provider-crusoe",
+          "url": "https://github.com/crusoecloud/terraform-provider-crusoe/blob/main/skills/terraform-provider-crusoe"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/crusoe/plugins/terraform-provider-crusoe",
+      "provider": "crusoe"
     }
   ]
 }

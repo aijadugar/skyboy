@@ -1,11 +1,13 @@
 {
   "id": "crusoe",
   "slug": "crusoe",
-  "description": "Integration guide and best practices for using Crusoe as a model provider.",
+  "description": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "crusoe"
+    "crusoe",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "crusoe",
     "license": "MIT"
   },
-  "hash": "f842c784f430b5b7",
+  "hash": "021b6b353940e0d7",
   "path": "skills/model-providers/crusoe",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/crusoe/SKILL.md"
 }
