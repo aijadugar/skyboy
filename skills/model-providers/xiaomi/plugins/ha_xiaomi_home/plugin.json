@@ -1,0 +1,13 @@
+{
+  "name": "ha_xiaomi_home",
+  "description": "Xiaomi Home Integration for Home Assistant — connect Xiaomi MIoT smart-home devices to Home Assistant.",
+  "source_url": "https://github.com/XiaoMi/ha_xiaomi_home",
+  "contents": {
+    "skills": ["ha_xiaomi_home"]
+  },
+  "vendor": "Xiaomi",
+  "license": "Other",
+  "category": "model-providers",
+  "tags": ["model-provider", "xiaomi", "smart-home", "home-assistant", "miot", "home-assistant-integration", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

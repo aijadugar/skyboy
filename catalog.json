@@ -1274,11 +1274,12 @@
     },
     {
       "id": "xiaomi",
-      "d": "Integration guide and best practices for using Xiaomi as a model provider.",
+      "d": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "xiaomi"
+        "xiaomi",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1287,7 +1288,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "09d76ddcd97cb2cd",
+      "h": "a90dc6f516d28d18",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/xiaomi"
@@ -3401,6 +3402,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/upstage/plugins/upstage-extensions-hub",
       "provider": "upstage"
+    },
+    {
+      "slug": "pegasus-YCSB",
+      "name": "pegasus-YCSB",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/pegasus-YCSB",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/pegasus-YCSB",
+      "install": "https://github.com/XiaoMi/pegasus-YCSB",
+      "description": "Provide pegasus plugin in YCSB — benchmark Pegasus through the Yahoo! Cloud Serving Benchmark harness (see 'Test Pegasus' in the README).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pegasus-YCSB",
+          "description": "",
+          "path": "skills/pegasus-YCSB",
+          "url": "https://github.com/XiaoMi/pegasus-YCSB/blob/main/skills/pegasus-YCSB"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/pegasus-YCSB",
+      "provider": "xiaomi"
+    },
+    {
+      "slug": "pegasus-datax",
+      "name": "pegasus-datax",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/pegasus-datax",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/pegasus-datax",
+      "install": "https://github.com/XiaoMi/pegasus-datax",
+      "description": "Provide pegasus plugin in alibaba/DataX — read/write Pegasus from DataX pipelines (see 'pegasuswriter/doc/pegasuswriter.md').",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pegasus-datax",
+          "description": "",
+          "path": "skills/pegasus-datax",
+          "url": "https://github.com/XiaoMi/pegasus-datax/blob/main/skills/pegasus-datax"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/pegasus-datax",
+      "provider": "xiaomi"
+    },
+    {
+      "slug": "ha_xiaomi_home",
+      "name": "ha_xiaomi_home",
+      "vendor": "Xiaomi",
+      "vendorUrl": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "install": "https://github.com/XiaoMi/ha_xiaomi_home",
+      "description": "Xiaomi Home Integration for Home Assistant — connect Xiaomi MIoT smart-home devices to Home Assistant.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "ha_xiaomi_home",
+          "description": "",
+          "path": "skills/ha_xiaomi_home",
+          "url": "https://github.com/XiaoMi/ha_xiaomi_home/blob/main/skills/ha_xiaomi_home"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/xiaomi/plugins/ha_xiaomi_home",
+      "provider": "xiaomi"
     }
   ]
 }

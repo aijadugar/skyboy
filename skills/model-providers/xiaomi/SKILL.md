@@ -69,3 +69,13 @@ Xiaomi offers models across capability tiers. Choose based on your use case:
 
 - Xiaomi official documentation
 - Xiaomi API reference
+
+## Xiaomi Plugins
+
+Xiaomi's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [pegasus-YCSB](https://github.com/XiaoMi/pegasus-YCSB) | Pegasus plugin for YCSB — benchmark Pegasus via the Yahoo! Cloud Serving Benchmark | Java | Other |
+| [pegasus-datax](https://github.com/XiaoMi/pegasus-datax) | Pegasus plugin for alibaba/DataX — read/write Pegasus from DataX pipelines | Java | Other |
+| [ha_xiaomi_home](https://github.com/XiaoMi/ha_xiaomi_home) | Xiaomi Home Integration for Home Assistant (smart-home, MIoT devices) | Python | Other |
