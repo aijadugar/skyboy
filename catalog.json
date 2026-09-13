@@ -946,11 +946,12 @@
     },
     {
       "id": "groq",
-      "d": "Integration guide and best practices for using Groq as a model provider.",
+      "d": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "groq"
+        "groq",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -959,7 +960,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "1fead4edb87c94a6",
+      "h": "8313f9761691b049",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/groq"
@@ -5458,6 +5459,186 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/sambanova/plugins/sambanova-plugin-cc",
       "provider": "sambanova"
+    },
+    {
+      "slug": "groq-desktop-beta",
+      "name": "groq-desktop-beta",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/groq-desktop-beta",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/groq-desktop-beta",
+      "install": "https://github.com/groq/groq-desktop-beta",
+      "description": "Local Groq Desktop chat app with MCP (Model Context Protocol) support for Windows, macOS, and Linux — MCP support functions as a plugin system extending the desktop app's capabilities with function-calling models.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "groq-desktop-beta",
+          "description": "",
+          "path": "skills/groq-desktop-beta",
+          "url": "https://github.com/groq/groq-desktop-beta/blob/main/skills/groq-desktop-beta"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/groq-desktop-beta",
+      "provider": "groq"
+    },
+    {
+      "slug": "groq-mcp-server",
+      "name": "groq-mcp-server",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/groq-mcp-server",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/groq-mcp-server",
+      "install": "https://github.com/groq/groq-mcp-server",
+      "description": "Groq MCP (Model Context Protocol) server — lets MCP clients like Claude query models hosted on Groq for lightning-fast inference, enabling agentic tasks, vision analysis, speech synthesis/transcription, and batch processing directly through the MCP plugin architecture.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "groq-mcp-server",
+          "description": "",
+          "path": "skills/groq-mcp-server",
+          "url": "https://github.com/groq/groq-mcp-server/blob/main/skills/groq-mcp-server"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/groq-mcp-server",
+      "provider": "groq"
+    },
+    {
+      "slug": "kustomize-upsert",
+      "name": "kustomize-upsert",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/kustomize-upsert",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/kustomize-upsert",
+      "install": "https://github.com/groq/kustomize-upsert",
+      "description": "A generic Go plugin for Kustomize providing 'append if exists, else create' behavior for array fields in Kubernetes resources, with regex-based resource targeting for gradual rollouts.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kustomize-upsert",
+          "description": "",
+          "path": "skills/kustomize-upsert",
+          "url": "https://github.com/groq/kustomize-upsert/blob/main/skills/kustomize-upsert"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/kustomize-upsert",
+      "provider": "groq"
+    },
+    {
+      "slug": "openbench",
+      "name": "openbench",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/openbench",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/openbench",
+      "install": "https://github.com/groq/openbench",
+      "description": "A provider-agnostic, open-source evaluation framework for language models with native plugin support via Python entry points — developers can package custom benchmarks and distribute them independently.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openbench",
+          "description": "",
+          "path": "skills/openbench",
+          "url": "https://github.com/groq/openbench/blob/main/skills/openbench"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/openbench",
+      "provider": "groq"
+    },
+    {
+      "slug": "openbench-cyber",
+      "name": "openbench-cyber",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/openbench-cyber",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/groq/openbench-cyber",
+      "install": "https://github.com/groq/openbench-cyber",
+      "description": "A cybersecurity evaluation plugin for openbench — moves cybersecurity-heavy benchmarks (CTI-Bench, CyBench) into a separate optional dependency, keeping the core openbench distribution lean while supporting advanced security workloads.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openbench-cyber",
+          "description": "",
+          "path": "skills/openbench-cyber",
+          "url": "https://github.com/groq/openbench-cyber/blob/main/skills/openbench-cyber"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/openbench-cyber",
+      "provider": "groq"
+    },
+    {
+      "slug": "tailscale-buildkite-plugin",
+      "name": "tailscale-buildkite-plugin",
+      "vendor": "Groq",
+      "vendorUrl": "https://github.com/groq/tailscale-buildkite-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/groq/tailscale-buildkite-plugin",
+      "install": "https://github.com/groq/tailscale-buildkite-plugin",
+      "description": "A Buildkite plugin designed to connect CI/CD pipelines securely to a Tailscale network.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "tailscale-buildkite-plugin",
+          "description": "",
+          "path": "skills/tailscale-buildkite-plugin",
+          "url": "https://github.com/groq/tailscale-buildkite-plugin/blob/main/skills/tailscale-buildkite-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/groq/plugins/tailscale-buildkite-plugin",
+      "provider": "groq"
     }
   ]
 }

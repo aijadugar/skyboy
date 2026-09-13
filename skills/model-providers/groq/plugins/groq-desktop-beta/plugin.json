@@ -1,0 +1,13 @@
+{
+  "name": "groq-desktop-beta",
+  "description": "Local Groq Desktop chat app with MCP (Model Context Protocol) support for Windows, macOS, and Linux — MCP support functions as a plugin system extending the desktop app's capabilities with function-calling models.",
+  "source_url": "https://github.com/groq/groq-desktop-beta",
+  "contents": {
+    "skills": ["groq-desktop-beta"]
+  },
+  "vendor": "Groq",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "groq", "desktop-app", "mcp", "chat", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
