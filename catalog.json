@@ -1261,11 +1261,14 @@
     },
     {
       "id": "zai",
-      "d": "Integration guide and best practices for using Zai as a model provider.",
+      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "zai"
+        "zai",
+        "glm",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1274,10 +1277,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "4c813f1fbc1456d5",
+      "h": "4d8897878cd4cef4",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/zai"
+    },
+    {
+      "id": "glm-skills",
+      "d": "Official skills for the GLM family of models — OCR, vision, and multimodal skills published by zai-org for GLM agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "zai",
+        "glm",
+        "skills",
+        "ocr",
+        "vision",
+        "multimodal"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "379d29d13fc21749",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/zai/skills/glm-skills"
     }
   ],
   "plugins": [
@@ -2890,6 +2918,66 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/meta/plugins/dont-use-facebook-for-woocommerce",
       "provider": "meta"
+    },
+    {
+      "slug": "zcode-plugins",
+      "name": "zcode-plugins",
+      "vendor": "Z.ai",
+      "vendorUrl": "https://github.com/zai-org/zcode-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/zai-org/zcode-plugins",
+      "install": "https://github.com/zai-org/zcode-plugins",
+      "description": "ZCode Plugins Marketplace — official built-in and community plugins for ZCode.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zcode-plugins",
+          "description": "",
+          "path": "skills/zcode-plugins",
+          "url": "https://github.com/zai-org/zcode-plugins/blob/main/skills/zcode-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/zai/plugins/zcode-plugins",
+      "provider": "zai"
+    },
+    {
+      "slug": "zai-coding-plugins",
+      "name": "zai-coding-plugins",
+      "vendor": "Z.ai",
+      "vendorUrl": "https://github.com/zai-org/zai-coding-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/zai-org/zai-coding-plugins",
+      "install": "https://github.com/zai-org/zai-coding-plugins",
+      "description": "Z.ai Coding Plugins Marketplace in Claude Code.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zai-coding-plugins",
+          "description": "",
+          "path": "skills/zai-coding-plugins",
+          "url": "https://github.com/zai-org/zai-coding-plugins/blob/main/skills/zai-coding-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/zai/plugins/zai-coding-plugins",
+      "provider": "zai"
     }
   ]
 }

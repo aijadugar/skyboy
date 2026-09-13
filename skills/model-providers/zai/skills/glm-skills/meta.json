@@ -1,0 +1,36 @@
+{
+  "id": "glm-skills",
+  "slug": "glm-skills",
+  "description": "Official skills for the GLM family of models — OCR, vision, and multimodal skills published by zai-org for GLM agents.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "zai",
+    "glm",
+    "skills",
+    "ocr",
+    "vision",
+    "multimodal"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/zai-org/GLM-skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "glm-skills",
+    "license": "Apache-2.0"
+  },
+  "hash": "379d29d13fc21749",
+  "path": "skills/model-providers/zai/skills/glm-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/zai/skills/glm-skills/SKILL.md"
+}

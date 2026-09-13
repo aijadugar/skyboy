@@ -1,11 +1,14 @@
 {
   "id": "zai",
   "slug": "zai",
-  "description": "Integration guide and best practices for using Zai as a model provider.",
+  "description": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "zai"
+    "zai",
+    "glm",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +28,7 @@
     "name": "zai",
     "license": "MIT"
   },
-  "hash": "4c813f1fbc1456d5",
+  "hash": "4d8897878cd4cef4",
   "path": "skills/model-providers/zai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/zai/SKILL.md"
 }
