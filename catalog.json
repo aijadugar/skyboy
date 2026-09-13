@@ -781,11 +781,13 @@
     },
     {
       "id": "friendliai",
-      "d": "Integration guide and best practices for using FriendliAI as a model provider.",
+      "d": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "friendliai"
+        "friendliai",
+        "hermes",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -794,7 +796,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ebb84ff4c01f2a19",
+      "h": "2ec19518ba666166",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/friendliai"
@@ -4555,6 +4557,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/fireworks/plugins/fireworks-cookbook",
       "provider": "fireworks"
+    },
+    {
+      "slug": "hermes-friendliai-provider",
+      "name": "hermes-friendliai-provider",
+      "vendor": "FriendliAI",
+      "vendorUrl": "https://github.com/friendliai/hermes-friendliai-provider",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/friendliai/hermes-friendliai-provider",
+      "install": "https://github.com/friendliai/hermes-friendliai-provider",
+      "description": "FriendliAI serverless model provider plugin for Hermes Agent — live model catalog, reasoning_effort/enable_thinking mapping, no built-in adapter required; handles Friendli-specific API quirks like disabling reasoning.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "hermes-friendliai-provider",
+          "description": "",
+          "path": "skills/hermes-friendliai-provider",
+          "url": "https://github.com/friendliai/hermes-friendliai-provider/blob/main/skills/hermes-friendliai-provider"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/friendliai/plugins/hermes-friendliai-provider",
+      "provider": "friendliai"
     }
   ]
 }

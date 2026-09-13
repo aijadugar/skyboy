@@ -1,11 +1,13 @@
 {
   "id": "friendliai",
   "slug": "friendliai",
-  "description": "Integration guide and best practices for using FriendliAI as a model provider.",
+  "description": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "friendliai"
+    "friendliai",
+    "hermes",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "friendliai",
     "license": "MIT"
   },
-  "hash": "ebb84ff4c01f2a19",
+  "hash": "2ec19518ba666166",
   "path": "skills/model-providers/friendliai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/friendliai/SKILL.md"
 }
