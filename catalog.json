@@ -890,11 +890,12 @@
     },
     {
       "id": "mistral",
-      "d": "Integration guide and best practices for using Mistral as a model provider.",
+      "d": "Integration guide and best practices for using Mistral as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "mistral"
+        "mistral",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -903,7 +904,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "51ceab11a3049c7f",
+      "h": "d936b84a942dd118",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/mistral"
@@ -3548,6 +3549,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/inclusionai/plugins/avernet",
       "provider": "inclusionai"
+    },
+    {
+      "slug": "zed-extensions",
+      "name": "zed-extensions",
+      "vendor": "Mistral",
+      "vendorUrl": "https://github.com/mistralai/zed-extensions",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/mistralai/zed-extensions",
+      "install": "https://github.com/mistralai/zed-extensions",
+      "description": "Extensions for the Zed editor by Mistral AI — editor extensions are Mistral's plugin-equivalents for the Zed coding environment.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "zed-extensions",
+          "description": "",
+          "path": "skills/zed-extensions",
+          "url": "https://github.com/mistralai/zed-extensions/blob/main/skills/zed-extensions"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/mistral/plugins/zed-extensions",
+      "provider": "mistral"
     }
   ]
 }
