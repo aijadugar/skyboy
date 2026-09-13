@@ -929,11 +929,12 @@
     },
     {
       "id": "microsoft-azure",
-      "d": "Integration guide and best practices for using Microsoft Azure as a model provider.",
+      "d": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "microsoft-azure"
+        "microsoft-azure",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -942,7 +943,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "8526d66a6b9cdea7",
+      "h": "e3fc5224f84d87ee",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/microsoft-azure"
@@ -4071,6 +4072,66 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/arcee-ai/plugins/pipelines",
       "provider": "arcee-ai"
+    },
+    {
+      "slug": "kubelogin",
+      "name": "kubelogin",
+      "vendor": "Microsoft",
+      "vendorUrl": "https://github.com/Azure/kubelogin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Azure/kubelogin",
+      "install": "https://github.com/Azure/kubelogin",
+      "description": "A Kubernetes credential (exec) plugin implementing azure authentication.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kubelogin",
+          "description": "",
+          "path": "skills/kubelogin",
+          "url": "https://github.com/Azure/kubelogin/blob/main/skills/kubelogin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/microsoft-azure/plugins/kubelogin",
+      "provider": "microsoft-azure"
+    },
+    {
+      "slug": "vagrant-azure",
+      "name": "vagrant-azure",
+      "vendor": "Microsoft",
+      "vendorUrl": "https://github.com/Azure/vagrant-azure",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/Azure/vagrant-azure",
+      "install": "https://github.com/Azure/vagrant-azure",
+      "description": "Enable Vagrant to manage virtual machines in Microsoft Azure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "vagrant-azure",
+          "description": "",
+          "path": "skills/vagrant-azure",
+          "url": "https://github.com/Azure/vagrant-azure/blob/main/skills/vagrant-azure"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/microsoft-azure/plugins/vagrant-azure",
+      "provider": "microsoft-azure"
     }
   ]
 }

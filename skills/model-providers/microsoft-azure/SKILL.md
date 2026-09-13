@@ -69,3 +69,12 @@ Microsoft Azure offers models across capability tiers. Choose based on your use 
 
 - Microsoft Azure official documentation
 - Microsoft Azure API reference
+
+## Microsoft Azure Plugins
+
+Azure's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [kubelogin](https://github.com/Azure/kubelogin) | Kubernetes credential (exec) plugin implementing Azure authentication | Go | MIT |
+| [vagrant-azure](https://github.com/Azure/vagrant-azure) | Enable Vagrant to manage virtual machines in Microsoft Azure (archived) | Ruby | MIT |
