@@ -42,11 +42,12 @@
   "skills": [
     {
       "id": "agnes-ai",
-      "d": "Integration guide and best practices for using Agnes AI as a model provider.",
+      "d": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "agnes-ai"
+        "agnes-ai",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -55,10 +56,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ffadd2205abd2c38",
+      "h": "61330c4a07abeed8",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/agnes-ai"
+    },
+    {
+      "id": "agnes-skills",
+      "d": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, ge",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "agnes-ai",
+        "codex",
+        "openai-compatible",
+        "api-gateway",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b7f13b471318b81c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/agnes-ai/skills/agnes-skills"
+    },
+    {
+      "id": "agnescode",
+      "d": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusa",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "agnes-ai",
+        "desktop",
+        "workspace",
+        "mcp",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "3fc25ac9d92be356",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/agnes-ai/skills/agnescode"
     },
     {
       "id": "alibaba-cloud",

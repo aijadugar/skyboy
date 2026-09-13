@@ -1,0 +1,35 @@
+{
+  "id": "agnes-skills",
+  "slug": "agnes-skills",
+  "description": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, ge",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "agnes-ai",
+    "codex",
+    "openai-compatible",
+    "api-gateway",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/AgnesAI-Labs/skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agnes-skills",
+    "license": "Apache-2.0"
+  },
+  "hash": "b7f13b471318b81c",
+  "path": "skills/model-providers/agnes-ai/skills/agnes-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/agnes-ai/skills/agnes-skills/SKILL.md"
+}
