@@ -1,11 +1,12 @@
 {
   "id": "deepseek",
   "slug": "deepseek",
-  "description": "Integration guide and best practices for using DeepSeek as a model provider.",
+  "description": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "deepseek"
+    "deepseek",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "deepseek",
     "license": "MIT"
   },
-  "hash": "7d0b2c90d9b1a82e",
+  "hash": "7792cb065ffc5a06",
   "path": "skills/model-providers/deepseek",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/deepseek/SKILL.md"
 }

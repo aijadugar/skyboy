@@ -495,11 +495,12 @@
     },
     {
       "id": "deepseek",
-      "d": "Integration guide and best practices for using DeepSeek as a model provider.",
+      "d": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepseek"
+        "deepseek",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -508,7 +509,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "7d0b2c90d9b1a82e",
+      "h": "7792cb065ffc5a06",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/deepseek"
@@ -844,11 +845,13 @@
     },
     {
       "id": "minimax",
-      "d": "Integration guide and best practices for using MiniMax as a model provider.",
+      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "minimax"
+        "minimax",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -857,10 +860,31 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "05ae7666c42b8db4",
+      "h": "6545684093dabd8f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/minimax"
+    },
+    {
+      "id": "minimax-skills",
+      "d": "MiniMax's official Agent Skills repository — skills published by MiniMax-AI for use with coding agents and the MiniMax model family.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "minimax",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c01157a02761a8b1",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/minimax/skills/minimax-skills"
     },
     {
       "id": "mistral",
@@ -3194,6 +3218,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/alibaba-cloud/plugins/qwen-mm-plugins-hub",
       "provider": "alibaba-cloud"
+    },
+    {
+      "slug": "deepseek-harness",
+      "name": "deepseek-harness",
+      "vendor": "DeepSeek",
+      "vendorUrl": "https://github.com/deepseek-ai/deepseek-harness",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/deepseek-ai/deepseek-harness",
+      "install": "https://github.com/deepseek-ai/deepseek-harness",
+      "description": "DeepSeek Harness: Everything is a Plugin — plugin-first agent harness (dsh) for building and running AI-agent plugins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "deepseek-harness",
+          "description": "",
+          "path": "skills/deepseek-harness",
+          "url": "https://github.com/deepseek-ai/deepseek-harness/blob/main/skills/deepseek-harness"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/deepseek/plugins/deepseek-harness",
+      "provider": "deepseek"
+    },
+    {
+      "slug": "MiniMax-Code-Plugins",
+      "name": "MiniMax-Code-Plugins",
+      "vendor": "MiniMax",
+      "vendorUrl": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "install": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+      "description": "Community registry and contribution toolkit for MiniMax Code plugins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "MiniMax-Code-Plugins",
+          "description": "",
+          "path": "skills/MiniMax-Code-Plugins",
+          "url": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins/blob/main/skills/MiniMax-Code-Plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/minimax/plugins/MiniMax-Code-Plugins",
+      "provider": "minimax"
+    },
+    {
+      "slug": "minimax-desgin-plugin",
+      "name": "minimax-desgin-plugin",
+      "vendor": "MiniMax",
+      "vendorUrl": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "install": "https://github.com/MiniMax-AI/minimax-desgin-plugin",
+      "description": "MiniMax design plugin for agent workflows.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "minimax-desgin-plugin",
+          "description": "",
+          "path": "skills/minimax-desgin-plugin",
+          "url": "https://github.com/MiniMax-AI/minimax-desgin-plugin/blob/main/skills/minimax-desgin-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/minimax/plugins/minimax-desgin-plugin",
+      "provider": "minimax"
     }
   ]
 }

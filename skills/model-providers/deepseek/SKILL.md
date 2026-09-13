@@ -69,3 +69,11 @@ DeepSeek offers models across capability tiers. Choose based on your use case:
 
 - DeepSeek official documentation
 - DeepSeek API reference
+
+## DeepSeek Plugins
+
+DeepSeek's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [deepseek-harness](https://github.com/deepseek-ai/deepseek-harness) | DeepSeek Harness: Everything is a Plugin (`dsh`, `ai-agents`, `cordis`, `dsh-plugin`) | TypeScript | MIT |

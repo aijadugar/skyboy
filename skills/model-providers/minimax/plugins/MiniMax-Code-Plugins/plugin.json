@@ -1,0 +1,13 @@
+{
+  "name": "MiniMax-Code-Plugins",
+  "description": "Community registry and contribution toolkit for MiniMax Code plugins.",
+  "source_url": "https://github.com/MiniMax-AI/MiniMax-Code-Plugins",
+  "contents": {
+    "skills": ["MiniMax-Code-Plugins"]
+  },
+  "vendor": "MiniMax",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "minimax", "plugins", "registry", "community"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
