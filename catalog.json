@@ -656,11 +656,13 @@
     },
     {
       "id": "inclusionai",
-      "d": "Integration guide and best practices for using InclusionAI as a model provider.",
+      "d": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "inclusionai"
+        "inclusionai",
+        "avernet",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -669,7 +671,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f7525925ec4b3712",
+      "h": "eb290bf19237b634",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/inclusionai"
@@ -3492,6 +3494,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/xiaomi/plugins/ha_xiaomi_home",
       "provider": "xiaomi"
+    },
+    {
+      "slug": "avernet",
+      "name": "avernet",
+      "vendor": "InclusionAI",
+      "vendorUrl": "https://github.com/inclusionAI/Avernet",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/inclusionAI/Avernet",
+      "install": "https://github.com/inclusionAI/Avernet",
+      "description": "Distributed agent coordination platform where agents live, connect, coordinate, execute, and evolve together.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "avernet",
+          "description": "",
+          "path": "skills/avernet",
+          "url": "https://github.com/inclusionAI/Avernet/blob/main/skills/avernet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/inclusionai/plugins/avernet",
+      "provider": "inclusionai"
     }
   ]
 }

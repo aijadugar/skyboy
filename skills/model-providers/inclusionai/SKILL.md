@@ -69,3 +69,11 @@ InclusionAI offers models across capability tiers. Choose based on your use case
 
 - InclusionAI official documentation
 - InclusionAI API reference
+
+## InclusionAI Plugins
+
+InclusionAI's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [Avernet](https://github.com/inclusionAI/Avernet) | Distributed agent coordination platform where agents live, connect, coordinate, execute, and evolve together (`multi-agent`, `agent-coordination`, `agent-infrastructure`) | Python | Apache-2.0 |

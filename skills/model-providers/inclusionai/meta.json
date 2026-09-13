@@ -1,11 +1,13 @@
 {
   "id": "inclusionai",
   "slug": "inclusionai",
-  "description": "Integration guide and best practices for using InclusionAI as a model provider.",
+  "description": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "inclusionai"
+    "inclusionai",
+    "avernet",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "inclusionai",
     "license": "MIT"
   },
-  "hash": "f7525925ec4b3712",
+  "hash": "eb290bf19237b634",
   "path": "skills/model-providers/inclusionai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/inclusionai/SKILL.md"
 }
