@@ -1,11 +1,12 @@
 {
   "id": "stepfun",
   "slug": "stepfun",
-  "description": "Integration guide and best practices for using StepFun as a model provider.",
+  "description": "Integration guide and best practices for using StepFun as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "stepfun"
+    "stepfun",
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +26,7 @@
     "name": "stepfun",
     "license": "MIT"
   },
-  "hash": "a33406aa58ed50b9",
+  "hash": "c92cca72475d6b4e",
   "path": "skills/model-providers/stepfun",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/stepfun/SKILL.md"
 }

@@ -1173,11 +1173,12 @@
     },
     {
       "id": "stepfun",
-      "d": "Integration guide and best practices for using StepFun as a model provider.",
+      "d": "Integration guide and best practices for using StepFun as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "stepfun"
+        "stepfun",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1186,10 +1187,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a33406aa58ed50b9",
+      "h": "c92cca72475d6b4e",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/stepfun"
+    },
+    {
+      "id": "stepaudio-skills",
+      "d": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "stepfun",
+        "audio",
+        "skills",
+        "claw"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "68f7500d2bbb8fcd",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/stepfun/skills/stepaudio-skills"
     },
     {
       "id": "thinking-machines",

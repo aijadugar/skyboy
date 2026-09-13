@@ -69,3 +69,11 @@ StepFun offers models across capability tiers. Choose based on your use case:
 
 - StepFun official documentation
 - StepFun API reference
+
+## StepFun Skills
+
+StepFun's public skills ecosystem (`skills/` in this folder; no dedicated plugin repositories published to date):
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| stepaudio-skills | [stepfun-ai/StepAudio-Skills](https://github.com/stepfun-ai/StepAudio-Skills) | Audio skills for Claw — speech and audio agent capabilities | Python | Apache-2.0 |

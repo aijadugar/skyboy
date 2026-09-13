@@ -1,0 +1,34 @@
+{
+  "id": "stepaudio-skills",
+  "slug": "stepaudio-skills",
+  "description": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "stepfun",
+    "audio",
+    "skills",
+    "claw"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/stepfun-ai/StepAudio-Skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "stepaudio-skills",
+    "license": "Apache-2.0"
+  },
+  "hash": "68f7500d2bbb8fcd",
+  "path": "skills/model-providers/stepfun/skills/stepaudio-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/stepfun/skills/stepaudio-skills/SKILL.md"
+}
