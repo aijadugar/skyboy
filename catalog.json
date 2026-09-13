@@ -1510,11 +1510,13 @@
     },
     {
       "id": "siliconflow",
-      "d": "Integration guide and best practices for using SiliconFlow as a model provider.",
+      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "siliconflow"
+        "siliconflow",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1523,10 +1525,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "505ffcabec5892dc",
+      "h": "681f672fa6afbc1f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/siliconflow"
+    },
+    {
+      "id": "bizyair-skill",
+      "d": "BizyAir's AIGC skill package for mainstream AI agents — natural-language image/video generation, AI application execution, and ModelZoo model calling on BizyAir cloud with zero configuration.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "siliconflow",
+        "aigc",
+        "text-to-image",
+        "agent-skill",
+        "bizyair",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "7d1133e82accf36a",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/siliconflow/skills/bizyair-skill"
     },
     {
       "id": "spacexai",
@@ -5027,6 +5054,72 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/gmi/plugins/openclaw-plugin",
       "provider": "gmi"
+    },
+    {
+      "slug": "BizyAirPlus",
+      "name": "BizyAirPlus",
+      "vendor": "SiliconFlow",
+      "vendorUrl": "https://github.com/siliconflow/BizyAirPlus",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/siliconflow/BizyAirPlus",
+      "install": "https://github.com/siliconflow/BizyAirPlus",
+      "description": "ComfyUI plugin that brings BizyAir cloud execution to ComfyUI while preserving the familiar local workflow editing experience — build and edit workflows locally, submit them to BizyAir for execution, and receive progress updates and results directly in the ComfyUI interface.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "BizyAirPlus",
+          "description": "",
+          "path": "skills/BizyAirPlus",
+          "url": "https://github.com/siliconflow/BizyAirPlus/blob/main/skills/BizyAirPlus"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/siliconflow/plugins/BizyAirPlus",
+      "provider": "siliconflow"
+    },
+    {
+      "slug": "dsh-plugins",
+      "name": "dsh-plugins",
+      "vendor": "SiliconFlow",
+      "vendorUrl": "https://github.com/siliconflow/dsh-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/siliconflow/dsh-plugins",
+      "install": "https://github.com/siliconflow/dsh-plugins",
+      "description": "DeepSeek Harness (DSH) local plugin collection — central management and distribution of custom DSH plugins. Includes dsh-tool-oss (multi-bucket OSS object-storage file browser with upload and recursive deletion, compatible with SiliconFlow, Tencent Cloud COS, Alibaba Cloud OSS) and dsh-ui-archived-local (archived sidebar panel with view/open/unarchive/delete and custom confirmation modals).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dsh-tool-oss",
+          "description": "",
+          "path": "skills/dsh-tool-oss",
+          "url": "https://github.com/siliconflow/dsh-plugins/blob/main/skills/dsh-tool-oss"
+        },
+        {
+          "name": "dsh-ui-archived-local",
+          "description": "",
+          "path": "skills/dsh-ui-archived-local",
+          "url": "https://github.com/siliconflow/dsh-plugins/blob/main/skills/dsh-ui-archived-local"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/siliconflow/plugins/dsh-plugins",
+      "provider": "siliconflow"
     }
   ]
 }

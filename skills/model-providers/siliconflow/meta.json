@@ -1,11 +1,13 @@
 {
   "id": "siliconflow",
   "slug": "siliconflow",
-  "description": "Integration guide and best practices for using SiliconFlow as a model provider.",
+  "description": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "siliconflow"
+    "siliconflow",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "siliconflow",
     "license": "MIT"
   },
-  "hash": "505ffcabec5892dc",
+  "hash": "681f672fa6afbc1f",
   "path": "skills/model-providers/siliconflow",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/siliconflow/SKILL.md"
 }

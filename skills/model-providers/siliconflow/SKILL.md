@@ -69,3 +69,20 @@ SiliconFlow offers models across capability tiers. Choose based on your use case
 
 - SiliconFlow official documentation
 - SiliconFlow API reference
+
+## SiliconFlow Skills & Plugins
+
+SiliconFlow's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| bizyair-skill | [siliconflow/bizyair-skill](https://github.com/siliconflow/bizyair-skill) | AIGC skill package for mainstream AI agents — natural-language image/video generation, AI application execution, and ModelZoo model calling on BizyAir cloud with no configuration or parameter tuning | Python | MIT |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [dsh-plugins](https://github.com/siliconflow/dsh-plugins) | DeepSeek Harness (DSH) local plugin collection — dsh-tool-oss (multi-bucket object-storage file browser: SiliconFlow, Tencent COS, Alibaba OSS) and dsh-ui-archived-local (archived sidebar panel with view/open/unarchive/delete) | JavaScript, TypeScript, Shell | MIT |
+| [BizyAirPlus](https://github.com/siliconflow/BizyAirPlus) | ComfyUI plugin bringing BizyAir cloud execution to local workflows — build/edit locally, submit to BizyAir, receive progress and results in the ComfyUI interface | Python | — |
