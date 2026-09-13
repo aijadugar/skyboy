@@ -1,0 +1,13 @@
+{
+  "name": "serverless-scaleway-functions",
+  "description": "Plugin for the Serverless Framework that lets users deploy serverless applications (Functions and Containers) on Scaleway infrastructure.",
+  "source_url": "https://github.com/scaleway/serverless-scaleway-functions",
+  "contents": {
+    "skills": ["serverless-scaleway-functions"]
+  },
+  "vendor": "Scaleway",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "scaleway", "serverless-framework", "functions", "containers", "deployment", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

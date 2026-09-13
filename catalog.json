@@ -1517,11 +1517,13 @@
     },
     {
       "id": "scaleway",
-      "d": "Integration guide and best practices for using Scaleway as a model provider.",
+      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "scaleway"
+        "scaleway",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1530,10 +1532,34 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ab3a254724bbf23f",
+      "h": "1cf9df62acddd039",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/scaleway"
+    },
+    {
+      "id": "scaleway-skills",
+      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "scaleway",
+        "agent-skill",
+        "mcp",
+        "cli",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "822f05ca3114dd91",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/scaleway/skills/scaleway-skills"
     },
     {
       "id": "siliconflow",
@@ -5207,6 +5233,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/crusoe/plugins/terraform-provider-crusoe",
       "provider": "crusoe"
+    },
+    {
+      "slug": "packer-plugin-scaleway",
+      "name": "packer-plugin-scaleway",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/packer-plugin-scaleway",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MPL-2.0",
+      "upstreamRepo": "https://github.com/scaleway/packer-plugin-scaleway",
+      "install": "https://github.com/scaleway/packer-plugin-scaleway",
+      "description": "Packer plugin for the Scaleway Builder — a multi-component plugin used with HashiCorp Packer to create custom images on Scaleway infrastructure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-scaleway",
+          "description": "",
+          "path": "skills/packer-plugin-scaleway",
+          "url": "https://github.com/scaleway/packer-plugin-scaleway/blob/main/skills/packer-plugin-scaleway"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/packer-plugin-scaleway",
+      "provider": "scaleway"
+    },
+    {
+      "slug": "serverless-scaleway-functions",
+      "name": "serverless-scaleway-functions",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/serverless-scaleway-functions",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/scaleway/serverless-scaleway-functions",
+      "install": "https://github.com/scaleway/serverless-scaleway-functions",
+      "description": "Plugin for the Serverless Framework that lets users deploy serverless applications (Functions and Containers) on Scaleway infrastructure.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "serverless-scaleway-functions",
+          "description": "",
+          "path": "skills/serverless-scaleway-functions",
+          "url": "https://github.com/scaleway/serverless-scaleway-functions/blob/main/skills/serverless-scaleway-functions"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/serverless-scaleway-functions",
+      "provider": "scaleway"
+    },
+    {
+      "slug": "waypoint-plugin-scaleway",
+      "name": "waypoint-plugin-scaleway",
+      "vendor": "Scaleway",
+      "vendorUrl": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "install": "https://github.com/scaleway/waypoint-plugin-scaleway",
+      "description": "HashiCorp Waypoint plugins adding Scaleway support — currently a container plugin that deploys containers to Scaleway.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "waypoint-plugin-scaleway",
+          "description": "",
+          "path": "skills/waypoint-plugin-scaleway",
+          "url": "https://github.com/scaleway/waypoint-plugin-scaleway/blob/main/skills/waypoint-plugin-scaleway"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/scaleway/plugins/waypoint-plugin-scaleway",
+      "provider": "scaleway"
     }
   ]
 }

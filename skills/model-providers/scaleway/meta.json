@@ -1,11 +1,13 @@
 {
   "id": "scaleway",
   "slug": "scaleway",
-  "description": "Integration guide and best practices for using Scaleway as a model provider.",
+  "description": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "scaleway"
+    "scaleway",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "scaleway",
     "license": "MIT"
   },
-  "hash": "ab3a254724bbf23f",
+  "hash": "1cf9df62acddd039",
   "path": "skills/model-providers/scaleway",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/scaleway/SKILL.md"
 }
