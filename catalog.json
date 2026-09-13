@@ -668,11 +668,13 @@
     },
     {
       "id": "digitalocean",
-      "d": "Integration guide and best practices for using DigitalOcean as a model provider.",
+      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "digitalocean"
+        "digitalocean",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -681,10 +683,56 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ef69c12e48fd490f",
+      "h": "81386cf2b606eca6",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/digitalocean"
+    },
+    {
+      "id": "action-gateway-skill",
+      "d": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean",
+        "action-gateway",
+        "mcp",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5ebcb0ac835f4b90",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/digitalocean/skills/action-gateway-skill"
+    },
+    {
+      "id": "do-app-platform-skills",
+      "d": "Claude/Agent Skills for DigitalOcean App Platform — deployment, migration, networking, database configuration, and troubleshooting.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean",
+        "app-platform",
+        "deployment",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "d1228ce2ce7df5a1",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/digitalocean/skills/do-app-platform-skills"
     },
     {
       "id": "fireworks",
@@ -4302,6 +4350,156 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/deepinfra/plugins/deepinfra-hermes-sandbox",
       "provider": "deepinfra"
+    },
+    {
+      "slug": "CodexPlugin",
+      "name": "CodexPlugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/CodexPlugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/CodexPlugin",
+      "install": "https://github.com/digitalocean/CodexPlugin",
+      "description": "A Codex plugin that provisions a DigitalOcean droplet and wires it up as a remote SSH workspace for the Codex desktop app, including a nested provision-droplet sub-skill.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "provision-droplet",
+          "description": "",
+          "path": "skills/provision-droplet",
+          "url": "https://github.com/digitalocean/CodexPlugin/blob/main/skills/provision-droplet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/CodexPlugin",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "do-markdownit",
+      "name": "do-markdownit",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/do-markdownit",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/do-markdownit",
+      "install": "https://github.com/digitalocean/do-markdownit",
+      "description": "Markdown-It plugin for the DigitalOcean Community — custom syntax highlighting, video embeds, and more.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "do-markdownit",
+          "description": "",
+          "path": "skills/do-markdownit",
+          "url": "https://github.com/digitalocean/do-markdownit/blob/main/skills/do-markdownit"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/do-markdownit",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "doctl-sandbox-plugin",
+      "name": "doctl-sandbox-plugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "install": "https://github.com/digitalocean/doctl-sandbox-plugin",
+      "description": "Supports certain doctl serverless subcommands by incorporating the DigitalOcean Functions Deployer via a plugin (historically 'the sandbox plugin').",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "doctl-sandbox-plugin",
+          "description": "",
+          "path": "skills/doctl-sandbox-plugin",
+          "url": "https://github.com/digitalocean/doctl-sandbox-plugin/blob/main/skills/doctl-sandbox-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/doctl-sandbox-plugin",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "packer-plugin-digitalocean",
+      "name": "packer-plugin-digitalocean",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MPL-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "install": "https://github.com/digitalocean/packer-plugin-digitalocean",
+      "description": "Packer plugin for DigitalOcean Builder — create custom machine images on DigitalOcean with HashiCorp Packer.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-digitalocean",
+          "description": "",
+          "path": "skills/packer-plugin-digitalocean",
+          "url": "https://github.com/digitalocean/packer-plugin-digitalocean/blob/main/skills/packer-plugin-digitalocean"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/packer-plugin-digitalocean",
+      "provider": "digitalocean"
+    },
+    {
+      "slug": "velero-plugin",
+      "name": "velero-plugin",
+      "vendor": "DigitalOcean",
+      "vendorUrl": "https://github.com/digitalocean/velero-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/digitalocean/velero-plugin",
+      "install": "https://github.com/digitalocean/velero-plugin",
+      "description": "DigitalOcean plugin for Velero — filesystem snapshots of Block Storage persistent volumes in Kubernetes for backup and restore.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "velero-plugin",
+          "description": "",
+          "path": "skills/velero-plugin",
+          "url": "https://github.com/digitalocean/velero-plugin/blob/main/skills/velero-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/digitalocean/plugins/velero-plugin",
+      "provider": "digitalocean"
     }
   ]
 }
