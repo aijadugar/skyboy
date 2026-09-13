@@ -69,3 +69,12 @@ Alibaba Cloud offers models across capability tiers. Choose based on your use ca
 
 - Alibaba Cloud official documentation
 - Alibaba Cloud API reference
+
+## Alibaba Cloud / Qwen Plugins
+
+The Qwen (QwenLM) plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [Qwen-MM-Plugins](https://github.com/QwenLM/Qwen-MM-Plugins) | Make any agent harness multimodal-native | Python | Apache-2.0 |
+| [qwen-mm-plugins-hub](https://github.com/QwenLM/qwen-mm-plugins-hub) | Documentation for Qwen-MM-Plugins | HTML | Apache-2.0 |

@@ -62,11 +62,13 @@
     },
     {
       "id": "alibaba-cloud",
-      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider.",
+      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "alibaba-cloud"
+        "alibaba-cloud",
+        "qwen",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -75,7 +77,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "32de3e4abeefdd0f",
+      "h": "d63f176e7be88424",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/alibaba-cloud"
@@ -693,11 +695,13 @@
     },
     {
       "id": "kimi",
-      "d": "Integration guide and best practices for using Kimi as a model provider.",
+      "d": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "kimi"
+        "kimi",
+        "moonshot",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -706,7 +710,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "2258fb042e5f9742",
+      "h": "73eebdf4b06eb2b7",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/kimi"
@@ -1121,11 +1125,13 @@
     },
     {
       "id": "spacexai",
-      "d": "Integration guide and best practices for using SpaceXAI as a model provider.",
+      "d": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "spacexai"
+        "spacexai",
+        "xai",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1134,7 +1140,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "092d86c9b2cc9cb2",
+      "h": "67a37b5d5f81b413",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/spacexai"
@@ -2978,6 +2984,216 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/zai/plugins/zai-coding-plugins",
       "provider": "zai"
+    },
+    {
+      "slug": "plugin-marketplace",
+      "name": "plugin-marketplace",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/xai-org/plugin-marketplace",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/xai-org/plugin-marketplace",
+      "install": "https://github.com/xai-org/plugin-marketplace",
+      "description": "Official xAI plugin marketplace.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "plugin-marketplace",
+          "description": "",
+          "path": "skills/plugin-marketplace",
+          "url": "https://github.com/xai-org/plugin-marketplace/blob/main/skills/plugin-marketplace"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/spacexai/plugins/plugin-marketplace",
+      "provider": "spacexai"
+    },
+    {
+      "slug": "grok-build-plugin-cc",
+      "name": "grok-build-plugin-cc",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/xai-org/grok-build-plugin-cc",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/xai-org/grok-build-plugin-cc",
+      "install": "https://github.com/xai-org/grok-build-plugin-cc",
+      "description": "Claude Code plugin that delegates reviews, rescue tasks, and session transfer to the Grok Build CLI.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "grok-build-plugin-cc",
+          "description": "",
+          "path": "skills/grok-build-plugin-cc",
+          "url": "https://github.com/xai-org/grok-build-plugin-cc/blob/main/skills/grok-build-plugin-cc"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/spacexai/plugins/grok-build-plugin-cc",
+      "provider": "spacexai"
+    },
+    {
+      "slug": "koishi-plugin-moonshot-api-plus",
+      "name": "koishi-plugin-moonshot-api-plus",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "install": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus",
+      "description": "Advanced moonshot api for koishi.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "koishi-plugin-moonshot-api-plus",
+          "description": "",
+          "path": "skills/koishi-plugin-moonshot-api-plus",
+          "url": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api-plus/blob/main/skills/koishi-plugin-moonshot-api-plus"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/koishi-plugin-moonshot-api-plus",
+      "provider": "kimi"
+    },
+    {
+      "slug": "koishi-plugin-moonshot-api",
+      "name": "koishi-plugin-moonshot-api",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "install": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api",
+      "description": "Official moonshot api for koishi.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "koishi-plugin-moonshot-api",
+          "description": "",
+          "path": "skills/koishi-plugin-moonshot-api",
+          "url": "https://github.com/MoonshotAI/koishi-plugin-moonshot-api/blob/main/skills/koishi-plugin-moonshot-api"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/koishi-plugin-moonshot-api",
+      "provider": "kimi"
+    },
+    {
+      "slug": "kimi-code-zed-extension",
+      "name": "kimi-code-zed-extension",
+      "vendor": "skyboy",
+      "vendorUrl": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "install": "https://github.com/MoonshotAI/kimi-code-zed-extension",
+      "description": "Kimi CLI Zed extension.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "kimi-code-zed-extension",
+          "description": "",
+          "path": "skills/kimi-code-zed-extension",
+          "url": "https://github.com/MoonshotAI/kimi-code-zed-extension/blob/main/skills/kimi-code-zed-extension"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/kimi/plugins/kimi-code-zed-extension",
+      "provider": "kimi"
+    },
+    {
+      "slug": "Qwen-MM-Plugins",
+      "name": "Qwen-MM-Plugins",
+      "vendor": "Alibaba Cloud",
+      "vendorUrl": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "install": "https://github.com/QwenLM/Qwen-MM-Plugins",
+      "description": "Make any agent harness multimodal-native. Official Qwen multimodal plugins from the QwenLM team.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "Qwen-MM-Plugins",
+          "description": "",
+          "path": "skills/Qwen-MM-Plugins",
+          "url": "https://github.com/QwenLM/Qwen-MM-Plugins/blob/main/skills/Qwen-MM-Plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/alibaba-cloud/plugins/Qwen-MM-Plugins",
+      "provider": "alibaba-cloud"
+    },
+    {
+      "slug": "qwen-mm-plugins-hub",
+      "name": "qwen-mm-plugins-hub",
+      "vendor": "Alibaba Cloud",
+      "vendorUrl": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "install": "https://github.com/QwenLM/qwen-mm-plugins-hub",
+      "description": "Documentation for Qwen-MM-Plugins — setup, usage, and plugin reference for making agent harnesses multimodal-native.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "qwen-mm-plugins-hub",
+          "description": "",
+          "path": "skills/qwen-mm-plugins-hub",
+          "url": "https://github.com/QwenLM/qwen-mm-plugins-hub/blob/main/skills/qwen-mm-plugins-hub"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/alibaba-cloud/plugins/qwen-mm-plugins-hub",
+      "provider": "alibaba-cloud"
     }
   ]
 }

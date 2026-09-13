@@ -69,3 +69,12 @@ SpaceXAI offers models across capability tiers. Choose based on your use case:
 
 - SpaceXAI official documentation
 - SpaceXAI API reference
+
+## SpaceXAI / xAI Plugins
+
+xAI's public plugin ecosystem (indexed under `plugins/` in this folder; no dedicated skills repositories published to date):
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [plugin-marketplace](https://github.com/xai-org/plugin-marketplace) | Official xAI plugin marketplace | Python | — |
+| [grok-build-plugin-cc](https://github.com/xai-org/grok-build-plugin-cc) | Claude Code plugin that delegates reviews, rescue tasks, and session transfer to the Grok Build CLI | JavaScript | Apache-2.0 |
