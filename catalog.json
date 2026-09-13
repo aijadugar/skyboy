@@ -198,11 +198,13 @@
     },
     {
       "id": "arcee-ai",
-      "d": "Integration guide and best practices for using Arcee AI as a model provider.",
+      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "arcee-ai"
+        "arcee-ai",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -211,10 +213,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "349166c2079ffe42",
+      "h": "d4540aa58a2575c3",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/arcee-ai"
+    },
+    {
+      "id": "nac",
+      "d": "Arcee's open-source harness for long-running agentic tasks — a central orchestrator, threads, and structure so agents can take on ambitious work without losing the plot.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "arcee-ai",
+        "nac",
+        "mcp",
+        "agent-orchestration",
+        "multi-agent-systems",
+        "agent-skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8d33e9a2f2b0ff86",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/arcee-ai/skills/nac"
     },
     {
       "id": "baseten",
@@ -4014,6 +4041,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/amazon-bedrock/plugins/aws-toolkit-visual-studio",
       "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "pipelines",
+      "name": "pipelines",
+      "vendor": "Arcee AI",
+      "vendorUrl": "https://github.com/arcee-ai/pipelines",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/arcee-ai/pipelines",
+      "install": "https://github.com/arcee-ai/pipelines",
+      "description": "Pipelines: Versatile, UI-Agnostic OpenAI-Compatible Plugin Framework.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pipelines",
+          "description": "",
+          "path": "skills/pipelines",
+          "url": "https://github.com/arcee-ai/pipelines/blob/main/skills/pipelines"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/arcee-ai/plugins/pipelines",
+      "provider": "arcee-ai"
     }
   ]
 }

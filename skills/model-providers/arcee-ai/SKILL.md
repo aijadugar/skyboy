@@ -69,3 +69,19 @@ Arcee AI offers models across capability tiers. Choose based on your use case:
 
 - Arcee AI official documentation
 - Arcee AI API reference
+
+## Arcee AI Skills & Plugins
+
+Arcee's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| nac | [arcee-ai/nac](https://github.com/arcee-ai/nac) | Open-source harness for long-running agentic tasks — central orchestrator, threads, and structure (`mcp`, `multi-agent-systems`, `agent-orchestration`, `agent-skills`) | Rust | Apache-2.0 |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [pipelines](https://github.com/arcee-ai/pipelines) | Versatile, UI-agnostic, OpenAI-compatible plugin framework | Python | MIT |
