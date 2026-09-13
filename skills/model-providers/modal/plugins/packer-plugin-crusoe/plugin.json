@@ -1,0 +1,12 @@
+{
+  "name": "packer-plugin-crusoe",
+  "description": "A Packer plugin that enables automated creation of custom VM images on Crusoe Cloud — automated image building, flexible SSH authentication, multi-region support, HMAC-based authentication, and automatic cleanup of temporary resources. Maintained by Modal Labs.",
+  "source_url": "https://github.com/modal-labs/packer-plugin-crusoe",
+  "contents": {
+    "skills": ["packer-plugin-crusoe"]
+  },
+  "vendor": "Modal",
+  "category": "model-providers",
+  "tags": ["model-provider", "modal", "packer", "crusoe-cloud", "vm-images", "infrastructure", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

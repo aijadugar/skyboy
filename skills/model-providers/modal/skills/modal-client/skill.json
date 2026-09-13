@@ -1,0 +1,12 @@
+{
+  "name": "modal-client",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Modal's official Python, JavaScript/TypeScript, and Go SDKs — distributes an agent skill (modal skills install / npx skills add) that gives coding assistants version-aligned Modal documentation.",
+  "command": "skyboy add modal-client",
+  "tags": ["model-provider", "modal", "sdk", "serverless", "skills", "agent-skill"],
+  "author": "skyboy",
+  "source_url": "https://github.com/modal-labs/modal-client",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

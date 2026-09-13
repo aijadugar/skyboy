@@ -1,0 +1,12 @@
+{
+  "name": "openai-agents-python-example",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
+  "command": "skyboy add openai-agents-python-example",
+  "tags": ["model-provider", "modal", "openai-agents-sdk", "sandboxes", "agent-harness", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/modal-labs/openai-agents-python-example",
+  "license": "Apache-2.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

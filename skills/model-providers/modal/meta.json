@@ -1,11 +1,13 @@
 {
   "id": "modal",
   "slug": "modal",
-  "description": "Integration guide and best practices for using Modal as a model provider.",
+  "description": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "modal"
+    "modal",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "modal",
     "license": "MIT"
   },
-  "hash": "9ac38a45006d0a79",
+  "hash": "1d5635885dad2dfe",
   "path": "skills/model-providers/modal",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/modal/SKILL.md"
 }

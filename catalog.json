@@ -1139,11 +1139,13 @@
     },
     {
       "id": "modal",
-      "d": "Integration guide and best practices for using Modal as a model provider.",
+      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "modal"
+        "modal",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1152,10 +1154,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "9ac38a45006d0a79",
+      "h": "1d5635885dad2dfe",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/modal"
+    },
+    {
+      "id": "modal-client",
+      "d": "Modal's official Python, JavaScript/TypeScript, and Go SDKs — distributes an agent skill (modal skills install / npx skills add) that gives coding assistants version-aligned Modal documentation.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "sdk",
+        "serverless",
+        "skills",
+        "agent-skill"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a7938b04029429d4",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modal/skills/modal-client"
+    },
+    {
+      "id": "openai-agents-python-example",
+      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "openai-agents-sdk",
+        "sandboxes",
+        "agent-harness",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ed65fd099445a45c",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/modal/skills/openai-agents-python-example"
     },
     {
       "id": "modular",
@@ -4830,6 +4880,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/together-ai/plugins/together-kubelogin",
       "provider": "together-ai"
+    },
+    {
+      "slug": "cni-plugins",
+      "name": "cni-plugins",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/cni-plugins",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/modal-labs/cni-plugins",
+      "install": "https://github.com/modal-labs/cni-plugins",
+      "description": "Reference and example CNI networking plugins maintained by the CNI team (Modal fork of containernetworking/plugins) — main interface-creating plugins (bridge, ipvlan, macvlan), IPAM plugins (dhcp, host-local), and meta plugins (tuning, portmap, bandwidth, firewall).",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "cni-plugins",
+          "description": "",
+          "path": "skills/cni-plugins",
+          "url": "https://github.com/modal-labs/cni-plugins/blob/main/skills/cni-plugins"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/cni-plugins",
+      "provider": "modal"
+    },
+    {
+      "slug": "packer-plugin-crusoe",
+      "name": "packer-plugin-crusoe",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "install": "https://github.com/modal-labs/packer-plugin-crusoe",
+      "description": "A Packer plugin that enables automated creation of custom VM images on Crusoe Cloud — automated image building, flexible SSH authentication, multi-region support, HMAC-based authentication, and automatic cleanup of temporary resources. Maintained by Modal Labs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "packer-plugin-crusoe",
+          "description": "",
+          "path": "skills/packer-plugin-crusoe",
+          "url": "https://github.com/modal-labs/packer-plugin-crusoe/blob/main/skills/packer-plugin-crusoe"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/packer-plugin-crusoe",
+      "provider": "modal"
+    },
+    {
+      "slug": "pytest-markdown-docs",
+      "name": "pytest-markdown-docs",
+      "vendor": "Modal",
+      "vendorUrl": "https://github.com/modal-labs/pytest-markdown-docs",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/modal-labs/pytest-markdown-docs",
+      "install": "https://github.com/modal-labs/pytest-markdown-docs",
+      "description": "A plugin for pytest that uses markdown code snippets from markdown files and docstrings as tests — detects Python code fences in .md, .mdx, .svx, and .py files and runs them, supporting fixtures, async fixtures, and continuation blocks.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "pytest-markdown-docs",
+          "description": "",
+          "path": "skills/pytest-markdown-docs",
+          "url": "https://github.com/modal-labs/pytest-markdown-docs/blob/main/skills/pytest-markdown-docs"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/modal/plugins/pytest-markdown-docs",
+      "provider": "modal"
     }
   ]
 }
