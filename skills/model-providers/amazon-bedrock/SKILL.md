@@ -69,3 +69,31 @@ Amazon Bedrock offers models across capability tiers. Choose based on your use c
 
 - Amazon Bedrock official documentation
 - Amazon Bedrock API reference
+
+## AWS Skills & Plugins
+
+AWS's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| tools-for-devops-agent | [aws/tools-for-devops-agent](https://github.com/aws/tools-for-devops-agent) | Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and tools for incident response, root cause analysis, and more | Python | Apache-2.0 |
+| agent-toolkit-for-aws | [aws/agent-toolkit-for-aws](https://github.com/aws/agent-toolkit-for-aws) | Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS | Python | Apache-2.0 |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [agent-toolkit-for-aws](https://github.com/aws/agent-toolkit-for-aws) | Official, AWS-supported MCP servers, skills, and plugins (also indexed under Skills) | Python | Apache-2.0 |
+| [aws-toolkit-jetbrains](https://github.com/aws/aws-toolkit-jetbrains) | AWS Toolkit for JetBrains — interact with AWS from JetBrains IDEs | Kotlin | Apache-2.0 |
+| [aws-toolkit-visual-studio](https://github.com/aws/aws-toolkit-visual-studio) | AWS Toolkit for Visual Studio — a plugin to interact with AWS | C#/.NET | Apache-2.0 |
+| [aws-signer-notation-plugin](https://github.com/aws/aws-signer-notation-plugin) | AWS Signer Plugin for Notation | Go | Apache-2.0 |
+| [amazon-vpc-cni-k8s](https://github.com/aws/amazon-vpc-cni-k8s) | Networking plugin for pod networking in Kubernetes using Elastic Network Interfaces | Go | Apache-2.0 |
+| [aws-ofi-nccl](https://github.com/aws/aws-ofi-nccl) | Plugin letting EC2 developers use libfabric as a network provider with NCCL | C++ | Apache-2.0 |
+| [audit-plugin-for-mysql](https://github.com/aws/audit-plugin-for-mysql) | Audit Plugin for MySQL Server | C++ | Other |
+| [amazon-inspector-container-image-scanner-jenkins-plugin](https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin) | Jenkins CI/CD plugin for Amazon Inspector container image scanning | Java | Apache-2.0 |
+| [aws-sigv4-auth-cassandra-java-driver-plugin](https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin) | SigV4 auth plugin for the Cassandra Java driver | Java | Apache-2.0 |
+| [aws-sigv4-auth-cassandra-python-driver-plugin](https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin) | SigV4 auth plugin for the Cassandra Python driver | Python | Apache-2.0 |
+| [aws-sigv4-auth-cassandra-gocql-driver-plugin](https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin) | SigV4 auth plugin for the gocql Cassandra driver | Go | Apache-2.0 |
+| [aws-sigv4-auth-cassandra-nodejs-driver-plugin](https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin) | SigV4 auth plugin for the Node.js Cassandra driver | JavaScript | Apache-2.0 |

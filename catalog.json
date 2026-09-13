@@ -84,11 +84,14 @@
     },
     {
       "id": "amazon-bedrock",
-      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider.",
+      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "amazon-bedrock"
+        "amazon-bedrock",
+        "aws",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -97,10 +100,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "31374e3d0ba16f3a",
+      "h": "7bed5b7c6ef4c6d4",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/amazon-bedrock"
+    },
+    {
+      "id": "agent-toolkit-for-aws",
+      "d": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
+        "mcp",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "a991b9606de2d8b5",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws"
+    },
+    {
+      "id": "tools-for-devops-agent",
+      "d": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
+        "devops",
+        "incident-response",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5c44255a51aeaccf",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent"
     },
     {
       "id": "anthropic",
@@ -3579,6 +3630,366 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/mistral/plugins/zed-extensions",
       "provider": "mistral"
+    },
+    {
+      "slug": "agent-toolkit-for-aws",
+      "name": "agent-toolkit-for-aws",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/agent-toolkit-for-aws",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/agent-toolkit-for-aws",
+      "install": "https://github.com/aws/agent-toolkit-for-aws",
+      "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS. (Also indexed under this provider's skills — the toolkit covers both.)",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "agent-toolkit-for-aws",
+          "description": "",
+          "path": "skills/agent-toolkit-for-aws",
+          "url": "https://github.com/aws/agent-toolkit-for-aws/blob/main/skills/agent-toolkit-for-aws"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/agent-toolkit-for-aws",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "amazon-inspector-container-image-scanner-jenkins-plugin",
+      "name": "amazon-inspector-container-image-scanner-jenkins-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "install": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "description": "Jenkins CI/CD plugin for Amazon Inspector container image scanning.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "amazon-inspector-container-image-scanner-jenkins-plugin",
+          "description": "",
+          "path": "skills/amazon-inspector-container-image-scanner-jenkins-plugin",
+          "url": "https://github.com/aws/amazon-inspector-container-image-scanner-jenkins-plugin/blob/main/skills/amazon-inspector-container-image-scanner-jenkins-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/amazon-inspector-container-image-scanner-jenkins-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "amazon-vpc-cni-k8s",
+      "name": "amazon-vpc-cni-k8s",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "install": "https://github.com/aws/amazon-vpc-cni-k8s",
+      "description": "Networking plugin repository for pod networking in Kubernetes using Elastic Network Interfaces on AWS.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "amazon-vpc-cni-k8s",
+          "description": "",
+          "path": "skills/amazon-vpc-cni-k8s",
+          "url": "https://github.com/aws/amazon-vpc-cni-k8s/blob/main/skills/amazon-vpc-cni-k8s"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/amazon-vpc-cni-k8s",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "audit-plugin-for-mysql",
+      "name": "audit-plugin-for-mysql",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/audit-plugin-for-mysql",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Other",
+      "upstreamRepo": "https://github.com/aws/audit-plugin-for-mysql",
+      "install": "https://github.com/aws/audit-plugin-for-mysql",
+      "description": "Audit Plugin for MySQL Server.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "audit-plugin-for-mysql",
+          "description": "",
+          "path": "skills/audit-plugin-for-mysql",
+          "url": "https://github.com/aws/audit-plugin-for-mysql/blob/main/skills/audit-plugin-for-mysql"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/audit-plugin-for-mysql",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-ofi-nccl",
+      "name": "aws-ofi-nccl",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-ofi-nccl",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-ofi-nccl",
+      "install": "https://github.com/aws/aws-ofi-nccl",
+      "description": "Plugin that lets EC2 developers use libfabric as a network provider while running NCCL applications.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-ofi-nccl",
+          "description": "",
+          "path": "skills/aws-ofi-nccl",
+          "url": "https://github.com/aws/aws-ofi-nccl/blob/main/skills/aws-ofi-nccl"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-ofi-nccl",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-signer-notation-plugin",
+      "name": "aws-signer-notation-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-signer-notation-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-signer-notation-plugin",
+      "install": "https://github.com/aws/aws-signer-notation-plugin",
+      "description": "AWS Signer Plugin for Notation — sign and verify OCI artifacts with AWS Signer.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-signer-notation-plugin",
+          "description": "",
+          "path": "skills/aws-signer-notation-plugin",
+          "url": "https://github.com/aws/aws-signer-notation-plugin/blob/main/skills/aws-signer-notation-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-signer-notation-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "description": "SigV4 authentication plugin for the gocql Cassandra driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-gocql-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-gocql-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-gocql-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-gocql-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-java-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-java-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "description": "SigV4 authentication plugin for the Apache Cassandra Java driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-java-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-java-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-java-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-java-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-java-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "description": "SigV4 authentication plugin for the Node.js Cassandra driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-nodejs-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-nodejs-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-nodejs-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-sigv4-auth-cassandra-python-driver-plugin",
+      "name": "aws-sigv4-auth-cassandra-python-driver-plugin",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "install": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "description": "SigV4 authentication plugin for the Apache Cassandra Python driver — IAM-based auth for Amazon Managed Service for Apache Cassandra.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-sigv4-auth-cassandra-python-driver-plugin",
+          "description": "",
+          "path": "skills/aws-sigv4-auth-cassandra-python-driver-plugin",
+          "url": "https://github.com/aws/aws-sigv4-auth-cassandra-python-driver-plugin/blob/main/skills/aws-sigv4-auth-cassandra-python-driver-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-sigv4-auth-cassandra-python-driver-plugin",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-toolkit-jetbrains",
+      "name": "aws-toolkit-jetbrains",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-toolkit-jetbrains",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-toolkit-jetbrains",
+      "install": "https://github.com/aws/aws-toolkit-jetbrains",
+      "description": "AWS Toolkit for JetBrains — a plugin for interacting with AWS from JetBrains IDEs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-toolkit-jetbrains",
+          "description": "",
+          "path": "skills/aws-toolkit-jetbrains",
+          "url": "https://github.com/aws/aws-toolkit-jetbrains/blob/main/skills/aws-toolkit-jetbrains"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-toolkit-jetbrains",
+      "provider": "amazon-bedrock"
+    },
+    {
+      "slug": "aws-toolkit-visual-studio",
+      "name": "aws-toolkit-visual-studio",
+      "vendor": "Amazon Web Services",
+      "vendorUrl": "https://github.com/aws/aws-toolkit-visual-studio",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/aws/aws-toolkit-visual-studio",
+      "install": "https://github.com/aws/aws-toolkit-visual-studio",
+      "description": "AWS Toolkit for Visual Studio — a plugin to interact with AWS.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "aws-toolkit-visual-studio",
+          "description": "",
+          "path": "skills/aws-toolkit-visual-studio",
+          "url": "https://github.com/aws/aws-toolkit-visual-studio/blob/main/skills/aws-toolkit-visual-studio"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/amazon-bedrock/plugins/aws-toolkit-visual-studio",
+      "provider": "amazon-bedrock"
     }
   ]
 }

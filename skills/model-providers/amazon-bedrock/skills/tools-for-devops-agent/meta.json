@@ -1,0 +1,35 @@
+{
+  "id": "tools-for-devops-agent",
+  "slug": "tools-for-devops-agent",
+  "description": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "amazon-bedrock",
+    "aws",
+    "devops",
+    "incident-response",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/aws/tools-for-devops-agent",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "tools-for-devops-agent",
+    "license": "Apache-2.0"
+  },
+  "hash": "5c44255a51aeaccf",
+  "path": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent/SKILL.md"
+}

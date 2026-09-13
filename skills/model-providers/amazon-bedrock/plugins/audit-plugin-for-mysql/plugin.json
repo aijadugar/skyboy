@@ -1,0 +1,13 @@
+{
+  "name": "audit-plugin-for-mysql",
+  "description": "Audit Plugin for MySQL Server.",
+  "source_url": "https://github.com/aws/audit-plugin-for-mysql",
+  "contents": {
+    "skills": ["audit-plugin-for-mysql"]
+  },
+  "vendor": "Amazon Web Services",
+  "license": "Other",
+  "category": "model-providers",
+  "tags": ["model-provider", "amazon-bedrock", "aws", "mysql", "audit", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
