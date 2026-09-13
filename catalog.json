@@ -775,11 +775,13 @@
     },
     {
       "id": "meta",
-      "d": "Integration guide and best practices for using Meta as a model provider.",
+      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "meta"
+        "meta",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -788,10 +790,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "3ab670a6cdc437a8",
+      "h": "b48ecb243202e89c",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/meta"
+    },
+    {
+      "id": "agentic-tools",
+      "d": "Meta's agentic tools plugin and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "meta",
+        "facebook",
+        "agentic-tools",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "93b7c4539606eca5",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/meta/skills/agentic-tools"
     },
     {
       "id": "microsoft-azure",
@@ -2745,6 +2770,126 @@
       "badge": "official (vendor)",
       "version": "0.48.2",
       "path": "plugins/vercel/vercel-plugin"
+    },
+    {
+      "slug": "facebook-for-woocommerce",
+      "name": "facebook-for-woocommerce",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/facebook-for-woocommerce",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/facebook-for-woocommerce",
+      "install": "https://github.com/facebook/facebook-for-woocommerce",
+      "description": "The official Meta plugin for WooCommerce. Now officially owned by Meta's Partner Engineering team; community contributions welcome.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "facebook-for-woocommerce",
+          "description": "",
+          "path": "skills/facebook-for-woocommerce",
+          "url": "https://github.com/facebook/facebook-for-woocommerce/blob/main/skills/facebook-for-woocommerce"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/facebook-for-woocommerce",
+      "provider": "meta"
+    },
+    {
+      "slug": "meta-embeds-for-wordpress",
+      "name": "meta-embeds-for-wordpress",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "install": "https://github.com/facebook/meta-embeds-for-wordpress",
+      "description": "Official WordPress plugin for embedding Threads, Instagram, and Facebook content — paste a Threads, Instagram, or Facebook URL into the WordPress editor.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "meta-embeds-for-wordpress",
+          "description": "",
+          "path": "skills/meta-embeds-for-wordpress",
+          "url": "https://github.com/facebook/meta-embeds-for-wordpress/blob/main/skills/meta-embeds-for-wordpress"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/meta-embeds-for-wordpress",
+      "provider": "meta"
+    },
+    {
+      "slug": "meta-instant-games-unity-plugin",
+      "name": "meta-instant-games-unity-plugin",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "install": "https://github.com/facebook/meta-instant-games-unity-plugin",
+      "description": "Meta Instant Games Unity plugin — supports the Instant Games SDK v8.0 with the latest features and APIs, plus code snippets shipped in the SDK.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "meta-instant-games-unity-plugin",
+          "description": "",
+          "path": "skills/meta-instant-games-unity-plugin",
+          "url": "https://github.com/facebook/meta-instant-games-unity-plugin/blob/main/skills/meta-instant-games-unity-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/meta-instant-games-unity-plugin",
+      "provider": "meta"
+    },
+    {
+      "slug": "dont-use-facebook-for-woocommerce",
+      "name": "dont-use-facebook-for-woocommerce",
+      "vendor": "Meta",
+      "vendorUrl": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "GPL-2.0",
+      "upstreamRepo": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "install": "https://github.com/facebook/dont-use-facebook-for-woocommerce",
+      "description": "A first-party extension plugin built for WooCommerce.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dont-use-facebook-for-woocommerce",
+          "description": "",
+          "path": "skills/dont-use-facebook-for-woocommerce",
+          "url": "https://github.com/facebook/dont-use-facebook-for-woocommerce/blob/main/skills/dont-use-facebook-for-woocommerce"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/meta/plugins/dont-use-facebook-for-woocommerce",
+      "provider": "meta"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "name": "agentic-tools",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Meta's agentic tools plugin and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
+  "command": "skyboy add agentic-tools",
+  "tags": ["model-provider", "meta", "facebook", "agentic-tools", "skills"],
+  "author": "skyboy",
+  "source_url": "https://github.com/facebook/agentic-tools",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

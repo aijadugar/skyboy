@@ -1,0 +1,13 @@
+{
+  "name": "facebook-for-woocommerce",
+  "description": "The official Meta plugin for WooCommerce. Now officially owned by Meta's Partner Engineering team; community contributions welcome.",
+  "source_url": "https://github.com/facebook/facebook-for-woocommerce",
+  "contents": {
+    "skills": ["facebook-for-woocommerce"]
+  },
+  "vendor": "Meta",
+  "license": "GPL-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "meta", "facebook", "woocommerce", "wordpress", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
