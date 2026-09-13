@@ -1,0 +1,36 @@
+{
+  "id": "ieops-aihub",
+  "slug": "ieops-aihub",
+  "description": "GMI's AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, ",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "gmi",
+    "ai-memory",
+    "agent-coordination",
+    "mcp",
+    "polyforge",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/GMISWE/ieops-aihub",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "ieops-aihub",
+    "license": "Apache-2.0"
+  },
+  "hash": "b9f1f401702b7c87",
+  "path": "skills/model-providers/gmi/skills/ieops-aihub",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/gmi/skills/ieops-aihub/SKILL.md"
+}

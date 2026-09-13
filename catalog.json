@@ -803,11 +803,13 @@
     },
     {
       "id": "gmi",
-      "d": "Integration guide and best practices for using GMI as a model provider.",
+      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "gmi"
+        "gmi",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -816,10 +818,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "9b4fd94918932fd1",
+      "h": "ab90f58de133e8de",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/gmi"
+    },
+    {
+      "id": "ieops-aihub",
+      "d": "GMI's AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "gmi",
+        "ai-memory",
+        "agent-coordination",
+        "mcp",
+        "polyforge",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b9f1f401702b7c87",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/gmi/skills/ieops-aihub"
     },
     {
       "id": "google",
@@ -4970,6 +4997,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/modal/plugins/pytest-markdown-docs",
       "provider": "modal"
+    },
+    {
+      "slug": "openclaw-plugin",
+      "name": "openclaw-plugin",
+      "vendor": "GMI",
+      "vendorUrl": "https://github.com/GMISWE/openclaw-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/GMISWE/openclaw-plugin",
+      "install": "https://github.com/GMISWE/openclaw-plugin",
+      "description": "GMI Cloud Provider Plugin for OpenClaw — adds GMI Cloud as a model provider for its OpenAI-compatible inference API (https://api.gmi-serving.com/v1), with API-key provider auth, a static catalog of common GMI Cloud models, and dynamic model resolution.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "openclaw-plugin",
+          "description": "",
+          "path": "skills/openclaw-plugin",
+          "url": "https://github.com/GMISWE/openclaw-plugin/blob/main/skills/openclaw-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/gmi/plugins/openclaw-plugin",
+      "provider": "gmi"
     }
   ]
 }

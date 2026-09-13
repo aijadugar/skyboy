@@ -1,11 +1,13 @@
 {
   "id": "gmi",
   "slug": "gmi",
-  "description": "Integration guide and best practices for using GMI as a model provider.",
+  "description": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "gmi"
+    "gmi",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "gmi",
     "license": "MIT"
   },
-  "hash": "9b4fd94918932fd1",
+  "hash": "ab90f58de133e8de",
   "path": "skills/model-providers/gmi",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/gmi/SKILL.md"
 }

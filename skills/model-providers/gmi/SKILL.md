@@ -69,3 +69,19 @@ GMI offers models across capability tiers. Choose based on your use case:
 
 - GMI official documentation
 - GMI API reference
+
+## GMI Skills & Plugins
+
+GMI's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| ieops-aihub | [GMISWE/ieops-aihub](https://github.com/GMISWE/ieops-aihub) | AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, and MCP tools | Go, Python, JavaScript, Shell | — |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [openclaw-plugin](https://github.com/GMISWE/openclaw-plugin) | GMI Cloud provider plugin for OpenClaw — API-key auth, static model catalog, and dynamic model resolution for GMI Cloud's OpenAI-compatible inference API (api.gmi-serving.com/v1) | TypeScript | — |
