@@ -1,11 +1,13 @@
 {
   "id": "baseten",
   "slug": "baseten",
-  "description": "Integration guide and best practices for using Baseten as a model provider.",
+  "description": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "baseten"
+    "baseten",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "baseten",
     "license": "MIT"
   },
-  "hash": "5d178562396bd2ad",
+  "hash": "24a93c752c6f087f",
   "path": "skills/model-providers/baseten",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/baseten/SKILL.md"
 }

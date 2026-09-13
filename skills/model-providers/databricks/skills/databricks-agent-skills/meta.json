@@ -1,0 +1,33 @@
+{
+  "id": "databricks-agent-skills",
+  "slug": "databricks-agent-skills",
+  "description": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "databricks",
+    "agents",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Other",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/databricks/databricks-agent-skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "databricks-agent-skills",
+    "license": "Other"
+  },
+  "hash": "b5fb90b6291b24f4",
+  "path": "skills/model-providers/databricks/skills/databricks-agent-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/databricks/skills/databricks-agent-skills/SKILL.md"
+}

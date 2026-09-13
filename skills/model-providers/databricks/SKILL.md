@@ -69,3 +69,20 @@ Databricks offers models across capability tiers. Choose based on your use case:
 
 - Databricks official documentation
 - Databricks API reference
+
+## Databricks Skills & Plugins
+
+Databricks' public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| databricks-agent-skills | [databricks/databricks-agent-skills](https://github.com/databricks/databricks-agent-skills) | Skills for Databricks agents — official Agent Skills repository | Python | Other |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [intellij-jsonnet](https://github.com/databricks/intellij-jsonnet) | IntelliJ Jsonnet Plugin | Java | Apache-2.0 |
+| [ec2-plugin](https://github.com/databricks/ec2-plugin) | Jenkins EC2 plugin | Java | MIT |

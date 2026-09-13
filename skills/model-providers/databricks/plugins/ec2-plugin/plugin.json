@@ -1,0 +1,13 @@
+{
+  "name": "ec2-plugin",
+  "description": "Jenkins ec2 plugin — provision and manage Amazon EC2 agents from Jenkins.",
+  "source_url": "https://github.com/databricks/ec2-plugin",
+  "contents": {
+    "skills": ["ec2-plugin"]
+  },
+  "vendor": "Databricks",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "databricks", "jenkins", "ec2", "cicd", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

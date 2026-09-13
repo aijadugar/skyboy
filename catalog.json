@@ -245,11 +245,13 @@
     },
     {
       "id": "baseten",
-      "d": "Integration guide and best practices for using Baseten as a model provider.",
+      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "baseten"
+        "baseten",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -258,10 +260,33 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "5d178562396bd2ad",
+      "h": "24a93c752c6f087f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/baseten"
+    },
+    {
+      "id": "baseten-skills",
+      "d": "Skills for using Baseten effectively — deploy, scale, and serve models on Baseten through agent workflows.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten",
+        "skills",
+        "inference",
+        "deployment"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b7634f7e2821d7fe",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/baseten/skills/baseten-skills"
     },
     {
       "id": "bitdeer-ai",
@@ -557,11 +582,13 @@
     },
     {
       "id": "databricks",
-      "d": "Integration guide and best practices for using Databricks as a model provider.",
+      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "databricks"
+        "databricks",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -570,10 +597,32 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "d70ad2698ef32957",
+      "h": "f82b0ce3c3522635",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/databricks"
+    },
+    {
+      "id": "databricks-agent-skills",
+      "d": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "databricks",
+        "agents",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b5fb90b6291b24f4",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/databricks/skills/databricks-agent-skills"
     },
     {
       "id": "deepinfra",
@@ -4132,6 +4181,96 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/microsoft-azure/plugins/vagrant-azure",
       "provider": "microsoft-azure"
+    },
+    {
+      "slug": "n8n-nodes-baseten",
+      "name": "n8n-nodes-baseten",
+      "vendor": "Baseten",
+      "vendorUrl": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "install": "https://github.com/basetenlabs/n8n-nodes-baseten",
+      "description": "n8n community node for Baseten chat model integration.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "n8n-nodes-baseten",
+          "description": "",
+          "path": "skills/n8n-nodes-baseten",
+          "url": "https://github.com/basetenlabs/n8n-nodes-baseten/blob/main/skills/n8n-nodes-baseten"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/baseten/plugins/n8n-nodes-baseten",
+      "provider": "baseten"
+    },
+    {
+      "slug": "ec2-plugin",
+      "name": "ec2-plugin",
+      "vendor": "Databricks",
+      "vendorUrl": "https://github.com/databricks/ec2-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/databricks/ec2-plugin",
+      "install": "https://github.com/databricks/ec2-plugin",
+      "description": "Jenkins ec2 plugin — provision and manage Amazon EC2 agents from Jenkins.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "ec2-plugin",
+          "description": "",
+          "path": "skills/ec2-plugin",
+          "url": "https://github.com/databricks/ec2-plugin/blob/main/skills/ec2-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/databricks/plugins/ec2-plugin",
+      "provider": "databricks"
+    },
+    {
+      "slug": "intellij-jsonnet",
+      "name": "intellij-jsonnet",
+      "vendor": "Databricks",
+      "vendorUrl": "https://github.com/databricks/intellij-jsonnet",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/databricks/intellij-jsonnet",
+      "install": "https://github.com/databricks/intellij-jsonnet",
+      "description": "IntelliJ Jsonnet Plugin — Jsonnet language support for IntelliJ-based IDEs.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "intellij-jsonnet",
+          "description": "",
+          "path": "skills/intellij-jsonnet",
+          "url": "https://github.com/databricks/intellij-jsonnet/blob/main/skills/intellij-jsonnet"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/databricks/plugins/intellij-jsonnet",
+      "provider": "databricks"
     }
   ]
 }
