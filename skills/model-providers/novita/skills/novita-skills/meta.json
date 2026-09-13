@@ -1,0 +1,33 @@
+{
+  "id": "novita-skills",
+  "slug": "novita-skills",
+  "description": "Official Novita Skills repository — reusable SKILL.md skills for agent ecosystems that support skill-based workflows on Novita AI.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "novita",
+    "skills",
+    "agent-workflows"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/novitalabs/novita-skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "novita-skills",
+    "license": "MIT"
+  },
+  "hash": "5abd535171da7616",
+  "path": "skills/model-providers/novita/skills/novita-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/skills/novita-skills/SKILL.md"
+}

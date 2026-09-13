@@ -69,3 +69,21 @@ Together AI offers models across capability tiers. Choose based on your use case
 
 - Together AI official documentation
 - Together AI API reference
+
+## Together AI Skills & Plugins
+
+Together's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| together-skills | [togethercomputer/skills](https://github.com/togethercomputer/skills) | Agent skills covering each Together product — inference, training, embeddings, audio, video, images, function calling, infrastructure — with API patterns, SDK usage, CLI commands, and best practices; compatible with Claude Code, Cursor, Codex, Gemini CLI | Python, TypeScript | MIT |
+| together-storage-claude-skills | [togethercomputer/together-storage-claude-skills](https://github.com/togethercomputer/together-storage-claude-skills) | Claude Code operational runbooks for deploying and verifying Together T4 (GNS control-plane + s3-proxy data-plane) and CS3 (s3-cache-proxy) on k3s backed by Rook-Ceph | Go | — |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [together-kubelogin](https://github.com/togethercomputer/together-kubelogin) | kubectl OIDC credential plugin for client-go — authenticate to Kubernetes clusters via the Together AI identity provider | Go | Apache-2.0 |
+| [k8s_gateway-fork](https://github.com/togethercomputer/k8s_gateway-fork) | CoreDNS plugin resolving Kubernetes resources by external IP (Ingress, LoadBalancer, Gateway API) — Together fork for internal infra routing | Go | Apache-2.0 |

@@ -1,11 +1,13 @@
 {
   "id": "novita",
   "slug": "novita",
-  "description": "Integration guide and best practices for using Novita as a model provider.",
+  "description": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "novita"
+    "novita",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "novita",
     "license": "MIT"
   },
-  "hash": "63a6a1b295f6f678",
+  "hash": "35b6918feb1bcc1a",
   "path": "skills/model-providers/novita",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/SKILL.md"
 }

@@ -1,0 +1,13 @@
+{
+  "name": "k8s_gateway-fork",
+  "description": "CoreDNS plugin that resolves Kubernetes resources with their external IP addresses based on configured zones — supports Ingress, Service (LoadBalancer), and Gateway API resources. Together AI fork for internal infrastructure routing.",
+  "source_url": "https://github.com/togethercomputer/k8s_gateway-fork",
+  "contents": {
+    "skills": ["k8s_gateway-fork"]
+  },
+  "vendor": "Together AI",
+  "license": "Apache-2.0",
+  "category": "model-providers",
+  "tags": ["model-provider", "together-ai", "coredns", "kubernetes", "gateway-api", "dns", "plugin"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

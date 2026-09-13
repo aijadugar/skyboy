@@ -1240,11 +1240,13 @@
     },
     {
       "id": "novita",
-      "d": "Integration guide and best practices for using Novita as a model provider.",
+      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "novita"
+        "novita",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1253,10 +1255,81 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "63a6a1b295f6f678",
+      "h": "35b6918feb1bcc1a",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/novita"
+    },
+    {
+      "id": "novita-cli",
+      "d": "Command-line interface for Novita AI — generate text, images, video, and audio, manage GPU/sandbox runtimes, with first-class agent skill integration.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "cli",
+        "gpu",
+        "sandbox",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5fabd23f9a810745",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-cli"
+    },
+    {
+      "id": "novita-multimodal-skill",
+      "d": "Novita AI multimodal skill for OpenClaw — text-to-image, text-to-video, TTS, and more; compatible with Claude Code, Cursor, Gemini CLI, and other mainstream agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "multimodal",
+        "text-to-image",
+        "text-to-video",
+        "tts",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0b2f7c936a2f7070",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-multimodal-skill"
+    },
+    {
+      "id": "novita-skills",
+      "d": "Official Novita Skills repository — reusable SKILL.md skills for agent ecosystems that support skill-based workflows on Novita AI.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "skills",
+        "agent-workflows"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5abd535171da7616",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/novita/skills/novita-skills"
     },
     {
       "id": "openai",
@@ -1466,11 +1539,13 @@
     },
     {
       "id": "together-ai",
-      "d": "Integration guide and best practices for using Together AI as a model provider.",
+      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "together-ai"
+        "together-ai",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1479,10 +1554,58 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "363f84ddb922f148",
+      "h": "ab4c6820cb27e20f",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/together-ai"
+    },
+    {
+      "id": "together-skills",
+      "d": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "skills",
+        "inference",
+        "training",
+        "embeddings"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "20ce3645a30b73a0",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/together-ai/skills/together-skills"
+    },
+    {
+      "id": "together-storage-claude-skills",
+      "d": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "kubernetes",
+        "storage",
+        "claude-code",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0448db4670968ef6",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/together-ai/skills/together-storage-claude-skills"
     },
     {
       "id": "upstage",
@@ -4587,6 +4710,126 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/friendliai/plugins/hermes-friendliai-provider",
       "provider": "friendliai"
+    },
+    {
+      "slug": "dify-plugin-novita",
+      "name": "dify-plugin-novita",
+      "vendor": "Novita",
+      "vendorUrl": "https://github.com/novitalabs/dify-plugin-novita",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/novitalabs/dify-plugin-novita",
+      "install": "https://github.com/novitalabs/dify-plugin-novita",
+      "description": "Novita AI plugin for Dify — use Novita AI models directly within the Dify workflow automation platform.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "dify-plugin-novita",
+          "description": "",
+          "path": "skills/dify-plugin-novita",
+          "url": "https://github.com/novitalabs/dify-plugin-novita/blob/main/skills/dify-plugin-novita"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/novita/plugins/dify-plugin-novita",
+      "provider": "novita"
+    },
+    {
+      "slug": "sd-webui-cleaner",
+      "name": "sd-webui-cleaner",
+      "vendor": "Novita",
+      "vendorUrl": "https://github.com/novitalabs/sd-webui-cleaner",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/novitalabs/sd-webui-cleaner",
+      "install": "https://github.com/novitalabs/sd-webui-cleaner",
+      "description": "Extension (plugin) for stable-diffusion-webui to remove any object from an image — UI and API powered by the LaMa model.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "sd-webui-cleaner",
+          "description": "",
+          "path": "skills/sd-webui-cleaner",
+          "url": "https://github.com/novitalabs/sd-webui-cleaner/blob/main/skills/sd-webui-cleaner"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/novita/plugins/sd-webui-cleaner",
+      "provider": "novita"
+    },
+    {
+      "slug": "k8s_gateway-fork",
+      "name": "k8s_gateway-fork",
+      "vendor": "Together AI",
+      "vendorUrl": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "install": "https://github.com/togethercomputer/k8s_gateway-fork",
+      "description": "CoreDNS plugin that resolves Kubernetes resources with their external IP addresses based on configured zones — supports Ingress, Service (LoadBalancer), and Gateway API resources. Together AI fork for internal infrastructure routing.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "k8s_gateway-fork",
+          "description": "",
+          "path": "skills/k8s_gateway-fork",
+          "url": "https://github.com/togethercomputer/k8s_gateway-fork/blob/main/skills/k8s_gateway-fork"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/together-ai/plugins/k8s_gateway-fork",
+      "provider": "together-ai"
+    },
+    {
+      "slug": "together-kubelogin",
+      "name": "together-kubelogin",
+      "vendor": "Together AI",
+      "vendorUrl": "https://github.com/togethercomputer/together-kubelogin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "Apache-2.0",
+      "upstreamRepo": "https://github.com/togethercomputer/together-kubelogin",
+      "install": "https://github.com/togethercomputer/together-kubelogin",
+      "description": "Kubernetes Authentication Plugin for Together AI — a kubectl OIDC credential plugin for client-go that authenticates to Kubernetes clusters via the Together AI identity provider.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "together-kubelogin",
+          "description": "",
+          "path": "skills/together-kubelogin",
+          "url": "https://github.com/togethercomputer/together-kubelogin/blob/main/skills/together-kubelogin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/together-ai/plugins/together-kubelogin",
+      "provider": "together-ai"
     }
   ]
 }

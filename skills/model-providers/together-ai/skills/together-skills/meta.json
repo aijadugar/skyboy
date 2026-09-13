@@ -1,0 +1,35 @@
+{
+  "id": "together-skills",
+  "slug": "together-skills",
+  "description": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, ",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "together-ai",
+    "skills",
+    "inference",
+    "training",
+    "embeddings"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/togethercomputer/skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "together-skills",
+    "license": "MIT"
+  },
+  "hash": "20ce3645a30b73a0",
+  "path": "skills/model-providers/together-ai/skills/together-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/together-ai/skills/together-skills/SKILL.md"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "together-storage-claude-skills",
+  "slug": "together-storage-claude-skills",
+  "description": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "together-ai",
+    "kubernetes",
+    "storage",
+    "claude-code",
+    "skills"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "skyboy",
+  "origin": "skyboy",
+  "verified": false,
+  "upstream_repo": "https://github.com/togethercomputer/together-storage-claude-skills",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "together-storage-claude-skills",
+    "license": "Apache-2.0"
+  },
+  "hash": "0448db4670968ef6",
+  "path": "skills/model-providers/together-ai/skills/together-storage-claude-skills",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/together-ai/skills/together-storage-claude-skills/SKILL.md"
+}
