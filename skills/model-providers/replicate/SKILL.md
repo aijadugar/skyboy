@@ -69,3 +69,19 @@ Replicate offers models across capability tiers. Choose based on your use case:
 
 - Replicate official documentation
 - Replicate API reference
+
+## Replicate Skills & Plugins
+
+Replicate's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+
+### Skills
+
+| Skill | Repository | Description | Language | License |
+|---|---|---|---|---|
+| replicate-skills | [replicate/skills](https://github.com/replicate/skills) | Agent Skills for building AI-powered apps with Replicate — find-models (search, browse collections, read schemas), video prompting, and image generation workflows, auto-invoked by coding agents on matching tasks; the cog repo additionally ships built-in agent skills (.agents/skills, e.g., release-cog) | Shell, Markdown | Apache-2.0 |
+
+### Plugins
+
+| Repository | Description | Language | License |
+|---|---|---|---|
+| [replicate-models-chatgpt-plugin](https://github.com/replicate/replicate-models-chatgpt-plugin) | Run Replicate models directly from ChatGPT — OpenAI plugins quickstart-based plugin with openapi.yaml and a Node.js backend for discovering and executing Replicate model predictions | JavaScript | MIT |

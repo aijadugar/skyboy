@@ -1528,11 +1528,13 @@
     },
     {
       "id": "replicate",
-      "d": "Integration guide and best practices for using Replicate as a model provider.",
+      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "replicate"
+        "replicate",
+        "skills",
+        "plugins"
       ],
       "a": [
         "claude-code",
@@ -1541,10 +1543,35 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "f7c1070921f937ac",
+      "h": "9609cd00ebfb5cec",
       "o": "skyboy",
       "y": false,
       "p": "skills/model-providers/replicate"
+    },
+    {
+      "id": "replicate-skills",
+      "d": "Replicate's collection of Agent Skills for building AI-powered apps — find-models, video prompting, and image generation workflows auto-invoked by AI coding agents on matching tasks.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "replicate",
+        "agent-skill",
+        "find-models",
+        "image-generation",
+        "video-prompting",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "f6fc7285b6e2c276",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/model-providers/replicate/skills/replicate-skills"
     },
     {
       "id": "sambanova",
@@ -5670,6 +5697,36 @@
       "badge": "official (vendor)",
       "path": "skills/model-providers/cerebras/plugins/vscode-cerebras-chat",
       "provider": "cerebras"
+    },
+    {
+      "slug": "replicate-models-chatgpt-plugin",
+      "name": "replicate-models-chatgpt-plugin",
+      "vendor": "Replicate",
+      "vendorUrl": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "sourceType": "vendor",
+      "origin": "vendor",
+      "category": "model-providers",
+      "tags": null,
+      "license": "MIT",
+      "upstreamRepo": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "install": "https://github.com/replicate/replicate-models-chatgpt-plugin",
+      "description": "OpenAI plugins quickstart-based plugin that runs Replicate models directly from within ChatGPT — ships the OpenAPI spec (openapi.yaml) and Node.js backend (app.js) that let ChatGPT discover and execute Replicate model predictions.",
+      "compatibleAgents": null,
+      "skills": [
+        {
+          "name": "replicate-models-chatgpt-plugin",
+          "description": "",
+          "path": "skills/replicate-models-chatgpt-plugin",
+          "url": "https://github.com/replicate/replicate-models-chatgpt-plugin/blob/main/skills/replicate-models-chatgpt-plugin"
+        }
+      ],
+      "commands": null,
+      "agents": null,
+      "mcp": null,
+      "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
+      "badge": "official (vendor)",
+      "path": "skills/model-providers/replicate/plugins/replicate-models-chatgpt-plugin",
+      "provider": "replicate"
     }
   ]
 }

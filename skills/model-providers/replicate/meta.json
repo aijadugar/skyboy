@@ -1,11 +1,13 @@
 {
   "id": "replicate",
   "slug": "replicate",
-  "description": "Integration guide and best practices for using Replicate as a model provider.",
+  "description": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "replicate"
+    "replicate",
+    "skills",
+    "plugins"
   ],
   "compatible_agents": [
     "claude-code",
@@ -25,7 +27,7 @@
     "name": "replicate",
     "license": "MIT"
   },
-  "hash": "f7c1070921f937ac",
+  "hash": "9609cd00ebfb5cec",
   "path": "skills/model-providers/replicate",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/replicate/SKILL.md"
 }
