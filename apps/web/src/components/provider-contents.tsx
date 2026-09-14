@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { DrawablyCheckbox } from "drawably/react";
 import type { Plugin, Skill } from "@/lib/catalog";
+import { EmptyShelf } from "@/components/empty-shelf";
 import {
   SelectionProvider,
   useSelection,
@@ -39,15 +40,15 @@ export function ProviderContents({
             ))}
           </div>
         ) : (
-          <p className="text-sm text-mute">No skills nested in this provider yet.</p>
+          <EmptyShelf kind="skills" seedInput={`${providerSlug}/skills`} />
         )}
       </section>
 
-      {plugins.length > 0 ? (
-        <section className="mt-14">
-          <h2 className="mb-5 text-xl font-semibold tracking-tight text-ink">
-            Plugins from this provider
-          </h2>
+      <section className="mt-14">
+        <h2 className="mb-5 text-xl font-semibold tracking-tight text-ink">
+          Plugins from this provider
+        </h2>
+        {plugins.length > 0 ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
             {plugins.map((p) => (
               <a
@@ -75,8 +76,10 @@ export function ProviderContents({
               </a>
             ))}
           </div>
-        </section>
-      ) : null}
+        ) : (
+          <EmptyShelf kind="plugins" seedInput={`${providerSlug}/plugins`} />
+        )}
+      </section>
     </SelectionProvider>
   );
 }
