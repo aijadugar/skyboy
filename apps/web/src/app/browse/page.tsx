@@ -5,6 +5,7 @@ import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
 import { CategoryFilter } from "@/components/category-filter";
 import { BrowseIntro } from "@/components/browse-intro";
+import { EmptyShelf } from "@/components/empty-shelf";
 import { SkillCard } from "@/components/skill-card";
 import { SelectionProvider } from "@/components/selection";
 
@@ -77,15 +78,8 @@ export default async function BrowsePage({
           </Suspense> */}
 
           <section className="mx-auto max-w-6xl px-6 pt-8">
-            {skills.length === 0 && plugins.length === 0 ? (
-              <div className="rounded-sm border border-hairline bg-card px-6 py-16 text-center">
-                <p className="font-mono text-sm uppercase tracking-[0.1em] text-mute">
-                  No matches
-                </p>
-                <p className="mt-3 text-sm text-body">
-                  Try a different category or tag, or clear the filters.
-                </p>
-              </div>
+            {skills.length === 0 ? (
+              <EmptyShelf kind="category" seedInput={`browse:${category}:${tag}`} />
             ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
                 {skills.map((skill) => (
