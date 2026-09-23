@@ -7,6 +7,7 @@ import {
   DrawablyHighlight,
   DrawablyUnderline,
 } from "drawably/react";
+import { Logo } from "./logo";
 import type { Skill } from "@/lib/catalog";
 
 export function Hero({ feature }: { feature: Skill }) {
@@ -14,7 +15,8 @@ export function Hero({ feature }: { feature: Skill }) {
   return (
     <section className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 pb-20 pt-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:pt-24">
       <div>
-        <p className="mb-4 font-mono text-xs uppercase tracking-[0.15em] text-pen">
+        <p className="mb-4 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] text-pen">
+          <Logo size="sm" />
           Skyboy.in
         </p>
         <h1 className="max-w-[16ch] text-4xl font-semibold leading-[1.06] tracking-tight text-ink sm:text-5xl lg:text-6xl">

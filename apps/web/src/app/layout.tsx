@@ -14,6 +14,20 @@ export const metadata: Metadata = {
   },
   description:
     "A fast, curated, agent-agnostic directory of portable AI-era skills. Search, preview, and install skills into Claude, Cursor, ChatGPT, Gemini CLI, and more.",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-32.png", type: "image/png", sizes: "32x32" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
+  },
+  openGraph: {
+    images: [{ url: "/logo-512.png", width: 512, height: 512 }],
+  },
+  twitter: {
+    card: "summary",
+    images: ["/logo-512.png"],
+  },
 };
 
 export default function RootLayout({
