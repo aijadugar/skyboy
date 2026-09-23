@@ -1,3 +1,5 @@
+import { Logo } from "./logo";
+
 export function Footer() {
   // One-line nav (taste-skill §9G: nav on one line, ≤80px). Placeholder routes
   // for this pass; the real pages land in Phase 1+.
@@ -12,9 +14,12 @@ export function Footer() {
     <footer className="border-t border-hairline bg-card">
       <div className="mx-auto max-w-6xl px-6 py-10">
         <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-4">
-          <p className="font-mono text-xs text-mute">
-            Skyboy.in is an independent directory. Not endorsed by any agent vendor.
-          </p>
+          <div className="flex items-center gap-2">
+            <Logo size="sm" />
+            <p className="font-mono text-xs text-mute">
+              Skyboy.in is an independent directory. Not endorsed by any agent vendor.
+            </p>
+          </div>
           <nav className="flex flex-wrap items-center gap-x-6 gap-y-2">
             {links.map((l) => (
               <a
