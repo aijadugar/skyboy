@@ -8,6 +8,6 @@
   "vendor": "Microsoft",
   "license": "MIT",
   "category": "model-providers",
-  "tags": ["model-provider", "microsoft-azure", "kubernetes", "authentication", "plugin"],
+  "tags": ["model-provider", "microsoft", "kubernetes", "authentication", "plugin"],
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
 }

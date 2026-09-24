@@ -1,0 +1,13 @@
+{
+  "name": "vagrant-azure",
+  "description": "Enable Vagrant to manage virtual machines in Microsoft Azure.",
+  "source_url": "https://github.com/Azure/vagrant-azure",
+  "contents": {
+    "skills": ["vagrant-azure"]
+  },
+  "vendor": "Microsoft",
+  "license": "MIT",
+  "category": "model-providers",
+  "tags": ["model-provider", "microsoft", "ruby", "vagrant", "vagrant-plugin", "vagrant-azure-plugin", "plugin", "archived"],
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
