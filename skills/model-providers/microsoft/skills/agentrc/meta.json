@@ -1,0 +1,31 @@
+{
+  "id": "agentrc",
+  "slug": "agentrc",
+  "description": "Tools for preparing repositories for AI development and coding agents",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "repository"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/agentrc",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agentrc",
+    "license": "MIT"
+  },
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/agentrc",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agentrc/SKILL.md"
+}
