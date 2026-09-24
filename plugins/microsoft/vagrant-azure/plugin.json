@@ -8,6 +8,6 @@
   "vendor": "Microsoft",
   "license": "MIT",
   "category": "model-providers",
-  "tags": ["model-provider", "microsoft-azure", "ruby", "vagrant", "vagrant-plugin", "vagrant-azure-plugin", "plugin", "archived"],
+  "tags": ["model-provider", "microsoft", "ruby", "vagrant", "vagrant-plugin", "vagrant-azure-plugin", "plugin", "archived"],
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
 }

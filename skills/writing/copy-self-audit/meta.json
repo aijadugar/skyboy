@@ -8,7 +8,12 @@
     "editing",
     "anti-slop"
   ],
-  "compatible_agents": null,
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
   "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
@@ -16,12 +21,19 @@
   "verified": false,
   "upstream_repo": null,
   "canonical_of": null,
-  "permissions": null,
+  "permissions": {
+    "network": false,
+    "filesystem_write_outside_target": false,
+    "shell_exec": false,
+    "env_read": [],
+    "generated_by": "generate-manifest.ts@1.0.0",
+    "generated_at": "2026-09-08T15:48:55.531Z"
+  },
   "frontmatter": {
     "name": "copy-self-audit",
     "license": "MIT"
   },
-  "hash": "063e3d0bafec4518",
+  "hash": "c7ac4f6c87dbd0e6",
   "path": "skills/writing/copy-self-audit",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/writing/copy-self-audit/SKILL.md"
 }

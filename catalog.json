@@ -1158,12 +1158,12 @@
       "p": "skills/model-providers/meta/skills/agentic-tools"
     },
     {
-      "id": "microsoft-azure",
+      "id": "microsoft",
       "d": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "microsoft-azure",
+        "microsoft",
         "plugins"
       ],
       "a": [
@@ -1176,7 +1176,7 @@
       "h": "e3fc5224f84d87ee",
       "o": "skyboy",
       "y": false,
-      "p": "skills/model-providers/microsoft-azure"
+      "p": "skills/model-providers/microsoft"
     },
     {
       "id": "minimax",
@@ -4609,8 +4609,8 @@
       "mcp": null,
       "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
       "badge": "official (vendor)",
-      "path": "skills/model-providers/microsoft-azure/plugins/kubelogin",
-      "provider": "microsoft-azure"
+      "path": "skills/model-providers/microsoft/plugins/kubelogin",
+      "provider": "microsoft"
     },
     {
       "slug": "vagrant-azure",
@@ -4639,8 +4639,8 @@
       "mcp": null,
       "note": "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
       "badge": "official (vendor)",
-      "path": "skills/model-providers/microsoft-azure/plugins/vagrant-azure",
-      "provider": "microsoft-azure"
+      "path": "skills/model-providers/microsoft/plugins/vagrant-azure",
+      "provider": "microsoft"
     },
     {
       "slug": "n8n-nodes-baseten",

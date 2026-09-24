@@ -21,12 +21,19 @@
   "verified": false,
   "upstream_repo": null,
   "canonical_of": null,
-  "permissions": null,
+  "permissions": {
+    "network": false,
+    "filesystem_write_outside_target": false,
+    "shell_exec": false,
+    "env_read": [],
+    "generated_by": "generate-manifest.ts@1.0.0",
+    "generated_at": "2026-09-08T15:48:55.531Z"
+  },
   "frontmatter": {
     "name": "anti-slop-landing",
     "license": "MIT"
   },
-  "hash": "5cf85c1e096537ef",
+  "hash": "0b2cfb206d5602c6",
   "path": "skills/frontend-design/anti-slop-landing",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/frontend-design/anti-slop-landing/SKILL.md"
 }

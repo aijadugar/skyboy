@@ -1,11 +1,11 @@
 {
-  "id": "microsoft-azure",
-  "slug": "microsoft-azure",
+  "id": "microsoft",
+  "slug": "microsoft",
   "description": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "microsoft-azure",
+    "microsoft",
     "plugins"
   ],
   "compatible_agents": [
@@ -23,10 +23,10 @@
   "canonical_of": null,
   "permissions": null,
   "frontmatter": {
-    "name": "microsoft-azure",
+    "name": "microsoft",
     "license": "MIT"
   },
   "hash": "e3fc5224f84d87ee",
-  "path": "skills/model-providers/microsoft-azure",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft-azure/SKILL.md"
+  "path": "skills/model-providers/microsoft",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/SKILL.md"
 }

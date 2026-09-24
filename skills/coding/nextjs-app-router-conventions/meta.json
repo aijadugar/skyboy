@@ -21,12 +21,19 @@
   "verified": false,
   "upstream_repo": null,
   "canonical_of": null,
-  "permissions": null,
+  "permissions": {
+    "network": false,
+    "filesystem_write_outside_target": false,
+    "shell_exec": false,
+    "env_read": [],
+    "generated_by": "generate-manifest.ts@1.0.0",
+    "generated_at": "2026-09-08T15:48:55.531Z"
+  },
   "frontmatter": {
     "name": "nextjs-app-router-conventions",
     "license": "MIT"
   },
-  "hash": "e0c98fead41fa599",
+  "hash": "b9d1ee947ba55a60",
   "path": "skills/coding/nextjs-app-router-conventions",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/coding/nextjs-app-router-conventions/SKILL.md"
 }
