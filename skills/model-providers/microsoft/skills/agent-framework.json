@@ -1,0 +1,12 @@
+{
+  "name": "agent-framework",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft Agent Framework (MAF) for Python and .NET – production-grade AI agents and multi-agent workflows.",
+  "command": "skyboy add agent-framework",
+  "tags": ["model-provider", "agent-framework"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
