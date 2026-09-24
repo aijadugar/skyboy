@@ -1,0 +1,12 @@
+{
+  "name": "agent-host-protocol",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Protocol for synchronized multi-client state across AI agent sessions",
+  "command": "skyboy add agent-host-protocol",
+  "tags": ["model-provider", "agent-host-protocol"],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/agent-host-protocol",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
