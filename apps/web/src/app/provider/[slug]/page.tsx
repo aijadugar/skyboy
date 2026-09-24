@@ -64,8 +64,9 @@ export default async function ProviderPage({ params }: Props) {
             <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
               Model provider
             </p>
-            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-ink sm:text-5xl flex items-center gap-2">
               {provider.name}
+              <span className="sk-badge sk-badge-official">{provider.badge}</span>
             </h1>
             <p className="mt-4 max-w-[62ch] text-lg leading-relaxed text-body">
               {provider.description}
