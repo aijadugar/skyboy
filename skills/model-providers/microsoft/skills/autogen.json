@@ -1,0 +1,12 @@
+{
+  "name": "autogen",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft AutoGen – programming framework for agentic AI and multi-agent applications.",
+  "command": "skyboy add autogen",
+  "tags": ["model-provider", "autogen"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "CC-BY-4.0",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

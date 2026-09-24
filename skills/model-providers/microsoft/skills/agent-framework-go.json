@@ -1,0 +1,12 @@
+{
+  "name": "agent-framework-go",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft Agent Framework for Go – production-grade AI agents and multi-agent workflows in Go.",
+  "command": "skyboy add agent-framework-go",
+  "tags": ["model-provider", "agent-framework"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

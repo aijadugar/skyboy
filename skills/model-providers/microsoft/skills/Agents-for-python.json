@@ -1,0 +1,12 @@
+{
+  "name": "Agents-for-python",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft 365 Agents SDK for Python – full stack, multichannel agents with OpenTelemetry observability.",
+  "command": "skyboy add Agents-for-python",
+  "tags": ["model-provider", "agents-sdk"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

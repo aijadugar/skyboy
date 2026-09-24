@@ -30,6 +30,9 @@ export function ProviderContents({
         <div className="mb-5 flex items-baseline justify-between gap-4">
           <h2 className="text-xl font-semibold tracking-tight text-ink">
             Skills in this provider
+            <span className="ml-2 text-sm font-normal text-ink">
+              ({skills.length} skill{skills.length === 1 ? "" : "s"})
+            </span>
           </h2>
           <SelectionDownloadButton />
         </div>

@@ -71,6 +71,9 @@ export default async function ProviderPage({ params }: Props) {
             <p className="mt-4 max-w-[62ch] text-lg leading-relaxed text-body">
               {provider.description}
             </p>
+            <p className="mt-1 text-sm text-ink">
+              {skills.length} skill{skills.length === 1 ? "" : "s"}
+            </p>
           </div>
 
           <aside className="sk-card--bare rounded-sm border border-hairline p-6">

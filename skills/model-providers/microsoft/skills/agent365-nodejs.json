@@ -1,0 +1,12 @@
+{
+  "name": "agent365-nodejs",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft Agent 365 SDK for Node.js/TypeScript – observability, notifications, runtime utilities, and development tools.",
+  "command": "skyboy add agent365-nodejs",
+  "tags": ["model-provider", "agent365-sdk"],
+  "author": "skyboy",
+  "source_url": null,
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
