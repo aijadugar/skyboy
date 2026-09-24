@@ -1,0 +1,12 @@
+{
+  "name": "agent365-dotnet",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": ".NET SDK components for Microsoft Agent 365 - observability, notifications, runtime utilities, and development tools",
+  "command": "skyboy add agent365-dotnet",
+  "tags": ["model-provider", "agent365-sdk"],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/Agent365-dotnet",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
