@@ -1,0 +1,31 @@
+{
+  "id": "agent-framework",
+  "slug": "agent-framework",
+  "description": "Framework for building, orchestrating, and deploying AI agents and multi-agent workflows with Python and .NET",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "agent-framework"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/agent-framework",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agent-framework",
+    "license": "MIT"
+  },
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/agent-framework",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agent-framework/SKILL.md"
+}
