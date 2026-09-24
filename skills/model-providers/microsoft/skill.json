@@ -2,7 +2,7 @@
   "name": "microsoft",
   "category": "model-providers",
   "version": "1.0.0",
-  "description": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Microsoft as a model provider. Includes links to official plugin repositories.",
   "command": "skyboy add microsoft",
   "tags": ["model-provider", "microsoft", "plugins"],
   "author": "skyboy",
