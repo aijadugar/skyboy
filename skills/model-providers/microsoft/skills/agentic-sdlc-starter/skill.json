@@ -1,0 +1,12 @@
+{
+  "name": "agentic-sdlc-starter",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Reference architecture for spec-driven, AI-assisted development using GitHub Copilot, MCP, and repository context engineering",
+  "command": "skyboy add agentic-sdlc-starter",
+  "tags": ["model-provider", "sdlc", "mcp"],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/agentic-sdlc-starter",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

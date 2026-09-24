@@ -1,0 +1,12 @@
+{
+  "name": "copilot-sdk-samples",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Samples for agents powered by the Copilot SDK and GitHub Agentic Workflow System",
+  "command": "skyboy add copilot-sdk-samples",
+  "tags": ["model-provider", "samples"],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/copilot-sdk-samples",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}

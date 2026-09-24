@@ -1,0 +1,32 @@
+{
+  "id": "agentic-sdlc-starter",
+  "slug": "agentic-sdlc-starter",
+  "description": "Reference architecture for spec-driven, AI-assisted development using GitHub Copilot, MCP, and repository context engineering",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "sdlc",
+    "mcp"
+  ],
+  "compatible_agents": [
+    "claude-code",
+    "claude-desktop",
+    "cursor",
+    "gemini-cli"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/agentic-sdlc-starter",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agentic-sdlc-starter",
+    "license": "MIT"
+  },
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/agentic-sdlc-starter",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agentic-sdlc-starter/SKILL.md"
+}

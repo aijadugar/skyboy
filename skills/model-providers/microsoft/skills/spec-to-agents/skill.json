@@ -1,0 +1,12 @@
+{
+  "name": "spec-to-agents",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Multi-agent event-planning workflow using Microsoft Agent Framework, Semantic Kernel, and AutoGen patterns",
+  "command": "skyboy add spec-to-agents",
+  "tags": ["model-provider", "workflow"],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/spec-to-agents",
+  "license": "MIT",
+  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+}
