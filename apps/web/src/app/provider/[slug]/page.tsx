@@ -66,13 +66,9 @@ export default async function ProviderPage({ params }: Props) {
             </p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-ink sm:text-5xl flex items-center gap-2">
               {provider.name}
-              <span className="sk-badge sk-badge-official">{provider.badge}</span>
             </h1>
             <p className="mt-4 max-w-[62ch] text-lg leading-relaxed text-body">
               {provider.description}
-            </p>
-            <p className="mt-1 text-sm text-ink">
-              {skills.length} skill{skills.length === 1 ? "" : "s"}
             </p>
           </div>
 

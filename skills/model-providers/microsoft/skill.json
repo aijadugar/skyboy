@@ -2,11 +2,10 @@
   "name": "microsoft",
   "category": "model-providers",
   "version": "1.0.0",
-  "description": "Integration guide and best practices for using Microsoft as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Microsoft as a model provider.",
   "command": "skyboy add microsoft",
-  "tags": ["model-provider", "microsoft", "plugins"],
+  "tags": ["model-provider", "microsoft"],
   "author": "skyboy",
   "source_url": null,
-  "license": "MIT",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+  "license": "MIT"
 }

@@ -1,0 +1,19 @@
+{
+  "id": "Agents-M365Copilot",
+  "slug": "Agents-M365Copilot",
+  "description": "Client libraries for Microsoft 365 Copilot APIs - typed service models and request builders for C#, Python, and TypeScript",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "copilot-apis"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/Microsoft/Agents-M365Copilot",
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/Agents-M365Copilot",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/Agents-M365Copilot/SKILL.md"
+}

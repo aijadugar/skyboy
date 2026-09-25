@@ -1,0 +1,19 @@
+{
+  "id": "project-oagents",
+  "slug": "project-oagents",
+  "description": "Experimental AI agent framework",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "experimental"
+  ],
+  "version": "1.0.0",
+  "license": "CC-BY-4.0",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/project-oagents",
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/project-oagents",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/project-oagents/SKILL.md"
+}

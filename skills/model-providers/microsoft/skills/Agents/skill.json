@@ -1,0 +1,14 @@
+{
+  "name": "Agents",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Microsoft 365 Agent SDK for full-stack, multichannel agents across Microsoft 365, Teams, Copilot Studio, and Webchat",
+  "command": "skyboy add Agents",
+  "tags": [
+    "model-provider",
+    "agents-sdk"
+  ],
+  "author": "skyboy",
+  "source_url": "https://github.com/Microsoft/Agents",
+  "license": "MIT"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Agents-M365Copilot",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Client libraries for Microsoft 365 Copilot APIs - typed service models and request builders for C#, Python, and TypeScript",
+  "command": "skyboy add Agents-M365Copilot",
+  "tags": [
+    "model-provider",
+    "copilot-apis"
+  ],
+  "author": "skyboy",
+  "source_url": "https://github.com/Microsoft/Agents-M365Copilot",
+  "license": "MIT"
+}

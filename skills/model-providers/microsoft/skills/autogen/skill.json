@@ -1,0 +1,14 @@
+{
+  "name": "autogen",
+  "category": "model-providers",
+  "version": "1.0.0",
+  "description": "Programming framework for agentic AI and multi-agent applications",
+  "command": "skyboy add autogen",
+  "tags": [
+    "model-provider",
+    "autogen"
+  ],
+  "author": "skyboy",
+  "source_url": "https://github.com/microsoft/autogen",
+  "license": "CC-BY-4.0"
+}

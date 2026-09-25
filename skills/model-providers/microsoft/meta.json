@@ -1,18 +1,11 @@
 {
   "id": "microsoft",
   "slug": "microsoft",
-  "description": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Microsoft as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "microsoft",
-    "plugins"
-  ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
+    "microsoft"
   ],
   "version": "1.0.0",
   "license": "MIT",

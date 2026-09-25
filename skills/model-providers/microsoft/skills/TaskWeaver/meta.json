@@ -1,0 +1,20 @@
+{
+  "id": "TaskWeaver",
+  "slug": "TaskWeaver",
+  "description": "Code-first agent framework for planning and executing data analytics tasks",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "analytics",
+    "archived"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/TaskWeaver",
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/TaskWeaver",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/TaskWeaver/SKILL.md"
+}

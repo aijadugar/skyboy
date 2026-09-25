@@ -1,0 +1,19 @@
+{
+  "id": "Agents-for-net",
+  "slug": "Agents-for-net",
+  "description": ".NET components for the Microsoft 365 Agent SDK - full stack, multichannel agents with OpenTelemetry observability",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "agents-sdk"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/Microsoft/Agents-for-net",
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/Agents-for-net",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/Agents-for-net/SKILL.md"
+}

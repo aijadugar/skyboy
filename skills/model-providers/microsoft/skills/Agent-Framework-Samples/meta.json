@@ -1,0 +1,19 @@
+{
+  "id": "Agent-Framework-Samples",
+  "slug": "Agent-Framework-Samples",
+  "description": "Examples showing how to use the Microsoft Agent Framework across Python, .NET, and Go implementations",
+  "category": "model-providers",
+  "tags": [
+    "model-provider",
+    "agent-framework-samples"
+  ],
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "skyboy",
+  "origin": "vendor",
+  "verified": true,
+  "upstream_repo": "https://github.com/microsoft/Agent-Framework-Samples",
+  "hash": "0000000000000000",
+  "path": "skills/model-providers/microsoft/skills/Agent-Framework-Samples",
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/Agent-Framework-Samples/SKILL.md"
+}
