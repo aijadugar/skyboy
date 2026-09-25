@@ -4,7 +4,7 @@
 //   - skyboy.in        -> unchanged (the root app)
 //   - docs.skyboy.in   -> docs site: bare "/" serves /docs; all other app
 //                         paths (/docs/mcp, /agents/*, /changelog, /skill/*,
-//                         /browse, /plugin/*) pass through unchanged.
+//                         /browse) pass through unchanged.
 //   - mcp.skyboy.in    -> the hosted MCP endpoint: every path collapses to the
 //                         single /api/mcp handler (read-only, Streamable HTTP).
 //

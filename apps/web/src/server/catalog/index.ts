@@ -7,8 +7,6 @@ export type {
   Permissions,
   SkillRecord,
   SkillMetaShard,
-  PluginSkillRef,
-  PluginRecord,
   Agent,
   CatalogManifest,
 } from "./types";
