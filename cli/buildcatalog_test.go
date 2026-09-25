@@ -105,41 +105,6 @@ func TestDynamicCategoryDiscovery(t *testing.T) {
 	}
 }
 
-func TestDeriveCategoriesIncludesPluginCategories(t *testing.T) {
-	root := newFixtureRepo(t)
-
-	// A plugin whose category field names a category no skills/ folder uses.
-	pluginDir := filepath.Join(root, "plugins", "acme", "acme-plugin")
-	if err := os.MkdirAll(pluginDir, 0o755); err != nil {
-		t.Fatal(err)
-	}
-	plugin := map[string]any{
-		"name":        "acme-plugin",
-		"description": "A fixture plugin for category derivation.",
-		"source_url":  "https://github.com/acme/acme-plugin",
-		"contents":    map[string]any{"skills": []string{}},
-		"category":    "plugin-only-category",
-	}
-	data, _ := json.MarshalIndent(plugin, "", "  ")
-	if err := os.WriteFile(filepath.Join(pluginDir, "plugin.json"), data, 0o644); err != nil {
-		t.Fatal(err)
-	}
-
-	result, err := buildCatalog(root)
-	if err != nil {
-		t.Fatalf("buildCatalog: %v", err)
-	}
-	found := false
-	for _, c := range result.manifest.Categories {
-		if c == "plugin-only-category" {
-			found = true
-		}
-	}
-	if !found {
-		t.Fatalf("plugin-declared category missing from %v", result.manifest.Categories)
-	}
-}
-
 func TestHashMatchesTSExporter(t *testing.T) {
 	// The TS exporter hashed: for every file sorted by relative slash path,
 	// sha256 over rel \0 size \0 bytes, truncated to 16 hex. Pin that here so

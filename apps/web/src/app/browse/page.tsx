@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
-import { listSkills, listPlugins, getCategories, getAllTags } from "@/lib/catalog";
+import { listSkills, getCategories, getAllTags } from "@/lib/catalog";
 import { SiteNav } from "@/components/site-nav";
 import { CatalogControls } from "@/components/catalog-controls";
 import { CategoryFilter } from "@/components/category-filter";
@@ -43,7 +43,6 @@ export default async function BrowsePage({
     count: topLevelSkills.filter((s) => s.category === name).length,
   }));
   const tags = getAllTags();
-  const plugins = listPlugins().filter((p) => !p.provider);
   let skills = topLevelSkills;
 
   if (category) skills = skills.filter((s) => s.category === category);
