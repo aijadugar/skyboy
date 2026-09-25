@@ -24,16 +24,6 @@ func testCatalog() *CatalogManifest {
 		Categories:  []string{"coding", "frontend-design"},
 		Agents:      []Agent{{Name: "Claude Code", Note: "folder drop"}},
 		Skills:      testSkills(),
-		Plugins: []PluginRecord{{
-			Slug: "vercel-plugin", Name: "vercel-plugin", Vendor: "Vercel",
-			Origin: OriginVendor, Category: "meta", License: "Apache-2.0",
-			UpstreamRepo: "https://github.com/vercel/vercel-plugin",
-			Path:         "plugins/vercel/vercel-plugin", Badge: "vendor",
-			Description: "Vercel ecosystem guidance.",
-			Commands:    []string{"deploy"},
-			Agents:      []string{"claude-code"},
-			Skills:      []PluginSkillRef{{Name: "nextjs", URL: "https://github.com/vercel/vercel-plugin/blob/main/skills/nextjs"}},
-		}},
 	}
 }
 
@@ -90,18 +80,6 @@ func TestToolResultGetSkillInvalidID(t *testing.T) {
 	}
 }
 
-func TestToolResultGetPluginNestedContents(t *testing.T) {
-	cat := testCatalog()
-	result, _ := toolResult(cat, "full", "stdio", "get_plugin", json.RawMessage(`{"slug":"vercel-plugin"}`))
-	content := result["content"].([]map[string]any)
-	text := content[0]["text"].(string)
-	for _, want := range []string{"vercel-plugin", "nextjs", "deploy"} {
-		if !strings.Contains(text, want) {
-			t.Errorf("plugin payload missing %q: %s", want, text)
-		}
-	}
-}
-
 func TestToolResultListCategories(t *testing.T) {
 	cat := testCatalog()
 	result, _ := toolResult(cat, "full", "stdio", "list_categories", json.RawMessage(`{}`))
@@ -136,9 +114,8 @@ func TestPrepareContextZipStdioWritesFile(t *testing.T) {
 	}
 	content := result["content"].([]map[string]any)
 	var payload struct {
-		Path    string `json:"path"`
-		Skills  int    `json:"skills"`
-		Plugins int    `json:"plugins"`
+		Path   string `json:"path"`
+		Skills int    `json:"skills"`
 	}
 	if err := json.Unmarshal([]byte(content[0]["text"].(string)), &payload); err != nil {
 		t.Fatalf("bad payload: %v", err)
@@ -146,8 +123,8 @@ func TestPrepareContextZipStdioWritesFile(t *testing.T) {
 	if payload.Path == "" {
 		t.Fatalf("stdio prepare_context_zip must return a file path: %s", content[0]["text"])
 	}
-	if payload.Skills != 2 || payload.Plugins != 0 {
-		t.Errorf("bundle composition = %d skills / %d plugins, want 2/0", payload.Skills, payload.Plugins)
+	if payload.Skills != 2 {
+		t.Errorf("bundle composition = %d skills, want 2", payload.Skills)
 	}
 	st, err := os.Stat(payload.Path)
 	if err != nil {

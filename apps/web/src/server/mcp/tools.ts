@@ -4,10 +4,10 @@
 // implements the same surface locally. Kept free of any transport concern so
 // it is usable over stdio and over the remote endpoint.
 //
-// Tools speak the Part 6 contract: search_catalog, get_skill, get_plugin,
+// Tools speak the Part 6 contract: search_catalog, get_skill,
 // list_categories, and prepare_context_zip (the hosted edition of the exact
 // `skyboy zip` bundle logic: same _CONTEXT_SUMMARY.md at the archive root,
-// same skills/<slug>/ layout, plugins indexed not vendored). The hosted
+// same skills/<slug>/ layout). The hosted
 // endpoint cannot write files, so prepare_context_zip streams the archive as
 // a base64 data payload in the tool result; the local Go server over stdio
 // returns a real file path instead. get_skill inlines the SKILL.md body
@@ -135,42 +135,6 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
     }
   );
 
-  // get_plugin ------------------------------------------------------------
-  server.registerTool(
-    "get_plugin",
-    {
-      title: "Get plugin",
-      description:
-        "Return a plugin's manifest with its nested skills, hooks, and agents. " +
-        "Plugins are indexed and linked, never vendored: the manifest points at " +
-        "the upstream repo as the source of truth.",
-      inputSchema: {
-        slug: z.string().describe("The plugin slug (e.g. vercel-plugin)"),
-      },
-    },
-    async ({ slug }) => {
-      const plugin = catalog.getPlugin(safeId(slug));
-      if (!plugin) return ok({ error: `no plugin named ${slug}`, count: 0 });
-      return ok({
-        plugin: {
-          slug: plugin.slug,
-          name: plugin.name,
-          vendor: plugin.vendor,
-          description: plugin.description,
-          category: plugin.category,
-          version: plugin.version,
-          license: plugin.license,
-          upstream: plugin.upstreamRepo,
-          note: plugin.note,
-          skills: plugin.skills,
-          hooks: plugin.commands,
-          agents: plugin.agents,
-          mcp: plugin.mcp,
-        },
-      });
-    }
-  );
-
   // list_categories -------------------------------------------------------
   server.registerTool(
     "list_categories",
@@ -186,7 +150,6 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
         categories: catalog.categories,
         agents: catalog.agents,
         skills: catalog.skills.length,
-        plugins: catalog.plugins.length,
         generatedAt: catalog.generatedAt,
       });
     }
@@ -200,12 +163,11 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
       description:
         "Build the same ZIP that `skyboy zip <slugs>` produces: a generated " +
         "_CONTEXT_SUMMARY.md at the archive root plus every skill folder under " +
-        "skills/. Accepts skill and plugin slugs in ONE bundle; plugins are " +
-        "indexed into the summary, never copied. Hosted transport: the archive " +
-        "is returned inline as base64 (write it to a file and upload it).",
+        "skills/. Accepts skill slugs in ONE bundle. Hosted transport: the " +
+        "archive is returned inline as base64 (write it to a file and upload it).",
       inputSchema: {
         slugs: z.array(z.string()).min(1).describe(
-          'Skill and/or plugin slugs to bundle, e.g. ["copy-self-audit","vercel-plugin"]'
+          'Skill slugs to bundle, e.g. ["copy-self-audit"]'
         ),
       },
     },
@@ -215,34 +177,25 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
       // the CLI ("not in the catalog", with a search hint) and no partial
       // bundle is built from a bad list.
       const skills = [];
-      const plugins = [];
       for (const name of names) {
         const skill = catalog.getSkill(safeId(name)) ?? catalog.resolve(name);
         if (skill) {
           skills.push(skill);
           continue;
         }
-        const plugin = catalog.getPlugin(safeId(name));
-        if (plugin) {
-          plugins.push(plugin);
-          continue;
-        }
         return ok({
-          error: `'${name}' is not in the catalog (skills or plugins). Try search_catalog.`,
+          error: `'${name}' is not in the catalog. Try search_catalog.`,
         });
       }
 
       const { buildBundleZip } = await import("./bundle");
-      const zip = await buildBundleZip(catalog, skills, plugins);
+      const zip = await buildBundleZip(catalog, skills);
 
       return ok({
         skills: skills.length,
-        plugins: plugins.length,
         bytes: zip.byteLength,
         encoding: "base64",
-        filename: skills.length === 1 && plugins.length === 0
-          ? `skyboy-${skillSlug(skills[0])}.zip`
-          : "skyboy-bundle.zip",
+        filename: skills.length === 1 ? `skyboy-${skillSlug(skills[0])}.zip` : "skyboy-bundle.zip",
         summary: "_CONTEXT_SUMMARY.md is at the archive root; upload the whole zip.",
         data: Buffer.from(zip).toString("base64"),
       });
@@ -254,4 +207,4 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
 // advertise exactly which tools it exposes. install_skill is intentionally
 // absent: it writes to a local filesystem and therefore belongs only to the
 // local Go server (`skyboy mcp --transport stdio`).
-export const READ_ONLY_TOOLS = ["search_catalog", "get_skill", "get_plugin", "list_categories", "prepare_context_zip"] as const;
+export const READ_ONLY_TOOLS = ["search_catalog", "get_skill", "list_categories", "prepare_context_zip"] as const;
