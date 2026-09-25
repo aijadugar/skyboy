@@ -10,7 +10,7 @@ func testSkills() []SkillRecord {
 	return []SkillRecord{
 		{ID: "nextjs-app-router-conventions", D: "Use when scaffolding or reviewing Next.js App Router projects.", C: "coding", T: []string{"nextjs", "app-router", "react"}, A: []string{"claude-code", "cursor"}, V: "1.0.0", H: "aa01598edd56d747", O: OriginSkyboy, Y: false, P: "skills/coding/nextjs-app-router-conventions"},
 		{ID: "anti-slop-landing", D: "Landing pages that avoid generic AI output.", C: "frontend-design", T: []string{"landing", "design"}, A: []string{"claude-code"}, V: "1.0.0", H: "bb01598edd56d747", O: OriginSkyboy, Y: true, P: "skills/frontend-design/anti-slop-landing"},
-		{ID: "@vercel/nextjs-plugin", D: "Vercel ecosystem plugin: nextjs deployment guidance.", C: "meta", T: []string{"vercel", "nextjs"}, A: []string{"claude-code"}, V: "0.2.0", H: "cc01598edd56d747", O: OriginVendor, Y: false, P: "plugins/vercel/nextjs-plugin"},
+		{ID: "@vercel/nextjs-guide", D: "Vercel ecosystem skill: nextjs deployment guidance.", C: "coding", T: []string{"vercel", "nextjs"}, A: []string{"claude-code"}, V: "0.2.0", H: "cc01598edd56d747", O: OriginVendor, Y: false, P: "skills/coding/@vercel/nextjs-guide"},
 	}
 }
 
@@ -18,10 +18,10 @@ func TestSkillSlugAndOwner(t *testing.T) {
 	if got := skillSlug(SkillRecord{ID: "anti-slop-landing"}); got != "anti-slop-landing" {
 		t.Errorf("bare slug: got %q", got)
 	}
-	if got := skillSlug(SkillRecord{ID: "@vercel/nextjs-plugin"}); got != "nextjs-plugin" {
+	if got := skillSlug(SkillRecord{ID: "@vercel/nextjs-guide"}); got != "nextjs-guide" {
 		t.Errorf("scoped slug: got %q", got)
 	}
-	if got := skillOwner(SkillRecord{ID: "@vercel/nextjs-plugin"}); got != "vercel" {
+	if got := skillOwner(SkillRecord{ID: "@vercel/nextjs-guide"}); got != "vercel" {
 		t.Errorf("owner: got %q", got)
 	}
 	if got := skillOwner(SkillRecord{ID: "anti-slop-landing"}); got != "" {
@@ -50,8 +50,8 @@ func TestBadgeFor(t *testing.T) {
 func TestScoreOrdering(t *testing.T) {
 	skills := testSkills()
 	// Exact scoped id must beat the bare slug.
-	scoped := score("@vercel/nextjs-plugin", skills[2])
-	slug := score("nextjs-plugin", skills[2])
+	scoped := score("@vercel/nextjs-guide", skills[2])
+	slug := score("nextjs-guide", skills[2])
 	if scoped != 1.0 || slug != 0.97 {
 		t.Errorf("exact scores: scoped=%v slug=%v", scoped, slug)
 	}
@@ -102,7 +102,7 @@ func TestResolveExactAndFuzzy(t *testing.T) {
 		t.Errorf("exact resolve failed: %+v", r)
 	}
 	// Exact bare slug for a scoped id.
-	if r := resolve("nextjs-plugin", skills); r == nil || !r.exact || r.slug != "@vercel/nextjs-plugin" {
+	if r := resolve("nextjs-guide", skills); r == nil || !r.exact || r.slug != "@vercel/nextjs-guide" {
 		t.Errorf("scoped slug resolve failed: %+v", r)
 	}
 	// Leading-segment fuzzy hit ("nextjs" is a whole leading segment).
@@ -120,7 +120,7 @@ func TestResolveExactAndFuzzy(t *testing.T) {
 }
 
 func TestSafeID(t *testing.T) {
-	for _, ok := range []string{"nextjs-app-router-conventions", "@vercel/nextjs-plugin", "copy_self.audit-1"} {
+	for _, ok := range []string{"nextjs-app-router-conventions", "@vercel/nextjs-guide", "copy_self.audit-1"} {
 		if err := safeID(ok); err != nil {
 			t.Errorf("safeID(%q) = %v, want nil", ok, err)
 		}
@@ -145,7 +145,7 @@ func TestSafeSkillFolderName(t *testing.T) {
 }
 
 func TestIsSafeSlug(t *testing.T) {
-	if !isSafeSlug("@vercel/nextjs-plugin") {
+	if !isSafeSlug("@vercel/nextjs-guide") {
 		t.Error("scoped id should be safe")
 	}
 	if isSafeSlug("..") || isSafeSlug("a/b") || isSafeSlug(`a\b`) {
@@ -166,7 +166,7 @@ func TestNormID(t *testing.T) {
 	if got := normID("  NextJS App Router! "); got != "nextjs-app-router" {
 		t.Errorf("normID = %q", got)
 	}
-	if got := normID("@Vercel/NextJS-Plugin"); got != "@vercel/nextjs-plugin" {
+	if got := normID("@Vercel/NextJS-Guide"); got != "@vercel/nextjs-guide" {
 		t.Errorf("normID scoped = %q", got)
 	}
 }
