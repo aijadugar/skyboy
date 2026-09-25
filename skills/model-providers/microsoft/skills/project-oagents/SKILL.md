@@ -64,9 +64,3 @@ workflow = Workflow(agents=[agent])
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/project-oagents)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

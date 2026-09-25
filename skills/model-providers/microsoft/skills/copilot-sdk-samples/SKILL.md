@@ -59,9 +59,3 @@ cd copilot-sdk-samples
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/copilot-sdk-samples)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

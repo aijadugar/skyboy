@@ -82,15 +82,6 @@ Microsoft offers models across capability tiers. Choose based on your use case:
 - [Microsoft 365 Agents SDK Documentation](https://aka.ms/M365-Agents-SDK-Docs)
 - [Microsoft Agent 365 Developer Documentation](https://learn.microsoft.com/microsoft-agent-365/developer/)
 
-## Microsoft Plugins
-
-Microsoft's plugin ecosystem (indexed under `plugins/` in this folder):
-
-| Repository | Description | Language | License |
-|---|---|---|---|
-| [kubelogin](https://github.com/Azure/kubelogin) | Kubernetes credential (exec) plugin implementing Azure authentication | Go | MIT |
-| [vagrant-azure](https://github.com/Azure/vagrant-azure) | Enable Vagrant to manage virtual machines in Microsoft (archived) | Ruby | MIT |
-
 ## Enhanced Features
 
 ### Modern UI Components
@@ -98,26 +89,6 @@ Microsoft's plugin ecosystem (indexed under `plugins/` in this folder):
 - Interactive code blocks and examples
 - Integrated live previews for demos
 - Enhanced documentation navigation
-
-### Comprehensive Skill Library
-Now includes **12 specialized skills** covering:
-- **Core Agent Frameworks**: agent-framework, agent-framework-go, Agents
-- **Platform-Specific SDKs**: Agents-for-python, Agents-for-net, Agents-for-js, Agents-M365Copilot
-- **Advanced Extensions**: agent365-python, agent365-dotnet, agent365-nodejs, autogen
-
-### Skill Categories
-1. **Agent Frameworks** - Core agent building and orchestration
-2. **Platform SDKs** - Language-specific implementations
-3. **Advanced Extensions** - Enterprise features and tooling
-4. **Integration Libraries** - Microsoft ecosystem integrations
-
-## Skill Counts
-
-- **Total Skills**: 12
-- **Framework Skills**: 4 (agent-framework, agent-framework-go, Agents, autogen)
-- **Platform Skills**: 4 (Agents-for-python, Agents-for-net, Agents-for-js, Agents-M365Copilot)
-- **Extension Skills**: 4 (agent365-python, agent365-dotnet, agent365-nodejs, autogen)
-- **Total Plugins**: 2 (kubelogin, vagrant-azure)
 
 ## Usage Examples
 

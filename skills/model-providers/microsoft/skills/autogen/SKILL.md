@@ -71,10 +71,3 @@ agent.initiate_chat(message="Hello!")
 
 - [AutoGen Documentation](https://learn.microsoft.com/en-us/autogen/)
 - [GitHub Repository](https://github.com/microsoft/autogen)
-
-## Microsoft plugins
-
-| Plugin | Description | Language | License |
-|---|---|---|---|
-| kubelogin | Kubernetes credential plugin for Azure authentication | Go | MIT |
-| vagrant-azure | Vagrant plugin for managing VMs in Microsoft (archived) | Ruby | MIT |

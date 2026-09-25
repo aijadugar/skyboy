@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "description": "CLI for developing, deploying, and managing Microsoft Agent 365 applications",
   "command": "skyboy add agent365-devTools",
-  "tags": ["model-provider", "agent365-sdk"],
+  "tags": [
+    "model-provider",
+    "agent365-sdk"
+  ],
   "author": "skyboy",
   "source_url": "https://github.com/microsoft/Agent365-devTools",
-  "license": "MIT",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+  "license": "MIT"
 }

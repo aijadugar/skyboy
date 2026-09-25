@@ -7,24 +7,12 @@
     "model-provider",
     "samples"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
   "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/copilot-sdk-samples",
-  "canonical_of": null,
-  "permissions": null,
-  "frontmatter": {
-    "name": "copilot-sdk-samples",
-    "license": "MIT"
-  },
   "hash": "0000000000000000",
   "path": "skills/model-providers/microsoft/skills/copilot-sdk-samples",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/copilot-sdk-samples/SKILL.md"

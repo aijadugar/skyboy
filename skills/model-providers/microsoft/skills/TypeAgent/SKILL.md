@@ -66,9 +66,3 @@ await personalAgent.connect(appAgent);
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/TypeAgent)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

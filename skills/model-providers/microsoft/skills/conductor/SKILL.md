@@ -63,9 +63,3 @@ conductor run workflow.yaml
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/conductor)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

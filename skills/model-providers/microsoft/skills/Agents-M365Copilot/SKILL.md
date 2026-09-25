@@ -118,9 +118,3 @@ const response = await client.getCompletion({
 - [Python API](https://learn.microsoft.com/python/api/?view=m365-agents-m365copilot&preserve-view=true)
 - [TypeScript API](https://learn.microsoft.com/javascript/api/?view=m365-agents-m365copilot&preserve-view=true)
 - [GitHub Repository](https://github.com/microsoft/Agents-M365Copilot)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

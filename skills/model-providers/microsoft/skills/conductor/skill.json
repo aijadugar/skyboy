@@ -4,9 +4,12 @@
   "version": "1.0.0",
   "description": "CLI for defining and running multi-agent workflows using the GitHub Copilot SDK and Anthropic Agents SDK",
   "command": "skyboy add conductor",
-  "tags": ["model-provider", "workflow", "cli"],
+  "tags": [
+    "model-provider",
+    "workflow",
+    "cli"
+  ],
   "author": "skyboy",
   "source_url": "https://github.com/microsoft/conductor",
-  "license": "MIT",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+  "license": "MIT"
 }

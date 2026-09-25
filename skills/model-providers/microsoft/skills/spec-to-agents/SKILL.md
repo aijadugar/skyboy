@@ -59,9 +59,3 @@ cd spec-to-agents
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/spec-to-agents)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

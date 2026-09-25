@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "description": "Experimental AI agent framework",
   "command": "skyboy add project-oagents",
-  "tags": ["model-provider", "experimental"],
+  "tags": [
+    "model-provider",
+    "experimental"
+  ],
   "author": "skyboy",
   "source_url": "https://github.com/microsoft/project-oagents",
-  "license": "CC-BY-4.0",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+  "license": "CC-BY-4.0"
 }

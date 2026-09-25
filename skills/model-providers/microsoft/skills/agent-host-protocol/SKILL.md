@@ -103,10 +103,3 @@ asyncio.run(main())
 
 - [Agent Host Protocol Specification](https://github.com/microsoft/agent-host-protocol)
 - [GitHub Repository](https://github.com/microsoft/agent-host-protocol)
-
-## Microsoft plugins
-
-| Plugin | Description | Language | License |
-|---|---|---|---|
-| kubelogin | Kubernetes credential plugin for Azure authentication | Go | MIT |
-| vagrant-azure | Vagrant plugin for managing VMs in Microsoft (archived) | Ruby | MIT |

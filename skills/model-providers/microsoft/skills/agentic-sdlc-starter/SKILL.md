@@ -61,9 +61,3 @@ cd agentic-sdlc-starter
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/agentic-sdlc-starter)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

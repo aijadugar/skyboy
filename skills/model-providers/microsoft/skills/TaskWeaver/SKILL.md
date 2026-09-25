@@ -64,9 +64,3 @@ result = agent.run("Analyze the sales data and create a visualization")
 ## References
 
 - [GitHub Repository](https://github.com/microsoft/TaskWeaver)
-
-## Microsoft plugins
-
-| Plugin | Skills Included |
-|--------|----------------|
-| agents-sdk-common | Azure provisioning, identity credentials, OAuth setup via `az` CLI |

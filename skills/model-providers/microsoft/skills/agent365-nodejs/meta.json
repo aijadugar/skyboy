@@ -7,24 +7,12 @@
     "model-provider",
     "agent365-sdk"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
   "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/Agent365-nodejs",
-  "canonical_of": null,
-  "permissions": null,
-  "frontmatter": {
-    "name": "agent365-nodejs",
-    "license": "MIT"
-  },
   "hash": "0000000000000000",
   "path": "skills/model-providers/microsoft/skills/agent365-nodejs",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agent365-nodejs/SKILL.md"

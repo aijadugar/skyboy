@@ -4,9 +4,11 @@
   "version": "1.0.0",
   "description": "Tools for preparing repositories for AI development and coding agents",
   "command": "skyboy add agentrc",
-  "tags": ["model-provider", "repository"],
+  "tags": [
+    "model-provider",
+    "repository"
+  ],
   "author": "skyboy",
   "source_url": "https://github.com/microsoft/agentrc",
-  "license": "MIT",
-  "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
+  "license": "MIT"
 }

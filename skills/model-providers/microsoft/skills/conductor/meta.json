@@ -8,24 +8,12 @@
     "workflow",
     "cli"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
   "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/conductor",
-  "canonical_of": null,
-  "permissions": null,
-  "frontmatter": {
-    "name": "conductor",
-    "license": "MIT"
-  },
   "hash": "0000000000000000",
   "path": "skills/model-providers/microsoft/skills/conductor",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/conductor/SKILL.md"

@@ -7,24 +7,12 @@
     "model-provider",
     "autogen"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
   "version": "1.0.0",
   "license": "CC-BY-4.0",
   "author": "skyboy",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/autogen",
-  "canonical_of": null,
-  "permissions": null,
-  "frontmatter": {
-    "name": "autogen",
-    "license": "CC-BY-4.0"
-  },
   "hash": "0000000000000000",
   "path": "skills/model-providers/microsoft/skills/autogen",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/autogen/SKILL.md"

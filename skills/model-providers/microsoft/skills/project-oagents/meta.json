@@ -7,24 +7,12 @@
     "model-provider",
     "experimental"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
   "version": "1.0.0",
   "license": "CC-BY-4.0",
   "author": "skyboy",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/project-oagents",
-  "canonical_of": null,
-  "permissions": null,
-  "frontmatter": {
-    "name": "project-oagents",
-    "license": "CC-BY-4.0"
-  },
   "hash": "0000000000000000",
   "path": "skills/model-providers/microsoft/skills/project-oagents",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/project-oagents/SKILL.md"
