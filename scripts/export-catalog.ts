@@ -21,7 +21,6 @@ import { dirname } from "node:path";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "..");
 const SKILLS_DIR = join(ROOT, "skills");
-const PLUGINS_DIR = join(ROOT, "plugins");
 const OUT = join(ROOT, "catalog.json");
 
 type Origin = "skyboy" | "vendor" | "community";
@@ -38,24 +37,6 @@ interface SkillMeta {
   upstream_repo?: string;
   canonical_of?: string | null;
   permissions?: { network: boolean; filesystem_write_outside_target: boolean; shell_exec: boolean; env_read: string[] };
-  [key: string]: unknown;
-}
-
-interface PluginMeta {
-  name?: string;
-  description?: string;
-  vendor?: string;
-  vendor_url?: string;
-  license?: string;
-  category?: string;
-  tags?: string[];
-  compatible_agents?: string[];
-  install?: string;
-  skills?: { name?: string; description?: string; path?: string }[];
-  commands?: string[];
-  agents?: string[];
-  mcp?: string;
-  version?: string;
   [key: string]: unknown;
 }
 
@@ -165,47 +146,6 @@ function buildMetaShard(skillDir: string, record: IndexRecord, fm: Record<string
   };
 }
 
-// Mirrors the old readPlugin: index + link, never vendored.
-function readPlugin(pluginDir: string, slug: string, vendorDir: string) {
-  const manifestPath = join(pluginDir, "plugin.json");
-  if (!existsSync(manifestPath)) return null;
-  const raw: PluginMeta = JSON.parse(readFileSync(manifestPath, "utf8"));
-  const vendor = raw.vendor ?? slug;
-  const upstreamRepo = (raw.vendor_url as string) || "";
-  return {
-    slug,
-    name: raw.name ?? slug,
-    vendor,
-    vendorUrl: raw.vendor_url,
-    path: `plugins/${vendorDir}/${slug}`,
-    sourceType: "vendor" as const,
-    origin: "vendor" as Origin,
-    category: raw.category ?? "meta",
-    tags: raw.tags ?? [],
-    license: raw.license ?? "Apache-2.0",
-    upstreamRepo,
-    install: raw.install ?? `npx plugins add ${vendor}/${slug}`,
-    description: raw.description ?? "",
-    compatibleAgents: raw.compatible_agents ?? [],
-    skills: (raw.skills ?? []).map((s) => ({
-      name: s.name ?? s.path ?? "skill",
-      description: s.description ?? "",
-      path: s.path ?? "",
-      url: s.path ? `${stripSlash(upstreamRepo)}/blob/main/${s.path}` : "",
-    })),
-    commands: raw.commands ?? [],
-    agents: raw.agents ?? [],
-    mcp: raw.mcp ?? null,
-    note: "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
-    badge: "official (vendor)" as const,
-    version: raw.version,
-  };
-}
-
-function stripSlash(url: string): string {
-  return url.replace(/\/+$/, "");
-}
-
 // SUPPORTED_AGENTS, mirrored from catalog.ts. The site adds the four new Phase 3
 // agents (Gemini CLI, Codex CLI, Windsurf, MCP) separately; the manifest keeps
 // the full list so the CLI and MCP pages agree with the site.
@@ -255,16 +195,6 @@ for (const { record, shard } of shards) {
   writeFileSync(join(ROOT, record.p, "meta.json"), JSON.stringify(shard, null, 2) + "\n");
 }
 
-const plugins = [];
-for (const vendor of readdirSync(PLUGINS_DIR)) {
-  const vendorPath = join(PLUGINS_DIR, vendor);
-  if (!existsSync(vendorPath) || !statSync(vendorPath).isDirectory()) continue;
-  for (const slug of readdirSync(vendorPath)) {
-    const plugin = readPlugin(join(vendorPath, slug), slug, vendor);
-    if (plugin) plugins.push(plugin);
-  }
-}
-
 const tree = {
   generatedAt: new Date().toISOString(),
   version: 2,
@@ -274,8 +204,7 @@ const tree = {
   }),
   agents: AGENTS,
   skills,
-  plugins,
 };
 
 writeFileSync(OUT, JSON.stringify(tree, null, 2) + "\n");
-console.log(`export-catalog: wrote ${skills.length} skill(s), ${plugins.length} plugin(s), ${shards.length} meta.json shard(s) to catalog.json (v2)`);
+console.log(`export-catalog: wrote ${skills.length} skill(s), ${shards.length} meta.json shard(s) to catalog.json (v2)`);

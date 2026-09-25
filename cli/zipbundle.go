@@ -2,13 +2,12 @@ package main
 
 // The bundle builder shared by `skyboy zip <name1,name2,...>` (Part 5) and the
 // MCP `prepare_context_zip` tool (Part 6). One implementation, two front doors:
-// planBundle resolves a mixed list of skill and plugin names against the
-// catalog, writeBundle archives it, and buildBundleFile writes it to disk.
+// planBundle resolves a list of skill names against the catalog, writeBundle
+// archives it, and buildBundleFile writes it to disk.
 //
 // The archive layout is a contract: _CONTEXT_SUMMARY.md (summary.go, the
 // first-class prompt deliverable) is the FIRST entry, then every skill folder
-// byte-identical under skills/<slug>/. Plugins are never vendored into the
-// archive; they appear in the summary as index + link entries only.
+// byte-identical under skills/<slug>/.
 
 import (
 	"archive/zip"
@@ -59,14 +58,13 @@ var bundleFetchFiles = func(folder string) ([]bundleFile, error) {
 	return out, nil
 }
 
-// bundlePlan is a resolved bundle request: skills to copy, plugins to index.
+// bundlePlan is a resolved bundle request: skills to copy.
 type bundlePlan struct {
-	items      []zipItem
-	skillRecs  []SkillRecord
-	pluginRecs []PluginRecord
+	items     []zipItem
+	skillRecs []SkillRecord
 }
 
-// planBundle resolves a mixed name list against the manifest. Unknown names
+// planBundle resolves a name list against the manifest. Unknown names
 // error with a search hint, the same message the CLI prints.
 func planBundle(names []string, manifest *CatalogManifest) (*bundlePlan, error) {
 	plan := &bundlePlan{}
@@ -79,12 +77,7 @@ func planBundle(names []string, manifest *CatalogManifest) (*bundlePlan, error) 
 			plan.skillRecs = append(plan.skillRecs, *skill)
 			continue
 		}
-		if plugin := catalogPluginLookup(manifest, name); plugin != nil {
-			plan.items = append(plan.items, zipItem{"plugin", plugin.Slug})
-			plan.pluginRecs = append(plan.pluginRecs, *plugin)
-			continue
-		}
-		return nil, fmt.Errorf("'%s' is not in the catalog (skills or plugins). Try 'skyboy search %s'", name, name)
+		return nil, fmt.Errorf("'%s' is not in the catalog. Try 'skyboy search %s'", name, name)
 	}
 	return plan, nil
 }
@@ -175,7 +168,7 @@ func cmdZipPart5(args []string) error {
 		return err
 	}
 
-	fmt.Fprintf(stdout, "skyboy: wrote %s (%d skill(s), %d plugin(s) indexed)\n", out, len(plan.skillRecs), len(plan.pluginRecs))
+	fmt.Fprintf(stdout, "skyboy: wrote %s (%d skill(s))\n", out, len(plan.skillRecs))
 	fmt.Fprintln(stdout, "  _CONTEXT_SUMMARY.md is at the archive root; upload the whole zip to ChatGPT, Claude, or Gemini.")
 	return nil
 }
