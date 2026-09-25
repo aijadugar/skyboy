@@ -275,7 +275,7 @@ export const AGENT_GUIDES: AgentGuide[] = [
       },
       {
         title: "Ask the agent",
-        body: "Once connected, the agent can call search_catalog, get_skill, get_plugin, list_categories, prepare_context_zip, and (over stdio) install_skill.",
+        body: "Once connected, the agent can call search_catalog, get_skill, list_categories, prepare_context_zip, and (over stdio) install_skill.",
       },
     ],
     extra: {
