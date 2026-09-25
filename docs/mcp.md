@@ -20,15 +20,13 @@ Protocol: MCP protocol version `2024-11-05`, `tools/list` and `tools/call`
 |---|---|---|---|---|
 | `search_catalog` | `query`, `category?`, `limit?` | yes | yes | Ranked matches: id, slug, description, category, tags, version, hash, badge |
 | `get_skill` | `slug` | yes | yes | The full SKILL.md body plus skill.json metadata in one round trip |
-| `get_plugin` | `slug` | yes | yes | Nested skills, hooks, agents, upstream URL |
 | `list_categories` | (none) | yes | yes | The dynamic category tree (derived by build-catalog, never hardcoded) |
 | `prepare_context_zip` | `slugs[]` | yes | yes | stdio: a local file path. http: a signed download URL, valid 15 minutes |
 | `install_skill` | `slug`, `target_dir?` | stdio only | no | Writes the skill folder to disk |
 
 `prepare_context_zip` is the exact `skyboy zip` logic (not a
-re-implementation): one ZIP mixing skills and plugins, with the generated
-`_CONTEXT_SUMMARY.md` as the first archive entry. Plugins are indexed into
-the summary, never vendored into the archive.
+re-implementation): one ZIP of skills, with the generated
+`_CONTEXT_SUMMARY.md` as the first archive entry.
 
 ## Example conversation flow
 
@@ -114,6 +112,6 @@ minutes and consumable exactly once.
 }
 ```
 
-Read-only: search_catalog, get_skill, get_plugin, list_categories, and
+Read-only: search_catalog, get_skill, list_categories, and
 prepare_context_zip (the archive is returned inline as base64 for agents
 that cannot receive files). No filesystem writes, ever.

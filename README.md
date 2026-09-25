@@ -1,6 +1,6 @@
 # skyboy.in
 
-A fast, searchable, agent-agnostic home for portable **AI skills** and **plugins**.
+A fast, searchable, agent-agnostic home for portable **AI skills**.
 Each one is a self-contained `SKILL.md` package that hands coding agents, writing
 agents, memory systems, and reasoning workflows reusable, expert-level behavior.
 
@@ -44,12 +44,12 @@ skyboy version
 `add` installs every named skill (comma-separated) into `./.skyboy/skills/`
 and records it in `~/.skyboy/state.json`, so `list`, `info`, `update`, and
 `zip` all work offline against the cache. Scoped ids work too:
-`skyboy add @vercel/nextjs-plugin`. `zip` always writes a generated
+`skyboy add @vercel/nextjs-skill`. `zip` always writes a generated
 `_CONTEXT_SUMMARY.md` at the archive root: a short, first-class brief that
 tells the receiving LLM what is loaded and how to use it, which is what makes
 the upload-the-zip workflow actually work.
 
-### Skill & plugin format
+### Skill format
 
 Every skill folder (`skills/<category>/<name>/`) carries:
 
@@ -57,8 +57,6 @@ Every skill folder (`skills/<category>/<name>/`) carries:
   holding the exact `skyboy add <name>` invocation
 - `skill.json`, validated against [`scripts/schemas/skill.schema.json`](scripts/schemas/skill.schema.json)
 
-Every plugin (`plugins/<vendor>/<name>/`) carries a `plugin.json` validated
-against [`scripts/schemas/plugin.schema.json`](scripts/schemas/plugin.schema.json).
 CI runs the Go validator (`skyboy validate`) on every PR, and
 `skyboy build-catalog` regenerates `catalog.json`, including the **dynamic
 category list**: categories are derived from the top-level folders under
@@ -123,7 +121,6 @@ skyboy mcp --transport stdio
 |---|---|---|
 | `search_catalog(query, category?)` | remote + stdio | Fuzzy search slug, name, description, or tag. |
 | `get_skill(slug)` | remote + stdio | Full SKILL.md body + skill.json metadata in one call. |
-| `get_plugin(slug)` | remote + stdio | Nested skills, hooks, and agents; index + link, never vendored. |
 | `list_categories()` | remote + stdio | The dynamic taxonomy tree and compatible agents. |
 | `prepare_context_zip(slugs[])` | remote + stdio | The exact `skyboy zip` bundle. stdio returns a file path; http returns a signed download URL. |
 | `install_skill(slug, target_dir?)` | **stdio only** | Write a skill to a local folder. |
@@ -164,14 +161,13 @@ skyboy/
 ├── cli/                         The skyboy Go binary: CLI + stdio MCP server,
 │                                Go stdlib only, zero third-party dependencies
 ├── skills/                      THE catalog, one folder per skill
-├── plugins/                     vendor/community plugins (index + link, never copied)
 ├── scripts/                     export-catalog, validate-skill, generate-manifest,
 │                                detect-duplicates
 └── docs/skill-spec.md           the canonical SKILL.md format
 ```
 
 `catalog.json` at the repo root is the single shareable manifest: generated from
-the real `skills/` and `plugins/` trees by `scripts/export-catalog.ts`, and
+the real `skills/` tree by `scripts/export-catalog.ts`, and
 consumed by the website, the Go CLI, and the stdio MCP server.
 
 The Go binary talks to the same raw.githubusercontent URLs and the same hosted
@@ -205,13 +201,6 @@ go test ./...
    CI runs the Go validator against the JSON Schemas, rebuilds the catalog and
    fails on drift, then runs the web build and `go test`/`go vet`.
 
-### Submit a plugin
-
-Vendor and community plugins are indexed, never copied. Add a `plugin.json`
-manifest under `plugins/<vendor>/<slug>/` pointing at the upstream repo as the
-source of truth, and it is linked into the catalog with an "official (vendor)"
-badge. Content issues are reported upstream.
-
 ### Releasing the CLI
 
 Releases are tag-driven: push a `v*` tag and the release workflow
@@ -229,7 +218,7 @@ artifacts to a GitHub Release, which is what the install scripts download.
 
 ## License
 
-MIT. Skills and plugins carry their own licenses as declared in their
+MIT. Skills carry their own licenses as declared in their
 `metadata.json`.
 
 Built and maintained by the Skyboy project.
