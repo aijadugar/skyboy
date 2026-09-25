@@ -61,9 +61,6 @@ export default async function ProviderPage({ params }: Props) {
 
         <header className="grid grid-cols-1 gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-start">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
-              Model provider
-            </p>
             <h1 className="mt-2 text-4xl font-semibold tracking-tight text-ink sm:text-5xl flex items-center gap-2">
               {provider.name}
             </h1>
