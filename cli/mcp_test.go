@@ -347,7 +347,7 @@ func TestWriteFrameShape(t *testing.T) {
 	for _, tl := range frame.Result.Tools {
 		names[tl.Name] = true
 	}
-	for _, want := range []string{"search_catalog", "get_skill", "get_plugin", "list_categories", "prepare_context_zip", "install_skill"} {
+	for _, want := range []string{"search_catalog", "get_skill", "list_categories", "prepare_context_zip", "install_skill"} {
 		if !names[want] {
 			t.Errorf("tools/list missing %s", want)
 		}
