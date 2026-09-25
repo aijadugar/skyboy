@@ -3,10 +3,10 @@
 import { useState } from "react";
 
 // One-item download. With `markdown` (a single skill page) it saves the raw
-// SKILL.md directly as a .md file — no server call needed. Without it (plugin
-// pages, multi-skill bundles) it posts the slug to /api/zip and saves the
-// archive built server-side by the same builder the multi-select bar and the
-// MCP prepare_context_zip tool use.
+// SKILL.md directly as a .md file — no server call needed. Without it
+// (multi-skill bundles) it posts the slug to /api/zip and saves the archive
+// built server-side by the same builder the multi-select bar and the MCP
+// prepare_context_zip tool use.
 export function DownloadButton({
   slug,
   label,

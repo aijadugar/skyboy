@@ -4,7 +4,6 @@ import {
   listProviders,
   getProviderBySlug,
   getProviderSkills,
-  getProviderPlugins,
   getSkillDetail,
 } from "@/lib/catalog";
 import { renderMarkdown } from "@/lib/markdown";
@@ -29,11 +28,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-// A model provider page: the provider is a model folder that CONTAINS skills
-// and plugins, so this page is a container view — the provider's own SKILL.md
-// integration guide up top, then everything that lives inside it (nested
-// skills with selection checkboxes feeding the shared ZIP bar, and the
-// provider's plugins linking to their index pages).
+// A model provider page: the provider is a model folder that CONTAINS skills,
+// so this page is a container view — the provider's own SKILL.md integration
+// guide up top, then everything that lives inside it (nested skills with
+// selection checkboxes feeding the shared ZIP bar).
 export default async function ProviderPage({ params }: Props) {
   const { slug } = await params;
   const provider = getProviderBySlug(slug);
@@ -41,7 +39,6 @@ export default async function ProviderPage({ params }: Props) {
 
   const detail = getSkillDetail(provider.slug);
   const skills = getProviderSkills(provider.slug);
-  const plugins = getProviderPlugins(provider.slug);
   const bodyHtml = detail ? renderMarkdown(detail.body) : null;
 
   return (
@@ -88,17 +85,15 @@ export default async function ProviderPage({ params }: Props) {
                 </p>
                 <p className="mt-2 font-mono text-sm text-ink">
                   {skills.length} skill{skills.length === 1 ? "" : "s"}
-                  {" · "}
-                  {plugins.length} plugin{plugins.length === 1 ? "" : "s"}
                 </p>
               </div>
             </div>
           </aside>
         </header>
 
-        {/* What lives inside: nested skills (selectable) and provider plugins */}
-        {skills.length > 0 || plugins.length > 0 ? (
-          <ProviderContents providerSlug={provider.slug} skills={skills} plugins={plugins} />
+        {/* What lives inside: nested skills (selectable) */}
+        {skills.length > 0 ? (
+          <ProviderContents providerSlug={provider.slug} skills={skills} />
         ) : null}
 
         {/* The provider's own integration guide */}

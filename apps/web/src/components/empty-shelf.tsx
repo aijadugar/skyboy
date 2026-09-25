@@ -8,11 +8,11 @@ import {
   DrawablyUnderline,
 } from "drawably/react";
 
-// The "empty shelf" card. When a category (or a provider's skills/plugins
-// section) holds nothing, we don't show a sad paragraph — we show a tiny
-// hand-drawn vacancy sign inviting the visitor to be the first entry. Copy
-// rotates deterministically from a seed so SSR and client agree.
-type ShelfKind = "skills" | "plugins" | "category";
+// The "empty shelf" card. When a category (or a provider's skills section)
+// holds nothing, we don't show a sad paragraph — we show a tiny hand-drawn
+// vacancy sign inviting the visitor to be the first entry. Copy rotates
+// deterministically from a seed so SSR and client agree.
+type ShelfKind = "skills" | "category";
 
 const COPY: Record<
   ShelfKind,
@@ -33,23 +33,6 @@ const COPY: Record<
       title: "This section runs on enthusiasm. Currently: none.",
       body: "Drop a SKILL.md in via a pull request and quietly set the bar for whoever follows.",
       cta: "Raise the bar",
-    },
-  ],
-  plugins: [
-    {
-      title: "Plugin rack — now with 100% more air.",
-      body: "No vendor plugins indexed here yet. A plugin entry is just a link and a manifest; index one and look busy.",
-      cta: "Index a plugin",
-    },
-    {
-      title: "This rack is decorative… for now.",
-      body: "Nothing parked here. If the vendor shipped a plugin, point us at it — if it's yours, ship it.",
-      cta: "Add a plugin",
-    },
-    {
-      title: "Bench empty. Ball in your court.",
-      body: "No plugins listed in this corner of the catalog. One PR and this card becomes a problem.",
-      cta: "Make it a problem",
     },
   ],
   category: [
