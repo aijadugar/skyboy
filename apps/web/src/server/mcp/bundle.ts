@@ -2,7 +2,7 @@
 // the canonical implementation (cli/zipbundle.go + cli/summary.go); this
 // module mirrors its OUTPUT byte contract for the hosted MCP endpoint, which
 // cannot execute Go: _CONTEXT_SUMMARY.md first, then each skill under
-// skills/<slug>/. Plugins are described in the summary, never archived.
+// skills/<slug>/.
 //
 // The zip is written by hand (local-file headers, deflate) because the web
 // runtime has no archive/zip and adding a dependency for one endpoint is not
@@ -113,9 +113,7 @@ function assembleZip(entries: ZipEntry[]): Buffer {
 // generateContextSummary. Keep the two in sync: the wording is a first-class
 // deliverable and both builders must emit the same document.
 function summaryMarkdown(
-  skills: { id: string; d: string; c: string; v: string }[],
-  plugins: { slug: string; description: string; upstreamRepo: string; skills: { name: string }[] }[],
-  extras: { slug: string; description: string; sourceUrl: string }[] = []
+  skills: { id: string; d: string; c: string; v: string }[]
 ): string {
   const lines: string[] = [];
   lines.push(`# Context summary (read this first)`);
@@ -152,19 +150,6 @@ function summaryMarkdown(
     lines.push(`  - When to apply: use the frontmatter description in its SKILL.md as the trigger.`);
     lines.push(`  - To install it permanently in a codebase: skyboy add ${skillSlug(s)}`);
   }
-  for (const p of plugins) {
-    lines.push(`- ${p.slug} (plugin, not bundled: indexed only)`);
-    lines.push(`  - What it is: ${p.description}`);
-    lines.push(`  - Source of truth: ${p.upstreamRepo}`);
-    if (p.skills.length > 0) {
-      lines.push(`  - Declared skills (upstream, not in this archive): ${p.skills.map((s) => s.name).join(", ")}`);
-    }
-  }
-  for (const e of extras) {
-    lines.push(`- skills/${e.slug}/ (bundled from a vendor plugin)`);
-    lines.push(`  - What it is: ${e.description}`);
-    lines.push(`  - Source of truth: ${e.sourceUrl}`);
-  }
   lines.push(``);
   lines.push(`## Boundaries`);
   lines.push(``);
@@ -178,44 +163,21 @@ function summaryMarkdown(
   return lines.join("\n");
 }
 
-// An upstream skill bundled from inside a vendor plugin. Plugin skills live in
-// the vendor's repo (skyboy indexes them, never vendors them), so a bundle
-// that includes one fetches the SKILL.md straight from the upstream raw URL.
-export interface BundleExtraSkill {
-  slug: string; // archive folder name under skills/
-  description: string; // summary line
-  sourceUrl: string; // upstream repo page, cited in the summary
-  rawUrl: string; // raw SKILL.md URL to fetch
-}
-
-// buildBundleZip assembles the archive from the resolved skill and plugin
-// records. SKILL.md bodies are fetched from the raw repo; the summary is the
-// first entry, matching the Go builder exactly. `extras` carries individually
-// selected plugin skills (the web download route); the MCP tool passes none.
-// The catalog argument is currently unused (bodies come straight from the raw
-// URLs) but stays in the signature so a future in-checkout builder can read
-// bundled files from disk.
+// buildBundleZip assembles the archive from the resolved skill records.
+// SKILL.md bodies are fetched from the raw repo; the summary is the
+// first entry, matching the Go builder exactly. The catalog argument is
+// currently unused (bodies come straight from the raw URLs) but stays in the
+// signature so a future in-checkout builder can read bundled files from disk.
 export async function buildBundleZip(
   _catalog: Catalog,
-  skills: Catalog["skills"],
-  plugins: Catalog["plugins"],
-  extras: BundleExtraSkill[] = []
+  skills: Catalog["skills"]
 ): Promise<Uint8Array> {
   const entries: ZipEntry[] = [];
 
   entries.push({
     name: "_CONTEXT_SUMMARY.md",
     data: new TextEncoder().encode(
-      summaryMarkdown(
-        skills.map((s) => ({ id: s.id, d: s.d, c: s.c, v: s.v })),
-        plugins.map((p) => ({
-          slug: p.slug,
-          description: p.description,
-          upstreamRepo: p.upstreamRepo,
-          skills: p.skills.map((s) => ({ name: s.name })),
-        })),
-        extras.map((e) => ({ slug: e.slug, description: e.description, sourceUrl: e.sourceUrl }))
-      )
+      summaryMarkdown(skills.map((s) => ({ id: s.id, d: s.d, c: s.c, v: s.v })))
     ),
   });
 
@@ -231,26 +193,11 @@ export async function buildBundleZip(
       fetched++;
     }
   }
-  if (fetched === 0 && skills.length === 0 && extras.length === 0) {
-    throw new Error(
-      "nothing to archive: plugins are indexed, not vendored, so select at least one skill " +
-      "(from the catalog or a plugin's skill list)"
-    );
+  if (fetched === 0 && skills.length === 0) {
+    throw new Error("nothing to archive: select at least one skill from the catalog");
   }
-  if (fetched === 0 && (skills.length > 0 || extras.length > 0)) {
+  if (fetched === 0 && skills.length > 0) {
     throw new Error("could not fetch any SKILL.md bodies; try again or use the CLI");
-  }
-  // Individually selected plugin skills are archived after the catalog skills
-  // (same skills/<slug>/ layout), also fetched from their upstream raw URLs.
-  for (const extra of extras) {
-    const body = await fetchText(extra.rawUrl);
-    if (body !== null) {
-      entries.push({
-        name: `skills/${extra.slug}/SKILL.md`,
-        data: new TextEncoder().encode(body),
-      });
-      fetched++;
-    }
   }
   if (entries.length > MAX_BUNDLE_FILES) {
     throw new Error(`bundle exceeds ${MAX_BUNDLE_FILES} files`);

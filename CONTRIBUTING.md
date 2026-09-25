@@ -40,22 +40,6 @@ all built from those files.
    It asks for the description, 2-3 concrete use cases, the agents you tested
    on, and a permissions disclosure.
 
-## Adding a plugin
-
-Plugins are **indexed and linked, never vendored**: the upstream repo stays
-the source of truth and content issues are reported upstream.
-
-1. Create `plugins/<vendor>/<slug>/plugin.json` with: `name` (equals the
-   folder name), `description`, `source_url` (the upstream repo, required),
-   `contents.skills` (the skill names bundled upstream), and optionally
-   `contents.hooks`, `contents.agents`, `vendor`, `license`, `version`,
-   `category`, and `mcp`. Validated against
-   `scripts/schemas/plugin.schema.json`.
-2. Validate your folder:
-   `go run ./cli validate --root . --path plugins/<vendor>/<slug>`
-3. Open a PR. You can start the conversation first with a
-   [New Plugin Proposal](.github/ISSUE_TEMPLATE/plugin-submission.md) issue.
-
 ## How CI reviews your PR
 
 CI validates **only the folders your PR changed**, so a one-skill PR stays

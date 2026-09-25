@@ -109,44 +109,6 @@ type SkillMetaShard struct {
 	SkillMDURL string `json:"skill_md_url"`
 }
 
-// PluginSkillRef links one skill inside a vendor plugin (index + link only).
-type PluginSkillRef struct {
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Path        string `json:"path"`
-	URL         string `json:"url"`
-}
-
-// PluginRecord is a vendor-published plugin entry: indexed and linked, never
-// vendored (spec section 3.2).
-type PluginRecord struct {
-	Slug             string          `json:"slug"`
-	Name             string          `json:"name"`
-	Vendor           string          `json:"vendor"`
-	VendorURL        string          `json:"vendorUrl,omitempty"`
-	SourceType       string          `json:"sourceType"`
-	Origin           Origin          `json:"origin"`
-	Category         string          `json:"category"`
-	Tags             []string        `json:"tags"`
-	License          string          `json:"license"`
-	UpstreamRepo     string          `json:"upstreamRepo"`
-	Install          string          `json:"install"`
-	Description      string          `json:"description"`
-	CompatibleAgents []string        `json:"compatibleAgents"`
-	Skills           []PluginSkillRef `json:"skills"`
-	Commands         []string        `json:"commands"`
-	Agents           []string        `json:"agents"`
-	MCP              *string         `json:"mcp"`
-	Note             string          `json:"note"`
-	Badge            string          `json:"badge"`
-	Version          string          `json:"version,omitempty"`
-	Path             string          `json:"path"`
-	// Provider is set when the plugin is declared inside a model provider's
-	// plugins/ folder (skills/model-providers/<p>/plugins/<slug>/) instead of
-	// the top-level plugins/ tree. Empty for ordinary vendor plugins.
-	Provider string `json:"provider,omitempty"`
-}
-
 // Agent is one compatible agent target in the manifest.
 type Agent struct {
 	Name string `json:"name"`
@@ -160,7 +122,6 @@ type CatalogManifest struct {
 	Categories  []string      `json:"categories"`
 	Agents      []Agent       `json:"agents"`
 	Skills      []SkillRecord `json:"skills"`
-	Plugins     []PluginRecord `json:"plugins"`
 }
 
 // skillMarkdownURL is the raw SKILL.md URL for a record (preview / one-off fetch).

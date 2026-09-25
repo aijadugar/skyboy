@@ -57,8 +57,8 @@ func printHelp() {
 
 Usage:
   skyboy add <name1,name2,...>   Download skills into ./.skyboy/skills/ and record them in ~/.skyboy/state.json.
-  skyboy update <name>           Re-fetch a skill or plugin and report what changed.
-  skyboy list                    Show locally added skills and plugins.
+  skyboy update <name>           Re-fetch a skill and report what changed.
+  skyboy list                    Show locally added skills.
   skyboy list --all              Show the full remote catalog, grouped by category.
   skyboy zip <name1,name2,...>   Bundle skills into one ZIP with a generated _CONTEXT_SUMMARY.md.
   skyboy info <name>             Print a skill's SKILL.md, including its ## Command section.
@@ -67,8 +67,8 @@ Usage:
   skyboy resolve <slug>          Print the resolved repo-relative path and raw URL for an id.
   skyboy mcp --transport stdio|http
                                  Start the MCP server (stdio default; http is read-only).
-  skyboy validate                Validate every skill.json/plugin.json against the JSON Schemas.
-  skyboy build-catalog           Regenerate catalog.json from the skills/ and plugins/ trees.
+  skyboy validate                Validate every skill.json against the JSON Schema.
+  skyboy build-catalog           Regenerate catalog.json from the skills/ tree.
   skyboy version                 Print the CLI version and the catalog manifest version.
   skyboy help                    Show this help.
 

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { DrawablyCheckbox } from "drawably/react";
-import type { Plugin, Skill } from "@/lib/catalog";
+import type { Skill } from "@/lib/catalog";
 import { EmptyShelf } from "@/components/empty-shelf";
 import {
   SelectionProvider,
@@ -10,19 +10,15 @@ import {
   SelectionDownloadButton,
 } from "@/components/selection";
 
-// Contents of a model provider: the skills and plugins that live inside the
-// provider folder. Skills are nested catalog entries — tick them to pull their
-// SKILL.md files into one ZIP via the shared selection bar. Plugins are
-// index-only bundles declared by the provider (its plugins/ sub-folder); each
-// links to its own plugin page, where the bundled upstream skills are listed.
+// Contents of a model provider: the skills that live inside the provider
+// folder. Skills are nested catalog entries — tick them to pull their
+// SKILL.md files into one ZIP via the shared selection bar.
 export function ProviderContents({
   providerSlug,
   skills,
-  plugins,
 }: {
   providerSlug: string;
   skills: Skill[];
-  plugins: Plugin[];
 }) {
   return (
     <SelectionProvider>
@@ -44,43 +40,6 @@ export function ProviderContents({
           </div>
         ) : (
           <EmptyShelf kind="skills" seedInput={`${providerSlug}/skills`} />
-        )}
-      </section>
-
-      <section className="mt-14">
-        <h2 className="mb-5 text-xl font-semibold tracking-tight text-ink">
-          Plugins from this provider
-        </h2>
-        {plugins.length > 0 ? (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-2">
-            {plugins.map((p) => (
-              <a
-                key={p.slug}
-                href={`/plugin/${p.slug}`}
-                className="group rounded-sm border border-hairline bg-card p-6 transition-colors hover:border-pen"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
-                    {p.vendor}
-                  </p>
-                  <span className="sk-badge sk-badge-official">{p.badge}</span>
-                </div>
-                <h3 className="mt-4 text-lg font-semibold text-ink">{p.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-body">{p.description}</p>
-                <div className="mt-5 flex items-center justify-between border-t border-hairline pt-4">
-                  <span className="font-mono text-xs text-mute">
-                    {p.skills.length} skill{p.skills.length === 1 ? "" : "s"}
-                    {p.mcp ? " · MCP" : ""}
-                  </span>
-                  <span className="font-mono text-xs uppercase tracking-[0.1em] text-pen">
-                    Open →
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <EmptyShelf kind="plugins" seedInput={`${providerSlug}/plugins`} />
         )}
       </section>
     </SelectionProvider>

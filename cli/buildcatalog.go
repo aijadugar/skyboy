@@ -1,13 +1,12 @@
 package main
 
-// build-catalog.go: derives catalog.json from the real skills/ and plugins/
-// trees, replacing scripts/export-catalog.ts as the source of truth for the
+// build-catalog.go: derives catalog.json from the real skills/ tree,
+// replacing scripts/export-catalog.ts as the source of truth for the
 // shared manifest. The web app's build keeps reading the committed
 // catalog.json; the Go tool now owns generating it.
 //
 // Part 4 contract: the categories list is DERIVED, never hardcoded. It is the
-// sorted set of top-level folder names under skills/, unioned with every
-// skill.json `category` declared inside plugins. Adding a category is
+// sorted set of top-level folder names under skills/. Adding a category is
 // therefore: create skills/<new-category>/<skill>/, open a PR. No UI or CLI
 // code changes; the sidebar renders from catalog.json's categories key.
 //
@@ -47,9 +46,8 @@ var knownAgents = []Agent{
 	{Name: "Windsurf", Note: "skills"},
 }
 
-// buildCatalog scans root's skills/ and plugins/ trees and produces the
-// manifest. skillsChanged/shardsWritten report what happened for the CLI's
-// summary line.
+// buildCatalog scans root's skills/ tree and produces the manifest.
+// shardsWritten reports what happened for the CLI's summary line.
 type buildResult struct {
 	manifest     *CatalogManifest
 	shardsWritten int
@@ -57,7 +55,6 @@ type buildResult struct {
 
 func buildCatalog(root string) (*buildResult, error) {
 	skillsRoot := filepath.Join(root, "skills")
-	pluginsRoot := filepath.Join(root, "plugins")
 
 	var skills []SkillRecord
 	type shardPair struct {
@@ -167,78 +164,10 @@ func buildCatalog(root string) (*buildResult, error) {
 		shardsWritten++
 	}
 
-	// Plugins: index + link, never vendored.
-	var plugins []PluginRecord
-	pluginEntries, err := os.ReadDir(pluginsRoot)
-	if err != nil && !os.IsNotExist(err) {
-		return nil, fmt.Errorf("plugins/: %w", err)
-	}
-	for _, vendorEntry := range pluginEntries {
-		if !vendorEntry.IsDir() || strings.HasPrefix(vendorEntry.Name(), ".") {
-			continue
-		}
-		vendorPath := filepath.Join(pluginsRoot, vendorEntry.Name())
-		slugEntries, err := os.ReadDir(vendorPath)
-		if err != nil {
-			continue
-		}
-		for _, slugEntry := range slugEntries {
-			if !slugEntry.IsDir() {
-				continue
-			}
-			rec, err := readPluginFolder(filepath.Join(vendorPath, slugEntry.Name()), slugEntry.Name(), "plugins/"+vendorEntry.Name()+"/"+slugEntry.Name(), "")
-			if err != nil {
-				return nil, fmt.Errorf("plugins/%s/%s: %w", vendorEntry.Name(), slugEntry.Name(), err)
-			}
-			if rec != nil {
-				plugins = append(plugins, *rec)
-			}
-		}
-	}
-
-	// Provider-nested plugins: skills/model-providers/<p>/plugins/<slug>/.
-	// Same manifest format as a vendor plugin, but declared inside the provider
-	// container so the provider's own SKILL.md and its plugins travel together.
-	providersRoot := filepath.Join(skillsRoot, "model-providers")
-	if isDir(providersRoot) {
-		providerEntries, err := os.ReadDir(providersRoot)
-		if err == nil {
-			for _, providerEntry := range providerEntries {
-				if !providerEntry.IsDir() {
-					continue
-				}
-				nestedPlugins := filepath.Join(providersRoot, providerEntry.Name(), "plugins")
-				if !isDir(nestedPlugins) {
-					continue
-				}
-				pluginDirs, err := os.ReadDir(nestedPlugins)
-				if err != nil {
-					continue
-				}
-				for _, pluginEntry := range pluginDirs {
-					if !pluginEntry.IsDir() {
-						continue
-					}
-					rel := "skills/model-providers/" + providerEntry.Name() + "/plugins/" + pluginEntry.Name()
-					rec, err := readPluginFolder(filepath.Join(nestedPlugins, pluginEntry.Name()), pluginEntry.Name(), rel, providerEntry.Name())
-					if err != nil {
-						return nil, fmt.Errorf("%s: %w", rel, err)
-					}
-					if rec != nil {
-						plugins = append(plugins, *rec)
-					}
-				}
-			}
-		}
-	}
-
-	// Part 4: the dynamic category list. Top-level skills/ folders first,
-	// then any category declared inside a plugin's bundled skill set (plugins
-	// may contribute skills that carry their own category).
-	categories := deriveCategories(root, skills, plugins)
+	// Part 4: the dynamic category list. Top-level skills/ folders.
+	categories := deriveCategories(root, skills)
 
 	sort.SliceStable(skills, func(i, j int) bool { return skills[i].ID < skills[j].ID })
-	sort.SliceStable(plugins, func(i, j int) bool { return plugins[i].Slug < plugins[j].Slug })
 
 	manifest := &CatalogManifest{
 		GeneratedAt: nowUTC(),
@@ -246,15 +175,13 @@ func buildCatalog(root string) (*buildResult, error) {
 		Categories:  categories,
 		Agents:      knownAgents,
 		Skills:      skills,
-		Plugins:     plugins,
 	}
 	return &buildResult{manifest: manifest, shardsWritten: shardsWritten}, nil
 }
 
-// deriveCategories is the Part 4 core: scan top-level folders under skills/
-// and union with plugin skill categories. No category is ever hardcoded here;
-// the catalog's own tree is the only input.
-func deriveCategories(root string, skills []SkillRecord, plugins []PluginRecord) []string {
+// deriveCategories is the Part 4 core: scan top-level folders under skills/.
+// No category is ever hardcoded here; the catalog's own tree is the only input.
+func deriveCategories(root string, skills []SkillRecord) []string {
 	seen := map[string]bool{}
 	var out []string
 
@@ -271,14 +198,6 @@ func deriveCategories(root string, skills []SkillRecord, plugins []PluginRecord)
 		}
 	}
 
-	// Plugin skills may declare categories of their own (a plugin that bundles
-	// a backend-design skill contributes that category to the taxonomy).
-	for _, p := range plugins {
-		if p.Category != "" && !seen[p.Category] {
-			seen[p.Category] = true
-			out = append(out, p.Category)
-		}
-	}
 	for _, s := range skills {
 		top := strings.SplitN(s.C, "/", 2)[0]
 		if top != "" && !seen[top] {
@@ -359,74 +278,6 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 	shard.Frontmatter.License = strPtr(fm["license"])
 
 	return record, shard, true, nil
-}
-
-// readPluginFolder reads one plugin.json into an index record. relPath is the
-// repo-relative folder path ("plugins/<vendor>/<slug>" for vendor plugins,
-// "skills/model-providers/<p>/plugins/<slug>" for provider-nested ones);
-// provider is the model provider slug for nested plugins, "" otherwise.
-func readPluginFolder(dir, slug, relPath, provider string) (*PluginRecord, error) {
-	pjPath := filepath.Join(dir, "plugin.json")
-	if !fileExists(pjPath) {
-		return nil, nil
-	}
-	data, err := os.ReadFile(pjPath)
-	if err != nil {
-		return nil, err
-	}
-	var doc pluginDocFile
-	if err := json.Unmarshal(data, &doc); err != nil {
-		return nil, fmt.Errorf("plugin.json: %w", err)
-	}
-
-	upstream := strings.TrimRight(doc.SourceURL, "/")
-	// Plugins may declare an mcp endpoint (a string, possibly an install
-	// command like "uvx markitdown-mcp"); pass it through when present.
-	mcpField := doc.MCP
-	// Upstream folder where bundled skills live; "skills" unless the manifest
-	// says otherwise (plugin directories keep them under "plugins/").
-	skillPrefix := doc.PathPrefix
-	if skillPrefix == "" {
-		skillPrefix = "skills"
-	}
-	rec := &PluginRecord{
-		Slug:         slug,
-		Name:         doc.Name,
-		Vendor:       doc.Vendor,
-		VendorURL:    doc.SourceURL,
-		SourceType:   "vendor",
-		Origin:       OriginVendor,
-		Category:     doc.Category,
-		License:      doc.License,
-		UpstreamRepo: upstream,
-		Install:      upstream,
-		Description:  doc.Description,
-		MCP:          nilIfEmpty(mcpField),
-		Note:         "Indexed from the vendor repo as the source of truth, not reviewed by skyboy. Report content issues upstream.",
-		Badge:        "official (vendor)",
-		Version:      doc.Version,
-		Path:         relPath,
-		Provider:     provider,
-	}
-	if rec.Category == "" {
-		rec.Category = "meta"
-	}
-	if rec.License == "" {
-		rec.License = "Apache-2.0"
-	}
-	if rec.Vendor == "" {
-		rec.Vendor = slug
-	}
-	for _, s := range doc.Contents.Skills {
-		rec.Skills = append(rec.Skills, PluginSkillRef{
-			Name: s,
-			Path: skillPrefix + "/" + s,
-			URL:  upstream + "/blob/main/" + skillPrefix + "/" + s,
-		})
-	}
-	rec.Commands = doc.Contents.Hooks
-	rec.Agents = doc.Contents.Agents
-	return rec, nil
 }
 
 // hashSkillFolder mirrors scripts/export-catalog.ts hashSkillFolder exactly:
@@ -552,7 +403,7 @@ func cmdBuildCatalog(args []string) error {
 		return err
 	}
 	fmt.Fprintf(stdout,
-		"build-catalog: wrote %d skill(s), %d plugin(s), %d meta.json shard(s), %d categories to catalog.json\n",
-		len(result.manifest.Skills), len(result.manifest.Plugins), result.shardsWritten, len(result.manifest.Categories))
+		"build-catalog: wrote %d skill(s), %d meta.json shard(s), %d categories to catalog.json\n",
+		len(result.manifest.Skills), result.shardsWritten, len(result.manifest.Categories))
 	return nil
 }

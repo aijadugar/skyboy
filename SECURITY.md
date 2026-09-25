@@ -7,8 +7,8 @@ Report vulnerabilities privately via GitHub
 (Draft a security advisory). Do not open a public issue for anything you
 believe is exploitable.
 
-Include: what an attacker could do, the affected surface (a skill, a plugin
-manifest, the CLI, the MCP server, or the site), and reproduction steps.
+Include: what an attacker could do, the affected surface (a skill, the CLI,
+the MCP server, or the site), and reproduction steps.
 
 You will get an acknowledgement within 7 days and a fix or a status update
 within 30 days. We credit reporters in the release notes by default; say so
@@ -21,8 +21,8 @@ if you prefer to stay anonymous.
 SKILL.md files are instructions addressed to an AI agent. They are not
 programs and do not execute. But an instruction that says "run this script"
 is a program with extra steps, so the catalog treats anything a skill ships
-beside its SKILL.md (files under `scripts/`, and every plugin in
-`plugins/`) as untrusted content with a higher review bar.
+beside its SKILL.md (files under `scripts/`) as untrusted content with a
+higher review bar.
 
 ### In scope
 
@@ -30,11 +30,6 @@ beside its SKILL.md (files under `scripts/`, and every plugin in
   line by line before merge, and again before `verified` badging. A skill
   whose `scripts/` content does not match its stated purpose is rejected,
   not fixed.
-- **Hooks and agents in plugins** (`contents.hooks`, `contents.agents`):
-  these run inside an agent's session or workspace, so they get the same
-  line-by-line bar. For vendor plugins this review happens upstream; the
-  skyboy index links, never vouches. The plugin page carries that caveat on
-  every vendor card.
 - **Permissions disclosures**: `network`, `shell_exec`,
   `filesystem_write_outside_target`, and `env_read` must reflect reality.
   A skill that hides capabilities from its disclosure is treated as a
@@ -60,8 +55,7 @@ beside its SKILL.md (files under `scripts/`, and every plugin in
 
 ## Review bar for hooks and scripts
 
-A PR touching `scripts/` inside a skill, or `contents.hooks` /
-`contents.agents` in a plugin, must state in the PR body:
+A PR touching `scripts/` inside a skill must state in the PR body:
 
 1. what each file does,
 2. what it touches (network, shell, filesystem, environment),

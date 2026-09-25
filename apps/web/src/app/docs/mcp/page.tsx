@@ -87,7 +87,6 @@ export default function DocsMcpPage() {
           {[
             ["search_catalog(query, category?)", "Fuzzy search the catalog, ranked"],
             ["get_skill(slug)", "Full SKILL.md + skill.json metadata in one call"],
-            ["get_plugin(slug)", "Nested skills, hooks, and agents manifest"],
             ["list_categories()", "The dynamic category tree, never hardcoded"],
             ["prepare_context_zip(slugs[])", "The exact skyboy zip bundle: _CONTEXT_SUMMARY.md + skills/"],
             ["install_skill(slug, target_dir?)", "Local/stdio only. Writes to your filesystem."],
@@ -191,8 +190,7 @@ export default function DocsMcpPage() {
             always has a generated <code>_CONTEXT_SUMMARY.md</code> at its
             root: a short brief the receiving model reads first, telling it
             what is in the bundle, how to apply each skill, and the boundaries
-            (nothing executes; surface declared permissions). Plugins are
-            indexed into the summary, never vendored into the archive.
+            (nothing executes; surface declared permissions).
           </p>
         </section>
 

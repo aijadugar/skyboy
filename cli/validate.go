@@ -2,8 +2,7 @@ package main
 
 // validate-skill.go: the Go validator behind `skyboy validate` and the CI
 // skills job. Validates every skills/<category>/<name>/skill.json against
-// scripts/schemas/skill.schema.json and every plugins/<name>/plugin.json
-// against plugin.schema.json, then applies the cross-file rules a JSON
+// scripts/schemas/skill.schema.json, then applies the cross-file rules a JSON
 // Schema cannot express:
 //
 //   - skill.json `name` equals the folder name it lives in
@@ -11,9 +10,6 @@ package main
 //   - skill.json `command` equals "skyboy add <name>" for that name
 //   - SKILL.md exists in the folder, carries frontmatter name/description,
 //     and contains a "## Command" section whose fenced block matches `command`
-//   - plugin.json `name` equals its folder name; contents.skills names are
-//     upstream references (plugins are index + link, never vendored), so
-//     they are not resolved against skills/
 //
 // The schema subset implemented here: type, required, properties,
 // additionalProperties(false), enum, const, pattern, min/maxLength,
@@ -298,28 +294,7 @@ type skillDocFile struct {
 	CompatibleAgents []string `json:"compatible_agents"`
 }
 
-// pluginDocFile is the on-disk shape of plugins/<name>/plugin.json.
-type pluginDocFile struct {
-	Name        string   `json:"name"`
-	Description string   `json:"description"`
-	SourceURL   string   `json:"source_url"`
-	Contents    struct {
-		Skills []string `json:"skills"`
-		Hooks  []string `json:"hooks"`
-		Agents []string `json:"agents"`
-	} `json:"contents"`
-	Category string `json:"category"`
-	Vendor   string `json:"vendor"`
-	License  string `json:"license"`
-	MCP      string `json:"mcp"`
-	Version  string `json:"version"`
-	// PathPrefix is the upstream folder where a plugin's bundled skills live
-	// ("skills" or "plugins"); defaults to "skills". Provider-nested plugins
-	// use it when the vendor repo keeps entries somewhere other than skills/.
-	PathPrefix string `json:"path_prefix"`
-}
-
-// validateRepo walks the repo tree and validates every skill and plugin.
+// validateRepo walks the repo tree and validates every skill.
 // Returns the collected problems; empty means clean.
 func validateRepo(root string) []string {
 	var problems []string
@@ -331,13 +306,6 @@ func validateRepo(root string) []string {
 	if err != nil {
 		return []string{"cannot load skill schema: " + err.Error()}
 	}
-	pluginSchema, err := parseSchema(filepath.Join(root, "scripts", "schemas", "plugin.schema.json"))
-	if err != nil {
-		return []string{"cannot load plugin schema: " + err.Error()}
-	}
-
-	// Index every skill name -> category for plugin reference checks.
-	skillNames := map[string]string{}
 
 	skillRoot := filepath.Join(root, "skills")
 	cats, err := os.ReadDir(skillRoot)
@@ -351,43 +319,6 @@ func validateRepo(root string) []string {
 			for _, skillDir := range walkSkillDirs(filepath.Join(skillRoot, cat.Name())) {
 				rel, _ := filepath.Rel(root, skillDir)
 				validateSkillDir(skillDir, rel, skillSchema, add)
-				if doc := readSkillDoc(skillDir); doc != nil {
-					skillNames[doc.Name] = doc.Category
-				}
-			}
-		}
-	}
-
-	pluginRoot := filepath.Join(root, "plugins")
-	entries, err := os.ReadDir(pluginRoot)
-	if err != nil {
-		add("plugins/: %v", err)
-	} else {
-		for _, vendorDir := range entries {
-			if !vendorDir.IsDir() || strings.HasPrefix(vendorDir.Name(), ".") {
-				continue
-			}
-			pluginDirs := walkPluginDirs(filepath.Join(pluginRoot, vendorDir.Name()))
-			for _, pluginDir := range pluginDirs {
-				rel, _ := filepath.Rel(root, pluginDir)
-				validatePluginDir(pluginDir, rel, pluginSchema, skillNames, add)
-			}
-		}
-	}
-
-	// Provider-nested plugins: skills/model-providers/<p>/plugins/<slug>/.
-	// Same manifest contract as a vendor plugin, declared inside the provider
-	// container (a model folder that holds its skills and plugins).
-	providersRoot := filepath.Join(skillRoot, "model-providers")
-	if dirs, err := os.ReadDir(providersRoot); err == nil {
-		for _, providerDir := range dirs {
-			if !providerDir.IsDir() {
-				continue
-			}
-			nestedRoot := filepath.Join(providersRoot, providerDir.Name(), "plugins")
-			for _, pluginDir := range walkPluginDirs(nestedRoot) {
-				rel, _ := filepath.Rel(root, pluginDir)
-				validatePluginDir(pluginDir, rel, pluginSchema, skillNames, add)
 			}
 		}
 	}
@@ -510,42 +441,6 @@ func skillCategoryOf(skillDir string) (string, bool) {
 	}
 }
 
-// validatePluginDir runs schema validation plus the cross-file rules on one
-// plugin folder. Shared by the full-tree walk and `validate --path`. The
-// skillNames registry is kept for signature symmetry with future reference
-// checks; index-only plugins resolve their skill names upstream, not here.
-func validatePluginDir(pluginDir, rel string, pluginSchema *schemaNode, skillNames map[string]string, add func(string, ...any)) {
-	_ = skillNames
-	data, err := os.ReadFile(filepath.Join(pluginDir, "plugin.json"))
-	if err != nil {
-		add("%s: missing plugin.json (%v)", rel, err)
-		return
-	}
-	var raw any
-	if err := json.Unmarshal(data, &raw); err != nil {
-		add("%s: plugin.json is not valid JSON: %v", rel, err)
-		return
-	}
-	var errs []string
-	validateNode(pluginSchema, raw, "plugin", &errs)
-	for _, e := range errs {
-		add("%s: %s", rel, e)
-	}
-
-	var doc pluginDocFile
-	if err := json.Unmarshal(data, &doc); err != nil {
-		return
-	}
-	if base := filepath.Base(pluginDir); doc.Name != base {
-		add("%s: plugin.json name %q does not match folder name %q", rel, doc.Name, base)
-	}
-	// contents.skills names are NOT required to exist in skills/: plugins are
-	// index + link, never vendored (spec 3.2), so a vendor plugin legitimately
-	// references skills that live only in its upstream repo. The schema
-	// guarantees an upstream to resolve them against by requiring source_url;
-	// name well-formedness is covered by the schema pattern.
-}
-
 // walkSkillDirs handles both flat categories (skills/coding/<skill>/) and
 // subcategories (skills/coding/frontend/<skill>/): it descends until it finds
 // a folder containing skill.json.
@@ -567,23 +462,6 @@ func walkSkillDirs(dir string) []string {
 		// This folder is itself a skill folder. A model provider container is
 		// both a skill (its own SKILL.md) and a parent of nested child skills
 		// (provider/skills/<slug>/) — validate the container and the children.
-		out = append(out, dir)
-	}
-	return out
-}
-
-func walkPluginDirs(dir string) []string {
-	var out []string
-	entries, err := os.ReadDir(dir)
-	if err != nil {
-		return out
-	}
-	for _, e := range entries {
-		if e.IsDir() {
-			out = append(out, walkPluginDirs(filepath.Join(dir, e.Name()))...)
-		}
-	}
-	if hasFile(dir, "plugin.json") {
 		out = append(out, dir)
 	}
 	return out
@@ -667,7 +545,7 @@ func frontmatterField(text, key string) string {
 
 // cmdValidate runs the repo validator and prints a report. With no positional
 // arguments it validates the whole tree; with `--path <dir>` it validates one
-// skill or plugin folder, which is what CI uses to check only the files a PR
+// skill folder, which is what CI uses to check only the files a PR
 // touched (the check has to stay cheap at six-figure catalog sizes). Each
 // --path can repeat. --check-catalog verifies that the committed catalog.json
 // record for each --path skill still matches a fresh folder hash (what
@@ -684,7 +562,7 @@ func cmdValidate(args []string) error {
 	}
 	problems := validateRepo(root)
 	if len(problems) == 0 {
-		fmt.Fprintln(stdout, "skyboy: all skills and plugins valid.")
+		fmt.Fprintln(stdout, "skyboy: all skills valid.")
 		return nil
 	}
 	for _, p := range problems {
@@ -705,7 +583,7 @@ func positionalValidatePaths(args []string) []string {
 	return out
 }
 
-// cmdValidatePaths validates a set of skill/plugin folders (the scoped CI
+// cmdValidatePaths validates a set of skill folders (the scoped CI
 // path) and optionally cross-checks their catalog.json records.
 func cmdValidatePaths(root string, targets []string, checkCatalog bool) error {
 	var problems []string
@@ -715,10 +593,6 @@ func cmdValidatePaths(root string, targets []string, checkCatalog bool) error {
 	skillSchema, err := parseSchema(filepath.Join(root, "scripts", "schemas", "skill.schema.json"))
 	if err != nil {
 		return fmt.Errorf("cannot load skill schema: %w", err)
-	}
-	pluginSchema, err := parseSchema(filepath.Join(root, "scripts", "schemas", "plugin.schema.json"))
-	if err != nil {
-		return fmt.Errorf("cannot load plugin schema: %w", err)
 	}
 
 	// One catalog lookup map shared by every target: id -> record.
@@ -750,18 +624,13 @@ func cmdValidatePaths(root string, targets []string, checkCatalog bool) error {
 			return fmt.Errorf("--path must be a directory: %s", target)
 		}
 		rel, _ := filepath.Rel(root, abs)
-		switch {
-		case hasFile(abs, "skill.json"):
-			validateSkillDir(abs, rel, skillSchema, add)
-			checked++
-			if checkCatalog {
-				checkCatalogRecord(abs, rel, records, add)
-			}
-		case hasFile(abs, "plugin.json"):
-			validatePluginDir(abs, rel, pluginSchema, nil, add)
-			checked++
-		default:
-			return fmt.Errorf("%s contains neither skill.json nor plugin.json; pass a skill or plugin folder", target)
+		if !hasFile(abs, "skill.json") {
+			return fmt.Errorf("%s is not a skill folder (missing skill.json)", target)
+		}
+		validateSkillDir(abs, rel, skillSchema, add)
+		checked++
+		if checkCatalog {
+			checkCatalogRecord(abs, rel, records, add)
 		}
 	}
 	if checked == 0 && checkCatalog {
