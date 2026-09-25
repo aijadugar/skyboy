@@ -1,11 +1,11 @@
 <!--
-  Contribution checklist. CI validates ONLY the skill/plugin folders this PR
+  Contribution checklist. CI validates ONLY the skill folders this PR
   changed (plus the catalog records for them), so a one-skill PR stays fast
   at any catalog size. Fill in the sections below so a maintainer can review
   the substance, not the plumbing.
 -->
 
-## What does this skill or plugin do?
+## What does this skill do?
 
 <!-- One or two sentences. What behavior does an agent gain? -->
 
@@ -13,8 +13,6 @@
 
 - Skill: `skills/<category>/<slug>/` (the folder under `skills/` IS the
   category; one slug, ever)
-- Plugin: `plugins/<vendor>/<slug>/plugin.json` (indexed + linked, never
-  vendored; `source_url` points at the upstream repo)
 
 ## Use cases
 
@@ -62,5 +60,5 @@ go run ./cli build-catalog
 
 ## License
 
-- [ ] The `license` field in skill.json (or plugin.json) is set (default MIT)
+- [ ] The `license` field in skill.json is set (default MIT)
       and I am the author or have the right to submit this.
