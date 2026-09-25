@@ -173,15 +173,9 @@ func TestInfoFallsBackThroughCache(t *testing.T) {
 }
 
 func TestGenerateContextSummaryIsFirstClass(t *testing.T) {
-	manifest := &CatalogManifest{Skills: testSkills(), Plugins: []PluginRecord{{
-		Slug: "vercel-plugin", Name: "vercel-plugin", Vendor: "Vercel",
-		UpstreamRepo: "https://github.com/vercel/vercel-plugin",
-		Description:  "Vercel ecosystem guidance.",
-		Skills:       []PluginSkillRef{{Name: "nextjs", URL: "https://github.com/vercel/vercel-plugin/blob/main/skills/nextjs"}},
-	}}}
+	manifest := &CatalogManifest{Skills: testSkills()}
 	items := []zipItem{
 		{"skill", "copy-self-audit"},
-		{"plugin", "vercel-plugin"},
 	}
 	data, err := generateContextSummary(items, manifest)
 	if err != nil {
@@ -192,17 +186,12 @@ func TestGenerateContextSummaryIsFirstClass(t *testing.T) {
 	for _, want := range []string{
 		"read this first",
 		"skills/copy-self-audit/",
-		"Source of truth: https://github.com/vercel/vercel-plugin",
 		"skyboy add copy-self-audit",
 		"Nothing in this bundle executes",
 	} {
 		if !strings.Contains(text, want) {
 			t.Errorf("summary missing %q", want)
 		}
-	}
-	// Plugins are never described as bundled content.
-	if strings.Contains(text, "bundled: ") && strings.Contains(text, "not bundled: ") {
-		t.Error("plugin wording inconsistent")
 	}
 }
 

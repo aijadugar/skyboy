@@ -71,9 +71,7 @@ func cmdDoc(args []string) error {
 
 // cmdAdd2 implements the Part 5 `skyboy add <name1,name2,...>`: resolve every
 // name against the catalog, download each skill folder into
-// ./.skyboy/skills/<name>/, and record it in ~/.skyboy/state.json. Plugin
-// names are allowed too: they resolve to a link entry in state (the plugin
-// content lives upstream; skyboy indexes, never vendors).
+// ./.skyboy/skills/<name>/, and record it in ~/.skyboy/state.json.
 func cmdAdd2(args []string) error {
 	pos := positional(args)
 	if len(pos) == 0 {
@@ -118,23 +116,7 @@ func cmdAdd2(args []string) error {
 			added = append(added, fmt.Sprintf("%s (v%s, %d file(s)) -> %s", entry.Name, skill.V, res.filesWritten, relToCwd(res.destDir)))
 			continue
 		}
-		if plugin := catalogPluginLookup(manifest, name); plugin != nil {
-			now := time.Now().UTC()
-			entry := stateEntry{
-				Name: plugin.Slug, Kind: "plugin",
-				Category: plugin.Category, Version: plugin.Version,
-				SourceURL: plugin.UpstreamRepo, Dir: "",
-				AddedAt: now, UpdatedAt: now,
-			}
-			if existing, _ := findStateEntry(state, entry.Name); existing != nil {
-				existing.Version, existing.UpdatedAt = entry.Version, entry.UpdatedAt
-			} else {
-				state.Plugins = append(state.Plugins, entry)
-			}
-			added = append(added, fmt.Sprintf("%s (plugin, indexed) -> source %s", plugin.Slug, plugin.UpstreamRepo))
-			continue
-		}
-		return fmt.Errorf("'%s' is not in the catalog (skills or plugins). Try 'skyboy search %s'", name, name)
+		return fmt.Errorf("'%s' is not in the catalog. Try 'skyboy search %s'", name, name)
 	}
 
 	if err := saveState(state); err != nil {
@@ -172,10 +154,10 @@ func relToCwd(abs string) string {
 	return rel
 }
 
-// cmdUpdate implements `skyboy update <name>`: re-fetch the skill or plugin
-// and report what changed. Skills compare content hash (authoritative) and
-// version; the diff summary lists files added/removed/changed between the
-// locally installed copy and the freshly downloaded one.
+// cmdUpdate implements `skyboy update <name>`: re-fetch the skill and report
+// what changed. The skill compares content hash (authoritative) and version;
+// the diff summary lists files added/removed/changed between the locally
+// installed copy and the freshly downloaded one.
 func cmdUpdate(args []string) error {
 	pos := positional(args)
 	if len(pos) != 1 {
@@ -195,26 +177,6 @@ func cmdUpdate(args []string) error {
 	}
 
 	switch kind {
-	case "plugin":
-		plugin := catalogPluginLookup(manifest, name)
-		if plugin == nil {
-			return fmt.Errorf("'%s' is no longer in the catalog", name)
-		}
-		changed := false
-		if plugin.Version != "" && entry.Version != plugin.Version {
-			fmt.Fprintf(stdout, "skyboy: %s (plugin) %s -> %s\n", name, orDash(entry.Version), plugin.Version)
-			changed = true
-		}
-		for _, s := range plugin.Skills {
-			fmt.Fprintf(stdout, "  bundled skill: %s\n", s.Name)
-		}
-		if !changed {
-			fmt.Fprintf(stdout, "skyboy: %s is up to date (source %s)\n", name, entry.SourceURL)
-		}
-		entry.Version = plugin.Version
-		entry.UpdatedAt = time.Now().UTC()
-		return saveState(state)
-
 	default: // skill
 		skill := catalogSkillLookup(manifest, name)
 		if skill == nil {
@@ -349,7 +311,8 @@ func cmdList(args []string) error {
 				fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", s.ID, s.V, oneLine(s.D))
 			}
 		}
-		// Categories that only plugins declare.
+		// Categories that only skills declare (sub-categories grouped at the
+		// top level).
 		var extra []string
 		for cat := range grouped {
 			if !containsString(manifest.Categories, cat) {
@@ -363,31 +326,17 @@ func cmdList(args []string) error {
 				fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", s.ID, s.V, oneLine(s.D))
 			}
 		}
-		if len(manifest.Plugins) > 0 {
-			fmt.Fprintln(stdout, "plugins")
-			for _, p := range manifest.Plugins {
-				fmt.Fprintf(stdout, "  %-44s %-8s %s\n", p.Slug, orDash(p.Version), oneLine(p.Description))
-			}
-		}
 		return nil
 	}
 
 	state := loadState()
-	if len(state.Skills) == 0 && len(state.Plugins) == 0 {
+	if len(state.Skills) == 0 {
 		fmt.Fprintln(stdout, "skyboy: nothing added yet. Use 'skyboy add <name>' or 'skyboy list --all' to browse.")
 		return nil
 	}
-	if len(state.Skills) > 0 {
-		fmt.Fprintln(stdout, "skills")
-		for _, e := range state.Skills {
-			fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", e.Name, orDash(e.Version), relToCwd(e.Dir))
-		}
-	}
-	if len(state.Plugins) > 0 {
-		fmt.Fprintln(stdout, "plugins")
-		for _, e := range state.Plugins {
-			fmt.Fprintf(stdout, "  %-44s %-8s %s\n", e.Name, orDash(e.Version), e.SourceURL)
-		}
+	fmt.Fprintln(stdout, "skills")
+	for _, e := range state.Skills {
+		fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", e.Name, orDash(e.Version), relToCwd(e.Dir))
 	}
 	return nil
 }
@@ -449,19 +398,6 @@ func cmdInfo(args []string) error {
 	}
 	skill := catalogSkillLookup(manifest, name)
 	if skill == nil {
-		if plugin := catalogPluginLookup(manifest, name); plugin != nil {
-			fmt.Fprintf(stdout, "%s is a plugin (index + link, never vendored).\n\nsource: %s\ncontents:\n", plugin.Slug, plugin.UpstreamRepo)
-			for _, s := range plugin.Skills {
-				fmt.Fprintf(stdout, "  skill:  %s\n", s.Name)
-			}
-			for _, h := range plugin.Commands {
-				fmt.Fprintf(stdout, "  hook:   %s\n", h)
-			}
-			for _, a := range plugin.Agents {
-				fmt.Fprintf(stdout, "  agent:  %s\n", a)
-			}
-			return nil
-		}
 		return fmt.Errorf("'%s' is not in the catalog", name)
 	}
 	body, err := fetchText(skillMarkdownURL(*skill))

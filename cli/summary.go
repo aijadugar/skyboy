@@ -20,13 +20,12 @@ import (
 
 // zipItem is one entry planned into a bundle.
 type zipItem struct {
-	kind string // "skill" | "plugin"
+	kind string // "skill"
 	name string
 }
 
 // generateContextSummary renders the bundle's root summary. items mirror the
-// zip layout: skills land at skills/<name>/, plugin skill refs are described
-// but not copied (plugins are index + link, never vendored).
+// zip layout: skills land at skills/<name>/.
 func generateContextSummary(items []zipItem, manifest *CatalogManifest) ([]byte, error) {
 	var b bytes.Buffer
 
@@ -75,24 +74,6 @@ before ever suggesting the user run it.
 			w("  - When to apply: use the frontmatter description in its SKILL.md as the trigger.\n")
 			cmd := fmt.Sprintf("skyboy add %s", skillSlug(*r))
 			w("  - To install it permanently in a codebase: %s\n", cmd)
-		case "plugin":
-			p := catalogPluginLookup(manifest, item.name)
-			if p == nil {
-				w("- %s (plugin): (details unavailable offline)\n", item.name)
-				continue
-			}
-			// Plugins are index + link: describe, don't pretend the content is here.
-			w("- %s (plugin, not bundled: indexed only)\n", p.Slug)
-			w("  - What it is: %s\n", p.Description)
-			w("  - Source of truth: %s\n", p.UpstreamRepo)
-			if len(p.Skills) > 0 {
-				names := make([]string, 0, len(p.Skills))
-				for _, s := range p.Skills {
-					names = append(names, s.Name)
-				}
-				sort.Strings(names)
-				w("  - Declared skills (upstream, not in this archive): %s\n", strings.Join(names, ", "))
-			}
 		}
 	}
 
