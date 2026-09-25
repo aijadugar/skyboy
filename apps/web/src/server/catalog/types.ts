@@ -72,40 +72,6 @@ export interface SkillMetaShard {
   skill_md_url: string;
 }
 
-export interface PluginSkillRef {
-  name: string;
-  description: string;
-  path: string;
-  url: string;
-}
-
-export interface PluginRecord {
-  slug: string;
-  name: string;
-  vendor: string;
-  vendorUrl?: string;
-  sourceType: "vendor";
-  origin: Origin;
-  category: string;
-  tags: string[];
-  license: string;
-  upstreamRepo: string;
-  install: string;
-  description: string;
-  compatibleAgents: string[];
-  skills: PluginSkillRef[];
-  commands: string[];
-  agents: string[];
-  mcp: string | null;
-  note: string;
-  badge: Badge;
-  version?: string;
-  path: string; // repo-relative plugin folder, e.g. "plugins/<vendor>/<slug>"
-  // Set for provider-nested plugins: the model provider whose plugins/ folder
-  // declared it (skills/model-providers/<p>/plugins/<slug>/).
-  provider?: string;
-}
-
 export interface Agent {
   name: string;
   note: string;
@@ -117,7 +83,6 @@ export interface CatalogManifest {
   categories: string[];
   agents: Agent[];
   skills: SkillRecord[];
-  plugins: PluginRecord[];
 }
 
 // The GitHub raw base for the skill catalog. The repo is the source of truth;
