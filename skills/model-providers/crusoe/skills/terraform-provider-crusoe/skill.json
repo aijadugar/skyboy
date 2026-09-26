@@ -5,7 +5,9 @@
   "description": "Official Terraform Provider for Crusoe Cloud — infrastructure-as-code for Crusoe GPU cloud, with active AI agent workflows: a Claude Code skill (/derive-schema-descriptions) for schema generation and a release-prep skill in the development pipeline.",
   "command": "skyboy add terraform-provider-crusoe",
   "tags": ["model-provider", "crusoe", "terraform", "gpu-cloud", "infrastructure-as-code", "claude-code", "skills"],
-  "author": "skyboy",
+  "author": "crusoe",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/crusoecloud/terraform-provider-crusoe",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
