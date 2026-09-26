@@ -87,7 +87,6 @@ export default function DocsMcpPage() {
           {[
             ["search_catalog(query, category?)", "Fuzzy search the catalog, ranked"],
             ["get_skill(slug)", "Full SKILL.md + skill.json metadata in one call"],
-            ["get_plugin(slug)", "Nested skills, hooks, and agents manifest"],
             ["list_categories()", "The dynamic category tree, never hardcoded"],
             ["prepare_context_zip(slugs[])", "The exact skyboy zip bundle: _CONTEXT_SUMMARY.md + skills/"],
             ["install_skill(slug, target_dir?)", "Local/stdio only. Writes to your filesystem."],
