@@ -20,9 +20,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "siliconflow",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/siliconflow/bizyair-skill",
   "canonical_of": null,
   "permissions": null,
@@ -30,7 +30,27 @@
     "name": "bizyair-skill",
     "license": "MIT"
   },
-  "hash": "7d1133e82accf36a",
+  "hash": "e645ece2e3ef0ede",
   "path": "skills/model-providers/siliconflow/skills/bizyair-skill",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/siliconflow/skills/bizyair-skill/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/siliconflow/skills/bizyair-skill/SKILL.md",
+  "token_cost": 384,
+  "router_description": "Use this skill when an AI agent needs to execute professional-grade AIGC tasks through natural language.",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

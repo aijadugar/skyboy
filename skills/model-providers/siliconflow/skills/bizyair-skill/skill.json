@@ -5,7 +5,9 @@
   "description": "BizyAir's AIGC skill package for mainstream AI agents — natural-language image/video generation, AI application execution, and ModelZoo model calling on BizyAir cloud with zero configuration.",
   "command": "skyboy add bizyair-skill",
   "tags": ["model-provider", "siliconflow", "aigc", "text-to-image", "agent-skill", "bizyair", "skills"],
-  "author": "skyboy",
+  "author": "siliconflow",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/siliconflow/bizyair-skill",
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
