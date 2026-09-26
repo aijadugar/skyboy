@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
   "command": "skyboy add cohere",
   "tags": ["model-provider", "cohere", "skills"],
-  "author": "skyboy",
+  "author": "cohere",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
