@@ -17,9 +17,9 @@
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "anthropic",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/modelcontextprotocol",
   "canonical_of": null,
   "permissions": null,
@@ -27,7 +27,27 @@
     "name": "mcp-server",
     "license": "Apache-2.0"
   },
-  "hash": "357a9ea4cb13f2fd",
+  "hash": "2868f87b88b03923",
   "path": "skills/model-providers/anthropic/skills/mcp-server",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/mcp-server/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/skills/mcp-server/SKILL.md",
+  "token_cost": 567,
+  "router_description": "Use this skill when building or configuring MCP servers — Anthropic's open protocol for connecting AI models to external tools, databases, and APIs.",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
