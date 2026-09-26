@@ -8,12 +8,7 @@
     "editing",
     "anti-slop"
   ],
-  "compatible_agents": [
-    "claude-code",
-    "claude-desktop",
-    "cursor",
-    "gemini-cli"
-  ],
+  "compatible_agents": null,
   "version": "1.0.0",
   "license": "MIT",
   "author": "skyboy",
@@ -21,19 +16,27 @@
   "verified": false,
   "upstream_repo": null,
   "canonical_of": null,
-  "permissions": {
-    "network": false,
-    "filesystem_write_outside_target": false,
-    "shell_exec": false,
-    "env_read": [],
-    "generated_by": "generate-manifest.ts@1.0.0",
-    "generated_at": "2026-09-08T15:48:55.531Z"
-  },
+  "permissions": null,
   "frontmatter": {
     "name": "copy-self-audit",
     "license": "MIT"
   },
-  "hash": "c7ac4f6c87dbd0e6",
+  "hash": "c8eab72c936c35bb",
   "path": "skills/writing/copy-self-audit",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/writing/copy-self-audit/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/writing/copy-self-audit/SKILL.md",
+  "token_cost": 989,
+  "router_description": "Use this at the end of writing any page, post, email, or docs update - right before you call it \"done\".",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "official",
+  "trust_reason": "first-party skyboy skill"
 }
