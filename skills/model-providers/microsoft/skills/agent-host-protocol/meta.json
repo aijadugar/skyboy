@@ -7,13 +7,41 @@
     "model-provider",
     "agent-host-protocol"
   ],
+  "compatible_agents": null,
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
+  "author": "microsoft",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/agent-host-protocol",
-  "hash": "0000000000000000",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "agent-host-protocol",
+    "license": "MIT"
+  },
+  "hash": "50b111dd7f3070d0",
   "path": "skills/model-providers/microsoft/skills/agent-host-protocol",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agent-host-protocol/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/agent-host-protocol/SKILL.md",
+  "token_cost": 681,
+  "router_description": "Use this skill when implementing synchronized multi-client state across AI agent sessions. Covers the protocol specification, message formats, and synchronization patterns for agent applications.",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "verbose: 7 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

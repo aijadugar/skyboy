@@ -7,13 +7,41 @@
     "model-provider",
     "agent-framework-samples"
   ],
+  "compatible_agents": null,
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
+  "author": "microsoft",
   "origin": "vendor",
   "verified": true,
   "upstream_repo": "https://github.com/microsoft/Agent-Framework-Samples",
-  "hash": "0000000000000000",
+  "canonical_of": null,
+  "permissions": null,
+  "frontmatter": {
+    "name": "Agent-Framework-Samples",
+    "license": "MIT"
+  },
+  "hash": "b73cd2f03783a4ed",
   "path": "skills/model-providers/microsoft/skills/Agent-Framework-Samples",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/Agent-Framework-Samples/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/skills/Agent-Framework-Samples/SKILL.md",
+  "token_cost": 975,
+  "router_description": "Use this skill when exploring Microsoft Agent Framework sample applications and patterns. This collection showcases practical implementations across different languages and use cases, helping you get",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "verbose: 8 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

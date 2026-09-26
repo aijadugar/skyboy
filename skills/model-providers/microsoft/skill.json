@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Microsoft as a model provider.",
   "command": "skyboy add microsoft",
   "tags": ["model-provider", "microsoft"],
-  "author": "skyboy",
+  "author": "microsoft",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT"
 }

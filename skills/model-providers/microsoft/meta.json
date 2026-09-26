@@ -7,11 +7,12 @@
     "model-provider",
     "microsoft"
   ],
+  "compatible_agents": null,
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "microsoft",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": null,
   "canonical_of": null,
   "permissions": null,
@@ -19,7 +20,28 @@
     "name": "microsoft",
     "license": "MIT"
   },
-  "hash": "e3fc5224f84d87ee",
+  "hash": "e24af11d3f832588",
   "path": "skills/model-providers/microsoft",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/SKILL.md",
+  "token_cost": 933,
+  "router_description": "Use this skill when integrating with Microsoft as a model provider. Provides comprehensive integration guides, best practices, and hands-on documentation for developing and deploying AI agents and",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "verbose: 8 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
