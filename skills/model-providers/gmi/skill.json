@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
   "command": "skyboy add gmi",
   "tags": ["model-provider", "gmi", "skills", "plugins"],
-  "author": "skyboy",
+  "author": "gmi",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
