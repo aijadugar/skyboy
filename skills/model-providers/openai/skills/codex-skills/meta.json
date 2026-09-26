@@ -17,9 +17,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "openai",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/openai/skills",
   "canonical_of": null,
   "permissions": null,
@@ -27,7 +27,27 @@
     "name": "codex-skills",
     "license": "MIT"
   },
-  "hash": "d61685f7a18d86b3",
+  "hash": "1f24a3ab7cc3c363",
   "path": "skills/model-providers/openai/skills/codex-skills",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/skills/codex-skills/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/skills/codex-skills/SKILL.md",
+  "token_cost": 546,
+  "router_description": "Use this skill when installing or authoring skills for OpenAI Codex from the official Skills Catalog ([openai/skills](https://github.com/openai/skills)).",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
