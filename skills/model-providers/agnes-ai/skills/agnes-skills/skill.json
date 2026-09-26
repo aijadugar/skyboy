@@ -5,7 +5,9 @@
   "description": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, generation, and tool-calling workflows.",
   "command": "skyboy add agnes-skills",
   "tags": ["model-provider", "agnes-ai", "codex", "openai-compatible", "api-gateway", "skills"],
-  "author": "skyboy",
+  "author": "agnes-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/AgnesAI-Labs/skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

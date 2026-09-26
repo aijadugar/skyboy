@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
   "command": "skyboy add agnes-ai",
   "tags": ["model-provider", "agnes-ai", "skills"],
-  "author": "skyboy",
+  "author": "agnes-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
