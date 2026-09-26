@@ -5,7 +5,9 @@
   "description": "MiniMax's official Agent Skills repository — skills published by MiniMax-AI for use with coding agents and the MiniMax model family.",
   "command": "skyboy add minimax-skills",
   "tags": ["model-provider", "minimax", "skills"],
-  "author": "skyboy",
+  "author": "minimax",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/MiniMax-AI/skills",
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
