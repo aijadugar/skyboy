@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
   "command": "skyboy add deepseek",
   "tags": ["model-provider", "deepseek", "plugins"],
-  "author": "skyboy",
+  "author": "deepseek",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
