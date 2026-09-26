@@ -17,9 +17,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "arcee-ai",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": null,
   "canonical_of": null,
   "permissions": null,
@@ -27,7 +27,31 @@
     "name": "arcee-ai",
     "license": "MIT"
   },
-  "hash": "d4540aa58a2575c3",
+  "hash": "e151d4c11f3034e0",
   "path": "skills/model-providers/arcee-ai",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/arcee-ai/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/arcee-ai/SKILL.md",
+  "token_cost": 590,
+  "router_description": "Use this skill when integrating with Arcee AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "near-duplicate of bitdeer-ai — merge them, or mark one canonical_of the other",
+      "verbose: 7 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "dup_of": "bitdeer-ai",
+  "dup_similarity": 0.8170212765957446,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
