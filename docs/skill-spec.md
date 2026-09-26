@@ -222,21 +222,11 @@ fetch `meta.json` for them.
 - immutable caching of raw URLs,
 - duplicate detection without fetching bodies.
 
-## 7. Content types
-
-A catalog entry is either a standalone **Skill** (this spec) or a **Plugin**:
-a bundle of `commands/`, `agents/`, `hooks/`, one or more `skills/`, and
-optionally an `.mcp.json`. Plugins are indexed + linked back to the vendor repo
-as the source of truth (never vendor-copied), and carry the `vendor` badge. The
-Skill-vs-Plugin distinction is a **search facet**, not a different underlying
-format.
-
-## 8. Deduplication / canonical version
+## 7. Deduplication / canonical version
 
 `canonical_of` points a duplicate/alternate entry at the ID of the canonical
 one. Search renders the canonical entry as the primary card with a "N similar
-alternates" affordance. A plugin-bundled skill can point at a standalone
-canonical or vice versa. The content hash makes "same content" provable without
+alternates" affordance. The content hash makes "same content" provable without
 fetching either body.
 
 ## 9. Display contract (UI)
