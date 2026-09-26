@@ -9,7 +9,9 @@
     "workflow",
     "cli"
   ],
-  "author": "skyboy",
+  "author": "microsoft",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/microsoft/conductor",
   "license": "MIT"
 }
