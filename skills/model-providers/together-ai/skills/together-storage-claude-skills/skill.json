@@ -5,7 +5,9 @@
   "description": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
   "command": "skyboy add together-storage-claude-skills",
   "tags": ["model-provider", "together-ai", "kubernetes", "storage", "claude-code", "skills"],
-  "author": "skyboy",
+  "author": "together-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/togethercomputer/together-storage-claude-skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
