@@ -2,7 +2,7 @@
 // read surface the /api/mcp and /api/search routes need. Pure data, no Next
 // imports, no filesystem coupling beyond what the caller passes in.
 
-import type { CatalogManifest, SkillRecord, PluginRecord, Agent, SkillMetaShard } from "./types";
+import type { CatalogManifest, SkillRecord, Agent, SkillMetaShard } from "./types";
 import { skillSlug, badgeFor, skillMetaUrl } from "./types";
 import { resolveSlug } from "./resolve";
 import { searchSkills } from "./search";
@@ -29,10 +29,6 @@ export class Catalog {
     return this.manifest.skills;
   }
 
-  get plugins(): PluginRecord[] {
-    return this.manifest.plugins;
-  }
-
   get categories(): string[] {
     return this.manifest.categories;
   }
@@ -51,10 +47,6 @@ export class Catalog {
 
   getSkill(id: string): SkillRecord | undefined {
     return this.byId.get(id);
-  }
-
-  getPlugin(slug: string): PluginRecord | undefined {
-    return this.manifest.plugins.find((p) => p.slug === slug);
   }
 
   getAllTags(): string[] {
