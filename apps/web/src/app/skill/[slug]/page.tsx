@@ -43,6 +43,10 @@ function langFor(name: string): string {
   return LANG_BY_EXT[ext] ?? "text";
 }
 
+function formatScore(score: number): string {
+  return score >= 8 ? "text-success" : score >= 6 ? "text-body" : "text-error";
+}
+
 export default async function SkillPage({ params }: Props) {
   const { slug } = await params;
   const skill = getSkillDetail(slug);
@@ -75,6 +79,168 @@ export default async function SkillPage({ params }: Props) {
             <p className="mt-4 max-w-[62ch] text-lg leading-relaxed text-body">
               {skill.description}
             </p>
+
+            {/* Trust & Quality */}
+            {(skill.trust || skill.quality) && (
+              <section className="mt-8 rounded-sm border border-hairline bg-card p-5">
+                <h2 className="text-lg font-semibold tracking-tight text-ink mb-4">
+                  Trust & Quality
+                </h2>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                  {skill.trust && (
+                    <div className="space-y-2">
+                      <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                        Trust Tier
+                      </p>
+                      <p className="text-2xl font-semibold text-ink capitalize">
+                        {skill.trust}
+                      </p>
+                      {skill.trustReason && (
+                        <p className="text-sm text-body">{skill.trustReason}</p>
+                      )}
+                      {skill.trustNext && skill.trustMissing && skill.trustMissing.length > 0 && (
+                        <div className="mt-3 space-y-1">
+                          <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                            To reach {skill.trustNext}:
+                          </p>
+                          <ul className="list-disc list-inside text-sm text-body space-y-1">
+                            {skill.trustMissing.map((m, i) => (
+                              <li key={i}>{m}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {skill.quality && typeof skill.quality.score === 'number' && (
+                    <div className="space-y-2">
+                      <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                        Quality Score
+                      </p>
+                      <div className="flex items-baseline gap-3">
+                        <span className={`text-3xl font-bold ${formatScore(skill.quality.score)}`}>
+                          {skill.quality.score}/10
+                        </span>
+                        <div className="flex-1 h-2 bg-paper-deep/40 rounded-full overflow-hidden">
+                          <div
+                            className="h-full bg-pen"
+                            style={{ width: `${(skill.quality.score / 10) * 100}%` }}
+                          />
+                        </div>
+                      </div>
+                      <ul className="grid grid-cols-2 gap-1 text-xs text-mute">
+                        <li>Trigger clarity: {skill.quality.triggerClarity?.toFixed(1) ?? "—"}/2.5</li>
+                        <li>Scope: {skill.quality.scope?.toFixed(1) ?? "—"}/2.5</li>
+                        <li>Links: {skill.quality.links?.toFixed(1) ?? "—"}/2.5</li>
+                        <li>Token budget: {skill.quality.tokenBudget?.toFixed(1) ?? "—"}/2.5</li>
+                      </ul>
+                      {skill.quality.issues && skill.quality.issues.length > 0 && (
+                        <details className="mt-2">
+                          <summary className="font-mono text-xs text-pen cursor-pointer">
+                            Issues
+                          </summary>
+                          <ul className="mt-1 list-disc list-inside text-sm text-body space-y-1">
+                            {skill.quality.issues.map((issue, i) => (
+                              <li key={i}>{issue}</li>
+                            ))}
+                          </ul>
+                        </details>
+                      )}
+                    </div>
+                  )}
+                  {skill.tokenCost && (
+                    <div className="space-y-2">
+                      <p className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+                        Token Cost
+                      </p>
+                      <p className="text-2xl font-semibold text-ink">
+                        ~{skill.tokenCost.toLocaleString()} tokens
+                      </p>
+                      {skill.routerDescription && (
+                        <p className="text-sm text-body italic">
+                          Router: {skill.routerDescription}
+                        </p>
+                      )}
+                      {skill.lastVerified && (
+                        <p className={`text-sm ${skill.stale ? "text-error" : "text-success"}`}>
+                          {skill.stale ? "⚠ Stale" : "✓ Fresh"} — Last verified {skill.lastVerified}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </section>
+            )}
+
+            {/* Dependencies */}
+            {skill.dependencies && skill.dependencies.length > 0 && (
+              <section className="mt-8 rounded-sm border border-hairline bg-card p-5">
+                <h2 className="text-lg font-semibold tracking-tight text-ink mb-4">
+                  Dependencies
+                </h2>
+                <p className="text-sm text-body mb-3">
+                  This skill requires the following skills to be installed first:
+                </p>
+                <ul className="flex flex-wrap gap-2">
+                  {skill.dependencies.map((dep) => (
+                    <li key={dep} className="sk-badge">
+                      {dep}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {/* Compatibility */}
+            {skill.compatibility && Object.keys(skill.compatibility).length > 0 && (
+              <section className="mt-8 rounded-sm border border-hairline bg-card p-5">
+                <h2 className="text-lg font-semibold tracking-tight text-ink mb-4">
+                  Agent Compatibility
+                </h2>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-hairline text-left text-mute">
+                      <th className="pb-2 font-mono text-[0.7rem] uppercase tracking-[0.1em]">
+                        Agent
+                      </th>
+                      <th className="pb-2 font-mono text-[0.7rem] uppercase tracking-[0.1em]">
+                        Tool Surface
+                      </th>
+                      <th className="pb-2 font-mono text-[0.7rem] uppercase tracking-[0.1em]">
+                        Notes
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {Object.entries(skill.compatibility).map(([agent, entry]) => (
+                      <tr key={agent} className="border-b border-hairline/50">
+                        <td className="py-2 font-mono">{agent}</td>
+                        <td className="py-2 font-mono text-[0.8rem]">
+                          {entry.toolSurface || "untested"}
+                        </td>
+                        <td className="py-2 text-body">{entry.notes || "—"}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </section>
+            )}
+
+            {/* Duplicate */}
+            {skill.dupOf && (
+              <section className="mt-8 rounded-sm border border-error/30 bg-error/5 p-5">
+                <h2 className="text-lg font-semibold tracking-tight text-error mb-2">
+                  Near Duplicate Detected
+                </h2>
+                <p className="text-sm text-body">
+                  This skill is a near-duplicate of <code className="text-ink">{skill.dupOf}</code>
+                  {skill.dupSimilarity
+                    ? ` (similarity: {(skill.dupSimilarity * 100).toFixed(0)}%)`
+                    : ""}.
+                  Consider merging them or marking one as canonical.
+                </p>
+              </section>
+            )}
           </div>
 
           <aside className="sk-card--bare rounded-sm border border-hairline p-6">
