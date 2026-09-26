@@ -18,9 +18,9 @@
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "stepfun",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/stepfun-ai/StepAudio-Skills",
   "canonical_of": null,
   "permissions": null,
@@ -28,7 +28,27 @@
     "name": "stepaudio-skills",
     "license": "Apache-2.0"
   },
-  "hash": "68f7500d2bbb8fcd",
+  "hash": "ea1eb96a9771f12e",
   "path": "skills/model-providers/stepfun/skills/stepaudio-skills",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/stepfun/skills/stepaudio-skills/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/stepfun/skills/stepaudio-skills/SKILL.md",
+  "token_cost": 253,
+  "router_description": "Use this skill when installing or authoring audio Agent Skills from StepFun's official repository ([stepfun-ai/StepAudio-Skills](https://github.com/stepfun-ai/StepAudio-Skills)) — audio skills for",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
