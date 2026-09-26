@@ -17,9 +17,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "novita",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/novitalabs/novita-skills",
   "canonical_of": null,
   "permissions": null,
@@ -27,7 +27,27 @@
     "name": "novita-skills",
     "license": "MIT"
   },
-  "hash": "5abd535171da7616",
+  "hash": "4b29b44aaa28344d",
   "path": "skills/model-providers/novita/skills/novita-skills",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/skills/novita-skills/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/skills/novita-skills/SKILL.md",
+  "token_cost": 256,
+  "router_description": "Use this skill when installing or authoring agent skills from Novita's official skills repository ([novitalabs/novita-skills](https://github.com/novitalabs/novita-skills)).",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

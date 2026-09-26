@@ -5,7 +5,9 @@
   "description": "Novita AI multimodal skill for OpenClaw — text-to-image, text-to-video, TTS, and more; compatible with Claude Code, Cursor, Gemini CLI, and other mainstream agents.",
   "command": "skyboy add novita-multimodal-skill",
   "tags": ["model-provider", "novita", "multimodal", "text-to-image", "text-to-video", "tts", "skills"],
-  "author": "skyboy",
+  "author": "novita",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/novitalabs/novita-multimodal-skill",
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
