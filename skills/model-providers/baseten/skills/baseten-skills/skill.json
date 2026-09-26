@@ -5,7 +5,9 @@
   "description": "Skills for using Baseten effectively — deploy, scale, and serve models on Baseten through agent workflows.",
   "command": "skyboy add baseten-skills",
   "tags": ["model-provider", "baseten", "skills", "inference", "deployment"],
-  "author": "skyboy",
+  "author": "baseten",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/basetenlabs/baseten-skills",
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
