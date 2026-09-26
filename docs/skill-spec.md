@@ -14,7 +14,7 @@ Every skill has exactly one `id`:
 
 - Curated Skyboy skills: a bare slug, e.g. `anti-slop-landing`.
 - Everything else (company official, open source, user-uploaded): `@owner/slug`
-  where owner is the GitHub org or user handle, e.g. `@vercel/nextjs-plugin`.
+  where owner is the GitHub org or user handle, e.g. `@vercel/nextjs-guide`.
 
 The bare slug space is reserved for Skyboy's own catalog. Community and vendor
 skills are structurally collision-free because the owner is part of the ID.
@@ -34,7 +34,7 @@ Example:
 
 ```
 skills/coding/nextjs-app-router-conventions/           # skyboy
-skills/coding/@vercel/nextjs-plugin/                   # vendor
+skills/coding/@vercel/nextjs-guide/                   # vendor
 skills/writing/@octocat/my-style-guide/                # community
 ```
 
@@ -88,7 +88,7 @@ consume a skill folder directly. Everything Skyboy-specific lives in
 
 ```json
 {
-  "id": "@vercel/nextjs-plugin",
+  "id": "@vercel/nextjs-guide",
   "category": "coding",
   "tags": ["nextjs", "app-router", "react"],
   "compatible_agents": ["claude-code", "cursor", "gemini-cli"],
@@ -97,7 +97,7 @@ consume a skill folder directly. Everything Skyboy-specific lives in
   "version": "1.0.0",
   "origin": "vendor",
   "verified": false,
-  "upstream_repo": "https://github.com/vercel/nextjs-plugins",
+  "upstream_repo": "https://github.com/vercel/nextjs-skills",
   "canonical_of": null,
   "permissions": {
     "network": false,
@@ -183,7 +183,7 @@ contains the full v2 metadata plus the content hash and the SKILL.md raw URL.
 
 ```json
 {
-  "id": "@vercel/nextjs-plugin",
+  "id": "@vercel/nextjs-guide",
   "d": "Use when scaffolding or reviewing Next.js App Router projects.",
   "c": "coding",
   "t": ["nextjs", "app-router"],
@@ -192,7 +192,7 @@ contains the full v2 metadata plus the content hash and the SKILL.md raw URL.
   "h": "9f2c1a4b8e7d3c05",
   "o": "vendor",
   "y": true,
-  "p": "skills/coding/@vercel/nextjs-plugin"
+  "p": "skills/coding/@vercel/nextjs-guide"
 }
 ```
 

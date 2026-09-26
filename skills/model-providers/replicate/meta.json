@@ -27,7 +27,7 @@
     "name": "replicate",
     "license": "MIT"
   },
-  "hash": "1915550aa0b6f9b0",
+  "hash": "5a808e361eb0fef5",
   "path": "skills/model-providers/replicate",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/replicate/SKILL.md",
   "token_cost": 627,

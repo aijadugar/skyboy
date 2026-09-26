@@ -630,17 +630,17 @@ func cmdValidatePaths(root string, targets []string, checkCatalog bool) error {
 		if st, statErr := os.Stat(abs); statErr != nil || !st.IsDir() {
 			return fmt.Errorf("--path must be a directory: %s", target)
 		}
-		rel, _ := filepath.Rel(root, abs)
-		switch {
-		case hasFile(abs, "skill.json"):
-			validateSkillDir(abs, rel, skillSchema, add)
-			checked++
-			if checkCatalog {
-				checkCatalogRecord(abs, rel, records, add)
+			rel, _ := filepath.Rel(root, abs)
+			switch {
+			case hasFile(abs, "skill.json"):
+				validateSkillDir(abs, rel, skillSchema, add)
+				checked++
+				if checkCatalog {
+					checkCatalogRecord(abs, rel, records, add)
+				}
+			default:
+				return fmt.Errorf("%s contains no skill.json; pass a skill folder", target)
 			}
-		default:
-			return fmt.Errorf("%s contains no skill.json; pass a skill folder", target)
-		}
 	}
 	if checked == 0 && checkCatalog {
 		return fmt.Errorf("--check-catalog requires at least one --path skill folder")

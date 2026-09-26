@@ -27,7 +27,7 @@
     "name": "arcee-ai",
     "license": "MIT"
   },
-  "hash": "e151d4c11f3034e0",
+  "hash": "9c69c8ada96a6c8c",
   "path": "skills/model-providers/arcee-ai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/arcee-ai/SKILL.md",
   "token_cost": 590,

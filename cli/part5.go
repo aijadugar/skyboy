@@ -96,7 +96,7 @@ func cmdAdd2(args []string) error {
 		if catalogSkillLookup(manifest, name) == nil {
 			return fmt.Errorf("'%s' is not in the catalog. Try 'skyboy search %s'", name, name)
 		}
-	}
+}
 
 	// Expand dependencies unless the caller opted out. The plan is
 	// dependency-first, so a skill's prerequisites are on disk before it is.
@@ -306,7 +306,7 @@ func cmdUpdateOne(name string, args []string) error {
 		return err
 	}
 
-	skill := catalogSkillLookup(manifest, name)
+skill := catalogSkillLookup(manifest, name)
 	if skill == nil {
 		return fmt.Errorf("'%s' is no longer in the catalog", name)
 	}
@@ -446,11 +446,9 @@ func cmdList(args []string) error {
 		fmt.Fprintln(stdout, "skyboy: nothing added yet. Use 'skyboy add <name>' or 'skyboy list --all' to browse.")
 		return nil
 	}
-	if len(state.Skills) > 0 {
-		fmt.Fprintln(stdout, "skills")
-		for _, e := range state.Skills {
-			fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", e.Name, orDash(e.Version), relToCwd(e.Dir))
-		}
+	fmt.Fprintln(stdout, "skills")
+	for _, e := range state.Skills {
+		fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", e.Name, orDash(e.Version), relToCwd(e.Dir))
 	}
 	return nil
 }

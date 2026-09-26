@@ -26,7 +26,7 @@
     "name": "deepinfra",
     "license": "MIT"
   },
-  "hash": "0968c553e8f93da7",
+  "hash": "b95bdf61777af2d9",
   "path": "skills/model-providers/deepinfra",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/deepinfra/SKILL.md",
   "token_cost": 494,

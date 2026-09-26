@@ -28,7 +28,7 @@
     "name": "amazon-bedrock",
     "license": "MIT"
   },
-  "hash": "74143e5747c2e61e",
+  "hash": "259329fe1847ffde",
   "path": "skills/model-providers/amazon-bedrock",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/SKILL.md",
   "token_cost": 1003,

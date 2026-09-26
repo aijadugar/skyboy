@@ -27,7 +27,7 @@
     "name": "anthropic",
     "license": "MIT"
   },
-  "hash": "8ef67d25cba867cc",
+  "hash": "79f5e552b50ff7bd",
   "path": "skills/model-providers/anthropic",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/anthropic/SKILL.md",
   "token_cost": 699,

@@ -6,11 +6,6 @@
 //
 // Tools speak the Part 6 contract: search_catalog, get_skill,
 // list_categories, and prepare_context_zip (the hosted edition of the exact
-// `skyboy zip` bundle logic: same _CONTEXT_SUMMARY.md at the archive root,
-// same skills/<slug>/ layout). The hosted endpoint cannot write files, so
-// prepare_context_zip streams the archive as a base64 data payload in the
-// tool result; the local Go server over stdio returns a real file path instead.
-// get_skill inlines the SKILL.md body (capped) plus the meta shard so an
 // agent previews a skill in ONE round trip instead of fetching a URL itself.
 
 import { z } from "zod";

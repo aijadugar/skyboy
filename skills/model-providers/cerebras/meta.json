@@ -26,7 +26,7 @@
     "name": "cerebras",
     "license": "MIT"
   },
-  "hash": "b1300caf739ea5b8",
+  "hash": "25d94a1f7cf184d3",
   "path": "skills/model-providers/cerebras",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/cerebras/SKILL.md",
   "token_cost": 548,

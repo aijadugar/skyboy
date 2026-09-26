@@ -44,7 +44,7 @@ skyboy version
 `add` installs every named skill (comma-separated) into `./.skyboy/skills/`
 and records it in `~/.skyboy/state.json`, so `list`, `info`, `update`, and
 `zip` all work offline against the cache. Scoped ids work too:
-`skyboy add @vercel/nextjs-plugin`. `zip` always writes a generated
+`skyboy add @vercel/nextjs-skill`. `zip` always writes a generated
 `_CONTEXT_SUMMARY.md` at the archive root: a short, first-class brief that
 tells the receiving LLM what is loaded and how to use it, which is what makes
 the upload-the-zip workflow actually work.
@@ -161,7 +161,7 @@ skyboy/
 ├── cli/                         The skyboy Go binary: CLI + stdio MCP server,
 │                                Go stdlib only, zero third-party dependencies
 ├── skills/                      THE catalog, one folder per skill
-├── scripts/                     validate-skill, generate-manifest,
+├── scripts/                     export-catalog, validate-skill, generate-manifest,
 │                                detect-duplicates
 └── docs/skill-spec.md           the canonical SKILL.md format
 ```

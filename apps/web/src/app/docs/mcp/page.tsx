@@ -190,8 +190,7 @@ export default function DocsMcpPage() {
             always has a generated <code>_CONTEXT_SUMMARY.md</code> at its
             root: a short brief the receiving model reads first, telling it
             what is in the bundle, how to apply each skill, and the boundaries
-            (nothing executes; surface declared permissions). Plugins are
-            indexed into the summary, never vendored into the archive.
+            (nothing executes; surface declared permissions).
           </p>
         </section>
 

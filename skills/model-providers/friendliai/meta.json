@@ -27,7 +27,7 @@
     "name": "friendliai",
     "license": "MIT"
   },
-  "hash": "8cf28075a151d9e9",
+  "hash": "242d6870dc2680e5",
   "path": "skills/model-providers/friendliai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/friendliai/SKILL.md",
   "token_cost": 545,

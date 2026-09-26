@@ -27,7 +27,7 @@
     "name": "siliconflow",
     "license": "MIT"
   },
-  "hash": "10a6c6e717e1f10e",
+  "hash": "aa99324cb61f2953",
   "path": "skills/model-providers/siliconflow",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/siliconflow/SKILL.md",
   "token_cost": 658,

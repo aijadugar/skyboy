@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T11:58:12.647Z",
+  "generatedAt": "2026-09-26T17:28:15.019Z",
   "version": 2,
   "categories": [
     "ai-agent-design",
@@ -64,143 +64,6 @@
   ],
   "skills": [
     {
-      "id": "Agent-Framework-Samples",
-      "d": "Examples showing how to use the Microsoft Agent Framework across Python, .NET, and Go implementations",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent-framework-samples"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "b73cd2f03783a4ed",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agent-Framework-Samples",
-      "rd": "Use this skill when exploring Microsoft Agent Framework sample applications and patterns. This collection showcases practical implementations across different languages and use cases, helping you get",
-      "tk": 975
-    },
-    {
-      "id": "Agents",
-      "d": "Microsoft 365 Agent SDK for full-stack, multichannel agents across Microsoft 365, Teams, Copilot Studio, and Webchat",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agents-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "f2bdfda942aed2b4",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agents",
-      "rd": "Use this skill when building full stack, multichannel, trusted agents for Microsoft 365 platforms including Teams, Copilot Studio, and Webchat.",
-      "tk": 708
-    },
-    {
-      "id": "Agents-M365Copilot",
-      "d": "Client libraries for Microsoft 365 Copilot APIs - typed service models and request builders for C#, Python, and TypeScript",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "copilot-apis"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "c024a4dfc653ea53",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agents-M365Copilot",
-      "rd": "Use this skill when developing applications that access Microsoft 365 Copilot APIs with typed service models and request builders for C#, Python, and TypeScript.",
-      "tk": 602
-    },
-    {
-      "id": "Agents-for-js",
-      "d": "JavaScript/TypeScript components for the Microsoft 365 Agent SDK - full stack, multichannel agents with OpenTelemetry observability",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agents-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "28c96e3779392e3b",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agents-for-js",
-      "rd": "Use this skill when building full stack, multichannel, trusted agents for Microsoft 365 platforms including M365, Teams, Copilot Studio, and Webchat with JavaScript/TypeScript.",
-      "tk": 466
-    },
-    {
-      "id": "Agents-for-net",
-      "d": ".NET components for the Microsoft 365 Agent SDK - full stack, multichannel agents with OpenTelemetry observability",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agents-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "7917a906aed905dd",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agents-for-net",
-      "rd": "Use this skill when building full stack, multichannel, trusted agents for Microsoft 365 platforms including M365, Teams, Copilot Studio, and Webchat with C#/.NET.",
-      "tk": 449
-    },
-    {
-      "id": "Agents-for-python",
-      "d": "Python components for the Microsoft 365 Agent SDK - full stack, multichannel agents with OpenTelemetry observability",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agents-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "1d6c8864cb676f48",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/Agents-for-python",
-      "rd": "Use this skill when building full stack, multichannel, trusted agents for Microsoft 365 platforms including M365, Teams, Copilot Studio, and Webchat with Python.",
-      "tk": 469
-    },
-    {
-      "id": "TaskWeaver",
-      "d": "Code-first agent framework for planning and executing data analytics tasks",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "analytics",
-        "archived"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "f7736bf2de25a9ad",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/TaskWeaver",
-      "rd": "Use this skill when building code-first agents for planning and executing data analytics tasks. TaskWeaver is an agent framework designed specifically for data science and analytics workflows.",
-      "tk": 371
-    },
-    {
-      "id": "TypeAgent",
-      "d": "TypeScript research project exploring personal agents that work with application agents",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "research"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "dd33ecfc410c069d",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/TypeAgent",
-      "rd": "Use this skill when exploring Microsoft's TypeScript research project for personal agents that work with application agents. This is a research project exploring novel agent architectures.",
-      "tk": 383
-    },
-    {
       "id": "action-gateway-skill",
       "d": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
       "c": "model-providers",
@@ -224,57 +87,6 @@
       "p": "skills/model-providers/digitalocean/skills/action-gateway-skill",
       "rd": "Use this skill when wiring a coding agent to the DigitalOcean Action Gateway via [digitalocean/action-gateway-skill](https://github.com/digitalocean/action-gateway-skill).",
       "tk": 303
-    },
-    {
-      "id": "agent-framework",
-      "d": "Framework for building, orchestrating, and deploying AI agents and multi-agent workflows with Python and .NET",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent-framework"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "85b4724d57246339",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent-framework",
-      "rd": "Use this skill when building, orchestrating, and deploying AI agents and multi-agent workflows with Python and .NET.",
-      "tk": 641
-    },
-    {
-      "id": "agent-framework-go",
-      "d": "Go implementation of the Microsoft Agent Framework for building, orchestrating, and deploying AI agents and multi-agent workflows",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent-framework"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "b8acbc2641da5b71",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent-framework-go",
-      "rd": "Use this skill when building production-grade AI agents and multi-agent workflows with Go. Covers core agent concepts, orchestration patterns, hosting, observability, and production deployment for",
-      "tk": 635
-    },
-    {
-      "id": "agent-host-protocol",
-      "d": "Protocol for synchronized multi-client state across AI agent sessions",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent-host-protocol"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "50b111dd7f3070d0",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent-host-protocol",
-      "rd": "Use this skill when implementing synchronized multi-client state across AI agent sessions. Covers the protocol specification, message formats, and synchronization patterns for agent applications.",
-      "tk": 681
     },
     {
       "id": "agent-toolkit-for-aws",
@@ -303,92 +115,6 @@
       "tk": 293
     },
     {
-      "id": "agent365-devTools",
-      "d": "CLI for developing, deploying, and managing Microsoft Agent 365 applications",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent365-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "2d94fbbea01359f3",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent365-devTools",
-      "rd": "Use this skill when developing, deploying, and managing Microsoft Agent 365 applications. Covers the command-line interface for streamlining development workflows, deployment, and management of Agent",
-      "tk": 428
-    },
-    {
-      "id": "agent365-dotnet",
-      "d": ".NET SDK components for Microsoft Agent 365 - observability, notifications, runtime utilities, and development tools",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent365-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "c73dd0d5eba67725",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent365-dotnet",
-      "rd": "Use this skill when building enterprise-grade agents with Microsoft Agent 365 SDK in C#/.NET. Covers observability, notifications, runtime utilities, and development tools for production agents",
-      "tk": 458
-    },
-    {
-      "id": "agent365-nodejs",
-      "d": "Node.js SDK components for Microsoft Agent 365 - observability, notifications, runtime utilities, and development tools",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent365-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "55914f1f9406eca0",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent365-nodejs",
-      "rd": "Use this skill when building enterprise-grade agents with Microsoft Agent 365 SDK in Node.js/TypeScript.",
-      "tk": 482
-    },
-    {
-      "id": "agent365-python",
-      "d": "Python SDK components for Microsoft Agent 365 - observability, notifications, runtime utilities, and development tools",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agent365-sdk"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "65723944b655490c",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agent365-python",
-      "rd": "Use this skill when building enterprise-grade agents with Microsoft Agent 365 SDK in Python. Covers observability, notifications, runtime utilities, and development tools for production agents across",
-      "tk": 451
-    },
-    {
-      "id": "agentic-sdlc-starter",
-      "d": "Reference architecture for spec-driven, AI-assisted development using GitHub Copilot, MCP, and repository context engineering",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "sdlc",
-        "mcp"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "7a1017adf0b40c64",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agentic-sdlc-starter",
-      "rd": "Use this skill when exploring reference architecture for spec-driven, AI-assisted development using GitHub Copilot, MCP (Model Context Protocol), and repository context engineering.",
-      "tk": 353
-    },
-    {
       "id": "agentic-tools",
       "d": "Meta's agentic tools plugin and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
       "c": "model-providers",
@@ -412,23 +138,6 @@
       "p": "skills/model-providers/meta/skills/agentic-tools",
       "rd": "Use this skill when working with Meta's agentic tools — the plugin and skills repository published by facebook ([facebook/agentic-tools](https://github.com/facebook/agentic-tools)) for use with",
       "tk": 262
-    },
-    {
-      "id": "agentrc",
-      "d": "Tools for preparing repositories for AI development and coding agents",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "repository"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "9463184e03091a6e",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/agentrc",
-      "rd": "Use this skill when preparing repositories for AI development and coding agents. Provides tools and configurations to make repositories AI-ready for coding agents.",
-      "tk": 314
     },
     {
       "id": "agnes-ai",
@@ -522,7 +231,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "c5b69a314cc52d3a",
+      "h": "0f20ce6216f02920",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/alibaba-cloud",
@@ -547,7 +256,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "74143e5747c2e61e",
+      "h": "259329fe1847ffde",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/amazon-bedrock",
@@ -571,7 +280,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "8ef67d25cba867cc",
+      "h": "79f5e552b50ff7bd",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/anthropic",
@@ -618,29 +327,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "e151d4c11f3034e0",
+      "h": "9c69c8ada96a6c8c",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/arcee-ai",
       "rd": "Use this skill when integrating with Arcee AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
       "tk": 590
-    },
-    {
-      "id": "autogen",
-      "d": "Programming framework for agentic AI and multi-agent applications",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "autogen"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "04e49720bef85d3e",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/autogen",
-      "rd": "Use this skill when building agentic AI and multi-agent applications with Microsoft's AutoGen framework. Covers programming framework for agentic AI, orchestration patterns, and production deployment.",
-      "tk": 404
     },
     {
       "id": "baseten",
@@ -659,7 +351,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "34fac7186ccc0285",
+      "h": "94139e03e7324403",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/baseten",
@@ -778,7 +470,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b1300caf739ea5b8",
+      "h": "25d94a1f7cf184d3",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/cerebras",
@@ -929,24 +621,6 @@
       "tk": 504
     },
     {
-      "id": "conductor",
-      "d": "CLI for defining and running multi-agent workflows using the GitHub Copilot SDK and Anthropic Agents SDK",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "workflow",
-        "cli"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "d1065abbd99cc7db",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/conductor",
-      "rd": "Use this skill when defining and running multi-agent workflows using the GitHub Copilot SDK and Anthropic Agents SDK. Conductor is a CLI tool for orchestrating complex multi-agent workflows.",
-      "tk": 355
-    },
-    {
       "id": "context-window-management",
       "d": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
       "c": "memory",
@@ -969,23 +643,6 @@
       "p": "skills/memory/context-window-management",
       "rd": "Use this when a long-running agent session starts to degrade: it forgets earlier decisions, re-derives facts already established, or the transcript is so long that correctness suffers.",
       "tk": 912
-    },
-    {
-      "id": "copilot-sdk-samples",
-      "d": "Samples for agents powered by the Copilot SDK and GitHub Agentic Workflow System",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "samples"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "df15c0f5361269d9",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/copilot-sdk-samples",
-      "rd": "Use this skill when exploring sample applications for agents powered by the Copilot SDK and GitHub Agentic Workflow System. This collection showcases practical implementations and patterns.",
-      "tk": 337
     },
     {
       "id": "copy-self-audit",
@@ -1044,7 +701,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "60c5519c24461c26",
+      "h": "eff91d1fafc3f8f3",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/crusoe",
@@ -1068,7 +725,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "e6c21dd75f0c77b6",
+      "h": "df15feace225ebf4",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/databricks",
@@ -1115,7 +772,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "0968c553e8f93da7",
+      "h": "b95bdf61777af2d9",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/deepinfra",
@@ -1138,7 +795,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "36f76348cd00742d",
+      "h": "fb589c695d33fe43",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/deepseek",
@@ -1162,7 +819,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "7a33de82574a26e5",
+      "h": "0df4f7fbd52f4d7d",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/digitalocean",
@@ -1211,7 +868,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "398e913a4509af5f",
+      "h": "5a3faf8b6f0e6ded",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/fireworks",
@@ -1260,7 +917,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "8cf28075a151d9e9",
+      "h": "242d6870dc2680e5",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/friendliai",
@@ -1311,7 +968,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b90a3411b1b70e2c",
+      "h": "0de6d12358a77d70",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/gmi",
@@ -1356,7 +1013,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "aedab053aa97f747",
+      "h": "1c8056865a9007d6",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/groq",
@@ -1429,7 +1086,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "691054287dc8916c",
+      "h": "ebeaba6a4da9a844",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/inclusionai",
@@ -1475,7 +1132,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "7ccea13fce5b1ac9",
+      "h": "b4813a6076a2595d",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/kimi",
@@ -1567,7 +1224,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "3534c76a208f3526",
+      "h": "1c1fb5b40f3d1d14",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/meta",
@@ -1584,7 +1241,7 @@
       ],
       "a": null,
       "v": "1.0.0",
-      "h": "e24af11d3f832588",
+      "h": "2dc90e1a1366ab3f",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/microsoft",
@@ -1608,35 +1265,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "9fd74dc16d998f4f",
+      "h": "12b990567485ff53",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/minimax",
       "rd": "Use this skill when integrating with MiniMax as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
       "tk": 579
-    },
-    {
-      "id": "minimax-skills",
-      "d": "MiniMax's official Agent Skills repository — skills published by MiniMax-AI for use with coding agents and the MiniMax model family.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "minimax",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "67a6d92d4b603d0e",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/minimax/skills/minimax-skills",
-      "rd": "Use this skill when installing or authoring Agent Skills from the official MiniMax skills repository ([MiniMax-AI/skills](https://github.com/MiniMax-AI/skills)).",
-      "tk": 247
     },
     {
       "id": "mistral",
@@ -1654,7 +1288,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "396c3ba3d2559d7a",
+      "h": "ebdab03e56f7d77f",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/mistral",
@@ -1678,7 +1312,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "fe8d1f7061421daf",
+      "h": "3990932696df7524",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/modal",
@@ -1844,7 +1478,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "4743255f9d9da491",
+      "h": "81c44a6b2e5696c2",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/novita",
@@ -1943,7 +1577,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "c2601bc668c20189",
+      "h": "fe0912197308c966",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/openai",
@@ -1999,23 +1633,6 @@
       "tk": 411
     },
     {
-      "id": "project-oagents",
-      "d": "Experimental AI agent framework",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "experimental"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "71b5eb2c09ae2544",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/project-oagents",
-      "rd": "Use this skill when exploring Microsoft's experimental AI agent framework. This is a research/experimental project for building AI agent systems.",
-      "tk": 324
-    },
-    {
       "id": "replicate",
       "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
@@ -2032,7 +1649,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "1915550aa0b6f9b0",
+      "h": "5a808e361eb0fef5",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/replicate",
@@ -2083,7 +1700,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "490ce78aa61f61b5",
+      "h": "2095d0e945775111",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/sambanova",
@@ -2133,7 +1750,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "33054aba4bf459bf",
+      "h": "894bc1684e7b7fa4",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/scaleway",
@@ -2183,7 +1800,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "10a6c6e717e1f10e",
+      "h": "aa99324cb61f2953",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/siliconflow",
@@ -2207,29 +1824,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "15ac77c387944f34",
+      "h": "2aacf77f22912d29",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/spacexai",
       "rd": "Use this skill when integrating with SpaceXAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
       "tk": 530
-    },
-    {
-      "id": "spec-to-agents",
-      "d": "Multi-agent event-planning workflow using Microsoft Agent Framework, Semantic Kernel, and AutoGen patterns",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "workflow"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "05e4caaab0dc187c",
-      "o": "vendor",
-      "y": true,
-      "p": "skills/model-providers/microsoft/skills/spec-to-agents",
-      "rd": "Use this skill when exploring multi-agent event-planning workflows using Microsoft Agent Framework, Semantic Kernel, and AutoGen patterns.",
-      "tk": 334
     },
     {
       "id": "stepaudio-skills",
@@ -2345,7 +1945,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "244b0ba5b387823d",
+      "h": "771153bf26b3cc1b",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/together-ai",
@@ -2448,7 +2048,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "bd18cf700f238c71",
+      "h": "e36aa9f9f057ae6d",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/upstage",
@@ -2518,7 +2118,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "e5da278ec014f11b",
+      "h": "fcec5690f9788ebc",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/xiaomi",
@@ -2543,7 +2143,7 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "718a5d9642e6cd2f",
+      "h": "554d984d1375b41f",
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/zai",

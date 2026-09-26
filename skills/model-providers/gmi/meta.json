@@ -27,7 +27,7 @@
     "name": "gmi",
     "license": "MIT"
   },
-  "hash": "b90a3411b1b70e2c",
+  "hash": "0de6d12358a77d70",
   "path": "skills/model-providers/gmi",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/gmi/SKILL.md",
   "token_cost": 613,

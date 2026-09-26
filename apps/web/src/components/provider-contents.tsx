@@ -10,8 +10,6 @@ import {
   SelectionDownloadButton,
 } from "@/components/selection";
 
-// Contents of a model provider: the skills that live inside the
-// provider folder. Skills are nested catalog entries — tick them to pull their
 // SKILL.md files into one ZIP via the shared selection bar.
 export function ProviderContents({
   providerSlug,

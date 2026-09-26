@@ -8,10 +8,6 @@ import {
   DrawablyUnderline,
 } from "drawably/react";
 
-// The "empty shelf" card. When a category (or a provider's skills
-// section) holds nothing, we don't show a sad paragraph — we show a tiny
-// hand-drawn vacancy sign inviting the visitor to be the first entry. Copy
-// rotates deterministically from a seed so SSR and client agree.
 type ShelfKind = "skills" | "category";
 
 const COPY: Record<

@@ -28,7 +28,7 @@
     "name": "zai",
     "license": "MIT"
   },
-  "hash": "718a5d9642e6cd2f",
+  "hash": "554d984d1375b41f",
   "path": "skills/model-providers/zai",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/zai/SKILL.md",
   "token_cost": 595,

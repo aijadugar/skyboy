@@ -10,12 +10,19 @@ func testSkills() []SkillRecord {
 	return []SkillRecord{
 		{ID: "nextjs-app-router-conventions", D: "Use when scaffolding or reviewing Next.js App Router projects.", C: "coding", T: []string{"nextjs", "app-router", "react"}, A: []string{"claude-code", "cursor"}, V: "1.0.0", H: "aa01598edd56d747", O: OriginSkyboy, Y: false, P: "skills/coding/nextjs-app-router-conventions"},
 		{ID: "copy-self-audit", D: "Use when auditing an agent for self-copy behavior.", C: "coding", T: []string{"audit", "safety"}, A: []string{"claude-code"}, V: "1.0.0", H: "dd01598edd56d747", O: OriginSkyboy, Y: false, P: "skills/coding/copy-self-audit"},
+		{ID: "anti-slop-landing", D: "Landing pages that avoid generic AI output.", C: "frontend-design", T: []string{"landing", "design"}, A: []string{"claude-code"}, V: "1.0.0", H: "bb01598edd56d747", O: OriginSkyboy, Y: true, P: "skills/frontend-design/anti-slop-landing"},
 	}
 }
 
 func TestSkillSlugAndOwner(t *testing.T) {
 	if got := skillSlug(SkillRecord{ID: "anti-slop-landing"}); got != "anti-slop-landing" {
 		t.Errorf("bare slug: got %q", got)
+	}
+	if got := skillSlug(SkillRecord{ID: "@vercel/nextjs-guide"}); got != "nextjs-guide" {
+		t.Errorf("scoped slug: got %q", got)
+	}
+	if got := skillOwner(SkillRecord{ID: "@vercel/nextjs-guide"}); got != "vercel" {
+		t.Errorf("owner: got %q", got)
 	}
 	if got := skillOwner(SkillRecord{ID: "anti-slop-landing"}); got != "" {
 		t.Errorf("bare owner should be empty, got %q", got)
@@ -107,7 +114,7 @@ func TestResolveExactAndFuzzy(t *testing.T) {
 }
 
 func TestSafeID(t *testing.T) {
-	for _, ok := range []string{"nextjs-app-router-conventions", "copy_self.audit-1"} {
+	for _, ok := range []string{"nextjs-app-router-conventions", "@vercel/nextjs-guide", "copy_self.audit-1"} {
 		if err := safeID(ok); err != nil {
 			t.Errorf("safeID(%q) = %v, want nil", ok, err)
 		}
@@ -132,6 +139,9 @@ func TestSafeSkillFolderName(t *testing.T) {
 }
 
 func TestIsSafeSlug(t *testing.T) {
+	if !isSafeSlug("@vercel/nextjs-guide") {
+		t.Error("scoped id should be safe")
+	}
 	if isSafeSlug("..") || isSafeSlug("a/b") || isSafeSlug(`a\b`) {
 		t.Error("escape ids should be rejected")
 	}
@@ -149,5 +159,8 @@ func TestFindUpCatalog(t *testing.T) {
 func TestNormID(t *testing.T) {
 	if got := normID("  NextJS App Router! "); got != "nextjs-app-router" {
 		t.Errorf("normID = %q", got)
+	}
+	if got := normID("@Vercel/NextJS-Guide"); got != "@vercel/nextjs-guide" {
+		t.Errorf("normID scoped = %q", got)
 	}
 }

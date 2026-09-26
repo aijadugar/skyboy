@@ -40,7 +40,6 @@ all built from those files.
    It asks for the description, 2-3 concrete use cases, the agents you tested
    on, and a permissions disclosure.
 
-
 ## How CI reviews your PR
 
 CI validates **only the folders your PR changed**, so a one-skill PR stays

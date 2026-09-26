@@ -9,8 +9,8 @@ import {
   type ReactNode,
 } from "react";
 import { DrawablyButton } from "drawably/react";
-// Multi-select for the catalog. Every card (skills on /browse, the individual
-// skills inside a plugin page) registers a checkbox against one shared
+// Multi-select for the catalog. Every card (skills on /browse, the nested
+// skills inside a provider page) registers a checkbox against one shared
 // context; the floating bar appears the moment anything is checked and posts
 // the whole selection to /api/zip, which builds the bundle with the same
 // server-side zip logic as `skyboy zip` and the MCP prepare_context_zip tool.

@@ -72,12 +72,8 @@ export async function POST(request: NextRequest): Promise<Response> {
     return jsonError(message, 502);
   }
 
+  const filename = skills.length === 1 ? `skyboy-${skillSlug(skills[0])}.zip` : `skyboy-bundle-${new Date().toISOString().slice(0, 10)}.zip`;
   const filename =
-    skills.length === 1
-      ? `skyboy-${skillSlug(skills[0])}.zip`
-      : `skyboy-bundle-${new Date().toISOString().slice(0, 10)}.zip`;
-
-  return new NextResponse(Buffer.from(zip), {
     status: 200,
     headers: {
       "Content-Type": "application/zip",

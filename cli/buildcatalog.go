@@ -47,8 +47,7 @@ var knownAgents = []Agent{
 }
 
 // buildCatalog scans root's skills/ tree and produces the manifest.
-// manifest. skillsChanged/shardsWritten report what happened for the CLI's
-// summary line.
+// shardsWritten reports what happened for the CLI's summary line.
 type buildResult struct {
 	manifest     *CatalogManifest
 	shardsWritten int
@@ -554,18 +553,6 @@ func cmdBuildCatalog(args []string) error {
 	fmt.Fprintf(stdout,
 		"build-catalog: wrote %d skill(s), %d meta.json shard(s), %d categories to catalog.json\n",
 		len(result.manifest.Skills), result.shardsWritten, len(result.manifest.Categories))
-	if telemetry != nil {
-		ranked := 0
-		for _, s := range result.manifest.Skills {
-			if s.EF > 0 {
-				ranked++
-			}
-		}
-		fmt.Fprintf(stdout, "build-catalog: folded telemetry for %d skill(s) into the effectiveness field\n", ranked)
-	}
-	if dupes := countDuplicates(result.manifest.Skills); dupes > 0 {
-		fmt.Fprintf(stdout, "build-catalog: flagged %d near-duplicate skill(s); run 'skyboy lint' for the pairs\n", dupes)
-	}
 	return nil
 }
 

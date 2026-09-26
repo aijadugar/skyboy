@@ -27,7 +27,7 @@
     "name": "databricks",
     "license": "MIT"
   },
-  "hash": "e6c21dd75f0c77b6",
+  "hash": "df15feace225ebf4",
   "path": "skills/model-providers/databricks",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/databricks/SKILL.md",
   "token_cost": 571,

@@ -20,7 +20,7 @@
     "name": "microsoft",
     "license": "MIT"
   },
-  "hash": "e24af11d3f832588",
+  "hash": "2dc90e1a1366ab3f",
   "path": "skills/model-providers/microsoft",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/microsoft/SKILL.md",
   "token_cost": 933,

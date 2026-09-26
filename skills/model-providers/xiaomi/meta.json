@@ -26,7 +26,7 @@
     "name": "xiaomi",
     "license": "MIT"
   },
-  "hash": "e5da278ec014f11b",
+  "hash": "fcec5690f9788ebc",
   "path": "skills/model-providers/xiaomi",
   "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/xiaomi/SKILL.md",
   "token_cost": 559,
