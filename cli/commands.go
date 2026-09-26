@@ -57,18 +57,29 @@ func printHelp() {
 
 Usage:
   skyboy add <name1,name2,...>   Download skills into ./.skyboy/skills/ and record them in ~/.skyboy/state.json.
-  skyboy update <name>           Re-fetch a skill or plugin and report what changed.
-  skyboy list                    Show locally added skills and plugins.
+                                 Dependencies declared in skill.json are resolved automatically.
+                                 --no-deps skips them.
+  skyboy update [<name>]         Re-fetch a skill and report what changed. With no name,
+                                 check every installed skill and report upstream drift.
+  skyboy list                    Show locally added skills.
   skyboy list --all              Show the full remote catalog, grouped by category.
   skyboy zip <name1,name2,...>   Bundle skills into one ZIP with a generated _CONTEXT_SUMMARY.md.
   skyboy info <name>             Print a skill's SKILL.md, including its ## Command section.
   skyboy doc [--print]           Local docs from docs/, printed or written to the cache.
   skyboy search <query>          Fuzzy-search the catalog by id, description, or tag.
   skyboy resolve <slug>          Print the resolved repo-relative path and raw URL for an id.
+  skyboy lint [path]             Score skills on trigger clarity, scope, links, and token
+                                 budget; flag near-duplicates. --strict --min N gates CI.
+  skyboy trust [<name>]          Print the trust-tier ladder, or one skill's tier and what
+                                 it needs to reach the next one.
+  skyboy adapt <name> --agent <a>
+                                 Generate another agent's shim over the canonical SKILL.md.
+                                 --list shows the supported agents.
+  skyboy stats                   Rank skills by recorded MCP invocation effectiveness.
   skyboy mcp --transport stdio|http
                                  Start the MCP server (stdio default; http is read-only).
-  skyboy validate                Validate every skill.json/plugin.json against the JSON Schemas.
-  skyboy build-catalog           Regenerate catalog.json from the skills/ and plugins/ trees.
+  skyboy validate                Validate every skill.json against the JSON Schema.
+  skyboy build-catalog           Regenerate catalog.json from the skills/ tree.
   skyboy version                 Print the CLI version and the catalog manifest version.
   skyboy help                    Show this help.
 
@@ -126,8 +137,15 @@ func positional(args []string) []string {
 			continue
 		}
 		switch a {
-		case "--dir", "--agent", "--out", "--category":
+		case "--dir", "--agent", "--out", "--category", "--catalog", "--min",
+			"--transport", "--addr", "--root", "--telemetry", "--target":
 			skipNext = true
+			continue
+		}
+		// Flags that take no value (like --list, --json, --strict) are still
+		// flags: they must not reach the positional list or `adapt --list`
+		// would be read as a skill name.
+		if strings.HasPrefix(a, "--") {
 			continue
 		}
 		if !strings.HasPrefix(a, "-") {
@@ -273,6 +291,14 @@ func run() error {
 		return cmdValidate(rest)
 	case "build-catalog":
 		return cmdBuildCatalog(rest)
+	case "lint":
+		return cmdLint(rest)
+	case "trust":
+		return cmdTrust(rest)
+	case "adapt":
+		return cmdAdapt(rest)
+	case "stats":
+		return cmdStats(rest)
 	default:
 		return fmt.Errorf("unknown command '%s'. Run 'skyboy help' for usage", command)
 	}

@@ -95,16 +95,19 @@ type installResult struct {
 	destDir      string // absolute
 	filesWritten int
 	sourceURL    string // the GitHub blob URL for the confirmation line
+	body         string // the fetched SKILL.md text, reused to warm the offline cache
 }
 
-// installSkill downloads the skill folder into targetRoot (resolved against
-// base). The generated meta.json shard ships in the repo, so it lands in the
-// install too; that is fine, it is small and documents the skill's metadata.
-func installSkill(r SkillRecord, targetRoot, base string) (*installResult, error) {
-	destDir := filepath.Join(base, filepath.FromSlash(targetRoot), safeSkillFolderName(skillSlug(r)))
-	folder := skillFolder(r)
+// installFetchFolder returns every file (repo-relative path + bytes) of one
+// skill folder. Production walks the GitHub contents API; tests swap in a stub
+// so add/update are verifiable offline. Mirrors the bundleFetchFiles seam in
+// zipbundle.go: one network seam per subsystem, never a real request in tests.
+var installFetchFolder = fetchFolderFiles
 
-	// Enumerate the folder recursively.
+// fetchFolderFiles walks folder via the contents API and downloads each file.
+// Shared by the install and bundle seams so both agree on what a skill folder
+// contains.
+func fetchFolderFiles(folder string) ([]bundleFile, error) {
 	var entries []ghEntry
 	queue := []string{folder}
 	for len(queue) > 0 {
@@ -123,6 +126,49 @@ func installSkill(r SkillRecord, targetRoot, base string) (*installResult, error
 		}
 	}
 	if len(entries) == 0 {
+		return nil, fmt.Errorf("no files found in %s", folder)
+	}
+
+	out := make([]bundleFile, 0, len(entries))
+	for _, entry := range entries {
+		u := ghFileURL(entry.Path)
+		if entry.DownloadURL != nil && *entry.DownloadURL != "" {
+			u = *entry.DownloadURL
+		}
+		buf, err := fetchFile(u)
+		if err != nil {
+			return nil, err
+		}
+		out = append(out, bundleFile{rel: strings.TrimPrefix(entry.Path, folder+"/"), data: buf})
+	}
+	return out, nil
+}
+
+// resolveDestRoot resolves targetRoot against base. targetRoot is already
+// absolute for the Part 5 install root (.skyboy/skills) and for the update temp
+// dir, while the MCP install_skill passes a relative agent folder. Note that
+// filepath.Join does NOT treat an absolute second element as a reset — it just
+// concatenates, producing the nonsensical <base>\<abs>\<slug> — so the absolute
+// case has to short-circuit here.
+func resolveDestRoot(base, targetRoot string) string {
+	if filepath.IsAbs(targetRoot) {
+		return filepath.Clean(targetRoot)
+	}
+	return filepath.Join(base, filepath.FromSlash(targetRoot))
+}
+
+// installSkill downloads the skill folder into targetRoot (resolved against
+// base). The generated meta.json shard ships in the repo, so it lands in the
+// install too; that is fine, it is small and documents the skill's metadata.
+func installSkill(r SkillRecord, targetRoot, base string) (*installResult, error) {
+	destDir := filepath.Join(resolveDestRoot(base, targetRoot), safeSkillFolderName(skillSlug(r)))
+	folder := skillFolder(r)
+
+	files, err := installFetchFolder(folder)
+	if err != nil {
+		return nil, err
+	}
+	if len(files) == 0 {
 		return nil, fmt.Errorf("no files found for skill %s in %s", r.ID, folder)
 	}
 
@@ -131,22 +177,17 @@ func installSkill(r SkillRecord, targetRoot, base string) (*installResult, error
 	}
 
 	filesWritten := 0
-	for _, entry := range entries {
-		rel := strings.TrimPrefix(entry.Path, folder+"/")
-		local := filepath.Join(destDir, filepath.FromSlash(rel))
+	body := ""
+	for _, f := range files {
+		local := filepath.Join(destDir, filepath.FromSlash(f.rel))
 		if err := os.MkdirAll(filepath.Dir(local), 0o755); err != nil {
 			return nil, err
 		}
-		u := rawBase + "/" + rel
-		if entry.DownloadURL != nil && *entry.DownloadURL != "" {
-			u = *entry.DownloadURL
-		}
-		buf, err := fetchFile(u)
-		if err != nil {
+		if err := os.WriteFile(local, f.data, 0o644); err != nil {
 			return nil, err
 		}
-		if err := os.WriteFile(local, buf, 0o644); err != nil {
-			return nil, err
+		if f.rel == "SKILL.md" {
+			body = string(f.data)
 		}
 		filesWritten++
 	}
@@ -156,6 +197,7 @@ func installSkill(r SkillRecord, targetRoot, base string) (*installResult, error
 		destDir:      destDir,
 		filesWritten: filesWritten,
 		sourceURL:    githubBlame + "/" + folder + "/SKILL.md",
+		body:         body,
 	}, nil
 }
 
