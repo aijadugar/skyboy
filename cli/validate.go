@@ -292,6 +292,13 @@ type skillDocFile struct {
 	SourceURL        *string  `json:"source_url"`
 	License          string   `json:"license"`
 	CompatibleAgents []string `json:"compatible_agents"`
+	// Authorial infrastructure fields (all optional):
+	Dependencies  []string               `json:"dependencies"`
+	LastVerified  string                 `json:"last_verified"`
+	Compatibility map[string]CompatEntry `json:"compatibility"`
+	// Trust/origin fields (optional; build-catalog reads these):
+	Origin   string `json:"origin"`   // "skyboy" | "vendor" | "community"
+	Verified bool   `json:"verified"` // review flag for community skills
 }
 
 // validateRepo walks the repo tree and validates every skill.
@@ -623,15 +630,17 @@ func cmdValidatePaths(root string, targets []string, checkCatalog bool) error {
 		if st, statErr := os.Stat(abs); statErr != nil || !st.IsDir() {
 			return fmt.Errorf("--path must be a directory: %s", target)
 		}
-		rel, _ := filepath.Rel(root, abs)
-		if !hasFile(abs, "skill.json") {
-			return fmt.Errorf("%s is not a skill folder (missing skill.json)", target)
-		}
-		validateSkillDir(abs, rel, skillSchema, add)
-		checked++
-		if checkCatalog {
-			checkCatalogRecord(abs, rel, records, add)
-		}
+			rel, _ := filepath.Rel(root, abs)
+			switch {
+			case hasFile(abs, "skill.json"):
+				validateSkillDir(abs, rel, skillSchema, add)
+				checked++
+				if checkCatalog {
+					checkCatalogRecord(abs, rel, records, add)
+				}
+			default:
+				return fmt.Errorf("%s contains no skill.json; pass a skill folder", target)
+			}
 	}
 	if checked == 0 && checkCatalog {
 		return fmt.Errorf("--check-catalog requires at least one --path skill folder")

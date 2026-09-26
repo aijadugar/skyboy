@@ -166,13 +166,13 @@ func toolDefs(mode string) []toolDef {
 			Name: "prepare_context_zip",
 			Description: "Build the same ZIP that `skyboy zip <slugs>` produces: a generated " +
 				"_CONTEXT_SUMMARY.md at the archive root plus every skill folder under skills/. " +
-				"Accepts a comma-separated list of skill slugs in ONE bundle. Over stdio returns " +
-				"the local file path; over http returns a short-lived signed download URL.",
+				"Accepts a comma-separated list of skill slugs in ONE bundle. Over stdio returns the " +
+				"local file path; over http returns a short-lived signed download URL.",
 			InputSchema: json.RawMessage(`{
 				"type":"object",
 				"properties":{
 					"slugs":{"type":"array","items":{"type":"string"},"minItems":1,
-						"description":"Skill slugs to bundle, e.g. [\"copy-self-audit\"]"}
+						"description":"Skill slugs to bundle, e.g. [\"copy-self-audit\",\"go-testing\"]"}
 				},
 				"required":["slugs"],
 				"additionalProperties":false}`),

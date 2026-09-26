@@ -1,6 +1,6 @@
 // Shared catalog types for the web app's server-side routes (/api/mcp and
-// /api/search). These mirror the compact v2 record shape emitted by
-// scripts/export-catalog.ts into catalog.json (docs/skill-spec.md §6). The old
+// /api/search). These mirror the compact v2 record shape emitted by the
+// Go build-catalog into catalog.json (docs/skill-spec.md §6). The old
 // standalone @skyboy/core package lived here; it was folded into the app when
 // the CLI + MCP server moved to the Go binary (the app is now their only
 // TypeScript consumer).
@@ -25,6 +25,13 @@ export interface SkillRecord {
   o: Origin;
   y: boolean; // verified
   p: string; // repo-relative folder path
+  // Additive computed fields (emitted by the Go build-catalog, omitempty):
+  rd?: string; // router description: always-loaded tier, <50 tokens
+  tk?: number; // estimated token cost of the full SKILL.md
+  q?: number; // quality score 0-10
+  lv?: string; // last_verified ISO date
+  dp?: string[]; // dependencies (skill ids)
+  ef?: number; // reserved effectiveness ranking (never emitted yet)
 }
 
 // Derived views so consumers never re-derive these by hand.
@@ -70,6 +77,32 @@ export interface SkillMetaShard {
   hash: string;
   path: string;
   skill_md_url: string;
+  // Computed at ingest by the Go build-catalog (never hand-authored):
+  token_cost?: number;
+  router_description?: string;
+  quality?: QualityReport;
+  last_verified?: string;
+  stale?: boolean;
+  dependencies?: string[];
+  compatibility?: Record<string, CompatEntry>;
+  dup_of?: string;
+  dup_similarity?: number;
+}
+
+// Lint-derived breakdown stored in the shard and shown on the skill page.
+export interface QualityReport {
+  score: number; // rounded 0-10 total
+  trigger_clarity: number; // 0-2.5
+  scope: number; // 0-2.5
+  links: number; // 0-2.5
+  token_budget: number; // 0-2.5
+  issues?: string[];
+}
+
+// One agent's tested state in the compatibility matrix.
+export interface CompatEntry {
+  tool_surface?: string; // e.g. "mcp-2025-06"; absent = untested
+  notes?: string;
 }
 
 export interface Agent {

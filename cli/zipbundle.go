@@ -30,33 +30,12 @@ type bundleFile struct {
 	data []byte
 }
 
-// bundleFetchFiles supplies every file of one skill folder. Production walks
-// the GitHub contents API (collectFolderEntries + fetchFile) so the CLI works
-// outside a checkout; tests swap in a filesystem stub so bundle building is
-// verifiable offline. Swapping is single-threaded per process, which matches
-// how the CLI and the local MCP server run.
-var bundleFetchFiles = func(folder string) ([]bundleFile, error) {
-	entries, err := collectFolderEntries(folder)
-	if err != nil {
-		return nil, err
-	}
-	if len(entries) == 0 {
-		return nil, fmt.Errorf("no files found in %s", folder)
-	}
-	out := make([]bundleFile, 0, len(entries))
-	for _, entry := range entries {
-		u := ghFileURL(entry.Path)
-		if entry.DownloadURL != nil && *entry.DownloadURL != "" {
-			u = *entry.DownloadURL
-		}
-		buf, err := fetchFile(u)
-		if err != nil {
-			return nil, err
-		}
-		out = append(out, bundleFile{rel: strings.TrimPrefix(entry.Path, folder+"/"), data: buf})
-	}
-	return out, nil
-}
+// bundleFetchFiles supplies every file of one skill folder, for bundling.
+// Production walks the GitHub contents API (fetchFolderFiles, shared with the
+// installer) so the CLI works outside a checkout; tests swap in a stub so
+// bundle building is verifiable offline. Swapping is single-threaded per
+// process, which matches how the CLI and the local MCP server run.
+var bundleFetchFiles = fetchFolderFiles
 
 // bundlePlan is a resolved bundle request: skills to copy.
 type bundlePlan struct {

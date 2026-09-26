@@ -5,7 +5,9 @@
   "description": "Official skills for the GLM family of models — OCR, vision, and multimodal skills published by zai-org for GLM agents.",
   "command": "skyboy add glm-skills",
   "tags": ["model-provider", "zai", "glm", "skills", "ocr", "vision", "multimodal"],
-  "author": "skyboy",
+  "author": "zai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/zai-org/GLM-skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

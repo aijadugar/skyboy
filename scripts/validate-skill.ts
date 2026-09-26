@@ -18,8 +18,25 @@ const MAX_SKILL_BYTES = 256 * 1024; // 256 KB total per skill folder.
 const MAX_FRONTMATTER_BYTES = 16 * 1024; // frontmatter should be lean.
 const MAX_DESCRIPTION_CHARS = 160; // the display line; keep it a trigger, not an essay.
 const MAX_TAGS = 3; // flat browse is category + up to 3 tags.
+const MAX_ROUTER_CHARS = 200; // router description: the always-loaded tier (<50 tokens).
 const REQUIRED_FRONTMATTER = ["name", "description"];
 const ORIGINS = ["skyboy", "vendor", "community"];
+
+// Router description = the first prose paragraph of SKILL.md after the
+// frontmatter (same extraction the Go build-catalog uses). Advisory only:
+// a verbose router line costs every agent tokens on every search.
+function routerDescription(contents) {
+  const withoutFm = contents.replace(/^---\r?\n[\s\S]*?\r?\n---/, "");
+  const lines = withoutFm.split(/\r?\n/);
+  let para = [];
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { if (para.length) break; continue; }
+    if (/^[#`>*|-]/.test(line)) { if (para.length) break; continue; }
+    para.push(line);
+  }
+  return para.join(" ");
+}
 
 // A folder name that can appear in skills/<category>/[<owner>/]<slug>/. The
 // scanner treats any directory starting with "@" as an owner namespace.
@@ -55,6 +72,7 @@ function readFrontmatter(contents) {
 }
 
 const errors = [];
+const warnings = [];
 let skillCount = 0;
 
 for (const category of readdirSync(SKILLS_DIR)) {
@@ -106,6 +124,12 @@ for (const category of readdirSync(SKILLS_DIR)) {
         // v2 removed compatible_agents from frontmatter (spec §2).
         if (fm.compatible_agents !== undefined && (!Array.isArray(fm.compatible_agents) || fm.compatible_agents.length > 0)) {
           errors.push(`${rel}: frontmatter 'compatible_agents' is removed in v2; declare agents in metadata.json only`);
+        }
+        // Token-efficiency advisory: the router description is loaded by every
+        // agent on every search; over the cap means wasted tokens everywhere.
+        const rd = routerDescription(contents);
+        if (rd.length > MAX_ROUTER_CHARS) {
+          warnings.push(`${rel}: router description is ${rd.length} chars, over the ${MAX_ROUTER_CHARS} cap — trim the first paragraph of SKILL.md`);
         }
       }
 
@@ -176,9 +200,10 @@ for (const category of readdirSync(SKILLS_DIR)) {
 }
 
 if (skillCount === 0) console.log("No skills found in skills/.");
+for (const w of warnings) console.warn("  warn: " + w);
 if (errors.length) {
   console.error(`validate-skill: ${errors.length} problem(s)`);
   for (const e of errors) console.error("  " + e);
   process.exit(1);
 }
-console.log(`validate-skill: ${skillCount} skill(s) OK`);
+console.log(`validate-skill: ${skillCount} skill(s) OK${warnings.length ? ` (${warnings.length} warning(s))` : ""}`);

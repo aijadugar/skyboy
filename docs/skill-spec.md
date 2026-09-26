@@ -222,11 +222,7 @@ fetch `meta.json` for them.
 - immutable caching of raw URLs,
 - duplicate detection without fetching bodies.
 
-## 7. Content types
-
-Every catalog entry is a standalone **Skill** (this spec).
-
-## 8. Deduplication / canonical version
+## 7. Deduplication / canonical version
 
 `canonical_of` points a duplicate/alternate entry at the ID of the canonical
 one. Search renders the canonical entry as the primary card with a "N similar

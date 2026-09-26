@@ -167,7 +167,7 @@ skyboy/
 ```
 
 `catalog.json` at the repo root is the single shareable manifest: generated from
-the real `skills/` tree by `scripts/export-catalog.ts`, and
+the real `skills/` tree by the Go `build-catalog`, and
 consumed by the website, the Go CLI, and the stdio MCP server.
 
 The Go binary talks to the same raw.githubusercontent URLs and the same hosted

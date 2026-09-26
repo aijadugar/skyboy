@@ -15,9 +15,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "google",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": null,
   "canonical_of": null,
   "permissions": null,
@@ -25,7 +25,30 @@
     "name": "google",
     "license": "MIT"
   },
-  "hash": "3098e43c8c6086fd",
+  "hash": "c0a183db796b73a5",
   "path": "skills/model-providers/google",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/google/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/google/SKILL.md",
+  "token_cost": 411,
+  "router_description": "Use this skill when integrating with Google as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "near-duplicate of celeris — merge them, or mark one canonical_of the other"
+    ]
+  },
+  "stale": true,
+  "dup_of": "celeris",
+  "dup_similarity": 0.7235772357723578,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

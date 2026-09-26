@@ -53,7 +53,19 @@ type buildResult struct {
 	shardsWritten int
 }
 
+// buildCatalog builds with no telemetry input: the deterministic default every
+// caller gets unless it explicitly supplies an aggregate. Effectiveness is then
+// simply absent from the output rather than guessed at.
 func buildCatalog(root string) (*buildResult, error) {
+	return buildCatalogWithTelemetry(root, nil)
+}
+
+// buildCatalogWithTelemetry is buildCatalog plus an invocation-telemetry index,
+// which is the only non-deterministic input to the catalog. Passing it
+// explicitly (rather than reading the local store) keeps catalog.json
+// reproducible: CI builds without it, and a registry that has real invocation
+// data supplies it via `build-catalog --telemetry <file>`.
+func buildCatalogWithTelemetry(root string, telemetry map[string]Effectiveness) (*buildResult, error) {
 	skillsRoot := filepath.Join(root, "skills")
 
 	var skills []SkillRecord
@@ -149,6 +161,66 @@ func buildCatalog(root string) (*buildResult, error) {
 		}
 	}
 
+	// Second pass: quality, then the signals that depend on it. The scope
+	// subscore compares each skill's token estimate to its category median, so
+	// the token index has to be complete before any scoring starts.
+	index := categoryTokenIndex(skills)
+	bodies := make(map[string]string, len(shards))
+	dirs := make(map[string]string, len(shards))
+	for i := range shards {
+		p := &shards[i]
+		dir := filepath.Join(root, filepath.FromSlash(p.record.P))
+		md := readBody(filepath.Join(dir, "SKILL.md"))
+		bodies[p.record.ID] = md
+		dirs[p.record.ID] = dir
+		p.shard.Quality = scoreSkill(&p.record, dir, md, index)
+		p.record.Q = p.shard.Quality.Score
+	}
+
+	// Duplicate detection runs after quality: when two skills tie on every
+	// other signal, the higher-scoring one becomes the canonical.
+	dups := findDuplicates(skills, bodies)
+	for i := range shards {
+		p := &shards[i]
+		finding, ok := dups[p.record.ID]
+		if !ok {
+			continue
+		}
+		p.record.DU = finding.Canonical
+		p.shard.DupOf = finding.Canonical
+		p.shard.DupSimilarity = finding.Similarity
+		if p.shard.Quality != nil {
+			p.shard.Quality.Issues = append(p.shard.Quality.Issues, dupIssue(finding))
+			sort.Strings(p.shard.Quality.Issues)
+		}
+	}
+
+	// Trust standing, then effectiveness. Both are reported on the shard; the
+	// record carries only the sortable summary (tier label, rank).
+	for i := range shards {
+		p := &shards[i]
+		eff := telemetry[p.record.ID]
+		trust := trustFor(p.record, p.shard.Quality, eff)
+		p.record.TR = trust.Badge
+		p.shard.Trust = trust.Badge
+		p.shard.TrustReason = trust.Reason
+		p.shard.TrustNext = trust.Next
+		p.shard.TrustMissing = trust.Missing
+		if issue := trustIssue(p.record, p.shard.Quality, eff); issue != "" && p.shard.Quality != nil {
+			p.shard.Quality.Issues = append(p.shard.Quality.Issues, issue)
+			sort.Strings(p.shard.Quality.Issues)
+		}
+		// Effectiveness is emitted only when there is real evidence behind it:
+		// an absent `ef` means "no invocations recorded", which every consumer
+		// ranks as neutral. Emitting a default 0.5 for all skills would bloat
+		// the manifest with a value that carries no information.
+		if eff.Invocations > 0 {
+			p.record.EF = eff.Rank()
+			e := eff
+			p.shard.Effectiveness = &e
+		}
+	}
+
 	// Write each meta.json shard next to the SKILL.md it describes.
 	shardsWritten := 0
 	for _, pair := range shards {
@@ -235,9 +307,30 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 	}
 
 	origin := OriginCommunity
-	if doc.Author == "skyboy" {
+	// Read origin from skill.json if present; fallback to author-based inference.
+	if doc.Origin != "" {
+		switch doc.Origin {
+		case "skyboy":
+			origin = OriginSkyboy
+		case "vendor":
+			origin = OriginVendor
+		case "community":
+			origin = OriginCommunity
+		}
+	} else if doc.Author == "skyboy" {
 		origin = OriginSkyboy
 	}
+
+	// Ingest-time computation: token estimate + router description come from
+	// the SKILL.md body; the hash covers the whole folder, so compute these
+	// AFTER hashSkillFolder and never write them back into hashed files.
+	body := readBody(mdPath)
+	tk := estimateTokens(body)
+	rd := routerDescription(body)
+	if rd == "" {
+		rd = recordDescription(doc.Description)
+	}
+
 	record := &SkillRecord{
 		ID: id,
 		D:  truncateRunes(doc.Description, 200),
@@ -247,8 +340,12 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 		V:  doc.Version,
 		H:  hash,
 		O:  origin,
-		Y:  false,
+		Y:  doc.Verified,
 		P:  relPath,
+		RD: rd,
+		TK: tk,
+		LV: doc.LastVerified,
+		DP: doc.Dependencies,
 	}
 
 	slug := id
@@ -266,7 +363,7 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 		License:          doc.License,
 		Author:           doc.Author,
 		Origin:           origin,
-		Verified:         false,
+		Verified:         doc.Verified,
 		UpstreamRepo:     doc.SourceURL,
 		CanonicalOf:      nil,
 		Permissions:      nil,
@@ -276,14 +373,56 @@ func readSkillFolder(dir, id, category, relPath string) (*SkillRecord, *SkillMet
 	}
 	shard.Frontmatter.Name = strPtr(fm["name"])
 	shard.Frontmatter.License = strPtr(fm["license"])
+	shard.TokenCost = tk
+	shard.RouterDescription = rd
+	shard.LastVerified = doc.LastVerified
+	shard.Dependencies = doc.Dependencies
+	shard.Compatibility = doc.Compatibility
+	shard.Stale = isStale(doc.LastVerified)
 
 	return record, shard, true, nil
 }
 
+// readBody loads a SKILL.md file's text, CRLF-normalized, for token/router
+// computation. Empty on read failure (ingest must not hard-fail on one skill).
+func readBody(path string) string {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return ""
+	}
+	return strings.ReplaceAll(string(data), "\r\n", "\n")
+}
+
+// recordDescription strips boilerplate from a skill.json description when it
+// has to stand in for a missing router description.
+func recordDescription(d string) string {
+	return truncateSentence(strings.TrimSpace(d), maxRouterChars)
+}
+
+// staleAfterDays is the staleness threshold: a skill unverified against its
+// target agent for longer than this is flagged in the shard and UI.
+const staleAfterDays = 180
+
+// isStale reports whether a last_verified date is older than the threshold.
+// Empty date = never verified = stale.
+func isStale(lastVerified string) bool {
+	if lastVerified == "" {
+		return true
+	}
+	t, err := time.Parse("2006-01-02", lastVerified)
+	if err != nil {
+		return true
+	}
+	return time.Since(t) > staleAfterDays*24*time.Hour
+}
+
 // hashSkillFolder mirrors scripts/export-catalog.ts hashSkillFolder exactly:
 // sha256 over, for each file sorted by relative path, rel \0 size \0 bytes.
-// The byte-for-byte match matters: the site, the TS tooling, and the Go CLI
-// must compute the same `h` for the same folder or update checks desync.
+// Generated files (meta.json, metadata.json) are excluded: the shard is an
+// output of this tool, not part of the skill's content, so regenerating it
+// must never churn the hash. The byte-for-byte match with the TS tooling
+// still matters: the site and the Go CLI must compute the same `h` for the
+// same folder or update checks desync.
 func hashSkillFolder(dir string) (string, error) {
 	h := sha256.New()
 	type fileEntry struct {
@@ -302,7 +441,11 @@ func hashSkillFolder(dir string) (string, error) {
 		if err != nil {
 			return err
 		}
-		files = append(files, fileEntry{filepath.ToSlash(rel), path})
+		rel = filepath.ToSlash(rel)
+		if rel == "meta.json" || rel == "metadata.json" {
+			return nil
+		}
+		files = append(files, fileEntry{rel, path})
 		return nil
 	})
 	if err != nil {
@@ -374,14 +517,6 @@ func strPtr(s string) *string {
 	return &s
 }
 
-// nilIfEmpty maps "" to a JSON null for optional string fields.
-func nilIfEmpty(s string) *string {
-	if s == "" {
-		return nil
-	}
-	return &s
-}
-
 // cmdBuildCatalog implements `skyboy build-catalog` (repo tooling; also run by
 // CI's no-drift check).
 func cmdBuildCatalog(args []string) error {
@@ -389,7 +524,20 @@ func cmdBuildCatalog(args []string) error {
 	if dir := flagValue(args, "--root"); dir != "" {
 		root = dir
 	}
-	result, err := buildCatalog(root)
+
+	// --telemetry <file>: fold a registry-side invocation aggregate into the
+	// catalog's effectiveness field. Without it the build is reproducible and
+	// carries no effectiveness data, which is what CI wants.
+	var telemetry map[string]Effectiveness
+	if path := flagValue(args, "--telemetry"); path != "" {
+		agg, err := loadTelemetryAggregate(path)
+		if err != nil {
+			return err
+		}
+		telemetry = agg
+	}
+
+	result, err := buildCatalogWithTelemetry(root, telemetry)
 	if err != nil {
 		return err
 	}
@@ -406,4 +554,15 @@ func cmdBuildCatalog(args []string) error {
 		"build-catalog: wrote %d skill(s), %d meta.json shard(s), %d categories to catalog.json\n",
 		len(result.manifest.Skills), result.shardsWritten, len(result.manifest.Categories))
 	return nil
+}
+
+// countDuplicates counts records carrying a duplicate finding.
+func countDuplicates(skills []SkillRecord) int {
+	n := 0
+	for _, s := range skills {
+		if s.DU != "" {
+			n++
+		}
+	}
+	return n
 }

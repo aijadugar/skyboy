@@ -5,7 +5,9 @@
   "description": "Cohere's vLLM skills — Agent Skills for serving and operating open models on the vLLM inference engine.",
   "command": "skyboy add vllm-skills",
   "tags": ["model-provider", "cohere", "vllm", "inference", "skills"],
-  "author": "skyboy",
+  "author": "cohere",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/cohere-ai/vllm-skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

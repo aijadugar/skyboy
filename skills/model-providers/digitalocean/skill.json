@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
   "command": "skyboy add digitalocean",
   "tags": ["model-provider", "digitalocean", "skills", "plugins"],
-  "author": "skyboy",
+  "author": "digitalocean",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

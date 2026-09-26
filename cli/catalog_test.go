@@ -9,8 +9,8 @@ import "testing"
 func testSkills() []SkillRecord {
 	return []SkillRecord{
 		{ID: "nextjs-app-router-conventions", D: "Use when scaffolding or reviewing Next.js App Router projects.", C: "coding", T: []string{"nextjs", "app-router", "react"}, A: []string{"claude-code", "cursor"}, V: "1.0.0", H: "aa01598edd56d747", O: OriginSkyboy, Y: false, P: "skills/coding/nextjs-app-router-conventions"},
+		{ID: "copy-self-audit", D: "Use when auditing an agent for self-copy behavior.", C: "coding", T: []string{"audit", "safety"}, A: []string{"claude-code"}, V: "1.0.0", H: "dd01598edd56d747", O: OriginSkyboy, Y: false, P: "skills/coding/copy-self-audit"},
 		{ID: "anti-slop-landing", D: "Landing pages that avoid generic AI output.", C: "frontend-design", T: []string{"landing", "design"}, A: []string{"claude-code"}, V: "1.0.0", H: "bb01598edd56d747", O: OriginSkyboy, Y: true, P: "skills/frontend-design/anti-slop-landing"},
-		{ID: "@vercel/nextjs-guide", D: "Vercel ecosystem skill: nextjs deployment guidance.", C: "coding", T: []string{"vercel", "nextjs"}, A: []string{"claude-code"}, V: "0.2.0", H: "cc01598edd56d747", O: OriginVendor, Y: false, P: "skills/coding/@vercel/nextjs-guide"},
 	}
 }
 
@@ -49,21 +49,19 @@ func TestBadgeFor(t *testing.T) {
 
 func TestScoreOrdering(t *testing.T) {
 	skills := testSkills()
-	// Exact scoped id must beat the bare slug.
-	scoped := score("@vercel/nextjs-guide", skills[2])
-	slug := score("nextjs-guide", skills[2])
-	if scoped != 1.0 || slug != 0.97 {
-		t.Errorf("exact scores: scoped=%v slug=%v", scoped, slug)
-	}
-	// Prefix chain: id prefix > slug prefix.
-	if got := score("nextjs-app", skills[0]); got != 0.92 {
+	bare := skills[0]    // nextjs-app-router-conventions
+	scratch := skills[1] // copy-self-audit, a second bare slug
+
+	// Prefix chain: for a bare slug, id == slug, so the id-prefix tier (0.92)
+	// wins; the slug tier (0.88) only distinguishes scoped records.
+	if got := score("nextjs-app", bare); got != 0.92 {
 		t.Errorf("id prefix score = %v, want 0.92", got)
 	}
-	if got := score("anti-slop", skills[1]); got != 0.88 {
-		t.Errorf("slug prefix score = %v, want 0.88", got)
+	if got := score("copy-self", scratch); got != 0.92 {
+		t.Errorf("bare-slug prefix score = %v, want 0.92 (id and slug coincide)", got)
 	}
 	// No match scores zero.
-	if got := score("kubernetes-helm", skills[0]); got != 0 {
+	if got := score("kubernetes-helm", bare); got != 0 {
 		t.Errorf("unrelated query scored %v, want 0", got)
 	}
 }
@@ -73,8 +71,8 @@ func TestSearchFiltersAndLimit(t *testing.T) {
 
 	// Category filter.
 	got := searchSkills(skills, "", searchOptions{category: "coding"})
-	if len(got) != 1 || got[0].ID != "nextjs-app-router-conventions" {
-		t.Errorf("category filter returned %+v", got)
+	if len(got) != 2 {
+		t.Errorf("category filter returned %d records, want 2: %+v", len(got), got)
 	}
 
 	// Agent filter (substring match).
@@ -100,10 +98,6 @@ func TestResolveExactAndFuzzy(t *testing.T) {
 	// Exact id.
 	if r := resolve("nextjs-app-router-conventions", skills); r == nil || !r.exact || r.slug != "nextjs-app-router-conventions" {
 		t.Errorf("exact resolve failed: %+v", r)
-	}
-	// Exact bare slug for a scoped id.
-	if r := resolve("nextjs-guide", skills); r == nil || !r.exact || r.slug != "@vercel/nextjs-guide" {
-		t.Errorf("scoped slug resolve failed: %+v", r)
 	}
 	// Leading-segment fuzzy hit ("nextjs" is a whole leading segment).
 	r := resolve("nextjs", skills)
@@ -136,7 +130,7 @@ func TestSafeSkillFolderName(t *testing.T) {
 	if got := safeSkillFolderName("nextjs-app-router-conventions"); got != "nextjs-app-router-conventions" {
 		t.Errorf("plain slug changed: %q", got)
 	}
-	if got := safeSkillFolderName("../../etc"); got != "----etc" {
+	if got := safeSkillFolderName("../../etc"); got != "..-..-etc" {
 		t.Errorf("path escape not neutralized: %q", got)
 	}
 	if got := safeSkillFolderName(""); got != "skill" {

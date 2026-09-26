@@ -5,7 +5,9 @@
   "description": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
   "command": "skyboy add databricks-agent-skills",
   "tags": ["model-provider", "databricks", "agents", "skills"],
-  "author": "skyboy",
+  "author": "databricks",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/databricks/databricks-agent-skills",
   "license": "Other",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

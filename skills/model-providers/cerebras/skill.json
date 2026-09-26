@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
   "command": "skyboy add cerebras",
   "tags": ["model-provider", "cerebras", "plugins"],
-  "author": "skyboy",
+  "author": "cerebras",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

@@ -35,9 +35,14 @@ func resolveManifestURL(cwd, explicit string) string {
 }
 
 // findUpCatalog walks up from start looking for a committed catalog.json.
-// Returns "" when none is found.
+// Returns "" when none is found. start is made absolute first: filepath.Dir
+// of a bare relative path ("." on Windows) returns the same path, which would
+// end the walk before it leaves the start directory.
 func findUpCatalog(start string) string {
-	dir := start
+	dir, err := filepath.Abs(start)
+	if err != nil {
+		return ""
+	}
 	for {
 		candidate := filepath.Join(dir, "catalog.json")
 		if st, err := os.Stat(candidate); err == nil && !st.IsDir() {

@@ -45,8 +45,6 @@ export default function ChangelogPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
               skills/ now carries skill.json (validated against a JSON Schema in
-              scripts/schemas/), and
-              the Go validator enforces both in CI. Categories became fully
               dynamic: they are derived from the skills/ tree, so a new category
               is a folder and a PR. The CLI grew doc, update, info, and
               comma-list add into ./.skyboy/skills/ with offline support, and
@@ -84,14 +82,6 @@ export default function ChangelogPage() {
 
           <section className="border-l-2 border-hairline pl-5">
             <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Phase 2: Submit flow
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              Added the /submit contribution route, a duplicate detector, and official
-              (vendor) badge support.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-02</p>
-          </section>
 
           <section className="border-l-2 border-hairline pl-5">
             <h2 className="text-lg font-semibold tracking-tight text-ink">

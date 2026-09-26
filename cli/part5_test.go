@@ -38,14 +38,32 @@ func newCommandEnv(t *testing.T) (home, project string, manifest *CatalogManifes
 	if err := os.WriteFile(filepath.Join(cache, "catalog.json"), data, 0o644); err != nil {
 		t.Fatal(err)
 	}
-	if err := os.Chdir(project); err != nil {
-		t.Fatal(err)
-	}
+	// t.Chdir restores the previous directory when the test ends. A bare
+	// os.Chdir would leave the process cwd inside the temp dir, and Windows
+	// then refuses to remove it ("being used by another process").
+	t.Chdir(project)
 	return home, project, manifest
+}
+
+// stubInstallFiles points the installer at a fixed in-memory skill folder so
+// add/update never touch the GitHub API. Without this the command tests depend
+// on a live network call that can only fail offline.
+func stubInstallFiles(t *testing.T) {
+	t.Helper()
+	body := "---\nname: skill\n---\n\n## Command\n\n```bash\nskyboy add copy-self-audit\n```\n"
+	prev := installFetchFolder
+	installFetchFolder = func(folder string) ([]bundleFile, error) {
+		return []bundleFile{
+			{rel: "SKILL.md", data: []byte(body)},
+			{rel: "skill.json", data: []byte(`{"name":"skill","category":"coding"}`)},
+		}, nil
+	}
+	t.Cleanup(func() { installFetchFolder = prev })
 }
 
 func TestAddCommaListInstallsIntoSkyboySkills(t *testing.T) {
 	_, project, _ := newCommandEnv(t)
+	stubInstallFiles(t)
 
 	// add works offline only when the catalog resolves locally; point
 	// --catalog at the cached fixture. refreshCatalogCache reads it directly.
@@ -84,6 +102,7 @@ func TestAddCommaListInstallsIntoSkyboySkills(t *testing.T) {
 
 func TestUpdateReportsAndAppliesChanges(t *testing.T) {
 	_, _, _ = newCommandEnv(t)
+	stubInstallFiles(t)
 	catPath := filepath.Join(os.Getenv("SKYBOY_HOME"), "cache", "catalog.json")
 
 	// Install v1.

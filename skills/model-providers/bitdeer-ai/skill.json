@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Bitdeer AI as a model provider.",
   "command": "skyboy add bitdeer-ai",
   "tags": ["model-provider", "bitdeer-ai"],
-  "author": "skyboy",
+  "author": "bitdeer-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

@@ -41,6 +41,19 @@ type SkillRecord struct {
 	O    Origin `json:"o"`             // skyboy | vendor | community
 	Y    bool   `json:"y"`             // verified
 	P    string `json:"p"`             // repo-relative folder path
+
+	// Additive computed fields (omitempty keeps old consumers working and
+	// keeps catalog.json small when a value is absent).
+	RD string   `json:"rd,omitempty"` // router description: always-loaded tier, <50 tokens
+	TK int      `json:"tk,omitempty"` // estimated token cost of the full SKILL.md
+	Q  int      `json:"q,omitempty"`  // quality score 0-10, from skyboy lint
+	LV string   `json:"lv,omitempty"` // last_verified ISO date from skill.json
+	DP []string `json:"dp,omitempty"` // dependencies (skill ids), from skill.json
+
+	// Ranking + trust signals, all derived at ingest (never authored):
+	TR string  `json:"tr,omitempty"` // trust tier: community|verified|vendor|official
+	EF float64 `json:"ef,omitempty"` // effectiveness rank 0-1 from invocation telemetry
+	DU string  `json:"du,omitempty"` // id of the canonical skill this one duplicates
 }
 
 // skillSlug returns the slug part of an id: "x" for bare, "slug" for
@@ -107,6 +120,44 @@ type SkillMetaShard struct {
 	Hash       string `json:"hash"`
 	Path       string `json:"path"`
 	SkillMDURL string `json:"skill_md_url"`
+
+	// Computed at ingest by build-catalog (never hand-authored):
+	TokenCost         int                    `json:"token_cost,omitempty"`
+	RouterDescription string                 `json:"router_description,omitempty"`
+	Quality           *QualityReport         `json:"quality,omitempty"`
+	LastVerified      string                 `json:"last_verified,omitempty"`
+	Stale             bool                   `json:"stale,omitempty"`
+	Dependencies      []string               `json:"dependencies,omitempty"`
+	Compatibility     map[string]CompatEntry `json:"compatibility,omitempty"`
+	DupOf             string                 `json:"dup_of,omitempty"`
+	DupSimilarity     float64                `json:"dup_similarity,omitempty"`
+
+	// Trust standing + its stated criteria (trust.go). Trust is the derived
+	// tier; Next/Missing publish exactly what the next rung requires.
+	Trust      string   `json:"trust,omitempty"`
+	TrustReason string  `json:"trust_reason,omitempty"`
+	TrustNext  string   `json:"trust_next,omitempty"`
+	TrustMissing []string `json:"trust_missing,omitempty"`
+
+	// Effectiveness is the invocation-telemetry standing (telemetry.go).
+	Effectiveness *Effectiveness `json:"effectiveness,omitempty"`
+}
+
+// QualityReport is the lint-derived breakdown stored in the shard and shown
+// on the skill page ("Token Efficiency"/quality section).
+type QualityReport struct {
+	Score          int      `json:"score"`           // rounded 0-10 total
+	TriggerClarity float64  `json:"trigger_clarity"` // 0-2.5
+	Scope          float64  `json:"scope"`           // 0-2.5
+	Links          float64  `json:"links"`           // 0-2.5
+	TokenBudget    float64  `json:"token_budget"`    // 0-2.5
+	Issues         []string `json:"issues,omitempty"`
+}
+
+// CompatEntry is one agent's tested state in the compatibility matrix.
+type CompatEntry struct {
+	ToolSurface string `json:"tool_surface,omitempty"` // e.g. "mcp-2025-06"; empty = untested
+	Notes       string `json:"notes,omitempty"`
 }
 
 // Agent is one compatible agent target in the manifest.

@@ -87,36 +87,65 @@ func cmdAdd2(args []string) error {
 		return err
 	}
 
-	state := loadState()
-	root := installRootFor()
-	var added []string
-
+	// Validate every requested name before touching the disk: a typo in the
+	// third name of five should not leave two skills half-installed.
 	for _, name := range names {
 		if err := safeID(name); err != nil {
 			return err
 		}
-		if skill := catalogSkillLookup(manifest, name); skill != nil {
-			res, err := installSkillInto(*skill, root)
-			if err != nil {
-				return err
-			}
-			now := time.Now().UTC()
-			entry := stateEntry{
-				Name: skillSlug(*skill), Kind: "skill",
-				Category: skill.C, Version: skill.V, Hash: skill.H,
-				SourceURL: "", Dir: res.destDir,
-				AddedAt: now, UpdatedAt: now,
-			}
-			if existing, _ := findStateEntry(state, entry.Name); existing != nil {
-				existing.Version, existing.Hash, existing.UpdatedAt = entry.Version, entry.Hash, entry.UpdatedAt
-			} else {
-				state.Skills = append(state.Skills, entry)
-			}
-			cacheSkillBody(entry.Name, skill)
-			added = append(added, fmt.Sprintf("%s (v%s, %d file(s)) -> %s", entry.Name, skill.V, res.filesWritten, relToCwd(res.destDir)))
-			continue
+		if catalogSkillLookup(manifest, name) == nil {
+			return fmt.Errorf("'%s' is not in the catalog. Try 'skyboy search %s'", name, name)
 		}
-		return fmt.Errorf("'%s' is not in the catalog. Try 'skyboy search %s'", name, name)
+}
+
+	// Expand dependencies unless the caller opted out. The plan is
+	// dependency-first, so a skill's prerequisites are on disk before it is.
+	plan := &dependencyPlan{Install: resolveManifestSkills(manifest, names)}
+	if !hasFlag(args, "--no-deps") {
+		plan = planDependencies(manifest, names)
+	}
+	for _, w := range plan.Warnings {
+		fmt.Fprintf(stderr, "skyboy: warning: %s\n", w)
+	}
+	// The requested names first so a failure aborts before dependency churn;
+	// the install loop below walks the plan in its dependency-first order.
+	_ = plan.Required
+
+	state := loadState()
+	root := installRootFor()
+	var added []string
+	direct := map[string]bool{}
+	for _, n := range names {
+		if s := catalogSkillLookup(manifest, n); s != nil {
+			direct[s.ID] = true
+		}
+	}
+
+	for _, skill := range plan.Install {
+		rec := skill
+		res, err := installSkillInto(rec, root)
+		if err != nil {
+			return err
+		}
+		now := time.Now().UTC()
+		entry := stateEntry{
+			Name: skillSlug(rec), Kind: "skill",
+			Category: rec.C, Version: rec.V, Hash: rec.H,
+			SourceURL: "", Dir: res.destDir,
+			AddedAt: now, UpdatedAt: now,
+		}
+		if existing, _ := findStateEntry(state, entry.Name); existing != nil {
+			existing.Version, existing.Hash, existing.UpdatedAt = entry.Version, entry.Hash, entry.UpdatedAt
+		} else {
+			state.Skills = append(state.Skills, entry)
+		}
+		cacheSkillBody(entry.Name, res.body, &rec)
+		label := ""
+		if !direct[rec.ID] {
+			label = " (dependency)"
+		}
+		added = append(added, fmt.Sprintf("%s%s (v%s, %d file(s)) -> %s",
+			entry.Name, label, rec.V, res.filesWritten, relToCwd(res.destDir)))
 	}
 
 	if err := saveState(state); err != nil {
@@ -129,6 +158,18 @@ func cmdAdd2(args []string) error {
 	return nil
 }
 
+// resolveManifestSkills maps a name list to records, skipping names the caller
+// already validated. Used when dependency resolution is disabled.
+func resolveManifestSkills(manifest *CatalogManifest, names []string) []SkillRecord {
+	out := make([]SkillRecord, 0, len(names))
+	for _, n := range names {
+		if s := catalogSkillLookup(manifest, n); s != nil {
+			out = append(out, *s)
+		}
+	}
+	return out
+}
+
 // installSkillInto downloads a skill folder into <root>/<slug>/ (the Part 5
 // layout, no agent-context autodetection).
 func installSkillInto(r SkillRecord, root string) (*installResult, error) {
@@ -136,10 +177,15 @@ func installSkillInto(r SkillRecord, root string) (*installResult, error) {
 }
 
 // cacheSkillBody stores the SKILL.md body in the offline cache for `doc`/`info`.
-func cacheSkillBody(name string, r *SkillRecord) {
-	body, err := fetchText(skillMarkdownURL(*r))
-	if err != nil {
-		return // cache write is best-effort
+// Prefer a body already fetched by the install (body != ""), so the common path
+// costs no extra network round trip; fetch only when the caller has none.
+func cacheSkillBody(name, body string, r *SkillRecord) {
+	if body == "" {
+		fetched, err := fetchText(skillMarkdownURL(*r))
+		if err != nil {
+			return // cache write is best-effort
+		}
+		body = fetched
 	}
 	path := skillCachePath(name)
 	_ = os.MkdirAll(filepath.Dir(path), 0o755)
@@ -154,19 +200,103 @@ func relToCwd(abs string) string {
 	return rel
 }
 
-// cmdUpdate implements `skyboy update <name>`: re-fetch the skill and report
-// what changed. The skill compares content hash (authoritative) and version;
-// the diff summary lists files added/removed/changed between the locally
-// installed copy and the freshly downloaded one.
+// cmdUpdate implements `skyboy update [<name>...]`.
+//
+//   with names   re-fetch each and report what changed, then apply.
+//   with none    check every installed skill for upstream drift and report it,
+//                applying nothing. This is the Dependabot half: a skill that
+//                changed upstream is invisible until someone asks, and the
+//                answer should not require reinstalling to obtain.
 func cmdUpdate(args []string) error {
 	pos := positional(args)
-	if len(pos) != 1 {
-		return fmt.Errorf("skyboy update requires exactly one <name>")
+	if len(pos) == 0 {
+		return cmdUpdateCheckAll(args)
 	}
-	name := pos[0]
+	for _, name := range pos {
+		if err := cmdUpdateOne(name, args); err != nil {
+			return err
+		}
+	}
+	return nil
+}
 
+// cmdUpdateCheckAll reports upstream drift for every tracked skill without
+// applying anything. Exit is success even when drift exists: this is a report,
+// and a script that wants to gate on it should read the output.
+func cmdUpdateCheckAll(args []string) error {
 	state := loadState()
-	entry, kind := findStateEntry(state, name)
+	if len(state.Skills) == 0 {
+		fmt.Fprintln(stdout, "skyboy: nothing installed yet; run 'skyboy add <name>' first")
+		return nil
+	}
+
+	manifest, err := refreshCatalogCache(flagValue(args, "--catalog"))
+	if err != nil {
+		return err
+	}
+
+	type drift struct {
+		name     string
+		local    string
+		remote   string
+		localV   string
+		remoteV  string
+		missing  bool
+	}
+	var drifted []drift
+	checked := 0
+
+	for _, entry := range state.Skills {
+		skill := catalogSkillLookup(manifest, entry.Name)
+		if skill == nil {
+			drifted = append(drifted, drift{name: entry.Name, missing: true})
+			continue
+		}
+		checked++
+		if entry.Hash != "" && skill.H != "" && entry.Hash == skill.H {
+			continue
+		}
+		drifted = append(drifted, drift{
+			name: entry.Name, local: entry.Hash, remote: skill.H,
+			localV: entry.Version, remoteV: skill.V,
+		})
+	}
+
+	if len(drifted) == 0 {
+		fmt.Fprintf(stdout, "skyboy: all %d installed skill(s) are up to date\n", checked)
+		return nil
+	}
+
+	fmt.Fprintf(stdout, "skyboy: %d of %d installed skill(s) have upstream changes\n\n", len(drifted), len(state.Skills))
+	for _, d := range drifted {
+		if d.missing {
+			fmt.Fprintf(stdout, "  %s  removed from the catalog upstream\n", d.name)
+			continue
+		}
+		fmt.Fprintf(stdout, "  %s  %s -> %s  (hash %s -> %s)\n",
+			d.name, orDash(d.localV), d.remoteV, shortHash(d.local), shortHash(d.remote))
+	}
+	fmt.Fprintln(stdout, "\nRun 'skyboy update <name>' to apply one, or 'skyboy update <a>,<b>' for several.")
+	return nil
+}
+
+// shortHash abbreviates a content hash for the drift line.
+func shortHash(h string) string {
+	if h == "" {
+		return "-"
+	}
+	if len(h) > 8 {
+		return h[:8]
+	}
+	return h
+}
+
+// cmdUpdateOne re-fetches one skill and reports what changed. Skills compare
+// content hash (authoritative) and version; the diff summary lists files
+// added/removed/changed between the installed copy and the fresh download.
+func cmdUpdateOne(name string, args []string) error {
+	state := loadState()
+	entry, _ := findStateEntry(state, name)
 	if entry == nil {
 		return fmt.Errorf("'%s' is not tracked in %s; run 'skyboy add %s' first", name, statePath(), name)
 	}
@@ -176,61 +306,58 @@ func cmdUpdate(args []string) error {
 		return err
 	}
 
-	switch kind {
-	default: // skill
-		skill := catalogSkillLookup(manifest, name)
-		if skill == nil {
-			return fmt.Errorf("'%s' is no longer in the catalog", name)
-		}
-		if entry.Hash != "" && skill.H != "" && entry.Hash == skill.H {
-			fmt.Fprintf(stdout, "skyboy: %s is up to date (hash %s, v%s)\n", name, skill.H, skill.V)
-			return nil
-		}
-
-		// Re-fetch into a temp dir and diff against the installed copy.
-		tmp, err := os.MkdirTemp("", "skyboy-update-")
-		if err != nil {
-			return err
-		}
-		defer os.RemoveAll(tmp)
-		fresh, err := installSkill(*skill, tmp, tmp)
-		if err != nil {
-			return err
-		}
-		// installSkill writes <tmp>/<slug>/...; the fresh root is that folder.
-		freshRoot := filepath.Join(tmp, fresh.slug)
-		report := diffTrees(entry.Dir, freshRoot)
-
-		fmt.Fprintf(stdout, "skyboy: %s %s -> %s (hash %s -> %s)\n",
-			name, orDash(entry.Version), skill.V, orDash(entry.Hash), skill.H)
-		fmt.Fprintf(stdout, "  files changed: %d, added: %d, removed: %d\n",
-			len(report.changed), len(report.added), len(report.removed))
-		for _, f := range report.changed {
-			fmt.Fprintf(stdout, "  M %s\n", f)
-		}
-		for _, f := range report.added {
-			fmt.Fprintf(stdout, "  A %s\n", f)
-		}
-		for _, f := range report.removed {
-			fmt.Fprintf(stdout, "  D %s\n", f)
-		}
-
-		// Apply: replace the installed copy with the fresh one.
-		if err := os.RemoveAll(entry.Dir); err != nil {
-			return err
-		}
-		if err := os.Rename(freshRoot, entry.Dir); err != nil {
-			return err
-		}
-		entry.Version, entry.Hash = skill.V, skill.H
-		entry.UpdatedAt = time.Now().UTC()
-		cacheSkillBody(name, skill)
-		if err := saveState(state); err != nil {
-			return err
-		}
-		fmt.Fprintf(stdout, "skyboy: %s updated in %s\n", name, relToCwd(entry.Dir))
+skill := catalogSkillLookup(manifest, name)
+	if skill == nil {
+		return fmt.Errorf("'%s' is no longer in the catalog", name)
+	}
+	if entry.Hash != "" && skill.H != "" && entry.Hash == skill.H {
+		fmt.Fprintf(stdout, "skyboy: %s is up to date (hash %s, v%s)\n", name, skill.H, skill.V)
 		return nil
 	}
+
+	// Re-fetch into a temp dir and diff against the installed copy.
+	tmp, err := os.MkdirTemp("", "skyboy-update-")
+	if err != nil {
+		return err
+	}
+	defer os.RemoveAll(tmp)
+	fresh, err := installSkill(*skill, tmp, tmp)
+	if err != nil {
+		return err
+	}
+	// installSkill writes <tmp>/<slug>/...; the fresh root is that folder.
+	freshRoot := filepath.Join(tmp, fresh.slug)
+	report := diffTrees(entry.Dir, freshRoot)
+
+	fmt.Fprintf(stdout, "skyboy: %s %s -> %s (hash %s -> %s)\n",
+		name, orDash(entry.Version), skill.V, orDash(entry.Hash), skill.H)
+	fmt.Fprintf(stdout, "  files changed: %d, added: %d, removed: %d\n",
+		len(report.changed), len(report.added), len(report.removed))
+	for _, f := range report.changed {
+		fmt.Fprintf(stdout, "  M %s\n", f)
+	}
+	for _, f := range report.added {
+		fmt.Fprintf(stdout, "  A %s\n", f)
+	}
+	for _, f := range report.removed {
+		fmt.Fprintf(stdout, "  D %s\n", f)
+	}
+
+	// Apply: replace the installed copy with the fresh one.
+	if err := os.RemoveAll(entry.Dir); err != nil {
+		return err
+	}
+	if err := os.Rename(freshRoot, entry.Dir); err != nil {
+		return err
+	}
+	entry.Version, entry.Hash = skill.V, skill.H
+	entry.UpdatedAt = time.Now().UTC()
+	cacheSkillBody(name, fresh.body, skill)
+	if err := saveState(state); err != nil {
+		return err
+	}
+	fmt.Fprintf(stdout, "skyboy: %s updated in %s\n", name, relToCwd(entry.Dir))
+	return nil
 }
 
 func orDash(s string) string {
@@ -311,21 +438,6 @@ func cmdList(args []string) error {
 				fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", s.ID, s.V, oneLine(s.D))
 			}
 		}
-		// Categories that only skills declare (sub-categories grouped at the
-		// top level).
-		var extra []string
-		for cat := range grouped {
-			if !containsString(manifest.Categories, cat) {
-				extra = append(extra, cat)
-			}
-		}
-		sort.Strings(extra)
-		for _, cat := range extra {
-			fmt.Fprintf(stdout, "%s\n", cat)
-			for _, s := range grouped[cat] {
-				fmt.Fprintf(stdout, "  %-44s v%-8s %s\n", s.ID, s.V, oneLine(s.D))
-			}
-		}
 		return nil
 	}
 
@@ -360,15 +472,6 @@ func oneLine(s string) string {
 	return s
 }
 
-func containsString(list []string, v string) bool {
-	for _, s := range list {
-		if s == v {
-			return true
-		}
-	}
-	return false
-}
-
 // cmdInfo implements `skyboy info <name>`: print the skill's SKILL.md,
 // including its ## Command section. Reads the offline cache first (installed
 // copy, then cached body), then fetches as a fallback.
@@ -378,15 +481,18 @@ func cmdInfo(args []string) error {
 		return fmt.Errorf("skyboy info requires exactly one <name>")
 	}
 	name := pos[0]
+	// Installs and cache entries are keyed by the slug part, so a scoped id
+	// (@owner/slug) and its bare slug resolve to the same local copy.
+	slug := skillSlug(SkillRecord{ID: name})
 
 	// 1. Locally installed copy (freshest thing the user has).
-	local := filepath.Join(installRootFor(), safeSkillFolderName(name), "SKILL.md")
+	local := filepath.Join(installRootFor(), safeSkillFolderName(slug), "SKILL.md")
 	if data, err := os.ReadFile(local); err == nil {
 		fmt.Fprint(stdout, string(data))
 		return nil
 	}
 	// 2. The offline cache populated by add / update.
-	if data, err := os.ReadFile(skillCachePath(name)); err == nil {
+	if data, err := os.ReadFile(skillCachePath(slug)); err == nil {
 		fmt.Fprint(stdout, string(data))
 		return nil
 	}
@@ -404,7 +510,7 @@ func cmdInfo(args []string) error {
 	if err != nil {
 		return err
 	}
-	cacheSkillBody(name, skill)
+	cacheSkillBody(slug, body, skill)
 	fmt.Fprint(stdout, body)
 	return nil
 }

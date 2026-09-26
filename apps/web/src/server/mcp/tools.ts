@@ -6,13 +6,7 @@
 //
 // Tools speak the Part 6 contract: search_catalog, get_skill,
 // list_categories, and prepare_context_zip (the hosted edition of the exact
-// `skyboy zip` bundle logic: same _CONTEXT_SUMMARY.md at the archive root,
-// same skills/<slug>/ layout). The hosted
-// endpoint cannot write files, so prepare_context_zip streams the archive as
-// a base64 data payload in the tool result; the local Go server over stdio
-// returns a real file path instead. get_skill inlines the SKILL.md body
-// (capped) plus the meta shard so an agent previews a skill in ONE round trip
-// instead of fetching a URL itself.
+// agent previews a skill in ONE round trip instead of fetching a URL itself.
 
 import { z } from "zod";
 import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
@@ -163,11 +157,11 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
       description:
         "Build the same ZIP that `skyboy zip <slugs>` produces: a generated " +
         "_CONTEXT_SUMMARY.md at the archive root plus every skill folder under " +
-        "skills/. Accepts skill slugs in ONE bundle. Hosted transport: the " +
-        "archive is returned inline as base64 (write it to a file and upload it).",
+        "skills/. Accepts skill slugs in ONE bundle. Hosted transport: the archive " +
+        "is returned inline as base64 (write it to a file and upload it).",
       inputSchema: {
         slugs: z.array(z.string()).min(1).describe(
-          'Skill slugs to bundle, e.g. ["copy-self-audit"]'
+          'Skill slugs to bundle, e.g. ["copy-self-audit","anti-slop-landing"]'
         ),
       },
     },
@@ -195,7 +189,9 @@ export function registerTools(server: McpServer, catalog: Catalog, mode: ToolMod
         skills: skills.length,
         bytes: zip.byteLength,
         encoding: "base64",
-        filename: skills.length === 1 ? `skyboy-${skillSlug(skills[0])}.zip` : "skyboy-bundle.zip",
+        filename: skills.length === 1
+          ? `skyboy-${skillSlug(skills[0])}.zip`
+          : "skyboy-bundle.zip",
         summary: "_CONTEXT_SUMMARY.md is at the archive root; upload the whole zip.",
         data: Buffer.from(zip).toString("base64"),
       });

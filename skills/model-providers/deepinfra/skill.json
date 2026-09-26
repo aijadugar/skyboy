@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
   "command": "skyboy add deepinfra",
   "tags": ["model-provider", "deepinfra", "plugins"],
-  "author": "skyboy",
+  "author": "deepinfra",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

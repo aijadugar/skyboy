@@ -5,7 +5,9 @@
   "description": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
   "command": "skyboy add scaleway-skills",
   "tags": ["model-provider", "scaleway", "agent-skill", "mcp", "cli", "skills"],
-  "author": "skyboy",
+  "author": "scaleway",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/scaleway/scaleway-skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

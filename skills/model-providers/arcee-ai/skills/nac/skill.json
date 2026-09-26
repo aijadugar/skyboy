@@ -5,7 +5,9 @@
   "description": "Arcee's open-source harness for long-running agentic tasks — a central orchestrator, threads, and structure so agents can take on ambitious work without losing the plot.",
   "command": "skyboy add nac",
   "tags": ["model-provider", "arcee-ai", "nac", "mcp", "agent-orchestration", "multi-agent-systems", "agent-skills"],
-  "author": "skyboy",
+  "author": "arcee-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/arcee-ai/nac",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

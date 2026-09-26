@@ -1,12 +1,35 @@
 {
-  "generatedAt": "2026-09-12T18:16:31.975Z",
+  "generatedAt": "2026-09-26T17:28:15.019Z",
   "version": 2,
   "categories": [
+    "ai-agent-design",
+    "ai-chatbot-development",
+    "api-integration",
+    "backend-development",
+    "blockchain-web3",
+    "cloud-architecture",
     "coding",
+    "content-writing",
+    "customer-support",
+    "data-analysis-visualization",
+    "database-data-engineering",
+    "design-ui-ux",
+    "devops-infrastructure",
     "frontend-design",
+    "frontend-development",
+    "game-development",
+    "machine-learning-ai-models",
+    "marketing",
     "memory",
-    "meta",
+    "mobile-development",
     "model-providers",
+    "product-management",
+    "productivity-automation",
+    "research",
+    "sales",
+    "security-cybersecurity",
+    "testing-qa",
+    "video-audio-production",
     "writing"
   ],
   "agents": [
@@ -41,59 +64,13 @@
   ],
   "skills": [
     {
-      "id": "agnes-ai",
-      "d": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
+      "id": "action-gateway-skill",
+      "d": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "agnes-ai",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "61330c4a07abeed8",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/agnes-ai"
-    },
-    {
-      "id": "agnes-skills",
-      "d": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, ge",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agnes-ai",
-        "codex",
-        "openai-compatible",
-        "api-gateway",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b7f13b471318b81c",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/agnes-ai/skills/agnes-skills"
-    },
-    {
-      "id": "agnescode",
-      "d": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusa",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "agnes-ai",
-        "desktop",
-        "workspace",
+        "digitalocean",
+        "action-gateway",
         "mcp",
         "skills"
       ],
@@ -104,55 +81,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "3fc25ac9d92be356",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/agnes-ai/skills/agnescode"
-    },
-    {
-      "id": "alibaba-cloud",
-      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "alibaba-cloud",
-        "qwen",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "d63f176e7be88424",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/alibaba-cloud"
-    },
-    {
-      "id": "amazon-bedrock",
-      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "amazon-bedrock",
-        "aws",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "7bed5b7c6ef4c6d4",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/amazon-bedrock"
+      "h": "babb997b2bcb4663",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/digitalocean/skills/action-gateway-skill",
+      "rd": "Use this skill when wiring a coding agent to the DigitalOcean Action Gateway via [digitalocean/action-gateway-skill](https://github.com/digitalocean/action-gateway-skill).",
+      "tk": 303
     },
     {
       "id": "agent-toolkit-for-aws",
@@ -173,966 +107,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a991b9606de2d8b5",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws"
-    },
-    {
-      "id": "tools-for-devops-agent",
-      "d": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "amazon-bedrock",
-        "aws",
-        "devops",
-        "incident-response",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "5c44255a51aeaccf",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent"
-    },
-    {
-      "id": "anthropic",
-      "d": "Integration guide and best practices for using Anthropic as a model provider. Includes links to official skill repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "claude",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "e1edfd015cdb8b37",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic"
-    },
-    {
-      "id": "anti-slop-landing",
-      "d": "Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.",
-      "c": "frontend-design",
-      "t": [
-        "design",
-        "landing-page",
-        "anti-slop"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "5cf85c1e096537ef",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/frontend-design/anti-slop-landing"
-    },
-    {
-      "id": "arcee-ai",
-      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "arcee-ai",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "d4540aa58a2575c3",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/arcee-ai"
-    },
-    {
-      "id": "nac",
-      "d": "Arcee's open-source harness for long-running agentic tasks — a central orchestrator, threads, and structure so agents can take on ambitious work without losing the plot.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "arcee-ai",
-        "nac",
-        "mcp",
-        "agent-orchestration",
-        "multi-agent-systems",
-        "agent-skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "8d33e9a2f2b0ff86",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/arcee-ai/skills/nac"
-    },
-    {
-      "id": "baseten",
-      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "baseten",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "24a93c752c6f087f",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/baseten"
-    },
-    {
-      "id": "baseten-skills",
-      "d": "Skills for using Baseten effectively — deploy, scale, and serve models on Baseten through agent workflows.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "baseten",
-        "skills",
-        "inference",
-        "deployment"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b7634f7e2821d7fe",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/baseten/skills/baseten-skills"
-    },
-    {
-      "id": "bitdeer-ai",
-      "d": "Integration guide and best practices for using Bitdeer AI as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "bitdeer-ai"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "f4aed9391ad39749",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/bitdeer-ai"
-    },
-    {
-      "id": "celeris",
-      "d": "Integration guide and best practices for using Celeris as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "celeris"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b0eababfd1446b71",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/celeris"
-    },
-    {
-      "id": "cerebras",
-      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "cerebras",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "8b4667a8a86bf113",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/cerebras"
-    },
-    {
-      "id": "claude-api",
-      "d": "Anthropic's Messages API — direct API access to Claude models with streaming, tool use, and prompt caching.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "claude-api",
-        "api"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "92d683f1544db2ae",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic/skills/claude-api"
-    },
-    {
-      "id": "claude-code",
-      "d": "Anthropic's CLI for Claude Code — agentic coding in the terminal with file editing, git, and MCP support.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "claude-code",
-        "cli"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "c59b4b20eb98b3f8",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic/skills/claude-code"
-    },
-    {
-      "id": "claude-desktop",
-      "d": "Anthropic's desktop app for Claude — native Mac/Windows client with MCP, vision, and extended thinking.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "claude-desktop",
-        "app"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "328a3839668e3cee",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic/skills/claude-desktop"
-    },
-    {
-      "id": "claude-managed-agents",
-      "d": "Anthropic's managed agents — deploy, schedule, and iterate on autonomous Claude agents in the cloud.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "agents",
-        "managed-agents"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "983bbf373fddbdae",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic/skills/claude-managed-agents"
-    },
-    {
-      "id": "codex-skills",
-      "d": "OpenAI's Skills Catalog for Codex — curated skills for Figma, Notion, Linear, GitHub, security, deployment, and document work, plus system skills.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "openai",
-        "codex",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "d61685f7a18d86b3",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/openai/skills/codex-skills"
-    },
-    {
-      "id": "cohere",
-      "d": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "cohere",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "999c7a2510b52e83",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/cohere"
-    },
-    {
-      "id": "vllm-skills",
-      "d": "Cohere's vLLM skills — Agent Skills for serving and operating open models on the vLLM inference engine.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "cohere",
-        "vllm",
-        "inference",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "6e5bbf6ee22bff75",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/cohere/skills/vllm-skills"
-    },
-    {
-      "id": "context-window-management",
-      "d": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
-      "c": "memory",
-      "t": [
-        "context",
-        "long-session",
-        "state"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli",
-        "codex-cli"
-      ],
-      "v": "1.0.0",
-      "h": "327d3f6146a178e4",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/memory/context-window-management"
-    },
-    {
-      "id": "copy-self-audit",
-      "d": "Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.",
-      "c": "writing",
-      "t": [
-        "copy",
-        "editing",
-        "anti-slop"
-      ],
-      "a": null,
-      "v": "1.0.0",
-      "h": "063e3d0bafec4518",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/writing/copy-self-audit"
-    },
-    {
-      "id": "coreweave",
-      "d": "Integration guide and best practices for using CoreWeave as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "coreweave"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "948e7766562849c8",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/coreweave"
-    },
-    {
-      "id": "crusoe",
-      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "crusoe",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "021b6b353940e0d7",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/crusoe"
-    },
-    {
-      "id": "terraform-provider-crusoe",
-      "d": "Official Terraform Provider for Crusoe Cloud — infrastructure-as-code for Crusoe GPU cloud, with active AI agent workflows: a Claude Code skill (/derive-schema-descriptions) for schema generation and ",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "crusoe",
-        "terraform",
-        "gpu-cloud",
-        "infrastructure-as-code",
-        "claude-code",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "78bfdb86ab296c2a",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/crusoe/skills/terraform-provider-crusoe"
-    },
-    {
-      "id": "databricks",
-      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "databricks",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "f82b0ce3c3522635",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/databricks"
-    },
-    {
-      "id": "databricks-agent-skills",
-      "d": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "databricks",
-        "agents",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b5fb90b6291b24f4",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/databricks/skills/databricks-agent-skills"
-    },
-    {
-      "id": "deepinfra",
-      "d": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "deepinfra",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "95d82c2e21cf4c15",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/deepinfra"
-    },
-    {
-      "id": "deepseek",
-      "d": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "deepseek",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "7792cb065ffc5a06",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/deepseek"
-    },
-    {
-      "id": "digitalocean",
-      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "digitalocean",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "81386cf2b606eca6",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/digitalocean"
-    },
-    {
-      "id": "action-gateway-skill",
-      "d": "Agent skill for setting up the DigitalOcean Action Gateway from a single URL — register the Action Gateway MCP server and discover catalog tools.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "digitalocean",
-        "action-gateway",
-        "mcp",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "5ebcb0ac835f4b90",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/digitalocean/skills/action-gateway-skill"
-    },
-    {
-      "id": "do-app-platform-skills",
-      "d": "Claude/Agent Skills for DigitalOcean App Platform — deployment, migration, networking, database configuration, and troubleshooting.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "digitalocean",
-        "app-platform",
-        "deployment",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "d1228ce2ce7df5a1",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/digitalocean/skills/do-app-platform-skills"
-    },
-    {
-      "id": "fireworks",
-      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "fireworks",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "febed4a2f429bb2c",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/fireworks"
-    },
-    {
-      "id": "fireworks-cookbook",
-      "d": "Fireworks AI Cookbook — portable Agent Skills (Markdown) with routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "fireworks",
-        "cookbook",
-        "training",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b1b742a47d24998f",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/fireworks/skills/fireworks-cookbook"
-    },
-    {
-      "id": "friendliai",
-      "d": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "friendliai",
-        "hermes",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "2ec19518ba666166",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/friendliai"
-    },
-    {
-      "id": "gmi",
-      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "gmi",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "ab90f58de133e8de",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/gmi"
-    },
-    {
-      "id": "ieops-aihub",
-      "d": "GMI's AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, ",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "gmi",
-        "ai-memory",
-        "agent-coordination",
-        "mcp",
-        "polyforge",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b9f1f401702b7c87",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/gmi/skills/ieops-aihub"
-    },
-    {
-      "id": "google",
-      "d": "Integration guide and best practices for using Google as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "google"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "3098e43c8c6086fd",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/google"
-    },
-    {
-      "id": "groq",
-      "d": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "groq",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "8313f9761691b049",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/groq"
-    },
-    {
-      "id": "inception",
-      "d": "Integration guide and best practices for using Inception as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "inception"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "49abbebaf185657a",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/inception"
-    },
-    {
-      "id": "inclusionai",
-      "d": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "inclusionai",
-        "avernet",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "eb290bf19237b634",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/inclusionai"
-    },
-    {
-      "id": "inco",
-      "d": "Integration guide and best practices for using Inco as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "inco"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "1cfdff7a956f6314",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/inco"
-    },
-    {
-      "id": "kimi",
-      "d": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "kimi",
-        "moonshot",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "73eebdf4b06eb2b7",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/kimi"
-    },
-    {
-      "id": "liquidai",
-      "d": "Integration guide and best practices for using Liquid AI as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "liquidai"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b8071582795a1106",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/liquidai"
-    },
-    {
-      "id": "makora",
-      "d": "Integration guide and best practices for using Makora as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "makora"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "c82001532624dced",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/makora"
-    },
-    {
-      "id": "mcp-server",
-      "d": "Model Context Protocol — Anthropic's open standard for connecting AI models to external tools and data sources.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "anthropic",
-        "mcp",
-        "protocol"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "357a9ea4cb13f2fd",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/anthropic/skills/mcp-server"
-    },
-    {
-      "id": "meta",
-      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "meta",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b48ecb243202e89c",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/meta"
+      "h": "e00da3d6cef81e63",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws",
+      "rd": "Use this skill when wiring AWS capabilities into an AI agent with the official toolkit ([aws/agent-toolkit-for-aws](https://github.com/aws/agent-toolkit-for-aws)).",
+      "tk": 293
     },
     {
       "id": "agentic-tools",
@@ -1152,61 +132,20 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "93b7c4539606eca5",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/meta/skills/agentic-tools"
+      "h": "54f6a5be0fb03163",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/meta/skills/agentic-tools",
+      "rd": "Use this skill when working with Meta's agentic tools — the plugin and skills repository published by facebook ([facebook/agentic-tools](https://github.com/facebook/agentic-tools)) for use with",
+      "tk": 262
     },
     {
-      "id": "microsoft",
-      "d": "Integration guide and best practices for using Microsoft Azure as a model provider. Includes links to official plugin repositories.",
+      "id": "agnes-ai",
+      "d": "Integration guide and best practices for using Agnes AI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "microsoft",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "e3fc5224f84d87ee",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/microsoft"
-    },
-    {
-      "id": "minimax",
-      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "minimax",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "6545684093dabd8f",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/minimax"
-    },
-    {
-      "id": "minimax-skills",
-      "d": "MiniMax's official Agent Skills repository — skills published by MiniMax-AI for use with coding agents and the MiniMax model family.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "minimax",
+        "agnes-ai",
         "skills"
       ],
       "a": [
@@ -1216,88 +155,23 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "c01157a02761a8b1",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/minimax/skills/minimax-skills"
+      "h": "cd84158b34d7ed20",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/agnes-ai",
+      "rd": "Use this skill when integrating with Agnes AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 625
     },
     {
-      "id": "mistral",
-      "d": "Integration guide and best practices for using Mistral as a model provider. Includes links to official plugin repositories.",
+      "id": "agnes-skills",
+      "d": "Agnes AI's official skill repository — reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway, with chat completion, streaming, ge",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "mistral",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "d936b84a942dd118",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/mistral"
-    },
-    {
-      "id": "modal",
-      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "modal",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "1d5635885dad2dfe",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/modal"
-    },
-    {
-      "id": "modal-client",
-      "d": "Modal's official Python, JavaScript/TypeScript, and Go SDKs — distributes an agent skill (modal skills install / npx skills add) that gives coding assistants version-aligned Modal documentation.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "modal",
-        "sdk",
-        "serverless",
-        "skills",
-        "agent-skill"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "a7938b04029429d4",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/modal/skills/modal-client"
-    },
-    {
-      "id": "openai-agents-python-example",
-      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "modal",
-        "openai-agents-sdk",
-        "sandboxes",
-        "agent-harness",
+        "agnes-ai",
+        "codex",
+        "openai-compatible",
+        "api-gateway",
         "skills"
       ],
       "a": [
@@ -1307,304 +181,23 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ed65fd099445a45c",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/modal/skills/openai-agents-python-example"
+      "h": "e3039e66dd6fc512",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/agnes-ai/skills/agnes-skills",
+      "rd": "Use this skill when integrating Agnes AI models through their OpenAI-compatible API gateway. The repository ships a reusable Codex skill covering chat completions, streaming, image/video generation,",
+      "tk": 357
     },
     {
-      "id": "modular",
-      "d": "Integration guide and best practices for using Modular as a model provider.",
+      "id": "agnescode",
+      "d": "Agnes AI's desktop workspace unifying local projects, model capabilities, reusable skills, and MCP app connections — skills as a core feature, packaging SOPs, domain knowledge, and toolchains as reusa",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "modular"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "266fa15e07063d97",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/modular"
-    },
-    {
-      "id": "multiverse-computing",
-      "d": "Integration guide and best practices for using Multiverse Computing as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "multiverse-computing"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "99d100a133acff00",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/multiverse-computing"
-    },
-    {
-      "id": "nebius",
-      "d": "Integration guide and best practices for using Nebius as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "nebius"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "851f5aacb6ed05e2",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/nebius"
-    },
-    {
-      "id": "nextjs-app-router-conventions",
-      "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
-      "c": "coding",
-      "t": [
-        "nextjs",
-        "app-router",
-        "react"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "e0c98fead41fa599",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/coding/nextjs-app-router-conventions"
-    },
-    {
-      "id": "novita",
-      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "novita",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "35b6918feb1bcc1a",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/novita"
-    },
-    {
-      "id": "novita-cli",
-      "d": "Command-line interface for Novita AI — generate text, images, video, and audio, manage GPU/sandbox runtimes, with first-class agent skill integration.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "novita",
-        "cli",
-        "gpu",
-        "sandbox",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "5fabd23f9a810745",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/novita/skills/novita-cli"
-    },
-    {
-      "id": "novita-multimodal-skill",
-      "d": "Novita AI multimodal skill for OpenClaw — text-to-image, text-to-video, TTS, and more; compatible with Claude Code, Cursor, Gemini CLI, and other mainstream agents.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "novita",
-        "multimodal",
-        "text-to-image",
-        "text-to-video",
-        "tts",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "0b2f7c936a2f7070",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/novita/skills/novita-multimodal-skill"
-    },
-    {
-      "id": "novita-skills",
-      "d": "Official Novita Skills repository — reusable SKILL.md skills for agent ecosystems that support skill-based workflows on Novita AI.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "novita",
-        "skills",
-        "agent-workflows"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "5abd535171da7616",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/novita/skills/novita-skills"
-    },
-    {
-      "id": "openai",
-      "d": "Integration guide and best practices for using OpenAI as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "openai"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "b53e20e044cad186",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/openai"
-    },
-    {
-      "id": "parasail",
-      "d": "Integration guide and best practices for using Parasail as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "parasail"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "71f3613e182c1d7d",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/parasail"
-    },
-    {
-      "id": "replicate",
-      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "replicate",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "9609cd00ebfb5cec",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/replicate"
-    },
-    {
-      "id": "replicate-skills",
-      "d": "Replicate's collection of Agent Skills for building AI-powered apps — find-models, video prompting, and image generation workflows auto-invoked by AI coding agents on matching tasks.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "replicate",
-        "agent-skill",
-        "find-models",
-        "image-generation",
-        "video-prompting",
-        "skills"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "f6fc7285b6e2c276",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/replicate/skills/replicate-skills"
-    },
-    {
-      "id": "sambanova",
-      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "sambanova",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "c045ad820881841e",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/sambanova"
-    },
-    {
-      "id": "sambanova-plugin-cc",
-      "d": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools b",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "sambanova",
-        "claude-code",
+        "agnes-ai",
+        "desktop",
+        "workspace",
         "mcp",
-        "sub-agent",
         "skills"
       ],
       "a": [
@@ -1614,18 +207,45 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "b19aeccf3cadd617",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/sambanova/skills/sambanova-plugin-cc"
+      "h": "43ee070f2221ce91",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/agnes-ai/skills/agnescode",
+      "rd": "Use this skill when working inside AgnesCode, Agnes AI's desktop application. It unifies local projects, model capabilities, reusable skills, and app connections over MCP — with skills as a core",
+      "tk": 375
     },
     {
-      "id": "scaleway",
-      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
+      "id": "alibaba-cloud",
+      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "scaleway",
+        "alibaba-cloud",
+        "qwen",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0f20ce6216f02920",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/alibaba-cloud",
+      "rd": "Use this skill when integrating with Alibaba Cloud as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 538
+    },
+    {
+      "id": "amazon-bedrock",
+      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
         "skills",
         "plugins"
       ],
@@ -1636,21 +256,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "1cf9df62acddd039",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/scaleway"
+      "h": "259329fe1847ffde",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/amazon-bedrock",
+      "rd": "Use this skill when integrating with Amazon Bedrock as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 1003
     },
     {
-      "id": "scaleway-skills",
-      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
+      "id": "anthropic",
+      "d": "Integration guide and best practices for using Anthropic as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "scaleway",
-        "agent-skill",
-        "mcp",
-        "cli",
+        "anthropic",
+        "claude",
         "skills"
       ],
       "a": [
@@ -1660,18 +280,43 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "822f05ca3114dd91",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/scaleway/skills/scaleway-skills"
+      "h": "79f5e552b50ff7bd",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic",
+      "rd": "Use this skill when integrating with Anthropic as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 699
     },
     {
-      "id": "siliconflow",
-      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
+      "id": "anti-slop-landing",
+      "d": "Use when building or reviewing a landing page, portfolio, or redesign. Ships interfaces that avoid the templated AI look.",
+      "c": "frontend-design",
+      "t": [
+        "design",
+        "landing-page",
+        "anti-slop"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e51b1878e0568705",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/frontend-design/anti-slop-landing",
+      "rd": "Landing pages, portfolios, and redesigns. **Not** dashboards, data tables, or multi-step product UI. Every rule here is contextual - none of it fires automatically.",
+      "tk": 2087
+    },
+    {
+      "id": "arcee-ai",
+      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "siliconflow",
+        "arcee-ai",
         "skills",
         "plugins"
       ],
@@ -1682,10 +327,83 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "681f672fa6afbc1f",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/siliconflow"
+      "h": "9c69c8ada96a6c8c",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/arcee-ai",
+      "rd": "Use this skill when integrating with Arcee AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 590
+    },
+    {
+      "id": "baseten",
+      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "94139e03e7324403",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/baseten",
+      "rd": "Use this skill when integrating with Baseten as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 561
+    },
+    {
+      "id": "baseten-skills",
+      "d": "Skills for using Baseten effectively — deploy, scale, and serve models on Baseten through agent workflows.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "baseten",
+        "skills",
+        "inference",
+        "deployment"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ed145f77c6680232",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/baseten/skills/baseten-skills",
+      "rd": "Use this skill when operating Baseten through the Agent Skills published at [basetenlabs/baseten-skills](https://github.com/basetenlabs/baseten-skills) — \"skills for using Baseten effectively.\"",
+      "tk": 237
+    },
+    {
+      "id": "bitdeer-ai",
+      "d": "Integration guide and best practices for using Bitdeer AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "bitdeer-ai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "977be157c7f6667e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/bitdeer-ai",
+      "rd": "Use this skill when integrating with Bitdeer AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 430
     },
     {
       "id": "bizyair-skill",
@@ -1707,19 +425,42 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "7d1133e82accf36a",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/siliconflow/skills/bizyair-skill"
+      "h": "e645ece2e3ef0ede",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/siliconflow/skills/bizyair-skill",
+      "rd": "Use this skill when an AI agent needs to execute professional-grade AIGC tasks through natural language.",
+      "tk": 384
     },
     {
-      "id": "spacexai",
-      "d": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
+      "id": "celeris",
+      "d": "Integration guide and best practices for using Celeris as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "spacexai",
-        "xai",
+        "celeris"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b4644b7a78560692",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/celeris",
+      "rd": "Use this skill when integrating with Celeris as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "cerebras",
+      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cerebras",
         "plugins"
       ],
       "a": [
@@ -1729,18 +470,117 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "67a37b5d5f81b413",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/spacexai"
+      "h": "25d94a1f7cf184d3",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/cerebras",
+      "rd": "Use this skill when integrating with Cerebras as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 548
     },
     {
-      "id": "stepfun",
-      "d": "Integration guide and best practices for using StepFun as a model provider. Includes links to official skill repositories.",
+      "id": "claude-api",
+      "d": "Anthropic's Messages API — direct API access to Claude models with streaming, tool use, and prompt caching.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "stepfun",
+        "anthropic",
+        "claude-api",
+        "api"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0fc463ff47c4c6e4",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic/skills/claude-api",
+      "rd": "Use this skill when integrating directly with Anthropic's Messages API. Covers authentication, streaming, tool use, prompt caching, and best practices for production applications.",
+      "tk": 590
+    },
+    {
+      "id": "claude-code",
+      "d": "Anthropic's CLI for Claude Code — agentic coding in the terminal with file editing, git, and MCP support.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude-code",
+        "cli"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "27fd1fa3bb712e20",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic/skills/claude-code",
+      "rd": "Use this skill when working with Claude Code, Anthropic's agentic coding CLI. Covers installation, configuration, MCP servers, slash commands, hooks, and IDE integrations.",
+      "tk": 467
+    },
+    {
+      "id": "claude-desktop",
+      "d": "Anthropic's desktop app for Claude — native Mac/Windows client with MCP, vision, and extended thinking.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "claude-desktop",
+        "app"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ff2070e49ef4f30e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic/skills/claude-desktop",
+      "rd": "Use this skill when working with Claude Desktop, Anthropic's native desktop application for Mac and Windows. Covers MCP server configuration, project setup, and best practices.",
+      "tk": 388
+    },
+    {
+      "id": "claude-managed-agents",
+      "d": "Anthropic's managed agents — deploy, schedule, and iterate on autonomous Claude agents in the cloud.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "agents",
+        "managed-agents"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "dea556be0c5b8f49",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic/skills/claude-managed-agents",
+      "rd": "Use this skill when building, deploying, or iterating on autonomous Claude agents hosted by Anthropic.",
+      "tk": 547
+    },
+    {
+      "id": "codex-skills",
+      "d": "OpenAI's Skills Catalog for Codex — curated skills for Figma, Notion, Linear, GitHub, security, deployment, and document work, plus system skills.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "openai",
+        "codex",
         "skills"
       ],
       "a": [
@@ -1750,21 +590,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "c92cca72475d6b4e",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/stepfun"
+      "h": "1f24a3ab7cc3c363",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/openai/skills/codex-skills",
+      "rd": "Use this skill when installing or authoring skills for OpenAI Codex from the official Skills Catalog ([openai/skills](https://github.com/openai/skills)).",
+      "tk": 546
     },
     {
-      "id": "stepaudio-skills",
-      "d": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+      "id": "cohere",
+      "d": "Integration guide and best practices for using Cohere as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "stepfun",
-        "audio",
-        "skills",
-        "claw"
+        "cohere",
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1773,18 +613,62 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "68f7500d2bbb8fcd",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/stepfun/skills/stepaudio-skills"
+      "h": "7dabb1fc96a8e1d7",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/cohere",
+      "rd": "Use this skill when integrating with Cohere as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 504
     },
     {
-      "id": "thinking-machines",
-      "d": "Integration guide and best practices for using Thinking Machines as a model provider.",
+      "id": "context-window-management",
+      "d": "Use when an agent session runs long or loses coherence. Applies compaction and state-preservation strategies inside a fixed context budget.",
+      "c": "memory",
+      "t": [
+        "context",
+        "long-session",
+        "state"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli",
+        "codex-cli"
+      ],
+      "v": "1.0.0",
+      "h": "27509b4e5b484e6d",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/memory/context-window-management",
+      "rd": "Use this when a long-running agent session starts to degrade: it forgets earlier decisions, re-derives facts already established, or the transcript is so long that correctness suffers.",
+      "tk": 912
+    },
+    {
+      "id": "copy-self-audit",
+      "d": "Use before shipping user-facing copy. Re-reads every visible string for AI-slop tells and rewrites them as plain, human copy.",
+      "c": "writing",
+      "t": [
+        "copy",
+        "editing",
+        "anti-slop"
+      ],
+      "a": null,
+      "v": "1.0.0",
+      "h": "c8eab72c936c35bb",
+      "o": "skyboy",
+      "y": false,
+      "p": "skills/writing/copy-self-audit",
+      "rd": "Use this at the end of writing any page, post, email, or docs update - right before you call it \"done\".",
+      "tk": 989
+    },
+    {
+      "id": "coreweave",
+      "d": "Integration guide and best practices for using CoreWeave as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "thinking-machines"
+        "coreweave"
       ],
       "a": [
         "claude-code",
@@ -1793,18 +677,20 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "8b2f321951bc9711",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/thinking-machines"
+      "h": "ca35fd003add87a4",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/coreweave",
+      "rd": "Use this skill when integrating with CoreWeave as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
     },
     {
-      "id": "together-ai",
-      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill and plugin repositories.",
+      "id": "crusoe",
+      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "together-ai",
+        "crusoe",
         "skills",
         "plugins"
       ],
@@ -1815,45 +701,189 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "ab4c6820cb27e20f",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/together-ai"
+      "h": "eff91d1fafc3f8f3",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/crusoe",
+      "rd": "Use this skill when integrating with Crusoe as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 663
     },
     {
-      "id": "together-skills",
-      "d": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, ",
+      "id": "databricks",
+      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill and plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "together-ai",
+        "databricks",
         "skills",
-        "inference",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "df15feace225ebf4",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/databricks",
+      "rd": "Use this skill when integrating with Databricks as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 571
+    },
+    {
+      "id": "databricks-agent-skills",
+      "d": "Databricks' official Agent Skills repository — skills for building and operating Databricks agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "databricks",
+        "agents",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c637c45bdf0854cf",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/databricks/skills/databricks-agent-skills",
+      "rd": "Use this skill when installing or authoring Agent Skills for Databricks from the official repository ([databricks/databricks-agent-skills](https://github.com/databricks/databricks-agent-skills)).",
+      "tk": 236
+    },
+    {
+      "id": "deepinfra",
+      "d": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "deepinfra",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b95bdf61777af2d9",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/deepinfra",
+      "rd": "Use this skill when integrating with DeepInfra as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 494
+    },
+    {
+      "id": "deepseek",
+      "d": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "deepseek",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "fb589c695d33fe43",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/deepseek",
+      "rd": "Use this skill when integrating with DeepSeek as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 499
+    },
+    {
+      "id": "digitalocean",
+      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0df4f7fbd52f4d7d",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/digitalocean",
+      "rd": "Use this skill when integrating with DigitalOcean as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 802
+    },
+    {
+      "id": "do-app-platform-skills",
+      "d": "Claude/Agent Skills for DigitalOcean App Platform — deployment, migration, networking, database configuration, and troubleshooting.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "digitalocean",
+        "app-platform",
+        "deployment",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "fe7b56fcd962d5ed",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/digitalocean/skills/do-app-platform-skills",
+      "rd": "Use this skill when deploying or operating apps on DigitalOcean App Platform with the modular agent skills from",
+      "tk": 282
+    },
+    {
+      "id": "fireworks",
+      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "fireworks",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5a3faf8b6f0e6ded",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/fireworks",
+      "rd": "Use this skill when integrating with Fireworks as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 634
+    },
+    {
+      "id": "fireworks-cookbook",
+      "d": "Fireworks AI Cookbook — portable Agent Skills (Markdown) with routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "fireworks",
+        "cookbook",
         "training",
-        "embeddings"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "20ce3645a30b73a0",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/together-ai/skills/together-skills"
-    },
-    {
-      "id": "together-storage-claude-skills",
-      "d": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "together-ai",
-        "kubernetes",
-        "storage",
-        "claude-code",
         "skills"
       ],
       "a": [
@@ -1863,20 +893,21 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "0448db4670968ef6",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/together-ai/skills/together-storage-claude-skills"
+      "h": "2a0ae34d8f25add8",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/fireworks/skills/fireworks-cookbook",
+      "rd": "Use this skill when training, building, or debugging generative AI models on Fireworks AI with the Agent Skills published in [fw-ai/cookbook](https://github.com/fw-ai/cookbook) (`skills/` directory —",
+      "tk": 362
     },
     {
-      "id": "upstage",
-      "d": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
+      "id": "friendliai",
+      "d": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "upstage",
-        "solar",
-        "n8n",
+        "friendliai",
+        "hermes",
         "plugins"
       ],
       "a": [
@@ -1886,74 +917,12 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "a706e956cc445f85",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/upstage"
-    },
-    {
-      "id": "wafer",
-      "d": "Integration guide and best practices for using Wafer as a model provider.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "wafer"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "a8cc83a906817862",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/wafer"
-    },
-    {
-      "id": "xiaomi",
-      "d": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "xiaomi",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "a90dc6f516d28d18",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/xiaomi"
-    },
-    {
-      "id": "zai",
-      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
-      "c": "model-providers",
-      "t": [
-        "model-provider",
-        "zai",
-        "glm",
-        "skills",
-        "plugins"
-      ],
-      "a": [
-        "claude-code",
-        "claude-desktop",
-        "cursor",
-        "gemini-cli"
-      ],
-      "v": "1.0.0",
-      "h": "4d8897878cd4cef4",
-      "o": "skyboy",
-      "y": false,
-      "p": "skills/model-providers/zai"
+      "h": "242d6870dc2680e5",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/friendliai",
+      "rd": "Use this skill when integrating with FriendliAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 545
     },
     {
       "id": "glm-skills",
@@ -1975,10 +944,1211 @@
         "gemini-cli"
       ],
       "v": "1.0.0",
-      "h": "379d29d13fc21749",
+      "h": "1da87b6473b9d046",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/zai/skills/glm-skills",
+      "rd": "Use this skill when installing or authoring official Agent Skills for the GLM family of models from [zai-org/GLM-skills](https://github.com/zai-org/GLM-skills).",
+      "tk": 296
+    },
+    {
+      "id": "gmi",
+      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "gmi",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0de6d12358a77d70",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/gmi",
+      "rd": "Use this skill when integrating with GMI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 613
+    },
+    {
+      "id": "google",
+      "d": "Integration guide and best practices for using Google as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "google"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c0a183db796b73a5",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/google",
+      "rd": "Use this skill when integrating with Google as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "groq",
+      "d": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "groq",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1c8056865a9007d6",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/groq",
+      "rd": "Use this skill when integrating with Groq as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 743
+    },
+    {
+      "id": "ieops-aihub",
+      "d": "GMI's AI memory system and polyforge backend — shared durable work-item lifecycle, persistent memory, and coordination primitives for coding agents via lifecycle skills (/pf-work, /pf-status), hooks, ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "gmi",
+        "ai-memory",
+        "agent-coordination",
+        "mcp",
+        "polyforge",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "8c7873eb6c16a55f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/gmi/skills/ieops-aihub",
+      "rd": "Use this skill when multiple AI coding agents must work together without colliding. The polyforge backend provides a shared, durable work-item lifecycle, persistent memory, and coordination",
+      "tk": 392
+    },
+    {
+      "id": "inception",
+      "d": "Integration guide and best practices for using Inception as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inception"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "43fc592a87d7f001",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/inception",
+      "rd": "Use this skill when integrating with Inception as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "inclusionai",
+      "d": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inclusionai",
+        "avernet",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ebeaba6a4da9a844",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/inclusionai",
+      "rd": "Use this skill when integrating with InclusionAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 507
+    },
+    {
+      "id": "inco",
+      "d": "Integration guide and best practices for using Inco as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "inco"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "4a9bef44e8f2dcc7",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/inco",
+      "rd": "Use this skill when integrating with Inco as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "kimi",
+      "d": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "kimi",
+        "moonshot",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b4813a6076a2595d",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/kimi",
+      "rd": "Use this skill when integrating with Kimi as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 542
+    },
+    {
+      "id": "liquidai",
+      "d": "Integration guide and best practices for using Liquid AI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "liquidai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "272e75b0cdb3222e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/liquidai",
+      "rd": "Use this skill when integrating with Liquid AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 428
+    },
+    {
+      "id": "makora",
+      "d": "Integration guide and best practices for using Makora as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "makora"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "66d87444fbc0ba32",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/makora",
+      "rd": "Use this skill when integrating with Makora as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "mcp-server",
+      "d": "Model Context Protocol — Anthropic's open standard for connecting AI models to external tools and data sources.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "anthropic",
+        "mcp",
+        "protocol"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2868f87b88b03923",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/anthropic/skills/mcp-server",
+      "rd": "Use this skill when building or configuring MCP servers — Anthropic's open protocol for connecting AI models to external tools, databases, and APIs.",
+      "tk": 567
+    },
+    {
+      "id": "meta",
+      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "meta",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1c1fb5b40f3d1d14",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/meta",
+      "rd": "Use this skill when integrating with Meta as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 674
+    },
+    {
+      "id": "microsoft",
+      "d": "Integration guide and best practices for using Microsoft as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "microsoft"
+      ],
+      "a": null,
+      "v": "1.0.0",
+      "h": "2dc90e1a1366ab3f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/microsoft",
+      "rd": "Use this skill when integrating with Microsoft as a model provider. Provides comprehensive integration guides, best practices, and hands-on documentation for developing and deploying AI agents and",
+      "tk": 933
+    },
+    {
+      "id": "minimax",
+      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "minimax",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "12b990567485ff53",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/minimax",
+      "rd": "Use this skill when integrating with MiniMax as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 579
+    },
+    {
+      "id": "mistral",
+      "d": "Integration guide and best practices for using Mistral as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "mistral",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ebdab03e56f7d77f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/mistral",
+      "rd": "Use this skill when integrating with Mistral as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 504
+    },
+    {
+      "id": "modal",
+      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "3990932696df7524",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/modal",
+      "rd": "Use this skill when integrating with Modal as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 778
+    },
+    {
+      "id": "modal-client",
+      "d": "Modal's official Python, JavaScript/TypeScript, and Go SDKs — distributes an agent skill (modal skills install / npx skills add) that gives coding assistants version-aligned Modal documentation.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "sdk",
+        "serverless",
+        "skills",
+        "agent-skill"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e8236bc262b013f1",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/modal/skills/modal-client",
+      "rd": "Use this skill when building on Modal's official SDKs. The repository ships an agent skill (installed via `modal skills install` or `npx skills add modal-labs/modal-client`) that populates",
+      "tk": 367
+    },
+    {
+      "id": "modular",
+      "d": "Integration guide and best practices for using Modular as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modular"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "df59ec2a46fc8052",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/modular",
+      "rd": "Use this skill when integrating with Modular as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "multiverse-computing",
+      "d": "Integration guide and best practices for using Multiverse Computing as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "multiverse-computing"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "60d3c4d1a26b5e05",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/multiverse-computing",
+      "rd": "Use this skill when integrating with Multiverse Computing as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 430
+    },
+    {
+      "id": "nac",
+      "d": "Arcee's open-source harness for long-running agentic tasks — a central orchestrator, threads, and structure so agents can take on ambitious work without losing the plot.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "arcee-ai",
+        "nac",
+        "mcp",
+        "agent-orchestration",
+        "multi-agent-systems",
+        "agent-skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c25dc1f0f711a2a8",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/arcee-ai/skills/nac",
+      "rd": "Use this skill when running long-horizon agent tasks with [arcee-ai/nac](https://github.com/arcee-ai/nac) — an open-source harness built on a central orchestrator, threads, and structure, designed to",
+      "tk": 313
+    },
+    {
+      "id": "nebius",
+      "d": "Integration guide and best practices for using Nebius as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "nebius"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "764a043766df0aba",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/nebius",
+      "rd": "Use this skill when integrating with Nebius as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "nextjs-app-router-conventions",
+      "d": "Use when scaffolding or reviewing Next.js App Router projects. Enforces server/client boundaries, routing conventions, and cache discipline.",
+      "c": "coding",
+      "t": [
+        "nextjs",
+        "app-router",
+        "react"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "87db3aae6850d134",
       "o": "skyboy",
       "y": false,
-      "p": "skills/model-providers/zai/skills/glm-skills"
+      "p": "skills/coding/nextjs-app-router-conventions",
+      "rd": "Use this skill whenever you touch a Next.js App Router project (Next.js 13+, especially 15). It exists so a codebase never drifts into the default-next-app shape: everything a client component, every",
+      "tk": 1567
+    },
+    {
+      "id": "novita",
+      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "81c44a6b2e5696c2",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/novita",
+      "rd": "Use this skill when integrating with Novita as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 714
+    },
+    {
+      "id": "novita-cli",
+      "d": "Command-line interface for Novita AI — generate text, images, video, and audio, manage GPU/sandbox runtimes, with first-class agent skill integration.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "cli",
+        "gpu",
+        "sandbox",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "67715fd7ae40d1e8",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/novita/skills/novita-cli",
+      "rd": "Use this skill when driving Novita AI from the terminal or from a coding agent via [novitalabs/novita-cli](https://github.com/novitalabs/novita-cli).",
+      "tk": 376
+    },
+    {
+      "id": "novita-multimodal-skill",
+      "d": "Novita AI multimodal skill for OpenClaw — text-to-image, text-to-video, TTS, and more; compatible with Claude Code, Cursor, Gemini CLI, and other mainstream agents.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "multimodal",
+        "text-to-image",
+        "text-to-video",
+        "tts",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "02a3c09dd4a0e0f2",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/novita/skills/novita-multimodal-skill",
+      "rd": "Use this skill when generating media through Novita AI from an agent, via [novitalabs/novita-multimodal-skill](https://github.com/novitalabs/novita-multimodal-skill) — a multimodal skill for OpenClaw",
+      "tk": 305
+    },
+    {
+      "id": "novita-skills",
+      "d": "Official Novita Skills repository — reusable SKILL.md skills for agent ecosystems that support skill-based workflows on Novita AI.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "novita",
+        "skills",
+        "agent-workflows"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "4b29b44aaa28344d",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/novita/skills/novita-skills",
+      "rd": "Use this skill when installing or authoring agent skills from Novita's official skills repository ([novitalabs/novita-skills](https://github.com/novitalabs/novita-skills)).",
+      "tk": 256
+    },
+    {
+      "id": "openai",
+      "d": "Integration guide and best practices for using OpenAI as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "openai"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "fe0912197308c966",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/openai",
+      "rd": "Use this skill when integrating with OpenAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 773
+    },
+    {
+      "id": "openai-agents-python-example",
+      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "modal",
+        "openai-agents-sdk",
+        "sandboxes",
+        "agent-harness",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "dcae38c47c5d7aee",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/modal/skills/openai-agents-python-example",
+      "rd": "Use this skill when designing a general-purpose coding agent harness. It demonstrates the OpenAI Agents SDK running inside Modal Sandboxes with async parallel workers, and an opt-in `/skills`",
+      "tk": 357
+    },
+    {
+      "id": "parasail",
+      "d": "Integration guide and best practices for using Parasail as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "parasail"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "31a38ba8a4512a0f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/parasail",
+      "rd": "Use this skill when integrating with Parasail as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "replicate",
+      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "replicate",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "5a808e361eb0fef5",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/replicate",
+      "rd": "Use this skill when integrating with Replicate as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 627
+    },
+    {
+      "id": "replicate-skills",
+      "d": "Replicate's collection of Agent Skills for building AI-powered apps — find-models, video prompting, and image generation workflows auto-invoked by AI coding agents on matching tasks.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "replicate",
+        "agent-skill",
+        "find-models",
+        "image-generation",
+        "video-prompting",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "11102544797418c3",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/replicate/skills/replicate-skills",
+      "rd": "Use this skill when an AI coding agent builds AI-powered apps on Replicate. The repository is Replicate's central hub of Agent Skills — `find-models` (search models, browse collections, read",
+      "tk": 397
+    },
+    {
+      "id": "sambanova",
+      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "sambanova",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2095d0e945775111",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/sambanova",
+      "rd": "Use this skill when integrating with SambaNova as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 688
+    },
+    {
+      "id": "sambanova-plugin-cc",
+      "d": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools b",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "sambanova",
+        "claude-code",
+        "mcp",
+        "sub-agent",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "1ee349a9cb098c0f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/sambanova/skills/sambanova-plugin-cc",
+      "rd": "Use this skill when managing SambaNova models from Claude Code or delegating coding tasks to a sub-agent running on SambaNova Cloud.",
+      "tk": 455
+    },
+    {
+      "id": "scaleway",
+      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "scaleway",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "894bc1684e7b7fa4",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/scaleway",
+      "rd": "Use this skill when integrating with Scaleway as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 663
+    },
+    {
+      "id": "scaleway-skills",
+      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "scaleway",
+        "agent-skill",
+        "mcp",
+        "cli",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "6e32875ffb96beeb",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/scaleway/skills/scaleway-skills",
+      "rd": "Use this skill when an agent needs to operate Scaleway services and CLI tools. The repository is Scaleway's official skill collection and doubles as an agent plugin, shipping skills plus MCP server",
+      "tk": 354
+    },
+    {
+      "id": "siliconflow",
+      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "siliconflow",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "aa99324cb61f2953",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/siliconflow",
+      "rd": "Use this skill when integrating with SiliconFlow as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 658
+    },
+    {
+      "id": "spacexai",
+      "d": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "spacexai",
+        "xai",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2aacf77f22912d29",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/spacexai",
+      "rd": "Use this skill when integrating with SpaceXAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 530
+    },
+    {
+      "id": "stepaudio-skills",
+      "d": "StepFun's audio skills for Claw — speech and audio Agent Skills published by stepfun-ai.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "stepfun",
+        "audio",
+        "skills",
+        "claw"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "ea1eb96a9771f12e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/stepfun/skills/stepaudio-skills",
+      "rd": "Use this skill when installing or authoring audio Agent Skills from StepFun's official repository ([stepfun-ai/StepAudio-Skills](https://github.com/stepfun-ai/StepAudio-Skills)) — audio skills for",
+      "tk": 253
+    },
+    {
+      "id": "stepfun",
+      "d": "Integration guide and best practices for using StepFun as a model provider. Includes links to official skill repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "stepfun",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e6a2230c4c20026e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/stepfun",
+      "rd": "Use this skill when integrating with StepFun as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 500
+    },
+    {
+      "id": "terraform-provider-crusoe",
+      "d": "Official Terraform Provider for Crusoe Cloud — infrastructure-as-code for Crusoe GPU cloud, with active AI agent workflows: a Claude Code skill (/derive-schema-descriptions) for schema generation and ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "crusoe",
+        "terraform",
+        "gpu-cloud",
+        "infrastructure-as-code",
+        "claude-code",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "06a0f6fb078d2950",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/crusoe/skills/terraform-provider-crusoe",
+      "rd": "Use this skill when managing Crusoe Cloud GPU resources with Terraform — and as a reference for how an infrastructure provider repository operationalizes AI coding agents.",
+      "tk": 412
+    },
+    {
+      "id": "thinking-machines",
+      "d": "Integration guide and best practices for using Thinking Machines as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "thinking-machines"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2f16948fd753337e",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/thinking-machines",
+      "rd": "Use this skill when integrating with Thinking Machines as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 430
+    },
+    {
+      "id": "together-ai",
+      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "771153bf26b3cc1b",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/together-ai",
+      "rd": "Use this skill when integrating with Together AI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 731
+    },
+    {
+      "id": "together-skills",
+      "d": "Together AI's agent skills collection — teaches coding agents to use each Together product (inference, training, embeddings, audio, video, images, function calling, infrastructure) with API patterns, ",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "skills",
+        "inference",
+        "training",
+        "embeddings"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "b547a6364f3a8b24",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/together-ai/skills/together-skills",
+      "rd": "Use this skill when working with the Together AI platform through the official agent-skills collection ([togethercomputer/skills](https://github.com/togethercomputer/skills)).",
+      "tk": 458
+    },
+    {
+      "id": "together-storage-claude-skills",
+      "d": "Claude Code operational runbooks for deploying and verifying Together T4 and CS3 storage on a k3s cluster backed by Rook-Ceph object storage.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "together-ai",
+        "kubernetes",
+        "storage",
+        "claude-code",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2cf894a2839e0237",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/together-ai/skills/together-storage-claude-skills",
+      "rd": "Use this skill when deploying or verifying Together's storage stack with Claude Code, following the operational runbooks in",
+      "tk": 297
+    },
+    {
+      "id": "tools-for-devops-agent",
+      "d": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "amazon-bedrock",
+        "aws",
+        "devops",
+        "incident-response",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "c1f2bb3f50ba62aa",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent",
+      "rd": "Use this skill when extending the AWS DevOps Agent with the open-source toolset from [aws/tools-for-devops-agent](https://github.com/aws/tools-for-devops-agent) — ready-to-use skills, custom agents,",
+      "tk": 279
+    },
+    {
+      "id": "upstage",
+      "d": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "upstage",
+        "solar",
+        "n8n",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "e36aa9f9f057ae6d",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/upstage",
+      "rd": "Use this skill when integrating with Upstage as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 577
+    },
+    {
+      "id": "vllm-skills",
+      "d": "Cohere's vLLM skills — Agent Skills for serving and operating open models on the vLLM inference engine.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "cohere",
+        "vllm",
+        "inference",
+        "skills"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "2d505926b2132b27",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/cohere/skills/vllm-skills",
+      "rd": "Use this skill when serving or operating models with vLLM using the skills published by [cohere-ai/vllm-skills](https://github.com/cohere-ai/vllm-skills).",
+      "tk": 248
+    },
+    {
+      "id": "wafer",
+      "d": "Integration guide and best practices for using Wafer as a model provider.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "wafer"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "0a62c6d1ee6ca64f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/wafer",
+      "rd": "Use this skill when integrating with Wafer as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 411
+    },
+    {
+      "id": "xiaomi",
+      "d": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "xiaomi",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "fcec5690f9788ebc",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/xiaomi",
+      "rd": "Use this skill when integrating with Xiaomi as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 559
+    },
+    {
+      "id": "zai",
+      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
+      "c": "model-providers",
+      "t": [
+        "model-provider",
+        "zai",
+        "glm",
+        "skills",
+        "plugins"
+      ],
+      "a": [
+        "claude-code",
+        "claude-desktop",
+        "cursor",
+        "gemini-cli"
+      ],
+      "v": "1.0.0",
+      "h": "554d984d1375b41f",
+      "o": "vendor",
+      "y": true,
+      "p": "skills/model-providers/zai",
+      "rd": "Use this skill when integrating with Zai as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+      "tk": 595
     }
   ]
 }

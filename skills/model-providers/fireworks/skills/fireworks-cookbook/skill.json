@@ -5,7 +5,9 @@
   "description": "Fireworks AI Cookbook — portable Agent Skills (Markdown) with routing guidance, reference material, templates, and workflows to train, build, and debug generative AI models on Fireworks.",
   "command": "skyboy add fireworks-cookbook",
   "tags": ["model-provider", "fireworks", "cookbook", "training", "skills"],
-  "author": "skyboy",
+  "author": "fireworks",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/fw-ai/cookbook",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

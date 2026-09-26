@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using CoreWeave as a model provider.",
   "command": "skyboy add coreweave",
   "tags": ["model-provider", "coreweave"],
-  "author": "skyboy",
+  "author": "coreweave",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

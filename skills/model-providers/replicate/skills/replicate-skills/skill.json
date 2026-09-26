@@ -4,7 +4,9 @@
   "version": "1.0.0",  "description": "Replicate's collection of Agent Skills for building AI-powered apps — find-models, video prompting, and image generation workflows auto-invoked by AI coding agents on matching tasks.",
   "command": "skyboy add replicate-skills",
   "tags": ["model-provider", "replicate", "agent-skill", "find-models", "image-generation", "video-prompting", "skills"],
-  "author": "skyboy",
+  "author": "replicate",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/replicate/skills",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

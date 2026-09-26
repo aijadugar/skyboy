@@ -19,9 +19,9 @@
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "amazon-bedrock",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/aws/agent-toolkit-for-aws",
   "canonical_of": null,
   "permissions": null,
@@ -29,7 +29,27 @@
     "name": "agent-toolkit-for-aws",
     "license": "Apache-2.0"
   },
-  "hash": "a991b9606de2d8b5",
+  "hash": "e00da3d6cef81e63",
   "path": "skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/skills/agent-toolkit-for-aws/SKILL.md",
+  "token_cost": 293,
+  "router_description": "Use this skill when wiring AWS capabilities into an AI agent with the official toolkit ([aws/agent-toolkit-for-aws](https://github.com/aws/agent-toolkit-for-aws)).",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

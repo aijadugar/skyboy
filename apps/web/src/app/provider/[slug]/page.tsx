@@ -29,9 +29,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // A model provider page: the provider is a model folder that CONTAINS skills,
-// so this page is a container view — the provider's own SKILL.md integration
-// guide up top, then everything that lives inside it (nested skills with
-// selection checkboxes feeding the shared ZIP bar).
 export default async function ProviderPage({ params }: Props) {
   const { slug } = await params;
   const provider = getProviderBySlug(slug);

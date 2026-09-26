@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
   "command": "skyboy add arcee-ai",
   "tags": ["model-provider", "arcee-ai", "skills", "plugins"],
-  "author": "skyboy",
+  "author": "arcee-ai",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

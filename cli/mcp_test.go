@@ -108,7 +108,7 @@ func TestPrepareContextZipStdioWritesFile(t *testing.T) {
 	bundleTempDir = t.TempDir()
 
 	result, rpcErr := toolResult(cat, "full", "stdio", "prepare_context_zip",
-		json.RawMessage(`{"slugs":["copy-self-audit","anti-slop-landing"]}`))
+		json.RawMessage(`{"slugs":["copy-self-audit","nextjs-app-router-conventions"]}`))
 	if rpcErr != nil {
 		t.Fatalf("unexpected rpc error: %+v", rpcErr)
 	}
@@ -369,8 +369,8 @@ func TestReadOnlyModeExcludesInstall(t *testing.T) {
 	if names["install_skill"] {
 		t.Error("read-only mode must not expose install_skill")
 	}
-	if len(names) != 5 {
-		t.Errorf("read-only surface has %d tools, want 5", len(names))
+	if len(names) != 4 {
+		t.Errorf("read-only surface has %d tools, want 4", len(names))
 	}
 	if !names["prepare_context_zip"] {
 		t.Error("read-only mode must keep prepare_context_zip")

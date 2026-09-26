@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Inco as a model provider.",
   "command": "skyboy add inco",
   "tags": ["model-provider", "inco"],
-  "author": "skyboy",
+  "author": "inco",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]

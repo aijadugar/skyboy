@@ -18,9 +18,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "zai",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": null,
   "canonical_of": null,
   "permissions": null,
@@ -28,7 +28,31 @@
     "name": "zai",
     "license": "MIT"
   },
-  "hash": "4d8897878cd4cef4",
+  "hash": "554d984d1375b41f",
   "path": "skills/model-providers/zai",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/zai/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/zai/SKILL.md",
+  "token_cost": 595,
+  "router_description": "Use this skill when integrating with Zai as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "near-duplicate of baseten — merge them, or mark one canonical_of the other",
+      "verbose: 7 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "dup_of": "baseten",
+  "dup_similarity": 0.7272727272727273,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

@@ -15,9 +15,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "openai",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": null,
   "canonical_of": null,
   "permissions": null,
@@ -25,7 +25,28 @@
     "name": "openai",
     "license": "MIT"
   },
-  "hash": "b53e20e044cad186",
+  "hash": "fe0912197308c966",
   "path": "skills/model-providers/openai",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/openai/SKILL.md",
+  "token_cost": 773,
+  "router_description": "Use this skill when integrating with OpenAI as a model provider. Covers API setup, authentication, model selection, and best practices for production use.",
+  "quality": {
+    "score": 8,
+    "trigger_clarity": 1.5,
+    "scope": 1.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it",
+      "verbose: 7 top-level sections (target ≤6) — move detail into references/"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
