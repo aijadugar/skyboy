@@ -23,7 +23,7 @@ jobs:
         with:
           go-version: stable
 
-      - name: Validate skills and plugins against the JSON Schemas
+      - name: Validate skills against the JSON Schema
         run: go run . validate --root ..
 
       - name: Build catalog
@@ -47,7 +47,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "Catalog checks failed: either a skill.json/plugin.json did not validate against scripts/schemas/, or catalog.json is stale. Run `skyboy validate` and `skyboy build-catalog` locally and commit the results."
+              body: "Catalog checks failed: either a skill.json did not validate against scripts/schemas/, or catalog.json is stale. Run `skyboy validate` and `skyboy build-catalog` locally and commit the results."
             })
 
   web:

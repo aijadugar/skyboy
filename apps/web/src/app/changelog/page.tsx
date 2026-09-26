@@ -30,7 +30,7 @@ export default function ChangelogPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
               The MCP tool surface moved to its final shape on both transports:
-              search_catalog, get_skill, get_plugin, list_categories, and
+              search_catalog, get_skill, list_categories, and
               prepare_context_zip, plus install_skill over stdio. The zip tool
               calls the same bundle logic as the CLI, so every bundle carries
               the generated _CONTEXT_SUMMARY.md. docs/mcp.md now ships copyable
@@ -45,8 +45,7 @@ export default function ChangelogPage() {
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
               skills/ now carries skill.json (validated against a JSON Schema in
-              scripts/schemas/), plugins carry the new plugin.json shape, and
-              the Go validator enforces both in CI. Categories became fully
+              scripts/schemas/). The Go validator enforces it in CI. Categories became fully
               dynamic: they are derived from the skills/ tree, so a new category
               is a folder and a PR. The CLI grew doc, update, info, and
               comma-list add into ./.skyboy/skills/ with offline support, and
@@ -84,12 +83,10 @@ export default function ChangelogPage() {
 
           <section className="border-l-2 border-hairline pl-5">
             <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Phase 2: Submit flow + vendor plugins
+              Phase 2: Submit flow + duplicate detection
             </h2>
             <p className="mt-2 text-sm leading-relaxed text-body">
-              Added the /submit contribution route, a duplicate detector, official
-              (vendor) badge support, and the first batch of vendor plugin
-              indexes (Vercel, Microsoft).
+              Added the /submit contribution route and a duplicate detector.
             </p>
             <p className="mt-2 font-mono text-xs text-mute">2026-09-02</p>
           </section>
