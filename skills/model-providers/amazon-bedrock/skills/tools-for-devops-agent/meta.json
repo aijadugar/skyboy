@@ -19,9 +19,9 @@
   ],
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "amazon-bedrock",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/aws/tools-for-devops-agent",
   "canonical_of": null,
   "permissions": null,
@@ -29,7 +29,27 @@
     "name": "tools-for-devops-agent",
     "license": "Apache-2.0"
   },
-  "hash": "5c44255a51aeaccf",
+  "hash": "c1f2bb3f50ba62aa",
   "path": "skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/amazon-bedrock/skills/tools-for-devops-agent/SKILL.md",
+  "token_cost": 279,
+  "router_description": "Use this skill when extending the AWS DevOps Agent with the open-source toolset from [aws/tools-for-devops-agent](https://github.com/aws/tools-for-devops-agent) — ready-to-use skills, custom agents,",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }

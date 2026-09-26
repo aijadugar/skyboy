@@ -5,7 +5,9 @@
   "description": "Open-source tools for AWS DevOps Agent — ready-to-use skills, custom agents, and other tools for incident response, root cause analysis, and more.",
   "command": "skyboy add tools-for-devops-agent",
   "tags": ["model-provider", "amazon-bedrock", "aws", "devops", "incident-response", "skills"],
-  "author": "skyboy",
+  "author": "amazon-bedrock",
+  "origin": "vendor",
+  "verified": true,
   "source_url": "https://github.com/aws/tools-for-devops-agent",
   "license": "Apache-2.0",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
