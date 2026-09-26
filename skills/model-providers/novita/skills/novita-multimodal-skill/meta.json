@@ -20,9 +20,9 @@
   ],
   "version": "1.0.0",
   "license": "MIT",
-  "author": "skyboy",
-  "origin": "skyboy",
-  "verified": false,
+  "author": "novita",
+  "origin": "vendor",
+  "verified": true,
   "upstream_repo": "https://github.com/novitalabs/novita-multimodal-skill",
   "canonical_of": null,
   "permissions": null,
@@ -30,7 +30,27 @@
     "name": "novita-multimodal-skill",
     "license": "MIT"
   },
-  "hash": "0b2f7c936a2f7070",
+  "hash": "02a3c09dd4a0e0f2",
   "path": "skills/model-providers/novita/skills/novita-multimodal-skill",
-  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/skills/novita-multimodal-skill/SKILL.md"
+  "skill_md_url": "https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/model-providers/novita/skills/novita-multimodal-skill/SKILL.md",
+  "token_cost": 305,
+  "router_description": "Use this skill when generating media through Novita AI from an agent, via [novitalabs/novita-multimodal-skill](https://github.com/novitalabs/novita-multimodal-skill) — a multimodal skill for OpenClaw",
+  "quality": {
+    "score": 9,
+    "trigger_clarity": 1.5,
+    "scope": 2.5,
+    "links": 2.5,
+    "token_budget": 2.5,
+    "issues": [
+      "description states what it does but not when to use it"
+    ]
+  },
+  "stale": true,
+  "trust": "vendor",
+  "trust_reason": "published from the vendor's own repository",
+  "trust_next": "official",
+  "trust_missing": [
+    "5 recorded invocations (has 0)",
+    "a last_verified date"
+  ]
 }
