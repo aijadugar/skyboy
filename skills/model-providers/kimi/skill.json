@@ -5,7 +5,9 @@
   "description": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
   "command": "skyboy add kimi",
   "tags": ["model-provider", "kimi", "moonshot", "plugins"],
-  "author": "skyboy",
+  "author": "kimi",
+  "origin": "vendor",
+  "verified": true,
   "source_url": null,
   "license": "MIT",
   "compatible_agents": ["claude-code", "claude-desktop", "cursor", "gemini-cli"]
