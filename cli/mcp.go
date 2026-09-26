@@ -17,7 +17,6 @@ package main
 //
 //   search_catalog(query, category?)   fuzzy search, ranked
 //   get_skill(slug)                    SKILL.md body + skill.json metadata, one call
-//   get_plugin(slug)                   nested skills/hooks/agents manifest
 //   list_categories()                  the dynamic category tree
 //   prepare_context_zip(slugs[])       the exact `skyboy zip` bundle logic
 //   install_skill(slug, target_dir?)   stdio/full mode only (writes to disk)
@@ -158,19 +157,6 @@ func toolDefs(mode string) []toolDef {
 				"additionalProperties":false}`),
 		},
 		{
-			Name: "get_plugin",
-			Description: "Return a plugin's manifest with its nested skills, hooks, and agents. " +
-				"Plugins are indexed and linked, never vendored: the manifest points at the " +
-				"upstream repo as the source of truth.",
-			InputSchema: json.RawMessage(`{
-				"type":"object",
-				"properties":{
-					"slug":{"type":"string","description":"The plugin slug (e.g. vercel-plugin)"}
-				},
-				"required":["slug"],
-				"additionalProperties":false}`),
-		},
-		{
 			Name: "list_categories",
 			Description: "Return the catalog's dynamic category tree (derived from the skills/ " +
 				"tree by build-catalog, never hardcoded) plus the compatible-agent list.",
@@ -180,14 +166,13 @@ func toolDefs(mode string) []toolDef {
 			Name: "prepare_context_zip",
 			Description: "Build the same ZIP that `skyboy zip <slugs>` produces: a generated " +
 				"_CONTEXT_SUMMARY.md at the archive root plus every skill folder under skills/. " +
-				"Accepts a comma-separated mix of skill and plugin slugs in ONE bundle. Plugins are " +
-				"indexed into the summary, never copied. Over stdio returns the local file path; " +
-				"over http returns a short-lived signed download URL.",
+				"Accepts a comma-separated list of skill slugs in ONE bundle. Over stdio returns the " +
+				"local file path; over http returns a short-lived signed download URL.",
 			InputSchema: json.RawMessage(`{
 				"type":"object",
 				"properties":{
 					"slugs":{"type":"array","items":{"type":"string"},"minItems":1,
-						"description":"Skill and/or plugin slugs to bundle, e.g. [\"copy-self-audit\",\"vercel-plugin\"]"}
+						"description":"Skill slugs to bundle, e.g. [\"copy-self-audit\",\"go-testing\"]"}
 				},
 				"required":["slugs"],
 				"additionalProperties":false}`),
@@ -232,9 +217,8 @@ func publicView(s SkillRecord) map[string]any {
 
 // bundleRequest describes one prepared zip: the bytes plus what went in.
 type bundleRequest struct {
-	names       []string
-	skillCount  int
-	pluginCount int
+	names      []string
+	skillCount int
 }
 
 // growableBuffer is a minimal in-memory byte sink the bundle writer streams
@@ -302,9 +286,8 @@ func buildPreparedBundle(names []string, cat *CatalogManifest) (*bundleRequest, 
 		return nil, nil, err
 	}
 	req := &bundleRequest{
-		names:       names,
-		skillCount:  len(plan.skillRecs),
-		pluginCount: len(plan.pluginRecs),
+		names:      names,
+		skillCount: len(plan.skillRecs),
 	}
 	return req, buf.bytes(), nil
 }
@@ -381,39 +364,11 @@ func toolResult(cat *CatalogManifest, mode, transport, name string, args json.Ra
 			"meta":           meta,
 		}), nil
 
-	case "get_plugin":
-		slug := getStr("slug")
-		for _, p := range cat.Plugins {
-			if p.Slug == slug {
-				// The nested shape an agent wants: skills, hooks, agents, plus
-				// the upstream pointer.
-				return textToolResult(map[string]any{
-					"plugin": map[string]any{
-						"slug":        p.Slug,
-						"name":        p.Name,
-						"vendor":      p.Vendor,
-						"description": p.Description,
-						"category":    p.Category,
-						"version":     p.Version,
-						"license":     p.License,
-						"upstream":    p.UpstreamRepo,
-						"note":        p.Note,
-						"skills":      p.Skills,
-						"hooks":       p.Commands,
-						"agents":      p.Agents,
-						"mcp":         p.MCP,
-					},
-				}), nil
-			}
-		}
-		return textToolResult(map[string]any{"error": fmt.Sprintf("no plugin named %s", slug), "count": 0}), nil
-
 	case "list_categories":
 		return textToolResult(map[string]any{
 			"categories":  cat.Categories,
 			"agents":      cat.Agents,
 			"skills":      len(cat.Skills),
-			"plugins":     len(cat.Plugins),
 			"generatedAt": cat.GeneratedAt,
 		}), nil
 
@@ -434,10 +389,9 @@ func toolResult(cat *CatalogManifest, mode, transport, name string, args json.Ra
 			}
 		}
 		payload := map[string]any{
-			"skills":     bundleReq.skillCount,
-			"plugins":    bundleReq.pluginCount,
-			"bytes":      len(data),
-			"summary":    "_CONTEXT_SUMMARY.md is at the archive root; upload the whole zip.",
+			"skills":  bundleReq.skillCount,
+			"bytes":   len(data),
+			"summary": "_CONTEXT_SUMMARY.md is at the archive root; upload the whole zip.",
 		}
 		if transport == "http" {
 			payload["downloadUrl"] = link

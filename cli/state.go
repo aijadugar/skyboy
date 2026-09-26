@@ -18,10 +18,10 @@ import (
 	"time"
 )
 
-// stateEntry records one locally added skill or plugin.
+// stateEntry records one locally added skill.
 type stateEntry struct {
 	Name      string    `json:"name"`
-	Kind      string    `json:"kind"` // "skill" | "plugin"
+	Kind      string    `json:"kind"` // "skill"
 	Category  string    `json:"category,omitempty"`
 	Version   string    `json:"version,omitempty"`
 	Hash      string    `json:"hash,omitempty"`
@@ -33,8 +33,7 @@ type stateEntry struct {
 
 // skyboyState is the whole ~/.skyboy/state.json document.
 type skyboyState struct {
-	Skills  []stateEntry `json:"skills"`
-	Plugins []stateEntry `json:"plugins"`
+	Skills []stateEntry `json:"skills"`
 }
 
 // skyboyHome resolves the state root: $SKYBOY_HOME, else ~/.skyboy.
@@ -80,16 +79,11 @@ func saveState(state *skyboyState) error {
 	return os.WriteFile(statePath(), append(data, '\n'), 0o644)
 }
 
-// findStateEntry locates a name in the state (skills first, then plugins).
+// findStateEntry locates a name in the state.
 func findStateEntry(state *skyboyState, name string) (*stateEntry, string) {
 	for i := range state.Skills {
 		if state.Skills[i].Name == name {
 			return &state.Skills[i], "skill"
-		}
-	}
-	for i := range state.Plugins {
-		if state.Plugins[i].Name == name {
-			return &state.Plugins[i], "plugin"
 		}
 	}
 	return nil, ""
@@ -157,18 +151,6 @@ func catalogSkillLookup(manifest *CatalogManifest, name string) *SkillRecord {
 		return nil
 	}
 	return resolveSlug(manifest.Skills, name)
-}
-
-func catalogPluginLookup(manifest *CatalogManifest, name string) *PluginRecord {
-	if manifest == nil {
-		return nil
-	}
-	for i := range manifest.Plugins {
-		if manifest.Plugins[i].Slug == name {
-			return &manifest.Plugins[i]
-		}
-	}
-	return nil
 }
 
 // splitList splits the comma-separated name lists Part 5 commands accept.
