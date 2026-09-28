@@ -90,15 +90,14 @@
     },
     {
       "id": "agent-toolkit-for-aws",
-      "d": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS.",
+      "d": "Official, AWS-supported MCP servers, skills, and  s to help AI agents build on AWS.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "amazon-bedrock",
         "aws",
         "mcp",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -116,7 +115,7 @@
     },
     {
       "id": "agentic-tools",
-      "d": "Meta's agentic tools plugin and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
+      "d": "Meta's agentic tools   and skills — agent-facing tooling and skills published by facebook for use with coding agents.",
       "c": "model-providers",
       "t": [
         "model-provider",
@@ -136,7 +135,7 @@
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/meta/skills/agentic-tools",
-      "rd": "Use this skill when working with Meta's agentic tools — the plugin and skills repository published by facebook ([facebook/agentic-tools](https://github.com/facebook/agentic-tools)) for use with",
+      "rd": "Use this skill when working with Meta's agentic tools — the   and skills repository published by facebook ([facebook/agentic-tools](https://github.com/facebook/agentic-tools)) for use with",
       "tk": 262
     },
     {
@@ -216,13 +215,12 @@
     },
     {
       "id": "alibaba-cloud",
-      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Alibaba Cloud as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "alibaba-cloud",
-        "qwen",
-        "plugins"
+        "qwen"
       ],
       "a": [
         "claude-code",
@@ -240,14 +238,13 @@
     },
     {
       "id": "amazon-bedrock",
-      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Amazon Bedrock as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "amazon-bedrock",
         "aws",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -312,13 +309,12 @@
     },
     {
       "id": "arcee-ai",
-      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Arcee AI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "arcee-ai",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -336,13 +332,12 @@
     },
     {
       "id": "baseten",
-      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "baseten",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -456,12 +451,11 @@
     },
     {
       "id": "cerebras",
-      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
+      "d": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official extension repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "cerebras",
-        "plugins"
+        "cerebras"
       ],
       "a": [
         "claude-code",
@@ -686,13 +680,12 @@
     },
     {
       "id": "crusoe",
-      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Crusoe as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "crusoe",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -710,13 +703,12 @@
     },
     {
       "id": "databricks",
-      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Databricks as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "databricks",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -758,12 +750,11 @@
     },
     {
       "id": "deepinfra",
-      "d": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using DeepInfra as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepinfra",
-        "plugins"
+        "deepinfra"
       ],
       "a": [
         "claude-code",
@@ -781,12 +772,11 @@
     },
     {
       "id": "deepseek",
-      "d": "Integration guide and best practices for using DeepSeek as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using DeepSeek as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "deepseek",
-        "plugins"
+        "deepseek"
       ],
       "a": [
         "claude-code",
@@ -804,13 +794,12 @@
     },
     {
       "id": "digitalocean",
-      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using DigitalOcean as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "digitalocean",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -853,13 +842,12 @@
     },
     {
       "id": "fireworks",
-      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "fireworks",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -902,13 +890,12 @@
     },
     {
       "id": "friendliai",
-      "d": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using FriendliAI as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "friendliai",
-        "hermes",
-        "plugins"
+        "hermes"
       ],
       "a": [
         "claude-code",
@@ -953,13 +940,12 @@
     },
     {
       "id": "gmi",
-      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using GMI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "gmi",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -999,12 +985,11 @@
     },
     {
       "id": "groq",
-      "d": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Groq as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "groq",
-        "plugins"
+        "groq"
       ],
       "a": [
         "claude-code",
@@ -1071,13 +1056,12 @@
     },
     {
       "id": "inclusionai",
-      "d": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using InclusionAI as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "inclusionai",
-        "avernet",
-        "plugins"
+        "avernet"
       ],
       "a": [
         "claude-code",
@@ -1117,13 +1101,12 @@
     },
     {
       "id": "kimi",
-      "d": "Integration guide and best practices for using Kimi as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Kimi as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "kimi",
-        "moonshot",
-        "plugins"
+        "moonshot"
       ],
       "a": [
         "claude-code",
@@ -1209,13 +1192,12 @@
     },
     {
       "id": "meta",
-      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Meta as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "meta",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1250,13 +1232,12 @@
     },
     {
       "id": "minimax",
-      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "minimax",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1274,12 +1255,11 @@
     },
     {
       "id": "mistral",
-      "d": "Integration guide and best practices for using Mistral as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Mistral as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "mistral",
-        "plugins"
+        "mistral"
       ],
       "a": [
         "claude-code",
@@ -1297,13 +1277,12 @@
     },
     {
       "id": "modal",
-      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Modal as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "modal",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1463,13 +1442,12 @@
     },
     {
       "id": "novita",
-      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "novita",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1586,7 +1564,7 @@
     },
     {
       "id": "openai-agents-python-example",
-      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown plugin system for agent context.",
+      "d": "Example general-purpose coding agent harness using the OpenAI Agents SDK and Modal Sandboxes with async parallel workers, including an opt-in /skills markdown   system for agent context.",
       "c": "model-providers",
       "t": [
         "model-provider",
@@ -1634,13 +1612,12 @@
     },
     {
       "id": "replicate",
-      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Replicate as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "replicate",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1685,13 +1662,12 @@
     },
     {
       "id": "sambanova",
-      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using SambaNova as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "sambanova",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1708,7 +1684,7 @@
       "tk": 688
     },
     {
-      "id": "sambanova-plugin-cc",
+      "id": "sambanova- -cc",
       "d": "Claude Code skills for managing SambaNova models and delegating coding tasks to a sub-agent on SambaNova Cloud — /code, /list-models, /model-info, /update-model, /reset-model-db exposed as MCP tools b",
       "c": "model-providers",
       "t": [
@@ -1729,19 +1705,18 @@
       "h": "1ee349a9cb098c0f",
       "o": "vendor",
       "y": true,
-      "p": "skills/model-providers/sambanova/skills/sambanova-plugin-cc",
+      "p": "skills/model-providers/sambanova/skills/sambanova- -cc",
       "rd": "Use this skill when managing SambaNova models from Claude Code or delegating coding tasks to a sub-agent running on SambaNova Cloud.",
       "tk": 455
     },
     {
       "id": "scaleway",
-      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Scaleway as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "scaleway",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1759,7 +1734,7 @@
     },
     {
       "id": "scaleway-skills",
-      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent plugin with skills and MCP server configurations for Scaleway scenarios.",
+      "d": "Official Scaleway collection of agent skills for Scaleway services and CLI tools, also serving as an agent   with skills and MCP server configurations for Scaleway scenarios.",
       "c": "model-providers",
       "t": [
         "model-provider",
@@ -1780,18 +1755,17 @@
       "o": "vendor",
       "y": true,
       "p": "skills/model-providers/scaleway/skills/scaleway-skills",
-      "rd": "Use this skill when an agent needs to operate Scaleway services and CLI tools. The repository is Scaleway's official skill collection and doubles as an agent plugin, shipping skills plus MCP server",
+      "rd": "Use this skill when an agent needs to operate Scaleway services and CLI tools. The repository is Scaleway's official skill collection and doubles as an agent  , shipping skills plus MCP server",
       "tk": 354
     },
     {
       "id": "siliconflow",
-      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using SiliconFlow as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "siliconflow",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -1809,13 +1783,12 @@
     },
     {
       "id": "spacexai",
-      "d": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using SpaceXAI as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "spacexai",
-        "xai",
-        "plugins"
+        "xai"
       ],
       "a": [
         "claude-code",
@@ -1930,13 +1903,12 @@
     },
     {
       "id": "together-ai",
-      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Together AI as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "together-ai",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
@@ -2032,14 +2004,13 @@
     },
     {
       "id": "upstage",
-      "d": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Upstage as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "upstage",
         "solar",
-        "n8n",
-        "plugins"
+        "n8n"
       ],
       "a": [
         "claude-code",
@@ -2104,12 +2075,11 @@
     },
     {
       "id": "xiaomi",
-      "d": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
+      "d": "Integration guide and best practices for using Xiaomi as a model provider.",
       "c": "model-providers",
       "t": [
         "model-provider",
-        "xiaomi",
-        "plugins"
+        "xiaomi"
       ],
       "a": [
         "claude-code",
@@ -2127,14 +2097,13 @@
     },
     {
       "id": "zai",
-      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
+      "d": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill repositories.",
       "c": "model-providers",
       "t": [
         "model-provider",
         "zai",
         "glm",
-        "skills",
-        "plugins"
+        "skills"
       ],
       "a": [
         "claude-code",
