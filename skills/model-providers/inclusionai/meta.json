@@ -1,13 +1,12 @@
 {
   "id": "inclusionai",
   "slug": "inclusionai",
-  "description": "Integration guide and best practices for using InclusionAI as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using InclusionAI as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "inclusionai",
-    "avernet",
-    "plugins"
+    "avernet"
   ],
   "compatible_agents": [
     "claude-code",
