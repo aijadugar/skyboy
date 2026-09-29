@@ -1,6 +1,6 @@
 ---
 name: microsoft
-description: Integration guide and best practices for using Microsoft as a model provider. Includes links to official plugin repositories.
+description: Integration guide and best practices for using Microsoft as a model provider.
 license: MIT
 ---
 

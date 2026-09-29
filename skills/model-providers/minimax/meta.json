@@ -1,13 +1,12 @@
 {
   "id": "minimax",
   "slug": "minimax",
-  "description": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill and plugin repositories.",
+  "description": "Integration guide and best practices for using MiniMax as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "minimax",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
