@@ -86,7 +86,6 @@ Anthropic maintains a growing ecosystem of public skill repositories:
 | Repository | Description | Stars |
 |---|---|---|
 | [skills](https://github.com/anthropics/skills) | Public repository for Agent Skills | 21k |
-| [claude-plugins-official](https://github.com/anthropics/claude-plugins-official) | Official Anthropic-managed directory of high quality Claude Code Plugins (skills, MCP) | 4.1k |
 | [defending-code-reference-harness](https://github.com/anthropics/defending-code-reference-harness) | Skills for threat modeling, scanning, triage, patching, plus an autonomous scanning harness | 600 |
 | [launch-your-agent](https://github.com/anthropics/launch-your-agent) | Skills that take a founder from idea to a live Claude Managed Agent: interview, scope, launch, grade, iterate, and schedule | 195 |
 | [k12-teacher-skills](https://github.com/anthropics/k12-teacher-skills) | Skills and eval rubrics for K-12 teachers, co-developed with Learning Commons | 88 |
