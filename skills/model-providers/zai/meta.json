@@ -1,14 +1,13 @@
 {
   "id": "zai",
   "slug": "zai",
-  "description": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill and plugin repositories.",
+  "description": "Integration guide and best practices for using Zai as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "zai",
     "glm",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
