@@ -1,13 +1,12 @@
 {
   "id": "novita",
   "slug": "novita",
-  "description": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill and plugin repositories.",
+  "description": "Integration guide and best practices for using Novita as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "novita",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
