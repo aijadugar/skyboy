@@ -1,12 +1,11 @@
 {
   "id": "cerebras",
   "slug": "cerebras",
-  "description": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official plugin and extension repositories.",
+  "description": "Integration guide and best practices for using Cerebras as a model provider. Includes links to official extension repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "cerebras",
-    "plugins"
+    "cerebras"
   ],
   "compatible_agents": [
     "claude-code",
