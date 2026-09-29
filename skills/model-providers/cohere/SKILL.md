@@ -72,7 +72,7 @@ Cohere offers models across capability tiers. Choose based on your use case:
 
 ## Cohere Skills
 
-Cohere's public skills ecosystem (`skills/` in this folder; no dedicated plugin repositories published to date):
+Cohere's public skills ecosystem (`skills/` in this folder):
 
 | Skill | Repository | Description | Language | License |
 |---|---|---|---|---|
