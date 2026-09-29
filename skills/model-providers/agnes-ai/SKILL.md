@@ -70,7 +70,7 @@ Agnes AI offers models across capability tiers. Choose based on your use case:
 - Agnes AI official documentation
 - Agnes AI API reference
 
-## Agnes AI Skills & Plugins
+## Agnes AI Skills
 
 Agnes AI's public skills ecosystem (`skills/` in this folder):
 
@@ -80,7 +80,3 @@ Agnes AI's public skills ecosystem (`skills/` in this folder):
 |---|---|---|---|---|
 | agnes-skills | [AgnesAI-Labs/skills](https://github.com/AgnesAI-Labs/skills) | Official reusable Codex skill for integrating Agnes AI text, image, video, and agent models through the OpenAI-compatible API gateway — chat completions, streaming, image/video generation, tool-calling agent workflows | Python | — |
 | agnescode | [AgnesAI-Labs/AgnesCode](https://github.com/AgnesAI-Labs/AgnesCode) | Agnes AI desktop workspace uniting local projects, model capabilities, reusable skills, and MCP app connections; skills (packaged SOPs, domain knowledge, toolchains) are a core feature | — | — |
-
-### Plugins
-
-No public Agnes AI repositories dedicated to plugins were found; the folder ships skills only.
