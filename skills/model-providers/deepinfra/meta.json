@@ -1,12 +1,11 @@
 {
   "id": "deepinfra",
   "slug": "deepinfra",
-  "description": "Integration guide and best practices for using DeepInfra as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using DeepInfra as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "deepinfra",
-    "plugins"
+    "deepinfra"
   ],
   "compatible_agents": [
     "claude-code",
