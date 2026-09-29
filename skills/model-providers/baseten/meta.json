@@ -1,13 +1,12 @@
 {
   "id": "baseten",
   "slug": "baseten",
-  "description": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill and plugin repositories.",
+  "description": "Integration guide and best practices for using Baseten as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "baseten",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",
