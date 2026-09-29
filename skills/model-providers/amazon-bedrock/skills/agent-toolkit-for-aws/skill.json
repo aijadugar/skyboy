@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS.",
   "command": "skyboy add agent-toolkit-for-aws",
-  "tags": ["model-provider", "amazon-bedrock", "aws", "mcp", "skills", "plugins"],
+  "tags": ["model-provider", "amazon-bedrock", "aws", "mcp", "skills"],
   "author": "amazon-bedrock",
   "origin": "vendor",
   "verified": true,

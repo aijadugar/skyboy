@@ -8,8 +8,7 @@
     "amazon-bedrock",
     "aws",
     "mcp",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",

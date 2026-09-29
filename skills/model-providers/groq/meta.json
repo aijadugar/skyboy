@@ -1,12 +1,11 @@
 {
   "id": "groq",
   "slug": "groq",
-  "description": "Integration guide and best practices for using Groq as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Groq as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "groq",
-    "plugins"
+    "groq"
   ],
   "compatible_agents": [
     "claude-code",

@@ -1,13 +1,12 @@
 {
   "id": "friendliai",
   "slug": "friendliai",
-  "description": "Integration guide and best practices for using FriendliAI as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using FriendliAI as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "friendliai",
-    "hermes",
-    "plugins"
+    "hermes"
   ],
   "compatible_agents": [
     "claude-code",

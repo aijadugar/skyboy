@@ -70,19 +70,12 @@ Zai offers models across capability tiers. Choose based on your use case:
 - Zai official documentation
 - Zai API reference
 
-## Z.ai Skills & Plugins
+## Z.ai Skills
 
-Z.ai's public skills and plugin ecosystem (`skills/` and `plugins/` in this folder):
+Z.ai's public skills ecosystem (`skills/` in this folder):
 
 ### Skills
 
 | Skill | Repository | Description | Language | License |
 |---|---|---|---|---|
 | glm-skills | [zai-org/GLM-skills](https://github.com/zai-org/GLM-skills) | Official skills for the GLM family of models — OCR, vision, multimodal | Python | Apache-2.0 |
-
-### Plugins
-
-| Repository | Description | Language | License |
-|---|---|---|---|
-| [zcode-plugins](https://github.com/zai-org/zcode-plugins) | ZCode Plugins Marketplace — official built-in and community plugins for ZCode | Python | Apache-2.0 |
-| [zai-coding-plugins](https://github.com/zai-org/zai-coding-plugins) | Z.ai Coding Plugins Marketplace in Claude Code | JavaScript | Apache-2.0 |

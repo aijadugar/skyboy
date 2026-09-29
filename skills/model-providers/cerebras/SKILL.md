@@ -70,15 +70,11 @@ Cerebras offers models across capability tiers. Choose based on your use case:
 - Cerebras official documentation
 - Cerebras API reference
 
-## Cerebras Skills & Plugins
+## Cerebras Extensions
 
-Cerebras's public plugin ecosystem (`plugins/` in this folder):
+Cerebras's public extension ecosystem:
 
-### Skills
-
-No public Cerebras repositories dedicated to agent skills were found; the folder ships plugins/extensions only.
-
-### Plugins / Extensions
+### Extensions
 
 | Repository | Description | Language | License |
 |---|---|---|---|

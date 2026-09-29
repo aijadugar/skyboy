@@ -1,12 +1,11 @@
 {
   "id": "xiaomi",
   "slug": "xiaomi",
-  "description": "Integration guide and best practices for using Xiaomi as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Xiaomi as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
-    "xiaomi",
-    "plugins"
+    "xiaomi"
   ],
   "compatible_agents": [
     "claude-code",

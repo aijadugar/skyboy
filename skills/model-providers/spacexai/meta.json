@@ -1,13 +1,12 @@
 {
   "id": "spacexai",
   "slug": "spacexai",
-  "description": "Integration guide and best practices for using SpaceXAI as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using SpaceXAI as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "spacexai",
-    "xai",
-    "plugins"
+    "xai"
   ],
   "compatible_agents": [
     "claude-code",

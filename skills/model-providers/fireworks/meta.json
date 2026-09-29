@@ -1,13 +1,12 @@
 {
   "id": "fireworks",
   "slug": "fireworks",
-  "description": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill and plugin repositories.",
+  "description": "Integration guide and best practices for using Fireworks as a model provider. Includes links to official skill repositories.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "fireworks",
-    "skills",
-    "plugins"
+    "skills"
   ],
   "compatible_agents": [
     "claude-code",

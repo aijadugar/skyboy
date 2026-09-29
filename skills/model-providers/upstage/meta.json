@@ -1,14 +1,13 @@
 {
   "id": "upstage",
   "slug": "upstage",
-  "description": "Integration guide and best practices for using Upstage as a model provider. Includes links to official plugin repositories.",
+  "description": "Integration guide and best practices for using Upstage as a model provider.",
   "category": "model-providers",
   "tags": [
     "model-provider",
     "upstage",
     "solar",
-    "n8n",
-    "plugins"
+    "n8n"
   ],
   "compatible_agents": [
     "claude-code",
