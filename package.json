@@ -15,8 +15,7 @@
     "lint": "npm --workspace apps/web run lint",
     "validate-skills": "go run ./cli validate",
     "build-catalog": "go run ./cli build-catalog",
-    "detect-duplicates": "node --experimental-strip-types scripts/detect-duplicates.ts",
-    "dedupe": "node --experimental-strip-types scripts/detect-duplicates.ts"
+    "detect-duplicates": "node --experimental-strip-types scripts/detect-duplicates.ts"
   },
   "engines": {
     "node": ">=20"
