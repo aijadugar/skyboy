@@ -9,6 +9,9 @@ build/
 # Emitted build output
 dist/
 
+# Go build output (go build ./... in cli/ drops a native binary here on Windows)
+*.exe
+
 # The design-input repos are vendored separately (each keeps its own git history)
 drawably/
 taste-skill/

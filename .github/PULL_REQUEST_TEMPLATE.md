@@ -11,5 +11,5 @@
 
 - [ ] `npm run validate-skills` passes
 - [ ] `npm run detect-duplicates` passes (if touching `skills/`)
-- [ ] `catalog.json` regenerated via `npm run export-catalog` (if the catalog changed)
+- [ ] `catalog.json` regenerated via `npm run build-catalog` (if the catalog changed)
 - [ ] No em-dashes in user-facing strings
