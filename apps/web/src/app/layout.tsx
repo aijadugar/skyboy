@@ -1,19 +1,21 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "drawably/style.css";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
+const description =
+  "Know the moment your coding agent is done, and keep it working while you're away. Skyboy is a desktop notifier for Claude Code and Codex.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://skyboy.in"),
   title: {
-    default: "skyboy.in",
-    template: "%s",
+    default: "Skyboy",
+    template: "%s · Skyboy",
   },
-  description:
-    "A fast, curated, agent-agnostic directory of portable AI-era skills. Search, preview, and install skills into Claude, Cursor, ChatGPT, Gemini CLI, and more.",
+  description,
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -22,10 +24,15 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   openGraph: {
+    title: "Skyboy",
+    description,
+    url: "https://skyboy.in",
     images: [{ url: "/logo-512.png", width: 512, height: 512 }],
   },
   twitter: {
     card: "summary",
+    title: "Skyboy",
+    description,
     images: ["/logo-512.png"],
   },
 };
@@ -39,7 +46,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         {children}
-        <Analytics />
       </body>
     </html>
   );
