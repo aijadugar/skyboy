@@ -1,120 +1,98 @@
 import type { Metadata } from "next";
-import { SiteNav } from "@/components/site-nav";
-import { Footer } from "@/components/footer";
+import Link from "next/link";
+import { PageHeader, PageShell } from "@/components/page-shell";
 
 export const metadata: Metadata = {
-  title: "Changelog · skyboy.in",
-  description: "Recent additions and changes to skyboy.in.",
+  title: "Changelog",
+  description: "Skyboy release history. The desktop app has no published version yet.",
 };
+
+const ROADMAP = [
+  {
+    version: "Now",
+    title: "Website",
+    items: [
+      "Home, features, sounds, docs, FAQ, and privacy",
+      "Waitlist, contact, and feature request",
+      "Download button in the coming-soon state",
+    ],
+  },
+  {
+    version: "v0.1",
+    title: "Notifications",
+    items: [
+      "Claude Code and Codex events, with hook setup in the app",
+      "Custom sound with preview, ring, and a desktop notification",
+      "Session list and a test button",
+      "Windows and macOS",
+    ],
+  },
+  {
+    version: "v0.2",
+    title: "Prompt queue",
+    items: ["Sequential queue with step and time limits", "Pause points", "Audit log"],
+  },
+  {
+    version: "v0.3",
+    title: "Phone and safety",
+    items: [
+      "ntfy phone push",
+      "Conditional steps",
+      "Pause and resume when an agent hits a usage limit",
+      "Git checkpoints",
+    ],
+  },
+  {
+    version: "v0.4 and later",
+    title: "Further out",
+    items: [
+      "Templates, voice announcements, webhooks, and escalating alerts",
+      "A mobile companion that can reply and approve",
+      "Stuck-agent detection",
+      "Gemini CLI, Cursor, and Linux",
+    ],
+  },
+];
 
 export default function ChangelogPage() {
   return (
-    <div className="min-h-[100dvh]">
-      <SiteNav current="/changelog" />
-      <main className="mx-auto max-w-6xl px-6 pb-24 pt-10">
-        <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
-          Changelog
+    <PageShell current="/changelog">
+      <PageHeader
+        eyebrow="Changelog"
+        title="No app release yet."
+        lede="When an installer ships, this page lists the version, the date, and what changed. The plan below is the order of work, not a set of released builds."
+      />
+
+      <article className="mt-12 max-w-2xl border-l-2 border-pen pl-5">
+        <h2 className="text-lg font-semibold tracking-tight text-ink">Website replaces the old skyboy.in</h2>
+        <p className="mt-2 text-sm leading-relaxed text-body">
+          skyboy.in is now the home of the Skyboy desktop notifier. The earlier
+          directory of AI skills is no longer part of this site. The download
+          button joins the{" "}
+          <Link href="/download#waitlist" className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen">
+            waitlist
+          </Link>
+          .
         </p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          What changed
-        </h1>
-        <p className="mt-3 max-w-[58ch] text-base leading-relaxed text-body">
-          A short record of notable additions. Skills and the catalog evolve; this
-          page tracks the site and tooling.
-        </p>
+        <p className="mt-2 font-mono text-xs text-mute">2026-11-16</p>
+      </article>
 
-        <div className="mt-10 max-w-2xl space-y-8">
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Part 6 MCP surface: search_catalog, prepare_context_zip
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              The MCP tool surface moved to its final shape on both transports:
-              search_catalog, get_skill, list_categories, and
-              prepare_context_zip, plus install_skill over stdio. The zip tool
-              calls the same bundle logic as the CLI, so every bundle carries
-              the generated _CONTEXT_SUMMARY.md. docs/mcp.md now ships copyable
-              Claude Desktop and Cursor config snippets.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
-          </section>
-
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Schema validation, dynamic categories, new CLI surface
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              skills/ now carries skill.json (validated against a JSON Schema in
-              scripts/schemas/). The Go validator enforces it in CI. Categories became fully
-              dynamic: they are derived from the skills/ tree, so a new category
-              is a folder and a PR. The CLI grew doc, update, info, and
-              comma-list add into ./.skyboy/skills/ with offline support, and
-              zip now writes a generated _CONTEXT_SUMMARY.md into every bundle.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
-          </section>
-
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              One binary: Go CLI + stdio MCP
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              Retired the npm and PyPI packages and rewrote the CLI and the stdio
-              MCP server as a single dependency-free Go binary (cli/). New
-              commands: skyboy zip (bundle skills for upload-style agents) and
-              skyboy mcp (local MCP server, stdio or http). Install moved to
-              curl/irm scripts and GitHub Releases.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-11</p>
-          </section>
-
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Phase 3: CLI + MCP + install guides
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              Added the skyboy add CLI, the Skyboy MCP server (stdio + hosted
-              read-only), the remaining agent install guides, and a /docs/mcp
-              setup page. Every package-manager command is shown for both npm and
-              pip/uvx.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-03</p>
-          </section>
-
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Phase 2: Submit flow + duplicate detection
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              Added the /submit contribution route and a duplicate detector.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-02</p>
-          </section>
-
-          <section className="border-l-2 border-hairline pl-5">
-            <h2 className="text-lg font-semibold tracking-tight text-ink">
-              Phase 1: Browse + skill details
-            </h2>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              First catalog routes: /browse with category and tag filters, and
-              /skill/[slug] with an in-page SKILL.md preview and permissions
-              manifest.
-            </p>
-            <p className="mt-2 font-mono text-xs text-mute">2026-09-01</p>
-          </section>
-        </div>
-
-        <p className="mt-12 max-w-[58ch] text-sm text-body">
-          Want to follow along or contribute?{" "}
-          <a
-            href="/submit"
-            className="font-mono text-xs uppercase tracking-[0.1em] text-pen hover:text-pen-deep"
-          >
-            Submit a skill →
-          </a>
-        </p>
-      </main>
-      <Footer />
-    </div>
+      <section className="mt-14">
+        <h2 className="text-2xl font-semibold tracking-tight text-ink">Roadmap</h2>
+        <ol className="mt-6 max-w-2xl space-y-8">
+          {ROADMAP.map((phase) => (
+            <li key={phase.version} className="border-t border-hairline pt-5">
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">{phase.version}</p>
+              <h3 className="mt-2 text-lg font-semibold text-ink">{phase.title}</h3>
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-body">
+                {phase.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ol>
+      </section>
+    </PageShell>
   );
 }
