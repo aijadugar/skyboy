@@ -1,224 +1,59 @@
-# skyboy.in
+# Skyboy
 
-A fast, searchable, agent-agnostic home for portable **AI skills**.
-Each one is a self-contained `SKILL.md` package that hands coding agents, writing
-agents, memory systems, and reasoning workflows reusable, expert-level behavior.
+**Know the moment your coding agent is done, and keep it working while you're away.**
 
-Skyboy is the curated directory where you find a skill once and pull it into
-whichever agent you're already using, without copy-pasting. It ships the catalog
-as a website, a single dependency-free CLI binary, and an MCP server, so a skill
-is one command away from any tool.
+Skyboy is a desktop notifier for AI coding agents, starting with **Claude Code** and **Codex**. It alerts you the way you choose when a task finishes or the agent needs you. It can then send the next prompt from a queue you wrote, so long jobs keep moving without you sitting at the screen.
 
----
+Website: **https://skyboy.in**
 
-## Quickstart & Installation
+The desktop app is not built yet. This repository's website is the marketing and download site. Items described as planned do not exist yet. How Claude Code and Codex expose events must be checked against their current documentation before the app is implemented.
 
-### The CLI
+The earlier site at this address was a directory of AI skills. That product is not Skyboy the notifier, and it is not part of this website.
 
-One static binary, written in Go, no runtime required:
+## Design rules
 
-```bash
-# macOS / Linux
-curl -fsSL https://skyboy.in/install.sh | sh
+- **Desktop app only.** Install, open, done. No command line for the user and no browser extension.
+- **Local first.** Prompts, code, and agent output stay on your machine unless you turn on phone push.
+- **Safe by default.** Automatic prompts are limited, stoppable, and logged.
 
-# Windows (PowerShell)
-irm https://skyboy.in/install.ps1 | iex
-```
+## Website
 
-Or grab a prebuilt binary straight from
-[GitHub Releases](https://github.com/aijadugar/skyboy/releases)
-(linux, macOS, Windows; amd64 + arm64), drop it on your `PATH`, and:
+The site is marketing and download only. The app runs on the user's computer.
 
-```bash
-skyboy add <name1,name2,...>   # download into ./.skyboy/skills/ + track in ~/.skyboy/state.json
-skyboy update <name>           # re-fetch and report what changed
-skyboy list                    # what you have locally
-skyboy list --all              # the full catalog, grouped by category
-skyboy zip <name1,name2,...>   # one ZIP + a generated _CONTEXT_SUMMARY.md for ChatGPT/Claude/Gemini uploads
-skyboy info <name>             # print a skill's SKILL.md
-skyboy doc --print             # the docs, in the terminal
-skyboy mcp --transport stdio   # the MCP server (or --transport http)
-skyboy version
-```
-
-`add` installs every named skill (comma-separated) into `./.skyboy/skills/`
-and records it in `~/.skyboy/state.json`, so `list`, `info`, `update`, and
-`zip` all work offline against the cache. Scoped ids work too:
-`skyboy add @vercel/nextjs-skill`. `zip` always writes a generated
-`_CONTEXT_SUMMARY.md` at the archive root: a short, first-class brief that
-tells the receiving LLM what is loaded and how to use it, which is what makes
-the upload-the-zip workflow actually work.
-
-### Skill format
-
-Every skill folder (`skills/<category>/<name>/`) carries:
-
-- `SKILL.md` with frontmatter name/description and a `## Command` section
-  holding the exact `skyboy add <name>` invocation
-- `skill.json`, validated against [`scripts/schemas/skill.schema.json`](scripts/schemas/skill.schema.json)
-
-CI runs the Go validator (`skyboy validate`) on every PR, and
-`skyboy build-catalog` regenerates `catalog.json`, including the **dynamic
-category list**: categories are derived from the top-level folders under
-`skills/`, so adding a category is just adding a folder and a PR, with no code
-change anywhere in the site or CLI.
-
-### Direct download (no CLI, no file server)
-
-```bash
-# degit clones just the skill folder, no git history
-npx degit aijadugar/skyboy/skills/<category>/<slug> .claude/skills/<slug>
-
-# or pull the raw SKILL.md straight from GitHub
-curl -O https://raw.githubusercontent.com/aijadugar/skyboy/main/skills/<category>/<slug>/SKILL.md
-```
-
----
-
-## MCP Server Setup
-
-The Skyboy MCP server exposes the catalog as callable tools. Use the hosted
-endpoint for a zero-install, read-only connection, or the same `skyboy` binary
-in stdio mode if you also want `install_skill` (which writes to your
-filesystem).
-
-### Hosted endpoint (`mcp.skyboy.in`)
-
-```json
-{
-  "mcpServers": {
-    "skyboy": {
-      "type": "http",
-      "url": "https://mcp.skyboy.in"
-    }
-  }
-}
-```
-
-Read-only: search, preview, list, bundle. No filesystem writes.
-
-### Local stdio (install-capable)
-
-```bash
-skyboy mcp --transport stdio
-```
-
-```json
-{
-  "mcpServers": {
-    "skyboy": {
-      "command": "skyboy",
-      "args": ["mcp", "--transport", "stdio"],
-      "type": "stdio"
-    }
-  }
-}
-```
-
-### Available tools
-
-| Tool | Transport | Description |
-|---|---|---|
-| `search_catalog(query, category?)` | remote + stdio | Fuzzy search slug, name, description, or tag. |
-| `get_skill(slug)` | remote + stdio | Full SKILL.md body + skill.json metadata in one call. |
-| `list_categories()` | remote + stdio | The dynamic taxonomy tree and compatible agents. |
-| `prepare_context_zip(slugs[])` | remote + stdio | The exact `skyboy zip` bundle. stdio returns a file path; http returns a signed download URL. |
-| `install_skill(slug, target_dir?)` | **stdio only** | Write a skill to a local folder. |
-
-One server implementation, transport selected by `--transport stdio|http`.
-The hosted endpoint serves only the read-only tools. `install_skill` is
-local-only because it writes to a filesystem and therefore requires local
-trust. Full config snippets for Claude Desktop and Cursor are in
-[docs/mcp.md](docs/mcp.md) and on the site at /docs/mcp.
-
----
-
-## Documentation & Agent Install Paths
-
-Full guides and per-agent install steps live at [`docs.skyboy.in`](https://docs.skyboy.in).
-
-| Agent | Where it reads skills |
+| Page | Purpose |
 |---|---|
-| Claude Code | `.claude/skills/<slug>/` |
-| Cursor | `.cursor/rules/<slug>/` |
-| Windsurf | `.windsurf/skills/<slug>/` |
-| Gemini CLI | `.gemini/skills/<slug>/` |
-| Codex CLI | `.codex/<slug>/` |
-| ChatGPT | paste the SKILL.md into a custom GPT (or `skyboy zip <slug>` for a bundle) |
-| Claude Desktop | upload the SKILL.md |
+| Home | What Skyboy does, the download button, a short demo, supported agents |
+| Features | Alert styles, prompt queue, dashboard, safety controls |
+| How it works | The hook-based flow in plain language |
+| Sounds | A gallery where visitors can preview the built-in sounds |
+| Download | One control per operating system, with version and checksum once a release exists |
+| Docs | Setup for Claude Code and Codex, phone push, troubleshooting |
+| Changelog | Release history |
+| Privacy | What stays on the computer and what phone push sends |
+| FAQ | Short answers |
+| Contact | Support and feedback |
 
----
+Until the app ships, the download button says **Coming soon** and opens the waitlist. Forms ask only for the fields they need, say why, and link to the privacy page. They open an email to contact@skyboy.in. The site does not store the submission.
 
-## Repository Architecture
+Contact: contact@skyboy.in
 
-```
-skyboy/
-├── apps/
-│   └── web/                     Next.js 15 site (catalog, docs, hosted MCP endpoint)
-│       ├── src/server/catalog/  In-app catalog reader (types, search, resolve, manifest)
-│       ├── src/server/mcp/      Hosted read-only MCP server logic
-│       └── public/install.sh    curl install script (+ install.ps1 for Windows)
-├── cli/                         The skyboy Go binary: CLI + stdio MCP server,
-│                                Go stdlib only, zero third-party dependencies
-├── skills/                      THE catalog, one folder per skill
-├── scripts/                     export-catalog, validate-skill, generate-manifest,
-│                                detect-duplicates
-└── docs/skill-spec.md           the canonical SKILL.md format
-```
+## What the app will do
 
-`catalog.json` at the repo root is the single shareable manifest: generated from
-the real `skills/` tree by the Go `build-catalog`, and
-consumed by the website, the Go CLI, and the stdio MCP server.
+Notify on task finished, needs permission, needs input, and error. Alert with a custom sound, a repeating ring, a desktop notification, and optional phone push. A prompt queue sends the next step you wrote, with pause points and step and time limits. The window lists sessions, and a local log records alerts and automatic prompts.
 
-The Go binary talks to the same raw.githubusercontent URLs and the same hosted
-`/api/search` endpoint the site serves, so the CLI works outside a checkout
-with no local state. Building it yourself:
+Phone push is off by default. The first path is ntfy with a long random topic. A Skyboy mobile app is planned.
+
+Platforms for the first release: Windows 10/11 and macOS. Linux comes after.
+
+## Run the website
 
 ```bash
-cd cli
-go build -o skyboy .
-go test ./...
+npm install
+npm run dev
 ```
 
----
-
-## Contributing & Validation
-
-### Submit a skill
-
-1. Create `skills/<category>/<slug>/SKILL.md` with a frontmatter `name` and
-   `description` and a `## Command` section, plus `skill.json` for category,
-   tags, command, author, license, and version. Both files are validated
-   against the schemas in [`scripts/schemas/`](scripts/schemas). See
-   [`docs/skill-spec.md`](docs/skill-spec.md) for the full format.
-2. Run the validation and catalog build locally (requires Go 1.24+):
-   ```bash
-   skyboy validate        # or: go run ./cli validate
-   skyboy build-catalog   # or: go run ./cli build-catalog
-   ```
-3. Open a pull request using the
-   [skill-submission template](.github/PULL_REQUEST_TEMPLATE/skill-submission.md).
-   CI runs the Go validator against the JSON Schemas, rebuilds the catalog and
-   fails on drift, then runs the web build and `go test`/`go vet`.
-
-### Releasing the CLI
-
-Releases are tag-driven: push a `v*` tag and the release workflow
-cross-compiles the binary for every supported platform and attaches the
-artifacts to a GitHub Release, which is what the install scripts download.
-
-### Conventions
-
-- **Zero em-dashes** in rendered text, docs, CLI output, and docstrings. Use
-  commas, parentheses, or colons instead.
-- **Hairline borders** (`#c9c9c6`) and **pen-blue accents** (`#2724d1`) on
-  strokes only, never surfaces; these are the site's design tokens.
-
----
+The Next.js app lives in `apps/web`.
 
 ## License
 
-MIT. Skills carry their own licenses as declared in their
-`metadata.json`.
-
-Built and maintained by the Skyboy project.
+To be decided.
