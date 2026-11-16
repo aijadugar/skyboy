@@ -2,7 +2,7 @@
   "name": "skyboy",
   "version": "0.1.0",
   "private": true,
-  "description": "skyboy.in - a fast, curated, agent-agnostic directory of portable AI-era skills",
+  "description": "Skyboy — a desktop notifier for Claude Code and Codex. This repo is the skyboy.in website.",
   "license": "MIT",
   "type": "module",
   "workspaces": [
