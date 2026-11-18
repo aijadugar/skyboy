@@ -59,11 +59,8 @@ jobs:
       # stays on the one step that needs it.
       SKYBOT_CLIENT_ID: ${{ secrets.SKYBOT_CLIENT_ID }}
     steps:
-      # Posts will show as "SkyBot" with the Skyboy logo once this app exists.
-      # Until SKYBOT_CLIENT_ID and SKYBOT_PRIVATE_KEY are set, the step is
-      # skipped and the report is posted by github-actions[bot] instead, so CI
-      # works either way. Setup is described in the pull request that added
-      # this workflow.
+      # Posts show as "SkyBot" with the Skyboy logo when the app is configured,
+      # and as github-actions[bot] otherwise, so CI works either way.
       - name: Mint the SkyBot token
         id: skybot
         if: env.SKYBOT_CLIENT_ID != ''
@@ -73,11 +70,12 @@ jobs:
           private-key: ${{ secrets.SKYBOT_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
           repositories: ${{ github.event.repository.name }}
-          # Downscope to exactly what commenting needs, rather than inheriting
-          # everything the app was granted. The script only reads pull requests
-          # and writes issue comments, so that is all the token can do.
+          # Downscope to exactly what the report needs, rather than inheriting
+          # everything the app was granted. It writes issue comments (the sticky
+          # report lives on the issues API) and writes pull request reviews
+          # (requesting or dismissing changes), and nothing else.
           permission-issues: write
-          permission-pull-requests: read
+          permission-pull-requests: write
 
       - name: Download the ci-results artifact
         id: download
@@ -334,10 +332,8 @@ jobs:
             // the token steps above); this is the name and logo shown inside
             // the body, which works either way.
             //
-            // The logo lives in apps/web/public, so it is served by the site at
-            // https://skyboy.in/icon.png. Raw GitHub is used here instead so the
-            // image does not depend on a deploy. It requires that icon.png is
-            // committed to the default branch -- it is currently untracked.
+            // Raw GitHub is used for the logo, rather than the site, so the
+            // image does not depend on a deploy.
             const defaultBranch = context.payload.repository?.default_branch || 'main';
             const logoUrl = `https://raw.githubusercontent.com/${REPO}/${defaultBranch}/apps/web/public/icon.png`;
             const BOT_NAME = 'SkyBot';
@@ -501,27 +497,145 @@ jobs:
               (comment) => typeof comment.body === 'string' && comment.body.startsWith(MARKER),
             );
 
+            let reportComment = null;
             if (existing) {
               // Out-of-order guard: a slower, older run finishing after a newer
-              // one must not overwrite the newer report with stale results.
+              // one must not overwrite the newer report with stale results. The
+              // same applies to the review verdict below, so returning here is
+              // deliberate: a stale run must not touch the pull request state.
               const existingRun = /run=(\d+)/.exec(existing.body);
               if (existingRun && Number(existingRun[1]) > Number(process.env.RUN_ID)) {
                 core.notice(`comment was written by newer run ${existingRun[1]}; leaving it alone.`);
                 return;
               }
-              await github.rest.issues.updateComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                comment_id: existing.id,
-                body,
-              });
+              reportComment = (
+                await github.rest.issues.updateComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  comment_id: existing.id,
+                  body,
+                })
+              ).data;
               core.notice(`${BOT_NAME} updated its report on #${issue_number}.`);
             } else {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number,
-                body,
-              });
+              reportComment = (
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number,
+                  body,
+                })
+              ).data;
               core.notice(`${BOT_NAME} posted its first report on #${issue_number}.`);
+            }
+
+            // ------------------------------------------------------------------
+            // SkyBot's review verdict
+            // ------------------------------------------------------------------
+            //
+            // The comment is advisory; a review is what actually marks the pull
+            // request as needing work, and dismissing it is what clears the
+            // block once the checks are green.
+            //
+            // Reviews are identified by a marker in their body rather than by
+            // login, because the author is `skybot[bot]` when the app is
+            // configured and `github-actions[bot]` when it is not.
+            //
+            // Everything here is best effort: the report has already been
+            // posted, so a review failure must never fail this job.
+
+            const REVIEW_MARKER = '<!-- skyboy-ci-review -->';
+            const HEAD = String(process.env.HEAD_SHA || '');
+            const headShort = code(HEAD.slice(0, 7) || 'unknown', 40);
+            // A cancelled or timed-out run says nothing about the code, so it
+            // must never flip the pull request's review state.
+            const NO_VERDICT_CONCLUSIONS = ['cancelled', 'timed_out', 'skipped'];
+
+            const reportUrl = reportComment?.html_url || process.env.RUN_URL;
+            const reviewLinks = `[SkyBot's report](${reportUrl}) · [CI run](${process.env.RUN_URL})`;
+
+            function isSkyBotReview(review) {
+              return typeof review.body === 'string' && review.body.includes(REVIEW_MARKER);
+            }
+
+            try {
+              const reviews = (
+                await github.paginate(github.rest.pulls.listReviews, {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: issue_number,
+                  per_page: 100,
+                })
+              ).filter(isSkyBotReview);
+
+              if (green) {
+                // Green: withdraw every outstanding request of ours. SkyBot
+                // never submits an APPROVE review - the maintainer approves.
+                for (const review of reviews.filter((r) => r.state === 'CHANGES_REQUESTED')) {
+                  try {
+                    await github.rest.pulls.dismissReview({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: issue_number,
+                      review_id: review.id,
+                      message: `CI is green on ${headShort}`,
+                    });
+                    core.notice(`${BOT_NAME} dismissed its changes-requested review (${review.id}).`);
+                  } catch (error) {
+                    core.warning(`could not dismiss review ${review.id}: ${error.message}`);
+                  }
+                }
+              } else if (actionableFailures.length > 0 && !NO_VERDICT_CONCLUSIONS.includes(conclusion)) {
+                // Re-fetch rather than trusting the payload: a closed pull
+                // request must never be touched, and the head may have moved on
+                // to a commit with its own run.
+                const pr = (
+                  await github.rest.pulls.get({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    pull_number: issue_number,
+                  })
+                ).data;
+
+                if (pr.state !== 'open' || pr.head?.sha !== HEAD) {
+                  core.notice(
+                    `not requesting changes: pull request is ${cell(pr.state, 20)}` +
+                      `${pr.head?.sha !== HEAD ? ', or a newer commit has its own run' : ''}.`,
+                  );
+                } else {
+                  const latestOnCommit = reviews
+                    .filter((review) => review.commit_id === HEAD)
+                    .sort((a, b) => a.id - b.id)
+                    .pop();
+
+                  if (latestOnCommit && latestOnCommit.state === 'CHANGES_REQUESTED') {
+                    core.notice(`${BOT_NAME} has already requested changes on this commit.`);
+                  } else {
+                    const failingNames = actionableFailures
+                      .map((check) => `\`${code(`${check.job} / ${check.tool}`, 70)}\``)
+                      .join(', ');
+                    const reviewBody = [
+                      REVIEW_MARKER,
+                      '',
+                      `**${attentionCount} ${attentionCount === 1 ? 'check needs' : 'checks need'} attention** on commit \`${headShort}\`.`,
+                      '',
+                      `Failing: ${failingNames}`,
+                      '',
+                      reviewLinks,
+                    ].join('\n');
+
+                    await github.rest.pulls.createReview({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      pull_number: issue_number,
+                      commit_id: HEAD,
+                      event: 'REQUEST_CHANGES',
+                      body: reviewBody,
+                    });
+                    core.notice(`${BOT_NAME} requested changes on #${issue_number}.`);
+                  }
+                }
+              }
+            } catch (error) {
+              core.warning(`could not update the SkyBot review: ${error.message}`);
             }
