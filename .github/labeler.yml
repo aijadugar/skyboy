@@ -1,0 +1,40 @@
+# Label rules for actions/labeler.
+#
+# Path -> label mapping. Labels are applied by
+# `.github/workflows/labeler.yml`, which runs on `pull_request_target` and
+# never checks out pull request code.
+#
+# Every label listed here must exist in the repository, or it is silently
+# ignored. The ones this file needs are listed in the setup checklist in the
+# pull request that added it.
+
+web:
+  - changed-files:
+      - any-glob-to-any-file:
+          - apps/web/**
+
+# apps/desktop does not exist yet. The rule is here so the label starts working
+# the moment the first desktop commit lands, without touching this file.
+desktop:
+  - changed-files:
+      - any-glob-to-any-file:
+          - apps/desktop/**
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/**
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+          - '**/*.md'
+
+# Anything that can change the dependency graph.
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - package.json
+          - package-lock.json
+          - '**/package.json'
