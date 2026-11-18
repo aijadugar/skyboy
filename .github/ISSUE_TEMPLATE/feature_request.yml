@@ -1,0 +1,78 @@
+name: Feature request
+description: Suggest a change, a new capability, or an improvement to something that already exists.
+title: '[Feature]: '
+labels:
+  - enhancement
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for thinking about where Skyboy should go next.
+
+        The most useful requests describe the problem you are stuck with rather
+        than only the solution you have in mind. If there is a workaround you
+        are using today, mention it - it tells us a lot about how much the
+        change matters.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you file
+      options:
+        - label: I searched the existing issues and this is not already requested.
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve
+      description: Describe the situation that made you want this. What are you doing today, and where does it break down?
+      placeholder: |
+        I run three agents at once in different repositories. When more than one
+        needs me, I cannot tell from the alert which one to go to first.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: What you would like Skyboy to do
+      description: If you have a specific design in mind, describe it. Rough sketches are fine.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered
+      description: >
+        Other ways to solve it, other tools you tried, or why the obvious
+        approach does not work. If you have not thought about alternatives,
+        say so and skip it.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which agent does this concern
+      description: Pick the closest fit, even if the request would apply to both.
+      options:
+        - Claude Code
+        - Codex
+        - Both agents equally
+        - Neither - it is about the Skyboy app itself
+        - Other (say which below)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contribution
+      options:
+        - label: I would like to work on this myself
+          required: false
+        - label: I am willing to test a build once someone else implements it
+          required: false
