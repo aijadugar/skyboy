@@ -37,8 +37,7 @@ on:
         type: string
 
 # Least privilege by default. No job here needs to write to the repository:
-# the reporting jobs live in pr-report.yml and labeler.yml, which declare
-# their own permissions.
+# the reporting job lives in pr-report.yml, which declares its own permissions.
 permissions:
   contents: read
 
@@ -61,6 +60,61 @@ jobs:
   # .github/scripts/ci-record.mjs, or the drift guard will fail the run.
 
   # ---------------------------------------------------------------------------
+  # Change detection
+  # ---------------------------------------------------------------------------
+  # A documentation-only pull request should not pay for a three-OS build
+  # matrix. This job decides what kind of change this is; `typecheck` and
+  # `test` are gated on its `web` output.
+  #
+  # The filter deliberately includes package*.json and .github/**: a dependency
+  # bump or a workflow change can break the app even though no file under
+  # apps/web moved. Err towards running the matrix.
+  changes:
+    name: Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      # paths-filter lists the changed files through the REST API on
+      # pull_request events.
+      pull-requests: read
+    outputs:
+      # Always 'true' or 'false', never empty. See the Decide step.
+      web: ${{ steps.decide.outputs.web }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Detect changed paths
+        id: filter
+        continue-on-error: true
+        uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+              - 'package*.json'
+              - '.github/**'
+
+      # Fail safe. If detection cannot run at all (an event the action does not
+      # handle, a transient API error), run the full matrix rather than let a
+      # gated check be skipped without anyone having looked at the code.
+      - name: Decide
+        id: decide
+        shell: bash
+        env:
+          FILTER_OUTCOME: ${{ steps.filter.outcome }}
+          FILTER_WEB: ${{ steps.filter.outputs.web }}
+        run: |
+          if [ "$FILTER_OUTCOME" != "success" ] || [ -z "$FILTER_WEB" ]; then
+            echo "::warning title=Change detection did not run::Running the full matrix so no check is silently skipped."
+            echo "web=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "web=$FILTER_WEB" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ---------------------------------------------------------------------------
   # Lint
   # ---------------------------------------------------------------------------
   lint:
@@ -69,6 +123,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -169,10 +226,18 @@ jobs:
   # ---------------------------------------------------------------------------
   typecheck:
     name: Typecheck
+    needs: changes
+    # Skipped on a documentation-only change. The verdict treats a skip as a
+    # pass only when `changes` reports no web-related files, so this can never
+    # be skipped grey-and-forgotten.
+    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -247,6 +312,9 @@ jobs:
   # real suite lands, it runs here without any change to this file.
   test:
     name: Test (${{ matrix.os }})
+    needs: changes
+    # Same rule as typecheck: only a documentation-only change may skip it.
+    if: needs.changes.outputs.web == 'true'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 25
     strategy:
@@ -255,6 +323,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -337,92 +408,6 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
-  # Build
-  # ---------------------------------------------------------------------------
-  # Produces the production build once, on Linux, and keeps the output as an
-  # artifact. This overlaps the build step inside the matrix job on purpose:
-  # the matrix answers "does it build per-OS", this job answers "what came out".
-  # Nothing is deployed from CI yet, and there is no desktop app to package.
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-          cache-dependency-path: package-lock.json
-
-      - name: Record the pull request number
-        shell: bash
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
-          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
-        run: node .github/scripts/ci-record.mjs pr-number
-
-      - name: Install dependencies
-        id: install
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -o pipefail
-          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
-
-      - name: Build
-        id: check
-        if: steps.install.outcome == 'success'
-        continue-on-error: true
-        shell: bash
-        run: npm run build > ci-results/build.log 2>&1
-
-      - name: Record build results
-        if: always()
-        shell: bash
-        env:
-          INSTALL_OUTCOME: ${{ steps.install.outcome }}
-          CHECK_OUTCOME: ${{ steps.check.outcome }}
-        run: |
-          set +e
-          status=0
-          if [ "$INSTALL_OUTCOME" != "success" ]; then
-            node .github/scripts/ci-record.mjs summary --job build --tool npm \
-              --status fail --message "npm ci failed; see the run log" || status=1
-            exit "$status"
-          fi
-          code=0; [ "$CHECK_OUTCOME" = "success" ] || code=1
-          node .github/scripts/ci-record.mjs parse --job build --tool next-build \
-            --input ci-results/build.log --exit-code "$code" || status=1
-          exit "$status"
-
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: ci-results-build
-          path: ci-results/
-          retention-days: 5
-          if-no-files-found: warn
-
-      - name: Upload the build output
-        if: steps.check.outcome == 'success'
-        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        with:
-          name: web-build
-          path: |
-            apps/web/.next/
-            !apps/web/.next/cache/
-          # Required since upload-artifact v4.4: hidden files are skipped by
-          # default, and every path here starts with a dot.
-          include-hidden-files: true
-          retention-days: 3
-          if-no-files-found: error
-
-  # ---------------------------------------------------------------------------
   # Secret scan
   # ---------------------------------------------------------------------------
   # gitleaks-action has no merge_group support, so it is skipped there. The
@@ -436,6 +421,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -512,6 +498,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -573,6 +562,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -617,10 +609,10 @@ jobs:
     name: all-checks-pass
     if: always()
     needs:
+      - changes
       - lint
       - typecheck
       - test
-      - build
       - secret-scan
       - dependency-review
       - pr-title
@@ -628,6 +620,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
@@ -655,16 +650,20 @@ jobs:
           path: ci-results
           merge-multiple: true
 
+      # `changes` is deliberately not a job result: it is the change-detection
+      # verdict for this diff, which ci-record.mjs uses to decide whether a
+      # skipped typecheck/test is legitimate. An empty value means detection did
+      # not run, and is treated strictly.
       - name: Verdict
         if: always()
         shell: bash
         env:
           EVENT_NAME: ${{ github.event_name }}
           JOB_RESULTS: |
+            changes=${{ needs.changes.outputs.web }}
             lint=${{ needs.lint.result }}
             typecheck=${{ needs.typecheck.result }}
             test=${{ needs.test.result }}
-            build=${{ needs.build.result }}
             secret-scan=${{ needs.secret-scan.result }}
             dependency-review=${{ needs.dependency-review.result }}
             pr-title=${{ needs.pr-title.result }}

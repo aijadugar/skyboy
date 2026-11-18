@@ -6,9 +6,7 @@
 blank_issues_enabled: false
 
 contact_links:
-  # NOTE: Discussions has to be enabled in the repository settings or this link
-  # leads to a 404. See the setup checklist in the pull request that added this
-  # file. Until then the contact page below is the working way to ask a question.
+  # Discussions is enabled for this repository, so this link resolves.
   - name: Questions and ideas
     url: https://github.com/aijadugar/skyboy/discussions
     about: Ask how something works, or float an idea before writing it up as an issue.
