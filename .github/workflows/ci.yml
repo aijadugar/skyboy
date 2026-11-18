@@ -37,8 +37,7 @@ on:
         type: string
 
 # Least privilege by default. No job here needs to write to the repository:
-# the reporting jobs live in pr-report.yml and labeler.yml, which declare
-# their own permissions.
+# the reporting job lives in pr-report.yml, which declares its own permissions.
 permissions:
   contents: read
 
@@ -337,92 +336,6 @@ jobs:
           if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
-  # Build
-  # ---------------------------------------------------------------------------
-  # Produces the production build once, on Linux, and keeps the output as an
-  # artifact. This overlaps the build step inside the matrix job on purpose:
-  # the matrix answers "does it build per-OS", this job answers "what came out".
-  # Nothing is deployed from CI yet, and there is no desktop app to package.
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-          cache-dependency-path: package-lock.json
-
-      - name: Record the pull request number
-        shell: bash
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
-          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
-          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
-        run: node .github/scripts/ci-record.mjs pr-number
-
-      - name: Install dependencies
-        id: install
-        continue-on-error: true
-        shell: bash
-        run: |
-          set -o pipefail
-          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
-
-      - name: Build
-        id: check
-        if: steps.install.outcome == 'success'
-        continue-on-error: true
-        shell: bash
-        run: npm run build > ci-results/build.log 2>&1
-
-      - name: Record build results
-        if: always()
-        shell: bash
-        env:
-          INSTALL_OUTCOME: ${{ steps.install.outcome }}
-          CHECK_OUTCOME: ${{ steps.check.outcome }}
-        run: |
-          set +e
-          status=0
-          if [ "$INSTALL_OUTCOME" != "success" ]; then
-            node .github/scripts/ci-record.mjs summary --job build --tool npm \
-              --status fail --message "npm ci failed; see the run log" || status=1
-            exit "$status"
-          fi
-          code=0; [ "$CHECK_OUTCOME" = "success" ] || code=1
-          node .github/scripts/ci-record.mjs parse --job build --tool next-build \
-            --input ci-results/build.log --exit-code "$code" || status=1
-          exit "$status"
-
-      - name: Upload results
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: ci-results-build
-          path: ci-results/
-          retention-days: 5
-          if-no-files-found: warn
-
-      - name: Upload the build output
-        if: steps.check.outcome == 'success'
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
-        with:
-          name: web-build
-          path: |
-            apps/web/.next/
-            !apps/web/.next/cache/
-          # Required since upload-artifact v4.4: hidden files are skipped by
-          # default, and every path here starts with a dot.
-          include-hidden-files: true
-          retention-days: 3
-          if-no-files-found: error
-
-  # ---------------------------------------------------------------------------
   # Secret scan
   # ---------------------------------------------------------------------------
   # gitleaks-action has no merge_group support, so it is skipped there. The
@@ -620,7 +533,6 @@ jobs:
       - lint
       - typecheck
       - test
-      - build
       - secret-scan
       - dependency-review
       - pr-title
@@ -664,7 +576,6 @@ jobs:
             lint=${{ needs.lint.result }}
             typecheck=${{ needs.typecheck.result }}
             test=${{ needs.test.result }}
-            build=${{ needs.build.result }}
             secret-scan=${{ needs.secret-scan.result }}
             dependency-review=${{ needs.dependency-review.result }}
             pr-title=${{ needs.pr-title.result }}
