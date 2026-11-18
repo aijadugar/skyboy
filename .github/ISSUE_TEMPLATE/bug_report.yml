@@ -1,0 +1,129 @@
+name: Bug report
+description: Something in Skyboy is broken, crashed, or did not do what you expected.
+title: '[Bug]: '
+labels:
+  - bug
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this.
+
+        Skyboy is at an early stage, so a clear report is genuinely useful. The
+        more precisely you can describe what you saw, the faster it can be
+        fixed. If you are not sure whether something is a bug, open it anyway
+        and say so.
+
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Before you file
+      options:
+        - label: I searched the existing issues and this is not already reported.
+          required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What did Skyboy do? Please be specific about what you saw on screen.
+      placeholder: |
+        I started a long Claude Code task, switched windows, and Skyboy never
+        alerted me when it finished. The session showed as idle in the window.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: The exact sequence. Number each step, starting from a fresh launch if you can.
+      placeholder: |
+        1. Open Skyboy and leave it running in the tray
+        2. Start Claude Code in a terminal
+        3. Ask it to do something that takes about five minutes
+        4. Switch to another window and wait for it to finish
+        5. No alert appears
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-result
+    attributes:
+      label: What you expected instead
+      description: What should have happened at the step where it went wrong?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      description: Windows 10 and 11, and macOS, are supported in the first release. Linux is not yet supported, but a report is still welcome.
+      options:
+        - Windows 11
+        - Windows 10
+        - macOS
+        - Linux
+        - Other (say which below)
+    validations:
+      required: true
+
+  - type: input
+    id: skyboy-version
+    attributes:
+      label: Skyboy version
+      description: Shown in the Skyboy window, under About. If you built it yourself, give the commit instead.
+      placeholder: '0.1.0'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Which agent were you using
+      description: Choose the one that was running when the problem happened.
+      options:
+        - Claude Code
+        - Codex
+        - Both
+        - Neither - the problem happens without an agent running
+        - Other (say which below)
+    validations:
+      required: true
+
+  - type: input
+    id: agent-version
+    attributes:
+      label: Agent version
+      description: The version of Claude Code or Codex that was running. An output of the version command is ideal.
+      placeholder: '1.2.3'
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: |
+        Anything that helps: Skyboy's log file, the tail of the agent's output,
+        or a screenshot of the alert that did or did not appear.
+
+        **Remove secrets before you paste.** Logs can contain API keys, tokens,
+        private file paths, prompts, and source code. Replace anything sensitive
+        with `[redacted]`. A report without logs is still useful - please do not
+        paste something you are uncomfortable sharing.
+      render: text
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: logs-redacted
+    attributes:
+      label: Before submitting
+      options:
+        - label: I have removed secrets, tokens and private paths from anything I pasted above.
+          required: true
+        - label: This report does not disclose a security vulnerability. I know those are reported privately, as described in SECURITY.md.
+          required: true
