@@ -1,0 +1,527 @@
+# Posts a single sticky comment on the pull request summarising a CI run.
+#
+# Why this is a separate workflow rather than a step in ci.yml:
+#
+#   A pull request from a fork gets a read-only GITHUB_TOKEN in the
+#   `pull_request` event, so the CI workflow cannot comment on it. A
+#   `workflow_run` workflow executes in the base repository's context and gets
+#   a token that can write. That is the whole reason this file exists.
+#
+# The security rules that come with `workflow_run`, all of which this file
+# obeys and which must not be relaxed:
+#
+#   * Never check out or execute pull request code. There is no checkout step
+#     here, and there must never be one. The branch this run is "about" is
+#     attacker-controlled.
+#   * Treat the `ci-results` artifact as untrusted data. It is parsed as JSON
+#     and re-emitted as escaped markdown, inside `actions/github-script` (a
+#     Node process), never interpolated into a shell command. The artifact's
+#     contents therefore never reach a shell, an eval, or a template.
+#   * `::error::`-style workflow commands are never emitted from artifact
+#     contents: an attacker could otherwise forge annotations or mask output.
+#   * The pull request number comes from the artifact (validated as an integer)
+#     or from `workflow_run.pull_requests`, never from a branch name.
+#   * The comment body is capped well under GitHub's 65536-character limit.
+
+name: PR report
+
+on:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  # Enough to create and update an issue comment on a pull request, and no more.
+  pull-requests: write
+
+concurrency:
+  group: pr-report-${{ github.event.workflow_run.id }}
+  cancel-in-progress: true
+
+jobs:
+  report:
+    name: Report on the pull request
+    # A push to main has no pull request to report on. Everything else
+    # (pull_request, merge_group, workflow_dispatch) may have one, and the
+    # script below skips cleanly when it cannot resolve a number.
+    if: github.event.workflow_run.event != 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # A comment is authored by whatever account or app owns the token that
+      # posted it, so this is what decides whether the report appears as
+      # "SkyBot" or as `github-actions[bot]`.
+      #
+      # Only the client id sits at job level, because a job-level `env` value is
+      # the reliable way to gate a step on "is this configured". The private key
+      # stays on the one step that needs it.
+      SKYBOT_CLIENT_ID: ${{ secrets.SKYBOT_CLIENT_ID }}
+    steps:
+      # Posts will show as "SkyBot" with the Skyboy logo once this app exists.
+      # Until SKYBOT_CLIENT_ID and SKYBOT_PRIVATE_KEY are set, the step is
+      # skipped and the report is posted by github-actions[bot] instead, so CI
+      # works either way. Setup is described in the pull request that added
+      # this workflow.
+      - name: Mint the SkyBot token
+        id: skybot
+        if: env.SKYBOT_CLIENT_ID != ''
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ env.SKYBOT_CLIENT_ID }}
+          private-key: ${{ secrets.SKYBOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          # Downscope to exactly what commenting needs, rather than inheriting
+          # everything the app was granted. The script only reads pull requests
+          # and writes issue comments, so that is all the token can do.
+          permission-issues: write
+          permission-pull-requests: read
+
+      - name: Download the ci-results artifact
+        id: download
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          # Matches the combined `ci-results` artifact, and also the
+          # per-job `ci-results-*` ones as a fallback if the aggregator never
+          # got as far as uploading.
+          pattern: ci-results*
+          path: ci-results-download
+          merge-multiple: true
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summarise the run
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        env:
+          RESULTS_DIR: ci-results-download
+          DOWNLOAD_OUTCOME: ${{ steps.download.outcome }}
+          TRIGGER_EVENT: ${{ github.event.workflow_run.event }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        with:
+          # SkyBot's installation token when the app is configured, otherwise
+          # the workflow token. This is the single line that decides who the
+          # comment is from.
+          github-token: ${{ steps.skybot.outputs.token || github.token }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const MARKER = '<!-- skyboy-ci-report';
+            const MAX_BODY = 65000;
+            const MAX_PROBLEMS = 20;
+
+            // ------------------------------------------------------------------
+            // escaping: the artifact is untrusted, so everything that reaches
+            // the comment goes through one of these.
+            // ------------------------------------------------------------------
+
+            function strip(value) {
+              return String(value == null ? '' : value)
+                .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '');
+            }
+
+            /** Plain text for a markdown table cell. HTML-escaped. */
+            function cell(value, max = 90) {
+              const text = strip(value)
+                .replace(/\r\n?/g, '\n')
+                .replace(/`/g, "'")
+                .replace(/\|/g, '\\|')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/\s*\n\s*/g, ' ')
+                .trim();
+              return text.length > max ? `${text.slice(0, max)}…` : text;
+            }
+
+            /** Text destined for a backtick code span: no escaping needed, and
+             *  no backticks allowed (they would end the span). */
+            function code(value, max = 160) {
+              const text = strip(value).replace(/\r\n?/g, ' ').replace(/`/g, "'").trim();
+              return text.length > max ? `${text.slice(0, max)}…` : text;
+            }
+
+            /** Multi-line text for a <pre> block, which needs HTML escaping
+             *  but tolerates backticks and blank lines. */
+            function pre(value, max = 1200) {
+              const text = strip(value)
+                .replace(/\r\n?/g, '\n')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .trim();
+              return text.length > max ? `${text.slice(0, max)}…` : text;
+            }
+
+            // ------------------------------------------------------------------
+            // per-tool guidance: what to do about a failure, and how to see it
+            // again locally.
+            // ------------------------------------------------------------------
+
+            const REPO = `${context.repo.owner}/${context.repo.repo}`;
+            const GUIDANCE = {
+              actionlint: {
+                fix: 'Fix the workflow YAML at the reported line. actionlint reports the offending line and column.',
+                run: 'actionlint',
+              },
+              yamllint: {
+                fix: 'Fix the YAML formatting or structure at the reported line.',
+                run: 'python3 -m yamllint -c .github/.yamllint.yml -f parsable .github',
+              },
+              tsc: {
+                fix: 'Fix the type error, or narrow the type where the value is produced.',
+                run: 'npx tsc --noEmit --pretty false -p apps/web/tsconfig.json',
+              },
+              tests: {
+                fix: 'Fix the failing test, or update it if the expectation genuinely changed.',
+                run: 'npm --workspace apps/web test',
+              },
+              'next-build': {
+                fix: 'Fix the build error. The log line above names the module and the reason.',
+                run: 'npm run build',
+              },
+              npm: {
+                fix: 'Usually a lockfile problem: run npm install locally and commit the updated package-lock.json.',
+                run: 'npm ci',
+              },
+              'toolchain-install': {
+                fix: 'Almost always transient on the runner. Re-run the failed job; if it repeats, it is a real problem with this pull request.',
+                run: '',
+              },
+              gitleaks: {
+                fix:
+                  'Remove the secret, rotate it, and rewrite the commit that introduced it. ' +
+                  'A secret that reached a pushed commit must be treated as compromised even ' +
+                  'after the file is fixed.',
+                run: 'gitleaks detect --source . --redact --verbose',
+              },
+              'dependency-review': {
+                fix: 'Update or replace the vulnerable dependency reported in the run log.',
+                run: 'npm audit',
+              },
+              'eslint': {
+                fix: 'Fix the lint error, or add a targeted disable comment with a reason.',
+                run: 'npm --workspace apps/web run lint',
+              },
+            };
+
+            // ------------------------------------------------------------------
+            // read the artifact
+            // ------------------------------------------------------------------
+
+            const dir = process.env.RESULTS_DIR || 'ci-results-download';
+            const records = [];
+            let artifactPrNumber = '';
+
+            if (fs.existsSync(dir)) {
+              for (const name of fs.readdirSync(dir)) {
+                if (name === 'pr-number.txt') {
+                  try {
+                    const raw = fs.readFileSync(path.join(dir, name), 'utf8').trim();
+                    if (/^\d+$/.test(raw)) artifactPrNumber = raw;
+                  } catch (error) {
+                    core.warning(`could not read pr-number.txt: ${error.message}`);
+                  }
+                  continue;
+                }
+                if (!name.endsWith('.ndjson')) continue;
+                let content;
+                try {
+                  content = fs.readFileSync(path.join(dir, name), 'utf8');
+                } catch {
+                  continue; // a directory, or unreadable: ignore
+                }
+                for (const line of content.split('\n')) {
+                  const trimmed = line.trim();
+                  if (!trimmed) continue;
+                  try {
+                    const record = JSON.parse(trimmed);
+                    if (record && typeof record === 'object' && !Array.isArray(record)) {
+                      records.push(record);
+                    }
+                  } catch {
+                    // Malformed line: ignore it rather than failing the report.
+                  }
+                }
+              }
+            } else {
+              core.warning(`no results directory at ${dir} (download reported: ${process.env.DOWNLOAD_OUTCOME})`);
+            }
+
+            // Worst-status-wins de-duplication, in case a record appears twice
+            // (the combined artifact and a per-job artifact can both carry it).
+            const checkMap = new Map();
+            for (const record of records) {
+              if (record.kind !== 'check') continue;
+              const key = `${record.job}||${record.tool}`;
+              const previous = checkMap.get(key);
+              if (!previous || (previous.status === 'pass' && record.status !== 'pass')) {
+                checkMap.set(key, record);
+              }
+            }
+            const checks = [...checkMap.values()].sort((a, b) =>
+              `${a.job}`.localeCompare(`${b.job}`) || `${a.tool}`.localeCompare(`${b.tool}`),
+            );
+
+            const findingKeys = new Set();
+            const findings = [];
+            for (const record of records) {
+              if (record.kind !== 'finding' || record.status !== 'fail') continue;
+              const key = [record.job, record.tool, record.file, record.line, record.col, record.message].join('||');
+              if (findingKeys.has(key)) continue;
+              findingKeys.add(key);
+              findings.push(record);
+            }
+
+            const verdicts = records.filter((record) => record.kind === 'verdict');
+            const verdictFailed = verdicts.some((record) => record.status === 'fail');
+            const verdictPassed = verdicts.some((record) => record.status === 'pass');
+
+            // ------------------------------------------------------------------
+            // which pull request is this about
+            // ------------------------------------------------------------------
+
+            let prNumber = artifactPrNumber;
+            if (!/^\d+$/.test(prNumber)) {
+              const candidate = context.payload.workflow_run?.pull_requests?.[0]?.number;
+              if (Number.isInteger(candidate) && candidate > 0) prNumber = String(candidate);
+            }
+            if (!/^\d+$/.test(prNumber)) {
+              core.notice('No pull request number in the artifact or the run payload; nothing to report.');
+              return;
+            }
+            const issue_number = Number(prNumber);
+
+            // ------------------------------------------------------------------
+            // overall status
+            // ------------------------------------------------------------------
+
+            const conclusion = process.env.CONCLUSION || 'unknown';
+            const failedChecks = checks.filter((check) => check.status !== 'pass');
+
+            // `all-checks-pass` is a roll-up of the other jobs, so it must not
+            // be counted as an extra problem, nor repeated as something to fix:
+            // its findings just restate failures already listed below. It stays
+            // in the table, where its verdict is the one that actually gates the
+            // merge, and its message names the first real problem.
+            const AGGREGATOR_JOB = 'all-checks-pass';
+            const actionableFailures = failedChecks.filter((check) => check.job !== AGGREGATOR_JOB);
+
+            let green;
+            if (verdicts.length > 0) {
+              green = verdictPassed && !verdictFailed;
+            } else if (checks.length > 0) {
+              green = failedChecks.length === 0 && conclusion === 'success';
+            } else {
+              green = false;
+            }
+
+            // Never "0 checks need attention": if the only thing standing is the
+            // aggregator itself, that is still one thing to look at.
+            const attentionCount = actionableFailures.length > 0 ? actionableFailures.length : 1;
+
+            // ------------------------------------------------------------------
+            // the comment
+            // ------------------------------------------------------------------
+
+            // Branding. Who the comment is *from* is decided by the token (see
+            // the token steps above); this is the name and logo shown inside
+            // the body, which works either way.
+            //
+            // The logo lives in apps/web/public, so it is served by the site at
+            // https://skyboy.in/icon.png. Raw GitHub is used here instead so the
+            // image does not depend on a deploy. It requires that icon.png is
+            // committed to the default branch -- it is currently untracked.
+            const defaultBranch = context.payload.repository?.default_branch || 'main';
+            const logoUrl = `https://raw.githubusercontent.com/${REPO}/${defaultBranch}/apps/web/public/icon.png`;
+            const BOT_NAME = 'SkyBot';
+
+            const lines = [];
+            lines.push(`<img src="${logoUrl}" width="18" height="18" alt="Skyboy" /> **${BOT_NAME}** <sub>· CI report</sub>`);
+            lines.push('');
+
+            if (green) {
+              lines.push('## ✅ All checks passed - ready for maintainer review');
+            } else {
+              lines.push(`## ❌ ${attentionCount} ${attentionCount === 1 ? 'check needs' : 'checks need'} attention`);
+            }
+            lines.push('');
+
+            if (conclusion === 'cancelled') {
+              lines.push('> This run was cancelled, usually because a newer commit was pushed. The newest run is the one that counts.');
+              lines.push('');
+            } else if (conclusion === 'timed_out') {
+              lines.push('> This run hit a job timeout. Re-run it; if it repeats, something is hanging.');
+              lines.push('');
+            } else if (checks.length === 0) {
+              lines.push(
+                '> No check results were uploaded for this run (conclusion: ' +
+                  `\`${cell(conclusion, 40)}\`). The full log below is the only detail available.`,
+              );
+              lines.push('');
+            }
+
+            // A first-time contributor gets a human sentence before the table.
+            let prData = null;
+            try {
+              prData = (await github.rest.pulls.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: issue_number,
+              })).data;
+            } catch (error) {
+              core.warning(`could not load pull request #${issue_number}: ${error.message}`);
+            }
+
+            const association = prData?.author_association;
+            const firstTime = ['FIRST_TIME_CONTRIBUTOR', 'FIRST_TIMER', 'NONE'].includes(association);
+            if (firstTime && !green) {
+              lines.push(
+                'Thanks for your first pull request here. Everything below is meant to be ' +
+                  'actionable rather than discouraging - if a failure makes no sense, say so ' +
+                  'in a comment and a maintainer will help.',
+              );
+              lines.push('');
+            }
+
+            if (checks.length > 0) {
+              lines.push('| Check | Result | Detail |');
+              lines.push('| --- | --- | --- |');
+              for (const check of checks) {
+                const passed = check.status === 'pass';
+                lines.push(`| \`${code(`${check.job} / ${check.tool}`, 70)}\` | ${passed ? '✅ pass' : '❌ fail'} | ${cell(check.message, 90)} |`);
+              }
+              lines.push('');
+            }
+
+            // Problems: every failure, with somewhere to look and something to do.
+            const problemBlocks = [];
+            const findingsByCheck = new Map();
+            for (const finding of findings) {
+              if (finding.job === AGGREGATOR_JOB) continue; // roll-up, not a task
+              const key = `${finding.job}||${finding.tool}`;
+              if (!findingsByCheck.has(key)) findingsByCheck.set(key, []);
+              findingsByCheck.get(key).push(finding);
+            }
+
+            for (const group of findingsByCheck.values()) {
+              for (const finding of group) {
+                const where = finding.file
+                  ? `\`${code(finding.file, 120)}${finding.line ? `:${code(finding.line, 10)}` : ''}\``
+                  : '';
+                const rule = finding.rule ? ` — \`${code(finding.rule, 60)}\`` : '';
+                const guidance = GUIDANCE[finding.tool];
+                const parts = [`**${where || 'No file reported'}${rule}**`, '', `<pre>${pre(finding.message)}</pre>`];
+                if (guidance) {
+                  parts.push(`- **How to fix it:** ${cell(guidance.fix, 300)}`);
+                  if (guidance.run) parts.push(`- **Reproduce locally:** \`${code(guidance.run, 160)}\``);
+                } else {
+                  parts.push(`- **How to fix it:** see the full run log linked at the bottom.`);
+                }
+                parts.push('');
+                problemBlocks.push(parts.join('\n'));
+              }
+            }
+
+            // A check can fail without producing a located finding (a secret
+            // scan, a dependency review, or an unparseable log). Those still
+            // need an entry, or the comment would be red with nothing to do.
+            for (const check of actionableFailures) {
+              const key = `${check.job}||${check.tool}`;
+              if (findingsByCheck.has(key)) continue;
+              const guidance = GUIDANCE[check.tool];
+              const parts = [`**\`${code(`${check.job} / ${check.tool}`, 90)}\`**`, '', `<pre>${pre(check.message)}</pre>`];
+              if (guidance) {
+                parts.push(`- **How to fix it:** ${cell(guidance.fix, 300)}`);
+                if (guidance.run) parts.push(`- **Reproduce locally:** \`${code(guidance.run, 160)}\``);
+              } else {
+                parts.push('- **How to fix it:** see the full run log linked at the bottom.');
+              }
+              parts.push('');
+              problemBlocks.push(parts.join('\n'));
+            }
+
+            if (problemBlocks.length > 0) {
+              const shown = problemBlocks.slice(0, MAX_PROBLEMS);
+              const numbered = shown.map((block, index) => `${index + 1}. ${block}`).join('\n');
+              const more = problemBlocks.length > MAX_PROBLEMS
+                ? `\n…and ${problemBlocks.length - MAX_PROBLEMS} more, all listed in the [full run log](${process.env.RUN_URL}).\n`
+                : '';
+              lines.push(`<details><summary><strong>What to fix (${problemBlocks.length})</strong></summary>`);
+              lines.push('');
+              lines.push(numbered);
+              if (more) lines.push(more);
+              lines.push('');
+              lines.push('</details>');
+              lines.push('');
+            }
+
+            if (green) {
+              lines.push('A maintainer will take it from here. You do not need to do anything else.');
+            } else {
+              lines.push(`Push a commit to this branch and this comment updates itself. The full log for this run is [here](${process.env.RUN_URL}).`);
+            }
+            lines.push('');
+            const shortSha = code(process.env.HEAD_SHA || 'unknown', 40);
+            const branch = code(prData?.head?.ref || 'this branch', 60);
+            lines.push(
+              `<sub>${BOT_NAME} · commit \`${shortSha}\` · [full CI run](${process.env.RUN_URL})` +
+                ` · updated on every push to \`${branch}\`</sub>`,
+            );
+
+            let body =
+              `${MARKER} run=${process.env.RUN_ID} sha=${code(process.env.HEAD_SHA || '', 40)} -->\n\n` +
+              `${lines.join('\n')}\n`;
+
+            if (body.length > MAX_BODY) {
+              const note =
+                '…[comment truncated by Skyboy CI: the full report is in the ci-results ' +
+                `artifact of the [run](${process.env.RUN_URL}).]`;
+              body = `${body.slice(0, MAX_BODY - 300)}\n\n${note}\n`;
+            }
+
+            // ------------------------------------------------------------------
+            // one sticky comment, always
+            // ------------------------------------------------------------------
+
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number,
+              per_page: 100,
+            });
+
+            const existing = comments.find(
+              (comment) => typeof comment.body === 'string' && comment.body.startsWith(MARKER),
+            );
+
+            if (existing) {
+              // Out-of-order guard: a slower, older run finishing after a newer
+              // one must not overwrite the newer report with stale results.
+              const existingRun = /run=(\d+)/.exec(existing.body);
+              if (existingRun && Number(existingRun[1]) > Number(process.env.RUN_ID)) {
+                core.notice(`comment was written by newer run ${existingRun[1]}; leaving it alone.`);
+                return;
+              }
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+              core.notice(`${BOT_NAME} updated its report on #${issue_number}.`);
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number,
+                body,
+              });
+              core.notice(`${BOT_NAME} posted its first report on #${issue_number}.`);
+            }
