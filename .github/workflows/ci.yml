@@ -60,6 +60,61 @@ jobs:
   # .github/scripts/ci-record.mjs, or the drift guard will fail the run.
 
   # ---------------------------------------------------------------------------
+  # Change detection
+  # ---------------------------------------------------------------------------
+  # A documentation-only pull request should not pay for a three-OS build
+  # matrix. This job decides what kind of change this is; `typecheck` and
+  # `test` are gated on its `web` output.
+  #
+  # The filter deliberately includes package*.json and .github/**: a dependency
+  # bump or a workflow change can break the app even though no file under
+  # apps/web moved. Err towards running the matrix.
+  changes:
+    name: Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+      # paths-filter lists the changed files through the REST API on
+      # pull_request events.
+      pull-requests: read
+    outputs:
+      # Always 'true' or 'false', never empty. See the Decide step.
+      web: ${{ steps.decide.outputs.web }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Detect changed paths
+        id: filter
+        continue-on-error: true
+        uses: dorny/paths-filter@ceb8a2b8f2d89434be7ff52d3de7ec3738c5cc9d # v4.0.3
+        with:
+          filters: |
+            web:
+              - 'apps/web/**'
+              - 'package*.json'
+              - '.github/**'
+
+      # Fail safe. If detection cannot run at all (an event the action does not
+      # handle, a transient API error), run the full matrix rather than let a
+      # gated check be skipped without anyone having looked at the code.
+      - name: Decide
+        id: decide
+        shell: bash
+        env:
+          FILTER_OUTCOME: ${{ steps.filter.outcome }}
+          FILTER_WEB: ${{ steps.filter.outputs.web }}
+        run: |
+          if [ "$FILTER_OUTCOME" != "success" ] || [ -z "$FILTER_WEB" ]; then
+            echo "::warning title=Change detection did not run::Running the full matrix so no check is silently skipped."
+            echo "web=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "web=$FILTER_WEB" >> "$GITHUB_OUTPUT"
+          fi
+
+  # ---------------------------------------------------------------------------
   # Lint
   # ---------------------------------------------------------------------------
   lint:
@@ -68,6 +123,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -168,10 +226,18 @@ jobs:
   # ---------------------------------------------------------------------------
   typecheck:
     name: Typecheck
+    needs: changes
+    # Skipped on a documentation-only change. The verdict treats a skip as a
+    # pass only when `changes` reports no web-related files, so this can never
+    # be skipped grey-and-forgotten.
+    if: needs.changes.outputs.web == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -246,6 +312,9 @@ jobs:
   # real suite lands, it runs here without any change to this file.
   test:
     name: Test (${{ matrix.os }})
+    needs: changes
+    # Same rule as typecheck: only a documentation-only change may skip it.
+    if: needs.changes.outputs.web == 'true'
     runs-on: ${{ matrix.os }}
     timeout-minutes: 25
     strategy:
@@ -254,6 +323,9 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -349,6 +421,7 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -425,6 +498,9 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -486,6 +562,9 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -530,6 +609,7 @@ jobs:
     name: all-checks-pass
     if: always()
     needs:
+      - changes
       - lint
       - typecheck
       - test
@@ -540,6 +620,9 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
 
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -567,12 +650,17 @@ jobs:
           path: ci-results
           merge-multiple: true
 
+      # `changes` is deliberately not a job result: it is the change-detection
+      # verdict for this diff, which ci-record.mjs uses to decide whether a
+      # skipped typecheck/test is legitimate. An empty value means detection did
+      # not run, and is treated strictly.
       - name: Verdict
         if: always()
         shell: bash
         env:
           EVENT_NAME: ${{ github.event_name }}
           JOB_RESULTS: |
+            changes=${{ needs.changes.outputs.web }}
             lint=${{ needs.lint.result }}
             typecheck=${{ needs.typecheck.result }}
             test=${{ needs.test.result }}
