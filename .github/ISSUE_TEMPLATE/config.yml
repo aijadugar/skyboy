@@ -1,8 +1,26 @@
+# Issue template chooser.
+#
+# Blank issues are off, so every report arrives with the fields it needs. The
+# contact links below are shown above the template list.
+
 blank_issues_enabled: false
+
 contact_links:
-  - name: Question or support
+  # NOTE: Discussions has to be enabled in the repository settings or this link
+  # leads to a 404. See the setup checklist in the pull request that added this
+  # file. Until then the contact page below is the working way to ask a question.
+  - name: Questions and ideas
+    url: https://github.com/aijadugar/skyboy/discussions
+    about: Ask how something works, or float an idea before writing it up as an issue.
+
+  - name: Support and feedback
     url: https://skyboy.in/contact
-    about: Reach the maintainers through the contact page.
-  - name: Docs
-    url: https://docs.skyboy.in
-    about: Install guides and the SKILL.md format spec.
+    about: Reach the maintainer directly. Use this if Discussions is not the right fit.
+
+  - name: Documentation
+    url: https://skyboy.in/docs
+    about: Setup for Claude Code and Codex, phone push, and troubleshooting.
+
+  - name: Report a security vulnerability
+    url: https://github.com/aijadugar/skyboy/security/advisories/new
+    about: Privately report anything you believe is exploitable. Please do not open a public issue for it.
