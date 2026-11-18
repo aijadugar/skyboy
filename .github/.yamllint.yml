@@ -1,0 +1,49 @@
+# yamllint configuration for the Skyboy workflows and issue forms.
+#
+# Based on yamllint's defaults, with the handful of rules that fight GitHub
+# Actions YAML switched off. Kept inside .github/ so it travels with the files
+# it describes. CI runs it explicitly with `-c .github/.yamllint.yml`.
+
+extends: default
+
+ignore: |
+  node_modules/
+  .next/
+
+rules:
+  # `on:` is GitHub's event key. YAML 1.1 reads it as the boolean true, which
+  # yamllint's truthy rule flags by default. Allow the literal key, and keep
+  # checking everything else.
+  truthy:
+    allowed-values: ['true', 'false', 'on']
+    check-keys: true
+
+  # Workflows conventionally start straight at `name:` with no `---`.
+  document-start: disable
+
+  # Workflow lines get long once you pin a commit SHA and keep the version in
+  # a trailing comment.
+  line-length:
+    max: 160
+    allow-non-breakable-words: true
+    allow-non-breakable-inline-mappings: true
+
+  # Long `uses: owner/repo@sha # v1.2.3` lines need room before the comment.
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: disable
+
+  # Block sequences under a mapping key are written flush in these files
+  # (`options:` then `- label:`), which is valid and conventional here.
+  indentation:
+    spaces: 2
+    indent-sequences: consistent
+    check-multi-line-strings: false
+
+  empty-lines:
+    max: 1
+
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1
