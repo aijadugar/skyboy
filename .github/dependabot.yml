@@ -1,0 +1,77 @@
+# Dependabot configuration.
+#
+# Two ecosystems, both weekly, both grouped so a normal week is one or two pull
+# requests rather than fifteen.
+#
+# Notes:
+#   * `directory: /` for npm, not `apps/web`, because the repository uses npm
+#     workspaces and keeps a single lockfile at the root.
+#   * Grouping matters more than usual here: every Dependabot pull request runs
+#     the full CI matrix, so an ungrouped Tuesday can queue a lot of runs.
+#   * `open-pull-requests-limit` caps how many are open at once.
+#
+# Dependabot pull requests still have to pass `all-checks-pass` like anyone
+# else's. Their titles are not checked against Conventional Commits, because
+# ci-record.mjs skips bot authors.
+
+version: 2
+
+updates:
+  # ---------------------------------------------------------------------------
+  # npm (root workspace, single lockfile)
+  # ---------------------------------------------------------------------------
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Asia/Kolkata
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    commit-message:
+      # Produces `chore(deps): ...` / `chore(deps-dev): ...`, which satisfies
+      # the pull request title check.
+      prefix: chore
+      include: scope
+    labels:
+      - dependencies
+    groups:
+      # One pull request for all non-breaking updates.
+      npm-minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+      # Security updates are never grouped, so they can be merged on their own
+      # the moment they land.
+      npm-security:
+        patterns:
+          - '*'
+        applies-to: security-updates
+
+  # ---------------------------------------------------------------------------
+  # GitHub Actions
+  # ---------------------------------------------------------------------------
+  # Actions are pinned to full commit SHAs in the workflows, which is what
+  # makes them trustworthy and also what stops them ever being updated by hand.
+  # This is what keeps those pins current.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: '06:00'
+      timezone: Asia/Kolkata
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: ci
+      include: scope
+    labels:
+      - dependencies
+      - ci
+    groups:
+      github-actions:
+        patterns:
+          - '*'
