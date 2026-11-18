@@ -6,8 +6,7 @@ import "drawably/style.css";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" });
 
-const description =
-  "Know the moment your coding agent is done, and keep it working while you're away. Skyboy is a desktop notifier for Claude Code and Codex.";
+const description = "Your second brain for AI coding agents.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://skyboy.in"),

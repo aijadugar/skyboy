@@ -1,93 +1,682 @@
+# Skyboy CI.
+#
+# Design notes worth knowing before editing:
+#
+#   * `all-checks-pass` is the ONE status check that branch protection should
+#     require. It runs with `if: always()` and fails if any job it needs
+#     failed, was cancelled, or was skipped when it was supposed to run. That
+#     means individual jobs can be added, renamed or gated on an event without
+#     anyone having to touch repository settings.
+#
+#   * Every job writes machine-readable results into `ci-results/` and emits
+#     GitHub annotations. Annotations come from the job's own stdout, so they
+#     appear inline on the PR "Files changed" tab even for fork PRs, which get
+#     a read-only token and therefore cannot comment.
+#
+#   * `.github/workflows/pr-report.yml` turns the uploaded `ci-results`
+#     artifact into a single sticky PR comment.
+#
+#   * All third-party actions are pinned to a full commit SHA. The trailing
+#     comment names the release that SHA belonged to at pin time; use
+#     Dependabot (`.github/dependabot.yml`) to move them.
+
 name: CI
 
 on:
   pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
   push:
     branches: [main]
+  # Required so the `all-checks-pass` check reports on merge queue entries.
+  merge_group:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Pull request number to attach this run's results to (optional).
+        required: false
+        type: string
+
+# Least privilege by default. No job here needs to write to the repository:
+# the reporting jobs live in pr-report.yml and labeler.yml, which declare
+# their own permissions.
+permissions:
+  contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  # Cancel superseded runs for pull requests only. A merge_group run must never
+  # be cancelled, because the merge queue is waiting on its verdict.
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  NODE_VERSION: '24'
 
 jobs:
-  skills:
-    name: Catalog integrity (Go)
+  # TODO(desktop): apps/desktop does not exist yet. When the Electron app lands,
+  # its jobs go here and get added to `needs:` on all-checks-pass below. Expect
+  # at least: a 3-OS matrix that packages the app, a build of the
+  # `skyboy-hook.exe` helper, and an integration job that feeds synthetic Claude
+  # Code and Codex hook payloads through the helper. Keep `all-checks-pass` as
+  # the required check name and add each new job to REQUIRED_ON in
+  # .github/scripts/ci-record.mjs, or the drift guard will fail the run.
+
+  # ---------------------------------------------------------------------------
+  # Lint
+  # ---------------------------------------------------------------------------
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cli
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          go-version: stable
+          node-version: ${{ env.NODE_VERSION }}
 
-      - name: Validate skills against the JSON Schema
-        run: go run . validate --root ..
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
 
-      - name: Build catalog
-        run: go run . build-catalog --root ..
-
-      - name: Fail on catalog drift
-        working-directory: .
+      # TODO(app-lint): `npm run lint` is `next lint`, which Next.js 16 removed,
+      # and apps/web has no ESLint config at all, so it fails on a clean checkout.
+      # Once ESLint is added to apps/web (eslint + eslint-config-next + a flat
+      # eslint.config.mjs, and `lint` repointed at the `eslint` CLI), add a step
+      # here that runs `npm --workspace apps/web run lint` through
+      # `ci-record.mjs parse --tool eslint`. Until then this job lints the
+      # repository's own YAML rather than pretending app lint ran.
+      - name: Note that app lint is not configured yet
+        shell: bash
         run: |
-          if [ -n "$(git status --porcelain catalog.json skills/)" ]; then
-            echo "::error::catalog.json or meta.json shards are stale. Run 'skyboy build-catalog' (or 'go run ./cli build-catalog') and commit the result."
-            git status --porcelain catalog.json skills/
-            exit 1
+          echo "::notice title=App lint is not configured::The lint job covers .github YAML only."
+          echo "::notice title=App lint is not configured::'npm run lint' is still 'next lint', removed in Next.js 16, and apps/web has no ESLint config."
+
+      - name: Install the linters
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ci-results "$RUNNER_TEMP/ci-tools"
+          # actionlint is fetched and checksum-verified rather than pulled
+          # through a third-party action, so the version is pinned here, in the
+          # open, next to its digest. The binary goes to the runner's temp
+          # directory so the checkout stays clean.
+          ACTIONLINT_VERSION=1.7.12
+          ACTIONLINT_SHA256=8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8
+          curl -sSfL -o "$RUNNER_TEMP/actionlint.tar.gz" \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz"
+          echo "${ACTIONLINT_SHA256}  $RUNNER_TEMP/actionlint.tar.gz" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/actionlint.tar.gz" -C "$RUNNER_TEMP/ci-tools" actionlint
+          "$RUNNER_TEMP/ci-tools/actionlint" --version
+          python3 -m pip install --user --quiet 'yamllint==1.38.0'
+          python3 -m yamllint --version
+
+      - name: Run actionlint
+        id: actionlint
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: '"$RUNNER_TEMP/ci-tools/actionlint" -format ''{{json .}}'' > ci-results/actionlint.log 2>&1'
+
+      - name: Run yamllint
+        id: yamllint
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          python3 -m yamllint -c .github/.yamllint.yml -f parsable .github > ci-results/yamllint.log 2>&1
+
+      - name: Record lint results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          ACTIONLINT_OUTCOME: ${{ steps.actionlint.outcome }}
+          YAMLLINT_OUTCOME: ${{ steps.yamllint.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job lint --tool toolchain-install \
+              --status fail --message "could not install the linters; see the run log" || status=1
+            exit "$status"
           fi
+          code=0; [ "$ACTIONLINT_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job lint --tool actionlint \
+            --input ci-results/actionlint.log --exit-code "$code" || status=1
+          code=0; [ "$YAMLLINT_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job lint --tool yamllint \
+            --input ci-results/yamllint.log --exit-code "$code" || status=1
+          exit "$status"
 
-      - name: Comment results on PR
-        if: failure() && github.event_name == 'pull_request'
-        uses: actions/github-script@v7
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "Catalog checks failed: either a skill.json did not validate against scripts/schemas/, or catalog.json is stale. Run `skyboy validate` and `skyboy build-catalog` locally and commit the results."
-            })
+          name: ci-results-lint
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
 
-  web:
-    name: Web build
+  # ---------------------------------------------------------------------------
+  # Typecheck
+  # ---------------------------------------------------------------------------
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
 
       - name: Install dependencies
-        run: npm ci
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          # `pipefail` is set explicitly so a failing `npm ci` still fails the
+          # step even though `tee` exits 0. Do not rely on the runner's default
+          # shell flags for this.
+          set -o pipefail
+          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
 
-      - name: Lint
-        run: npm run lint
+      # `--pretty false` gives one line per diagnostic, which is what the
+      # recorder parses into file/line/column/rule records.
+      - name: Typecheck
+        id: check
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: npx --no-install tsc --noEmit --pretty false -p apps/web/tsconfig.json > ci-results/typecheck.log 2>&1
 
-      - name: Build
-        run: npm run build
+      - name: Record typecheck results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job typecheck --tool npm \
+              --status fail --message "npm ci failed; see the run log" || status=1
+            exit "$status"
+          fi
+          code=0; [ "$CHECK_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job typecheck --tool tsc \
+            --input ci-results/typecheck.log --exit-code "$code" || status=1
+          exit "$status"
 
-  go:
-    name: Go CLI
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: cli
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-go@v5
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
-          go-version: stable
+          name: ci-results-typecheck
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
 
-      - name: Vet
-        run: go vet ./...
+  # ---------------------------------------------------------------------------
+  # Test  (matrix)
+  # ---------------------------------------------------------------------------
+  # There is no test suite yet: apps/web's `test` script is a placeholder, so
+  # the step below reports that as a notice instead of pretending to test. What
+  # the matrix genuinely proves today is that the app compiles and builds on
+  # all three supported platforms, which is the part that breaks per-OS. When a
+  # real suite lands, it runs here without any change to this file.
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - name: Test
-        run: go test ./...
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      # `shell: bash` on every step, on all three runners, so one script body
+      # behaves identically everywhere. GitHub's Windows images ship Git Bash.
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Install dependencies
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
+
+      - name: Run the test suite
+        id: tests
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          script=$(node -e "const p=require('./apps/web/package.json');process.stdout.write((p.scripts&&p.scripts.test)||'')")
+          if [ -z "$script" ] || printf '%s' "$script" | grep -q 'no tests yet'; then
+            echo "::notice title=No test suite yet::apps/web has no test suite (scripts.test is '${script}')."
+            echo "::notice title=No test suite yet::The matrix still verifies the build on ${RUNNER_OS}."
+            exit 0
+          fi
+          npm --workspace apps/web test > ci-results/tests.log 2>&1
 
       - name: Build
-        run: go build ./...
+        id: build
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: npm run build > ci-results/build.log 2>&1
+
+      - name: Record test and build results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job "test-${RUNNER_OS}" --tool npm \
+              --status fail --message "npm ci failed; see the run log" || status=1
+            exit "$status"
+          fi
+          # Anything the suite printed goes through the generic parser, so a
+          # failure still lands in the comment even before a real reporter exists.
+          code=0; [ "$TESTS_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "test-${RUNNER_OS}" --tool tests \
+            --input ci-results/tests.log --exit-code "$code" || status=1
+          code=0; [ "$BUILD_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "test-${RUNNER_OS}" --tool next-build \
+            --input ci-results/build.log --exit-code "$code" || status=1
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-results-test-${{ matrix.os }}
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Build
+  # ---------------------------------------------------------------------------
+  # Produces the production build once, on Linux, and keeps the output as an
+  # artifact. This overlaps the build step inside the matrix job on purpose:
+  # the matrix answers "does it build per-OS", this job answers "what came out".
+  # Nothing is deployed from CI yet, and there is no desktop app to package.
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Install dependencies
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
+
+      - name: Build
+        id: check
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: npm run build > ci-results/build.log 2>&1
+
+      - name: Record build results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job build --tool npm \
+              --status fail --message "npm ci failed; see the run log" || status=1
+            exit "$status"
+          fi
+          code=0; [ "$CHECK_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job build --tool next-build \
+            --input ci-results/build.log --exit-code "$code" || status=1
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-results-build
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+      - name: Upload the build output
+        if: steps.check.outcome == 'success'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: web-build
+          path: |
+            apps/web/.next/
+            !apps/web/.next/cache/
+          # Required since upload-artifact v4.4: hidden files are skipped by
+          # default, and every path here starts with a dot.
+          include-hidden-files: true
+          retention-days: 3
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------------------
+  # Secret scan
+  # ---------------------------------------------------------------------------
+  # gitleaks-action has no merge_group support, so it is skipped there. The
+  # commits it would have scanned are the same ones scanned on the pull request.
+  secret-scan:
+    name: Secret scan
+    if: github.event_name != 'merge_group'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      # No GITLEAKS_LICENSE secret is needed: gitleaks-action is free for
+      # personal accounts and only requires a licence key for organisations.
+      # `aijadugar/skyboy` is a user account. If this repo ever moves under an
+      # organisation, add the licence as a secret and pass it here.
+      #
+      # GITLEAKS_ENABLE_COMMENTS is off on purpose. Its default is on, and a
+      # pull request from a fork gets a read-only token, so the action's own
+      # comment attempt would fail the job and block an innocent pull request.
+      # Its comment would also duplicate the one pr-report.yml posts.
+      #
+      # GITLEAKS_ENABLE_SUMMARY is off to match how pr-report.yml treats this
+      # check: pass or fail with no finding detail. A detected secret should not
+      # be echoed into a job summary that is retained for the life of the run;
+      # the run log and the maintainer's own investigation are the right places.
+      - name: Run gitleaks
+        id: gitleaks
+        continue-on-error: true
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2.3.9
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_COMMENTS: false
+          GITLEAKS_ENABLE_SUMMARY: false
+
+      - name: Record secret scan results
+        if: always()
+        shell: bash
+        env:
+          GITLEAKS_OUTCOME: ${{ steps.gitleaks.outcome }}
+        run: |
+          # Deliberately reports only pass/fail with no per-finding detail:
+          # a leak's location is not something to echo back into a comment.
+          if [ "$GITLEAKS_OUTCOME" = "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job secret-scan --tool gitleaks \
+              --status pass --message "no secrets detected"
+          else
+            node .github/scripts/ci-record.mjs summary --job secret-scan --tool gitleaks \
+              --status fail --message "gitleaks reported a possible secret or could not run; see the run log"
+          fi
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-results-secret-scan
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Dependency review
+  # ---------------------------------------------------------------------------
+  # Pull requests only: it diffs the dependency manifests of the base and head
+  # commits, so there is nothing to review on a push or a merge group entry.
+  dependency-review:
+    name: Dependency review
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      # `comment-summary-in-pr: never` because a fork pull request only gets a
+      # read-only token, and the action fails the step if it cannot comment.
+      # Its verdict is reported through the ci-results artifact instead.
+      - name: Review dependency changes
+        id: review
+        continue-on-error: true
+        uses: actions/dependency-review-action@2031cfc080254a8a887f58cffee85186f0e49e48 # v4.9.0
+        with:
+          comment-summary-in-pr: never
+
+      - name: Record dependency review results
+        if: always()
+        shell: bash
+        env:
+          REVIEW_OUTCOME: ${{ steps.review.outcome }}
+        run: |
+          if [ "$REVIEW_OUTCOME" = "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job dependency-review --tool dependency-review \
+              --status pass --message "no vulnerable dependency changes"
+          else
+            node .github/scripts/ci-record.mjs summary --job dependency-review --tool dependency-review \
+              --status fail --message "a dependency change was flagged, or the review could not run; see the run log"
+          fi
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-results-dependency-review
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Pull request title
+  # ---------------------------------------------------------------------------
+  # Lives here rather than in its own workflow so that `all-checks-pass`
+  # covers it. The title is passed through an environment variable and matched
+  # as data; it is never interpolated into a script body. actionlint enforces
+  # that rule for this whole file.
+  pr-title:
+    name: PR title
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      # No `continue-on-error` here on purpose: `check-title` is the last real
+      # step, and a failing step is what makes this job's result `failure`.
+      # With `continue-on-error` the job would report `success` and the
+      # aggregator would wave a non-conventional title through.
+      - name: Check the pull request title
+        id: title
+        shell: bash
+        env:
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+        run: node .github/scripts/ci-record.mjs check-title
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-results-pr-title
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Aggregator - the single required status check
+  # ---------------------------------------------------------------------------
+  # The job name below must not change: branch protection and the merge queue
+  # key off `all-checks-pass`.
+  all-checks-pass:
+    name: all-checks-pass
+    if: always()
+    needs:
+      - lint
+      - typecheck
+      - test
+      - build
+      - secret-scan
+      - dependency-review
+      - pr-title
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      # Merges every `ci-results-*` artifact into one directory. Allowed to
+      # fail: if no job got far enough to upload, the verdict below fails the
+      # run, which is the correct outcome.
+      - name: Collect per-job results
+        id: collect
+        if: always()
+        continue-on-error: true
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          pattern: ci-results-*
+          path: ci-results
+          merge-multiple: true
+
+      - name: Verdict
+        if: always()
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          JOB_RESULTS: |
+            lint=${{ needs.lint.result }}
+            typecheck=${{ needs.typecheck.result }}
+            test=${{ needs.test.result }}
+            build=${{ needs.build.result }}
+            secret-scan=${{ needs.secret-scan.result }}
+            dependency-review=${{ needs.dependency-review.result }}
+            pr-title=${{ needs.pr-title.result }}
+        run: node .github/scripts/ci-record.mjs verdict
+
+      - name: Upload combined results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          # This is the artifact pr-report.yml reads. Its name is part of the
+          # contract between the two workflows.
+          name: ci-results
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: error

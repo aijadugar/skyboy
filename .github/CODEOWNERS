@@ -1,0 +1,24 @@
+# Review ownership.
+#
+# Code owners are requested automatically on every pull request that touches a
+# matching path. With a single maintainer this is mostly a record of who is
+# expected to review what; it starts doing real work the moment a second
+# maintainer is added.
+#
+# Syntax: <path pattern> <owner>...
+# `@aijadugar` is a user, not a team. The repository is owned by a personal
+# account (`aijadugar/skyboy`), so there is no organisation team to reference.
+
+# Default: everything not matched below.
+*                       @aijadugar
+
+# Workflows and CI configuration. A change here can weaken every other check,
+# so it should never be merged without the maintainer reading the diff.
+/.github/               @aijadugar
+
+# Dependency manifests: a dependency bump is a supply-chain change.
+/package.json           @aijadugar
+/package-lock.json      @aijadugar
+
+# The website. Separate from the desktop app on purpose.
+/apps/web/              @aijadugar
