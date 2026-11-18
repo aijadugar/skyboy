@@ -477,7 +477,6 @@ const REQUIRED_ON = {
   lint: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
   typecheck: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
   test: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
-  build: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
   // gitleaks-action does not support the merge_group event; Dependabot's own
   // group merge is covered by the same commits being scanned on the PR.
   'secret-scan': ['pull_request', 'push', 'workflow_dispatch'],
