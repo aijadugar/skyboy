@@ -36,10 +36,17 @@
  * markdown.
  */
 
-import { appendFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import {
+  appendFileSync,
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  writeFileSync,
+} from "node:fs";
+import { join } from "node:path";
 
-const RESULTS_DIR = process.env.CI_RESULTS_DIR || 'ci-results';
+const RESULTS_DIR = process.env.CI_RESULTS_DIR || "ci-results";
 
 /** Hard cap on any single free-text field, so one hostile log line cannot
  *  bloat the artifact or the rendered comment. */
@@ -54,22 +61,27 @@ function ensureDir(dir) {
 }
 
 function safeName(value) {
-  const cleaned = String(value ?? '').replace(/[^A-Za-z0-9._-]+/g, '_').replace(/^_+|_+$/g, '');
-  return cleaned || 'job';
+  const cleaned = String(value ?? "")
+    .replace(/[^A-Za-z0-9._-]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+  return cleaned || "job";
 }
 
 /** GitHub annotation *data* escaping. `%` must go first. */
 function escapeData(value) {
-  return String(value ?? '').replace(/%/g, '%25').replace(/\r/g, '%0D').replace(/\n/g, '%0A');
+  return String(value ?? "")
+    .replace(/%/g, "%25")
+    .replace(/\r/g, "%0D")
+    .replace(/\n/g, "%0A");
 }
 
 /** Annotation *property* escaping: data escaping plus the two delimiters. */
 function escapeProp(value) {
-  return escapeData(value).replace(/:/g, '%3A').replace(/,/g, '%2C');
+  return escapeData(value).replace(/:/g, "%3A").replace(/,/g, "%2C");
 }
 
 function clip(value, max = MAX_FIELD) {
-  const text = String(value ?? '').replace(/\r\n?/g, '\n');
+  const text = String(value ?? "").replace(/\r\n?/g, "\n");
   return text.length > max ? `${text.slice(0, max)} …[truncated]` : text;
 }
 
@@ -80,27 +92,36 @@ function annotate(level, message, { file, line, col, title } = {}) {
   if (line) props.push(`line=${escapeProp(line)}`);
   if (col) props.push(`col=${escapeProp(col)}`);
   if (title) props.push(`title=${escapeProp(title)}`);
-  const prefix = props.length ? `::${level} ${props.join(',')} ` : `::${level} `;
+  const prefix = props.length ? `::${level} ${props.join(",")} ` : `::${level} `;
   process.stdout.write(`${prefix}::${escapeData(clip(message, 1000))}\n`);
 }
 
 function record(job, rec) {
   ensureDir(RESULTS_DIR);
-  appendFileSync(join(RESULTS_DIR, `${safeName(job)}.ndjson`), `${JSON.stringify({ job, ...rec })}\n`, 'utf8');
+  appendFileSync(
+    join(RESULTS_DIR, `${safeName(job)}.ndjson`),
+    `${JSON.stringify({ job, ...rec })}\n`,
+    "utf8",
+  );
 }
 
 function recordCheck(job, tool, passed, message) {
-  record(job, { kind: 'check', tool, status: passed ? 'pass' : 'fail', message: clip(message, 600) });
+  record(job, {
+    kind: "check",
+    tool,
+    status: passed ? "pass" : "fail",
+    message: clip(message, 600),
+  });
 }
 
 function recordFinding(job, tool, { file, line, col, rule, message }, status) {
   record(job, {
-    kind: 'finding',
+    kind: "finding",
     tool,
     status,
     // Backslashes only ever appear when a Windows runner produced the path.
     // Normalising here keeps annotations and the rendered comment consistent.
-    file: file ? clip(String(file).replace(/\\/g, '/'), 300) : null,
+    file: file ? clip(String(file).replace(/\\/g, "/"), 300) : null,
     line: line ? String(line) : null,
     col: col ? String(col) : null,
     rule: rule ? clip(rule, 120) : null,
@@ -112,17 +133,17 @@ function parseArgv(argv) {
   const args = { _: [] };
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
-    if (!token.startsWith('--')) {
+    if (!token.startsWith("--")) {
       args._.push(token);
       continue;
     }
-    const eq = token.indexOf('=');
+    const eq = token.indexOf("=");
     if (eq !== -1) {
       args[token.slice(2, eq)] = token.slice(eq + 1);
     } else {
       const next = argv[i + 1];
-      if (next === undefined || next.startsWith('--')) {
-        args[token.slice(2)] = 'true';
+      if (next === undefined || next.startsWith("--")) {
+        args[token.slice(2)] = "true";
       } else {
         args[token.slice(2)] = next;
         i += 1;
@@ -133,18 +154,18 @@ function parseArgv(argv) {
 }
 
 function readInput(path) {
-  if (!path || path === '-') {
+  if (!path || path === "-") {
     try {
-      return readFileSync(0, 'utf8');
+      return readFileSync(0, "utf8");
     } catch {
-      return '';
+      return "";
     }
   }
-  if (!existsSync(path)) return '';
+  if (!existsSync(path)) return "";
   try {
-    return readFileSync(path, 'utf8');
+    return readFileSync(path, "utf8");
   } catch {
-    return '';
+    return "";
   }
 }
 
@@ -164,25 +185,27 @@ function readInput(path) {
  */
 function resolvePrNumber(env) {
   const candidates = [];
-  if (env.EVENT_NAME === 'pull_request') candidates.push(env.PR_NUMBER);
-  if (env.EVENT_NAME === 'merge_group' && env.MERGE_GROUP_HEAD_REF) {
+  if (env.EVENT_NAME === "pull_request") candidates.push(env.PR_NUMBER);
+  if (env.EVENT_NAME === "merge_group" && env.MERGE_GROUP_HEAD_REF) {
     const match = /(?:^|\/)pr-(\d+)(?:-|$)/.exec(env.MERGE_GROUP_HEAD_REF);
     if (match) candidates.push(match[1]);
   }
-  if (env.EVENT_NAME === 'workflow_dispatch') candidates.push(env.INPUT_PR_NUMBER);
+  if (env.EVENT_NAME === "workflow_dispatch") candidates.push(env.INPUT_PR_NUMBER);
 
   for (const candidate of candidates) {
-    const trimmed = String(candidate ?? '').trim();
+    const trimmed = String(candidate ?? "").trim();
     if (/^\d+$/.test(trimmed)) return trimmed;
   }
-  return '';
+  return "";
 }
 
 function cmdPrNumber() {
   ensureDir(RESULTS_DIR);
   const number = resolvePrNumber(process.env);
-  writeFileSync(join(RESULTS_DIR, 'pr-number.txt'), number ? `${number}\n` : '', 'utf8');
-  process.stdout.write(number ? `pull request: #${number}\n` : 'pull request: none (not a pull request run)\n');
+  writeFileSync(join(RESULTS_DIR, "pr-number.txt"), number ? `${number}\n` : "", "utf8");
+  process.stdout.write(
+    number ? `pull request: #${number}\n` : "pull request: none (not a pull request run)\n",
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -197,7 +220,7 @@ function parseTsc(text) {
     /^(?<file>[^\s(][^(]*?)\((?<line>\d+),(?<col>\d+)\):\s*(?<sev>error|warning)\s+(?<rule>TS\d+):\s*(?<msg>.*)$/,
     /^(?<file>\S.*?):(?<line>\d+):(?<col>\d+)\s+-\s+(?<sev>error|warning)\s+(?<rule>TS\d+):\s*(?<msg>.*)$/,
   ];
-  for (const rawLine of text.split('\n')) {
+  for (const rawLine of text.split("\n")) {
     const lineText = rawLine.trim();
     if (!lineText) continue;
     for (const re of patterns) {
@@ -232,18 +255,18 @@ function parseActionlint(text) {
   const findings = [];
 
   const pushFromObject = (obj) => {
-    if (!obj || typeof obj !== 'object') return;
+    if (!obj || typeof obj !== "object") return;
     findings.push({
       file: obj.filepath ?? null,
       line: obj.line ?? null,
       col: obj.column ?? null,
-      rule: obj.kind ?? 'actionlint',
+      rule: obj.kind ?? "actionlint",
       message: obj.message ?? String(obj),
     });
   };
 
-  const start = text.indexOf('[');
-  const end = text.lastIndexOf(']');
+  const start = text.indexOf("[");
+  const end = text.lastIndexOf("]");
   if (start !== -1 && end > start) {
     try {
       const parsed = JSON.parse(text.slice(start, end + 1));
@@ -256,17 +279,18 @@ function parseActionlint(text) {
     }
   }
 
-  const plainRe = /^(?<file>\S+?):(?<line>\d+):(?<col>\d+):\s*(?<msg>.*?)(?:\s+\[(?<rule>[^\]]+)\])?$/;
-  for (const rawLine of text.split('\n')) {
+  const plainRe =
+    /^(?<file>\S+?):(?<line>\d+):(?<col>\d+):\s*(?<msg>.*?)(?:\s+\[(?<rule>[^\]]+)\])?$/;
+  for (const rawLine of text.split("\n")) {
     const lineText = rawLine.trim();
-    if (!lineText.startsWith('{')) {
+    if (!lineText.startsWith("{")) {
       const m = plainRe.exec(lineText);
-      if (m?.groups && !lineText.startsWith('|')) {
+      if (m?.groups && !lineText.startsWith("|")) {
         findings.push({
           file: m.groups.file,
           line: m.groups.line,
           col: m.groups.col,
-          rule: m.groups.rule || 'actionlint',
+          rule: m.groups.rule || "actionlint",
           message: m.groups.msg,
         });
       }
@@ -284,8 +308,9 @@ function parseActionlint(text) {
 /** yamllint `-f parsable`: `file:line:col: [level] message (rule)`. */
 function parseYamllint(text) {
   const findings = [];
-  const re = /^(?<file>.+?):(?<line>\d+):(?<col>\d+):\s*\[(?<sev>[a-z]+)\]\s*(?<msg>.*?)(?:\s+\((?<rule>[^()]+)\))?$/;
-  for (const rawLine of text.split('\n')) {
+  const re =
+    /^(?<file>.+?):(?<line>\d+):(?<col>\d+):\s*\[(?<sev>[a-z]+)\]\s*(?<msg>.*?)(?:\s+\((?<rule>[^()]+)\))?$/;
+  for (const rawLine of text.split("\n")) {
     const lineText = rawLine.trimEnd();
     if (!lineText) continue;
     const m = re.exec(lineText);
@@ -294,7 +319,7 @@ function parseYamllint(text) {
       file: m.groups.file,
       line: m.groups.line,
       col: m.groups.col,
-      rule: m.groups.rule || 'yamllint',
+      rule: m.groups.rule || "yamllint",
       message: `${m.groups.sev}: ${m.groups.msg}`,
     });
   }
@@ -304,8 +329,8 @@ function parseYamllint(text) {
 /** gitleaks `--report-format json`: a top-level array of leaks. */
 function parseGitleaks(text) {
   const findings = [];
-  const start = text.indexOf('[');
-  const end = text.lastIndexOf(']');
+  const start = text.indexOf("[");
+  const end = text.lastIndexOf("]");
   if (start === -1 || end <= start) return findings;
   let leaks;
   try {
@@ -319,9 +344,9 @@ function parseGitleaks(text) {
       file: leak.File ?? null,
       line: leak.StartLine ?? null,
       col: leak.StartColumn ?? null,
-      rule: leak.RuleID ?? 'gitleaks',
+      rule: leak.RuleID ?? "gitleaks",
       // Deliberately never echo the secret itself.
-      message: `possible secret detected (${leak.Description || 'rule matched'}); value redacted`,
+      message: `possible secret detected (${leak.Description || "rule matched"}); value redacted`,
     });
   }
   return findings;
@@ -329,8 +354,11 @@ function parseGitleaks(text) {
 
 /** Last few non-empty lines of an unstructured log, as one finding. */
 function lastLines(text, count = 25) {
-  const lines = text.split('\n').map((l) => l.trimEnd()).filter((l) => l.length > 0);
-  return lines.slice(-count).join('\n');
+  const lines = text
+    .split("\n")
+    .map((l) => l.trimEnd())
+    .filter((l) => l.length > 0);
+  return lines.slice(-count).join("\n");
 }
 
 const PARSERS = {
@@ -347,48 +375,52 @@ const PARSERS = {
 
 function cmdParse(args) {
   const job = args.job;
-  const tool = args.tool || 'unknown';
-  if (!job) throw new Error('parse: --job is required');
+  const tool = args.tool || "unknown";
+  if (!job) throw new Error("parse: --job is required");
 
-  const exitCode = Number.parseInt(args['exit-code'] ?? '0', 10) || 0;
+  const exitCode = Number.parseInt(args["exit-code"] ?? "0", 10) || 0;
   const passed = exitCode === 0;
   const text = readInput(args.input);
   const parser = PARSERS[tool] ?? PARSERS.raw;
   const findings = parser(text);
-  const severity = passed ? 'warning' : 'fail';
+  const severity = passed ? "warning" : "fail";
 
   if (findings.length === 0) {
     if (passed) {
-      recordCheck(job, tool, true, text.trim() ? 'clean' : 'clean (no output)');
-      annotate('notice', `${job}/${tool}: clean`, { title: `${job} passed` });
+      recordCheck(job, tool, true, text.trim() ? "clean" : "clean (no output)");
+      annotate("notice", `${job}/${tool}: clean`, { title: `${job} passed` });
     } else {
       // The tool failed but we could not parse a location out of it. Say so
       // honestly rather than inventing a file and line.
-      const excerpt = lastLines(text) || '(no output captured)';
-      recordFinding(job, tool, { rule: tool, message: excerpt }, 'fail');
-      recordCheck(job, tool, false, 'failed with no parseable diagnostics; see the run log');
-      annotate('error', `${job}/${tool} failed and produced no parseable diagnostics:\n${clip(excerpt, 900)}`, {
-        title: `${job} failed`,
-      });
+      const excerpt = lastLines(text) || "(no output captured)";
+      recordFinding(job, tool, { rule: tool, message: excerpt }, "fail");
+      recordCheck(job, tool, false, "failed with no parseable diagnostics; see the run log");
+      annotate(
+        "error",
+        `${job}/${tool} failed and produced no parseable diagnostics:\n${clip(excerpt, 900)}`,
+        {
+          title: `${job} failed`,
+        },
+      );
     }
   } else {
     for (const finding of findings) recordFinding(job, tool, finding, severity);
     const first = findings[0];
-    const where = first.file ? `${first.file}${first.line ? `:${first.line}` : ''}` : '';
+    const where = first.file ? `${first.file}${first.line ? `:${first.line}` : ""}` : "";
     recordCheck(
       job,
       tool,
       passed,
       passed
         ? `${findings.length} finding(s), none fatal`
-        : `${findings.length} problem(s), first at ${where || 'an unknown location'}`,
+        : `${findings.length} problem(s), first at ${where || "an unknown location"}`,
     );
     findings.forEach((finding) => {
-      annotate(passed ? 'warning' : 'error', finding.message, {
+      annotate(passed ? "warning" : "error", finding.message, {
         file: finding.file,
         line: finding.line,
         col: finding.col,
-        title: `${tool}${finding.rule ? ` (${finding.rule})` : ''}`,
+        title: `${tool}${finding.rule ? ` (${finding.rule})` : ""}`,
       });
     });
   }
@@ -402,12 +434,14 @@ function cmdParse(args) {
 
 function cmdSummary(args) {
   const job = args.job;
-  if (!job) throw new Error('summary: --job is required');
-  const tool = args.tool || 'unknown';
-  const passed = String(args.status ?? '').toLowerCase() === 'pass';
-  const message = args.message || (passed ? 'passed' : 'failed');
+  if (!job) throw new Error("summary: --job is required");
+  const tool = args.tool || "unknown";
+  const passed = String(args.status ?? "").toLowerCase() === "pass";
+  const message = args.message || (passed ? "passed" : "failed");
   recordCheck(job, tool, passed, message);
-  annotate(passed ? 'notice' : 'error', `${job}/${tool}: ${message}`, { title: passed ? `${job} passed` : `${job} failed` });
+  annotate(passed ? "notice" : "error", `${job}/${tool}: ${message}`, {
+    title: passed ? `${job} passed` : `${job} failed`,
+  });
   if (!passed) process.exitCode = 1;
 }
 
@@ -416,37 +450,49 @@ function cmdSummary(args) {
 // ---------------------------------------------------------------------------
 
 const CONVENTIONAL_TYPES = [
-  'build', 'chore', 'ci', 'docs', 'feat', 'fix', 'perf', 'refactor', 'revert', 'style', 'test',
+  "build",
+  "chore",
+  "ci",
+  "docs",
+  "feat",
+  "fix",
+  "perf",
+  "refactor",
+  "revert",
+  "style",
+  "test",
 ];
-const CONVENTIONAL_RE = new RegExp(`^(?:${CONVENTIONAL_TYPES.join('|')})(?:\\([a-z0-9][a-z0-9._/-]*\\))?!?: .+`);
+const CONVENTIONAL_RE = new RegExp(
+  `^(?:${CONVENTIONAL_TYPES.join("|")})(?:\\([a-z0-9][a-z0-9._/-]*\\))?!?: .+`,
+);
 
 /**
  * The PR title arrives via `env.PR_TITLE`, never interpolated into a script
  * body, and is matched as data against a static pattern.
  */
 function cmdCheckTitle() {
-  const title = String(process.env.PR_TITLE ?? '').trim();
-  const author = String(process.env.PR_AUTHOR ?? '');
-  const job = 'pr-title';
-  const tool = 'conventional-commits';
+  const title = String(process.env.PR_TITLE ?? "").trim();
+  const author = String(process.env.PR_AUTHOR ?? "");
+  const job = "pr-title";
+  const tool = "conventional-commits";
 
   if (!title) {
-    recordCheck(job, tool, true, 'no pull request title to check');
+    recordCheck(job, tool, true, "no pull request title to check");
     return;
   }
   // Dependabot writes its own titles; never fail the bot on them.
-  if (author.endsWith('[bot]')) {
+  if (author.endsWith("[bot]")) {
     recordCheck(job, tool, true, `skipped for bot author ${author}`);
     return;
   }
   // GitHub's own merge/revert titles are not Conventional Commits by design.
   if (/^(Merge (pull request|branch|remote-tracking branch)|Revert )/.test(title)) {
-    recordCheck(job, tool, true, 'GitHub-generated merge/revert title');
+    recordCheck(job, tool, true, "GitHub-generated merge/revert title");
     return;
   }
 
   if (CONVENTIONAL_RE.test(title)) {
-    recordCheck(job, tool, true, 'follows Conventional Commits');
+    recordCheck(job, tool, true, "follows Conventional Commits");
     return;
   }
 
@@ -454,11 +500,11 @@ function cmdCheckTitle() {
     `PR title does not follow Conventional Commits.\n` +
     `Title: ${title}\n` +
     `Expected: <type>(<optional scope>): <subject>\n` +
-    `Allowed types: ${CONVENTIONAL_TYPES.join(', ')}\n` +
+    `Allowed types: ${CONVENTIONAL_TYPES.join(", ")}\n` +
     `Example: fix(hooks): stop the Codex notifier dropping the thread id`;
-  recordFinding(job, tool, { rule: 'conventional-commits', message }, 'fail');
-  recordCheck(job, tool, false, 'title is not a Conventional Commit');
-  annotate('error', message, { title: 'Conventional Commits' });
+  recordFinding(job, tool, { rule: "conventional-commits", message }, "fail");
+  recordCheck(job, tool, false, "title is not a Conventional Commit");
+  annotate("error", message, { title: "Conventional Commits" });
   process.exitCode = 1;
 }
 
@@ -474,14 +520,17 @@ function cmdCheckTitle() {
  * below fails the run if a job appears in one and not the other.
  */
 const REQUIRED_ON = {
-  lint: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
-  typecheck: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
-  test: ['pull_request', 'push', 'merge_group', 'workflow_dispatch'],
+  lint: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  typecheck: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  // Formatting is required on every event, pushes to main included. It has no
+  // gate and no path filter, so it can never legitimately be skipped.
+  format: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  test: ["pull_request", "push", "merge_group", "workflow_dispatch"],
   // gitleaks-action does not support the merge_group event; Dependabot's own
   // group merge is covered by the same commits being scanned on the PR.
-  'secret-scan': ['pull_request', 'push', 'workflow_dispatch'],
-  'dependency-review': ['pull_request'],
-  'pr-title': ['pull_request'],
+  "secret-scan": ["pull_request", "push", "workflow_dispatch"],
+  "dependency-review": ["pull_request"],
+  "pr-title": ["pull_request"],
 };
 
 /**
@@ -490,24 +539,26 @@ const REQUIRED_ON = {
  * on the code, so "your test is broken" would be the wrong advice.
  */
 const RUNNER_PROBLEM_HINT =
-  ' - this is usually a runner problem, not a test failure; re-run the failed jobs.';
+  " - this is usually a runner problem, not a test failure; re-run the failed jobs.";
 
 function cmdVerdict() {
-  const job = 'all-checks-pass';
-  const eventName = process.env.EVENT_NAME || '';
-  const raw = process.env.JOB_RESULTS || '';
+  const job = "all-checks-pass";
+  const eventName = process.env.EVENT_NAME || "";
+  const raw = process.env.JOB_RESULTS || "";
 
   const results = new Map();
-  for (const line of raw.split('\n')) {
+  for (const line of raw.split("\n")) {
     const trimmed = line.trim();
     if (!trimmed) continue;
-    const eq = trimmed.indexOf('=');
+    const eq = trimmed.indexOf("=");
     if (eq === -1) continue;
     const name = trimmed.slice(0, eq).trim();
     const value = trimmed.slice(eq + 1).trim();
     if (!/^[A-Za-z0-9_-]+$/.test(name)) {
-      recordCheck(job, 'aggregator', false, `could not parse a job result line: ${name}`);
-      annotate('error', `Unparseable job result entry: ${clip(name, 200)}`, { title: 'all-checks-pass' });
+      recordCheck(job, "aggregator", false, `could not parse a job result line: ${name}`);
+      annotate("error", `Unparseable job result entry: ${clip(name, 200)}`, {
+        title: "all-checks-pass",
+      });
       process.exitCode = 1;
       return;
     }
@@ -515,9 +566,9 @@ function cmdVerdict() {
   }
 
   if (results.size === 0) {
-    recordCheck(job, 'aggregator', false, 'no job results were passed to the aggregator');
-    annotate('error', 'all-checks-pass received no job results; refusing to report a pass.', {
-      title: 'all-checks-pass',
+    recordCheck(job, "aggregator", false, "no job results were passed to the aggregator");
+    annotate("error", "all-checks-pass received no job results; refusing to report a pass.", {
+      title: "all-checks-pass",
     });
     process.exitCode = 1;
     return;
@@ -532,10 +583,14 @@ function cmdVerdict() {
 
   const problems = [];
   for (const name of unknown) {
-    problems.push(`\`${name}\` is wired into the aggregator but has no entry in REQUIRED_ON in ci-record.mjs`);
+    problems.push(
+      `\`${name}\` is wired into the aggregator but has no entry in REQUIRED_ON in ci-record.mjs`,
+    );
   }
   for (const name of missing) {
-    problems.push(`\`${name}\` has an entry in REQUIRED_ON but no result was passed to the aggregator`);
+    problems.push(
+      `\`${name}\` has an entry in REQUIRED_ON but no result was passed to the aggregator`,
+    );
   }
 
   const lines = [];
@@ -544,36 +599,45 @@ function cmdVerdict() {
     // A required job passes only on `success`. Every other value - skipped,
     // cancelled, abandoned, failure, or an empty string - is a failure.
     // A job that is not required on this event may be `success` or `skipped`.
-    const ok = required ? value === 'success' : value === 'success' || value === 'skipped';
-    lines.push(`${ok ? 'PASS' : 'FAIL'}  ${name}: ${value}${required ? '' : ' (not required on this event)'}`);
+    const ok = required ? value === "success" : value === "success" || value === "skipped";
+    lines.push(
+      `${ok ? "PASS" : "FAIL"}  ${name}: ${value}${required ? "" : " (not required on this event)"}`,
+    );
     if (!ok) {
       let why;
       if (required) {
         why = `\`${name}\` must succeed on a \`${eventName}\` run but reported \`${value}\``;
-        if (value !== 'success' && value !== 'failure') {
+        if (value !== "success" && value !== "failure") {
           why += RUNNER_PROBLEM_HINT;
         }
       } else {
         why = `\`${name}\` reported \`${value}\`; only \`success\` or \`skipped\` are acceptable here`;
       }
       problems.push(why);
-      recordFinding(job, name, { rule: value, message: `job \`${name}\` reported \`${value}\`` }, 'fail');
+      recordFinding(
+        job,
+        name,
+        { rule: value, message: `job \`${name}\` reported \`${value}\`` },
+        "fail",
+      );
     }
   }
 
-  process.stdout.write(`${lines.join('\n')}\n`);
+  process.stdout.write(`${lines.join("\n")}\n`);
 
   const passed = problems.length === 0;
   if (passed) {
-    recordCheck(job, 'aggregator', true, `every required check passed on a ${eventName} run`);
-    annotate('notice', 'All required checks passed.', { title: 'all-checks-pass' });
+    recordCheck(job, "aggregator", true, `every required check passed on a ${eventName} run`);
+    annotate("notice", "All required checks passed.", { title: "all-checks-pass" });
   } else {
     // The first problem goes in the check message, because the bot renders that
     // message in its table and deliberately does not repeat the aggregator's
     // roll-up as a separate "thing to fix".
-    recordCheck(job, 'aggregator', false, problems[0]);
-    const message = ['Some required checks did not pass:', ...problems.map((p) => `- ${p}`)].join('\n');
-    annotate('error', message, { title: 'all-checks-pass' });
+    recordCheck(job, "aggregator", false, problems[0]);
+    const message = ["Some required checks did not pass:", ...problems.map((p) => `- ${p}`)].join(
+      "\n",
+    );
+    annotate("error", message, { title: "all-checks-pass" });
     process.exitCode = 1;
   }
 }
@@ -583,10 +647,10 @@ function cmdVerdict() {
 // ---------------------------------------------------------------------------
 
 const COMMANDS = {
-  'pr-number': cmdPrNumber,
+  "pr-number": cmdPrNumber,
   parse: cmdParse,
   summary: cmdSummary,
-  'check-title': cmdCheckTitle,
+  "check-title": cmdCheckTitle,
   verdict: cmdVerdict,
 };
 
@@ -594,7 +658,7 @@ function main() {
   const args = parseArgv(process.argv.slice(2));
   const command = args._[0];
   if (!command || !COMMANDS[command]) {
-    process.stderr.write(`usage: ci-record.mjs <${Object.keys(COMMANDS).join('|')}> [options]\n`);
+    process.stderr.write(`usage: ci-record.mjs <${Object.keys(COMMANDS).join("|")}> [options]\n`);
     process.exitCode = 2;
     return;
   }
