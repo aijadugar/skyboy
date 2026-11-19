@@ -4,7 +4,8 @@ import { SoundGallery } from "@/components/sound-gallery";
 
 export const metadata: Metadata = {
   title: "Sounds",
-  description: "Preview the built-in Skyboy alert sounds for finished tasks, questions, permissions, errors, and the repeating ring.",
+  description:
+    "Preview the built-in Skyboy alert sounds for finished tasks, questions, permissions, errors, and the repeating ring.",
 };
 
 export default function SoundsPage() {
