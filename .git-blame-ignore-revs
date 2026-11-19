@@ -1,0 +1,13 @@
+# Commits that only reformat the tree. `git blame` skips them, so a line is
+# attributed to the change that last altered it rather than to the commit that
+# rewrapped it.
+#
+# Enable once per clone:
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+#
+# GitHub's blame view reads this file automatically.
+
+# style: format the repository with prettier
+# TODO: replace the commented SHA below with the full 40-character SHA of that
+# commit, on its own line, before this file is merged.
+# 0000000000000000000000000000000000000000
