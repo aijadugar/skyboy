@@ -188,6 +188,10 @@ jobs:
                 fix: 'Usually a lockfile problem: run npm install locally and commit the updated package-lock.json.',
                 run: 'npm ci',
               },
+              prettier: {
+                fix: 'Run `npm run format`, then commit the rewritten files. Do not hand-fix individual lines; Prettier owns this.',
+                run: 'npm run format:check',
+              },
               'toolchain-install': {
                 fix: 'Almost always transient on the runner. Re-run the failed job; if it repeats, it is a real problem with this pull request.',
                 run: '',

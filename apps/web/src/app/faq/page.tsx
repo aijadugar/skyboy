@@ -4,7 +4,8 @@ import { PageHeader, PageShell } from "@/components/page-shell";
 
 export const metadata: Metadata = {
   title: "FAQ",
-  description: "Short answers about Skyboy setup, agent settings, prompt queues, privacy, and the download.",
+  description:
+    "Short answers about Skyboy setup, agent settings, prompt queues, privacy, and the download.",
 };
 
 const FAQ = [
@@ -60,7 +61,10 @@ export default function FaqPage() {
       </div>
       <p className="mt-8 text-sm text-body">
         Something else?{" "}
-        <Link href="/contact" className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen">
+        <Link
+          href="/contact"
+          className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen"
+        >
           Write to contact@skyboy.in
         </Link>
         .

@@ -48,7 +48,7 @@ concurrency:
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
-  NODE_VERSION: '24'
+  NODE_VERSION: "24"
 
 jobs:
   # TODO(desktop): apps/desktop does not exist yet. When the Electron app lands,
@@ -238,6 +238,90 @@ jobs:
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: ci-results-typecheck
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Format
+  # ---------------------------------------------------------------------------
+  # Prettier is the only style gate. It runs on every event, pushes to main
+  # included, so `main` cannot drift out of format between pull requests.
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Keep the job token out of .git/config.
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Install dependencies
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          # Explicit, so a failing `npm ci` fails the step through `tee`.
+          set -o pipefail
+          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
+
+      - name: Check formatting
+        id: check
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        env:
+          # Plain output makes the `[warn]` lines countable below.
+          NO_COLOR: "1"
+        run: npm run format:check > ci-results/format.log 2>&1
+
+      - name: Record format results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          CHECK_OUTCOME: ${{ steps.check.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job format --tool npm \
+              --status fail --message "npm ci failed; see the run log" || status=1
+            exit "$status"
+          fi
+          if [ "$CHECK_OUTCOME" = "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job format --tool prettier \
+              --status pass --message "all files are formatted"
+          else
+            # Prettier prints one `[warn] <path>` line per unformatted file, then a
+            # summary line that also starts with `[warn]`. Count only the paths.
+            count=$(grep '^\[warn\] ' ci-results/format.log 2>/dev/null |
+              grep -vc 'Code style issues found') || count=0
+            node .github/scripts/ci-record.mjs summary --job format --tool prettier \
+              --status fail --message "${count} files are not formatted; run npm run format"
+          fi
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-format
           path: ci-results/
           retention-days: 5
           if-no-files-found: warn
@@ -548,6 +632,7 @@ jobs:
     needs:
       - lint
       - typecheck
+      - format
       - test
       - secret-scan
       - dependency-review
@@ -594,6 +679,7 @@ jobs:
           JOB_RESULTS: |
             lint=${{ needs.lint.result }}
             typecheck=${{ needs.typecheck.result }}
+            format=${{ needs.format.result }}
             test=${{ needs.test.result }}
             secret-scan=${{ needs.secret-scan.result }}
             dependency-review=${{ needs.dependency-review.result }}

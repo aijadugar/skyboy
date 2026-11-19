@@ -27,9 +27,12 @@ export function Field({
 export function PrivacyNote() {
   return (
     <p className="text-sm leading-relaxed text-body">
-      Submitting opens an email to contact@skyboy.in with only the fields on this
-      form. The website does not store them.{" "}
-      <Link href="/privacy" className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen">
+      Submitting opens an email to contact@skyboy.in with only the fields on this form. The website
+      does not store them.{" "}
+      <Link
+        href="/privacy"
+        className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen"
+      >
         Privacy
       </Link>
     </p>
@@ -48,10 +51,10 @@ export function FormStatus({
   if (!sent) return null;
   return (
     <div className="rounded-sm border border-hairline bg-paper px-4 py-3 text-sm leading-relaxed text-body">
-      <p className="font-medium text-ink">Your email app should open, addressed to contact@skyboy.in.</p>
-      <p className="mt-2">
-        If it does not, copy this note. Subject: {subject}
+      <p className="font-medium text-ink">
+        Your email app should open, addressed to contact@skyboy.in.
       </p>
+      <p className="mt-2">If it does not, copy this note. Subject: {subject}</p>
       <pre className="mt-3 whitespace-pre-wrap font-mono text-xs text-ink">{body}</pre>
     </div>
   );

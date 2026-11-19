@@ -25,9 +25,14 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: '06:00'
+      time: "06:00"
       timezone: Asia/Kolkata
     open-pull-requests-limit: 5
+    # Let a new release settle for a week before opening a pull request, so a
+    # broken publish is usually caught upstream first. Dependabot applies
+    # cooldown to version updates only: security updates bypass it.
+    cooldown:
+      default-days: 7
     versioning-strategy: increase
     commit-message:
       # Produces `chore(deps): ...` / `chore(deps-dev): ...`, which satisfies
@@ -40,7 +45,7 @@ updates:
       # One pull request for all non-breaking updates.
       npm-minor-and-patch:
         patterns:
-          - '*'
+          - "*"
         update-types:
           - minor
           - patch
@@ -48,7 +53,7 @@ updates:
       # the moment they land.
       npm-security:
         patterns:
-          - '*'
+          - "*"
         applies-to: security-updates
 
   # ---------------------------------------------------------------------------
@@ -62,9 +67,13 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: '06:00'
+      time: "06:00"
       timezone: Asia/Kolkata
     open-pull-requests-limit: 5
+    # Same week-long cooldown as npm. Version updates only; security updates
+    # ignore it.
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: ci
       include: scope
@@ -74,4 +83,4 @@ updates:
     groups:
       github-actions:
         patterns:
-          - '*'
+          - "*"

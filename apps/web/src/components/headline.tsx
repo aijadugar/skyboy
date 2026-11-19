@@ -10,10 +10,10 @@ export function Headline() {
         <DrawablyUnderline className="whitespace-nowrap">done</DrawablyUnderline>.
       </h1>
       <p className="mt-6 max-w-[42ch] text-lg leading-relaxed text-body">
-        Keep it working while you are away. Skyboy alerts you the way you
-        choose when <DrawablyHighlight>Claude Code</DrawablyHighlight> or{" "}
-        <DrawablyHighlight>Codex</DrawablyHighlight> finishes or needs you,
-        then sends the next prompt from a queue you wrote.
+        Keep it working while you are away. Skyboy alerts you the way you choose when{" "}
+        <DrawablyHighlight>Claude Code</DrawablyHighlight> or{" "}
+        <DrawablyHighlight>Codex</DrawablyHighlight> finishes or needs you, then sends the next
+        prompt from a queue you wrote.
       </p>
     </>
   );

@@ -94,7 +94,9 @@ export function WaitlistForm({
       ) : null}
 
       <fieldset>
-        <legend className="font-mono text-xs uppercase tracking-[0.1em] text-ink">Agents you use</legend>
+        <legend className="font-mono text-xs uppercase tracking-[0.1em] text-ink">
+          Agents you use
+        </legend>
         <p className="mt-1 text-sm leading-relaxed text-body">
           Skyboy starts with Claude Code and Codex. Other tells us who to support next.
         </p>

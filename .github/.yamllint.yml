@@ -15,7 +15,7 @@ rules:
   # yamllint's truthy rule flags by default. Allow the literal key, and keep
   # checking everything else.
   truthy:
-    allowed-values: ['true', 'false', 'on']
+    allowed-values: ["true", "false", "on"]
     check-keys: true
 
   # Workflows conventionally start straight at `name:` with no `---`.

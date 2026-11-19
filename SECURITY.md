@@ -1,82 +1,77 @@
 # Security Policy
 
-## Reporting
+## What this repository is
 
-Report vulnerabilities privately via GitHub
-[Security Advisories](https://github.com/aijadugar/skyboy/security/advisories/new)
-(Draft a security advisory). Do not open a public issue for anything you
-believe is exploitable.
+This repository is the **website at [skyboy.in](https://skyboy.in)**, a Next.js
+application in `apps/web`.
 
-Include: what an attacker could do, the affected surface (a skill, the CLI,
-the MCP server, or the site), and reproduction steps.
+The **desktop app** and the **hook helper** that will connect it to Claude Code and
+Codex are **planned, not built**. They are not in this repository yet, so there is
+nothing of theirs to attack today. This policy will be extended when they exist.
 
-You will get an acknowledgement within 7 days and a fix or a status update
-within 30 days. We credit reporters in the release notes by default; say so
-if you prefer to stay anonymous.
+## Reporting a vulnerability
 
-## Scope
+Report it privately through GitHub's private vulnerability reporting:
 
-### The trust model, in one paragraph
+**<https://github.com/aijadugar/skyboy/security/advisories/new>**
 
-SKILL.md files are instructions addressed to an AI agent. They are not
-programs and do not execute. But an instruction that says "run this script"
-is a program with extra steps, so the catalog treats anything a skill ships
-beside its SKILL.md (files under `scripts/`) as untrusted content with a
-higher review bar.
+Please do not open a public issue for anything you believe is exploitable, and do not
+discuss it publicly before it is fixed.
 
-### In scope
+### What to include
 
-- **Skills under `skills/`**: anything in a `scripts/` subfolder is reviewed
-  line by line before merge, and again before `verified` badging. A skill
-  whose `scripts/` content does not match its stated purpose is rejected,
-  not fixed.
-- **Permissions disclosures**: `network`, `shell_exec`,
-  `filesystem_write_outside_target`, and `env_read` must reflect reality.
-  A skill that hides capabilities from its disclosure is treated as a
-  security issue, not a review miss.
-- **The CLI (`cli/`)**: path handling for install targets (no writes outside
-  the requested install root), the catalog fetch path (no code execution
-  from catalog content), and the bundle builder (no path traversal via
-  archive entry names).
-- **The MCP server**: `install_skill` is stdio/local only by design; the
-  hosted endpoint must never gain filesystem-write tools. One-time signed
-  download links must not be replayable.
-- **The site**: the `/api/zip` and `/api/search` endpoints (no filesystem or
-  SSRF surface from user-supplied slugs), and the SKILL.md render path (no
-  raw-HTML injection from catalog content).
+- What an attacker could do with it, and who it affects.
+- Where it lives: the page or URL, the browser and operating system you used.
+- Steps to reproduce, as precisely as you can make them. A request and its response
+  is better than a description of one.
+- Whether you have told anyone else, or disclosed it anywhere.
+- How you would like to be credited, or that you would rather not be.
 
-### Out of scope
+## What to expect
 
-- Social engineering of an agent by a skill's prose (that is what curation
-  and review exist for; report a content issue instead).
-- Content in upstream vendor repos (report upstream; we relink or delist).
-- The install scripts' target hosts, or anything about the deployment
-  platform beyond the endpoints above.
+- An acknowledgement **within 7 days**.
+- A fix, or a status update, **within 30 days**.
+- Credit in the release notes when it is fixed, unless you ask us not to.
 
-## Review bar for hooks and scripts
+If a fix takes longer than that, we will say so and keep you informed rather than let
+the report go quiet.
 
-A PR touching `scripts/` inside a skill must state in the PR body:
+## Safe harbour for good-faith research
 
-1. what each file does,
-2. what it touches (network, shell, filesystem, environment),
-3. why the skill needs it (progressive disclosure means most skills should
-   not need scripts at all).
+Security research done in good faith is welcome here. If you stay within the in-scope
+list below, avoid touching other people's data, avoid degrading the service for
+anyone else, and give us a reasonable chance to fix the problem before you publish,
+we will treat your work as authorised and will not report it as abuse.
 
-Reviewers diff the script against that description. Unexplained obfuscation
-(minification, base64 blobs, packed strings) is grounds for rejection on its
-own: a skill is meant to be read by an agent and a human.
+This is not permission to test against accounts, infrastructure or data that are not
+yours. If you are unsure whether something is in scope, ask first through the private
+report link above.
+
+## In scope
+
+- **The website**: the pages, client-side code, and the server routes that serve
+  them, at `skyboy.in` and its subdomains.
+- **Forms and links**: the waitlist and contact flows. They currently open an email
+  rather than storing a submission, and the policy is written around that.
+- **This repository**: leaked secrets, vulnerable or malicious dependencies, and
+  workflow configurations that could be abused through a pull request.
+- **Content injection**: anything that lets page content escape into markup, a
+  redirect, or a request the user did not intend.
+
+## Out of scope
+
+- Third-party services we do not control: GitHub, the hosting platform, the email
+  provider, analytics.
+- Denial of service, rate-limit exhaustion, spam, and social engineering.
+- Anything that needs physical access to a device, or a device that is already
+  compromised.
+- Vulnerabilities in Claude Code, Codex, or any other agent Skyboy integrates with.
+  Report those to the vendor.
+- Automated scanner output with no explanation of impact and no working proof of
+  concept.
 
 ## Supported versions
 
-Only the latest release of the CLI and the current `main` of the site are
-supported. Skills are versioned per folder (`version` in skill.json);
-security fixes to a skill bump its version and the catalog hash, and
-`skyboy update` surfaces the change.
-
-## Known limitations
-
-- Catalog content is community-contributed; `verified` means a maintainer
-  ran it, not that it is vulnerability-free.
-- The bundle builder deduplicates nothing: a bundle is only as trustworthy
-  as the catalog records behind it, which is why the hash chain
-  (folder -> skill.json -> catalog.json) is checked in CI.
+Only the current `main` branch of the website is supported. There are no released
+desktop builds yet; when there are, this section will say which versions receive
+fixes.

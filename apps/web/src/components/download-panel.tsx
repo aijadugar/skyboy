@@ -21,19 +21,27 @@ export function DownloadPanel() {
       <section className="mt-10 rounded-md border border-hairline bg-card p-6 sm:p-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">Current release</p>
+            <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">
+              Current release
+            </p>
             <p className="mt-2 text-3xl font-semibold tracking-tight text-ink">Coming soon</p>
             <dl className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
               <div>
-                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">Version</dt>
+                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">
+                  Version
+                </dt>
                 <dd className="mt-1 text-ink">Not published</dd>
               </div>
               <div>
-                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">Date</dt>
+                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">
+                  Date
+                </dt>
                 <dd className="mt-1 text-ink">Not published</dd>
               </div>
               <div>
-                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">Checksum</dt>
+                <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">
+                  Checksum
+                </dt>
                 <dd className="mt-1 text-ink">Ships with the file</dd>
               </div>
             </dl>
@@ -43,11 +51,18 @@ export function DownloadPanel() {
 
         <div className="mt-8 grid grid-cols-1 gap-5 border-t border-hairline pt-6 sm:grid-cols-2">
           <label className="block">
-            <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink">Operating system</span>
-            <span className="mt-1 block text-sm leading-relaxed text-body">
-              After release, this chooses the matching installer. The other systems stay listed below. Today it only fills the waitlist.
+            <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink">
+              Operating system
             </span>
-            <select className={`${fieldClass} mt-2`} value={os} onChange={(event) => setOs(event.target.value)}>
+            <span className="mt-1 block text-sm leading-relaxed text-body">
+              After release, this chooses the matching installer. The other systems stay listed
+              below. Today it only fills the waitlist.
+            </span>
+            <select
+              className={`${fieldClass} mt-2`}
+              value={os}
+              onChange={(event) => setOs(event.target.value)}
+            >
               {OS_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -59,9 +74,14 @@ export function DownloadPanel() {
             <label className="block">
               <span className="font-mono text-xs uppercase tracking-[0.1em] text-ink">CPU</span>
               <span className="mt-1 block text-sm leading-relaxed text-body">
-                macOS needs a separate build for Intel and Apple silicon. We record which one you need.
+                macOS needs a separate build for Intel and Apple silicon. We record which one you
+                need.
               </span>
-              <select className={`${fieldClass} mt-2`} value={cpu} onChange={(event) => setCpu(event.target.value)}>
+              <select
+                className={`${fieldClass} mt-2`}
+                value={cpu}
+                onChange={(event) => setCpu(event.target.value)}
+              >
                 <option>Apple silicon</option>
                 <option>Intel</option>
               </select>
@@ -76,9 +96,14 @@ export function DownloadPanel() {
 
       <ul className="mt-6 divide-y divide-hairline border-y border-hairline">
         {PLATFORMS.map((platform) => (
-          <li key={platform.name} className="flex flex-wrap items-center justify-between gap-2 py-3 text-sm">
+          <li
+            key={platform.name}
+            className="flex flex-wrap items-center justify-between gap-2 py-3 text-sm"
+          >
             <span className="font-medium text-ink">{platform.name}</span>
-            <span className="font-mono text-xs uppercase tracking-[0.1em] text-mute">{platform.plan}</span>
+            <span className="font-mono text-xs uppercase tracking-[0.1em] text-mute">
+              {platform.plan}
+            </span>
           </li>
         ))}
       </ul>

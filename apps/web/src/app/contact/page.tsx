@@ -17,7 +17,10 @@ export default function ContactPage() {
       />
 
       <p className="mt-6">
-        <a href="mailto:contact@skyboy.in" className="font-mono text-sm text-pen hover:text-pen-deep">
+        <a
+          href="mailto:contact@skyboy.in"
+          className="font-mono text-sm text-pen hover:text-pen-deep"
+        >
           contact@skyboy.in
         </a>
       </p>

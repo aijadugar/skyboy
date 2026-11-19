@@ -145,8 +145,12 @@ button:not(:disabled),
   font-size: 0.95rem;
   line-height: 1.75;
 }
-.md-body > :first-child { margin-top: 0; }
-.md-body > :last-child { margin-bottom: 0; }
+.md-body > :first-child {
+  margin-top: 0;
+}
+.md-body > :last-child {
+  margin-bottom: 0;
+}
 .md-body h1,
 .md-body h2,
 .md-body h3,
@@ -157,24 +161,47 @@ button:not(:disabled),
   line-height: 1.25;
   margin: 1.75em 0 0.6em;
 }
-.md-body h1 { font-size: 1.7rem; }
-.md-body h2 { font-size: 1.35rem; }
-.md-body h3 { font-size: 1.12rem; }
-.md-body h4 { font-size: 1rem; }
-.md-body p { margin: 0.9em 0; }
+.md-body h1 {
+  font-size: 1.7rem;
+}
+.md-body h2 {
+  font-size: 1.35rem;
+}
+.md-body h3 {
+  font-size: 1.12rem;
+}
+.md-body h4 {
+  font-size: 1rem;
+}
+.md-body p {
+  margin: 0.9em 0;
+}
 .md-body a {
   color: #2724d1;
   text-decoration: underline;
   text-decoration-color: #c9c9c6;
   text-underline-offset: 3px;
 }
-.md-body a:hover { text-decoration-color: #2724d1; }
-.md-body strong { color: #18181b; }
+.md-body a:hover {
+  text-decoration-color: #2724d1;
+}
+.md-body strong {
+  color: #18181b;
+}
 .md-body ul,
-.md-body ol { margin: 0.9em 0; padding-left: 1.35rem; }
-.md-body ul { list-style: disc; }
-.md-body ol { list-style: decimal; }
-.md-body li { margin: 0.3em 0; }
+.md-body ol {
+  margin: 0.9em 0;
+  padding-left: 1.35rem;
+}
+.md-body ul {
+  list-style: disc;
+}
+.md-body ol {
+  list-style: decimal;
+}
+.md-body li {
+  margin: 0.3em 0;
+}
 .md-body blockquote {
   margin: 1.1em 0;
   padding: 0.1em 0 0.1em 1.1em;
@@ -201,7 +228,9 @@ button:not(:disabled),
   text-transform: uppercase;
   color: #474645;
 }
-.md-body tr:last-child td { border-bottom: none; }
+.md-body tr:last-child td {
+  border-bottom: none;
+}
 .md-body code {
   font-family: var(--font-geist-mono), ui-monospace, monospace;
   font-size: 0.85em;
@@ -239,18 +268,31 @@ button:not(:disabled),
    syntax rainbow (taste-skill §4.2: one accent, restrained). */
 .md-code .hljs-keyword,
 .md-code .hljs-selector-tag,
-.md-code .hljs-literal { color: #2724d1; }
+.md-code .hljs-literal {
+  color: #2724d1;
+}
 .md-code .hljs-string,
 .md-code .hljs-attr,
 .md-code .hljs-regexp,
-.md-code .hljs-template-variable { color: #188a42; }
-.md-code .hljs-comment { color: #a1a1aa; font-style: italic; }
+.md-code .hljs-template-variable {
+  color: #188a42;
+}
+.md-code .hljs-comment {
+  color: #a1a1aa;
+  font-style: italic;
+}
 .md-code .hljs-number,
 .md-code .hljs-title,
 .md-code .hljs-name,
-.md-code .hljs-built_in { color: #18181b; }
-.md-code .hljs-tag { color: #474645; }
-.md-code .hljs-meta { color: #2724d1; }
+.md-code .hljs-built_in {
+  color: #18181b;
+}
+.md-code .hljs-tag {
+  color: #474645;
+}
+.md-code .hljs-meta {
+  color: #2724d1;
+}
 
 /* Reduced motion: drawably already freezes its sketch + skips hover re-sketch.
    We honor the same preference for any page-level motion. */

@@ -20,18 +20,18 @@ The earlier site at this address was a directory of AI skills. That product is n
 
 The site is marketing and download only. The app runs on the user's computer.
 
-| Page | Purpose |
-|---|---|
-| Home | What Skyboy does, the download button, a short demo, supported agents |
-| Features | Alert styles, prompt queue, dashboard, safety controls |
-| How it works | The hook-based flow in plain language |
-| Sounds | A gallery where visitors can preview the built-in sounds |
-| Download | One control per operating system, with version and checksum once a release exists |
-| Docs | Setup for Claude Code and Codex, phone push, troubleshooting |
-| Changelog | Release history |
-| Privacy | What stays on the computer and what phone push sends |
-| FAQ | Short answers |
-| Contact | Support and feedback |
+| Page         | Purpose                                                                           |
+| ------------ | --------------------------------------------------------------------------------- |
+| Home         | What Skyboy does, the download button, a short demo, supported agents             |
+| Features     | Alert styles, prompt queue, dashboard, safety controls                            |
+| How it works | The hook-based flow in plain language                                             |
+| Sounds       | A gallery where visitors can preview the built-in sounds                          |
+| Download     | One control per operating system, with version and checksum once a release exists |
+| Docs         | Setup for Claude Code and Codex, phone push, troubleshooting                      |
+| Changelog    | Release history                                                                   |
+| Privacy      | What stays on the computer and what phone push sends                              |
+| FAQ          | Short answers                                                                     |
+| Contact      | Support and feedback                                                              |
 
 Until the app ships, the download button says **Coming soon** and opens the waitlist. Forms ask only for the fields they need, say why, and link to the privacy page. They open an email to contact@skyboy.in. The site does not store the submission.
 
@@ -54,6 +54,34 @@ npm run dev
 
 The Next.js app lives in `apps/web`.
 
+## Working Guidelines
+
+How a change gets merged here.
+
+- **Pull request titles follow [Conventional Commits](https://www.conventionalcommits.org/), with no tool prefix.** Write `fix(web): stop the download button wrapping`, not `[Claude] fix: ...` or `Update file`. CI checks the title and fails the pull request if it does not match.
+- **Open pull requests ready for review.** Drafts are fine for work in progress, but a draft is not reviewed and not merged; mark it ready when it is.
+- **Every pull request must pass the required `all-checks-pass` status check.** That is the only status check branch protection requires. It aggregates every other job, so a failure anywhere shows up there.
+
+Run the checks locally before pushing:
+
+| Check     | Command                                      | Notes                                                                                                                                                                                                                     |
+| --------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Build     | `npm run build`                              | Runs `next build`, which type-checks as part of the build.                                                                                                                                                                |
+| Typecheck | `npx tsc --noEmit -p apps/web/tsconfig.json` | Faster than a full build when you only want types.                                                                                                                                                                        |
+| Format    | `npm run format:check`                       | `npm run format` rewrites the files.                                                                                                                                                                                      |
+| Lint      | `npm run lint`                               | **Currently broken.** It runs `next lint`, which Next.js 16 removed, and there is no ESLint config yet. It fails on a clean checkout. ESLint is a separate follow-up; do not treat a lint failure as your change's fault. |
+
+Formatting is Prettier, configured in `.prettierrc.json` to match the code that was
+already here: double quotes, semicolons, 100 columns. There is also an optional
+pre-commit hook that checks only the files you are committing:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+It is opt-in, and it skips itself with a message if `npm ci` has not been run. Once
+installed, `git commit --no-verify` bypasses it for one commit.
+
 ## License
 
-To be decided.
+[MIT](LICENSE).

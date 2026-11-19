@@ -1,78 +1,111 @@
-# Contributing to skyboy.in
+# Contributing
 
-Thanks for helping build a curated, trustworthy skill directory. The catalog
-lives as real files in this repo; the site, the CLI, and the MCP server are
-all built from those files.
+Thanks for helping with Skyboy. This repository is the **website at
+[skyboy.in](https://skyboy.in)**. The desktop app is not built yet; when it lands it
+will get its own guidance here.
 
-## Adding a skill
+## Before you write code
 
-1. Fork this repo and create the folder `skills/<category>/<slug>/`. The
-   top-level folder under `skills/` **is** the category, so a brand-new
-   category needs nothing but the folder itself (no code changes anywhere).
+- Read the **Working Guidelines** section of [README.md](README.md). It is the short
+  version of this file.
+- Open an issue before starting anything larger than a typo or a one-line fix. It is
+  cheaper to agree on the shape of a change than to redo it.
+- Say in the issue if you are already working on it, so nobody duplicates the work.
 
-2. Add the two required files (optional `scripts/`, `references/`,
-   `assets/` subfolders as needed):
-   - `SKILL.md` - the portable instruction file: frontmatter `name` and
-     `description` plus a `## Command` section holding the exact
-     `skyboy add <slug>` line (see `docs/skill-spec.md`).
-   - `skill.json` - machine-readable metadata: `name` (equals the folder
-     name), `category` (equals the folder path under `skills/`), `version`
-     (semver), `description` (the 160-char display line), `command`,
-     `tags` (1-10), `author`, `license` (SPDX, default MIT), and optional
-     `compatible_agents` and `source_url`. Validated against
-     `scripts/schemas/skill.schema.json`.
+## Getting it running
 
-3. Validate and regenerate locally (Go 1.24+):
-
-   ```bash
-   # Validate just your folder (exactly what CI runs on your PR):
-   go run ./cli validate --root . --path skills/<category>/<slug>
-
-   # Refresh the catalog record for your skill (content hash + meta shard):
-   go run ./cli build-catalog
-
-   # Optional: check your skill is not a near-duplicate:
-   npm run detect-duplicates
-   ```
-
-4. Open a PR using the
-   [skill submission template](.github/PULL_REQUEST_TEMPLATE/skill-submission.md).
-   It asks for the description, 2-3 concrete use cases, the agents you tested
-   on, and a permissions disclosure.
-
-## How CI reviews your PR
-
-CI validates **only the folders your PR changed**, so a one-skill PR stays
-fast no matter how large the catalog grows:
-
-1. `go run ./cli validate --root . --path <changed folders>` - runs the same
-   schema and cross-file checks as a full-tree validation, scoped to your
-   folders.
-2. `--check-catalog` on the same folders - verifies the `catalog.json` record
-   hash still matches your folder contents, i.e. that you ran
-   `skyboy build-catalog` and committed the result.
-3. The web build and the Go test suite run in the main CI workflow.
-
-The full-tree validation still runs on every push to `main`.
-
-## Review, badges, and governance
-
-A maintainer reviews every submission. The badge comes from the record's
-`origin` plus the review outcome (see `docs/skill-spec.md` §4): `official`
-for skills authored by the project, `vendor` for vendor-published indexes,
-`verified` after review, `community` otherwise. Governance, maintainer roles,
-and the security review bar for hooks/scripts are described in
-[GOVERNANCE.md](GOVERNANCE.md) and [SECURITY.md](SECURITY.md).
-
-## Commits
-
-Conventional Commits format: `<type>(<scope>): <subject>`.
+Node 20 or newer.
 
 ```bash
-git add skills/<category>/<slug>
-git commit -m "feat(skills): add <slug>"
+npm install
+npm run dev
 ```
+
+The site runs at <http://localhost:3000>. The Next.js app lives in `apps/web`; the
+repository root is an npm workspace that wraps it.
+
+## What CI checks
+
+Every pull request runs the jobs below. `all-checks-pass` is the single status check
+branch protection requires, and it fails if any of them fails.
+
+| Job               | What it does                                            | Run it locally                               |
+| ----------------- | ------------------------------------------------------- | -------------------------------------------- |
+| Format            | `prettier --check` over the whole repository            | `npm run format:check`                       |
+| Typecheck         | `tsc --noEmit` over `apps/web`                          | `npx tsc --noEmit -p apps/web/tsconfig.json` |
+| Test              | `npm run build` on Ubuntu, Windows and macOS            | `npm run build`                              |
+| Lint              | actionlint and yamllint over `.github/`                 | see the note below                           |
+| Secret scan       | gitleaks over the commits in the pull request           | none; CI only                                |
+| Dependency review | flags vulnerable dependency changes, pull requests only | `npm audit`                                  |
+| PR title          | checks the title against Conventional Commits           | none; rename the pull request                |
+
+Two things are worth being blunt about:
+
+- **`npm run lint` is broken.** It runs `next lint`, which Next.js 16 removed, and
+  there is no ESLint config yet. It fails on a clean checkout. Adding ESLint is a
+  separate change; do not read that failure as a problem with your work.
+- **There is no automated test suite.** The `test` job's three-OS matrix currently
+  proves that the site builds everywhere, not that it behaves correctly. That is why
+  the verification section below matters.
+
+## What we look for in a pull request
+
+- One change per pull request. A fix and an unrelated refactor in the same branch are
+  hard to review and hard to revert.
+- The description explains what changed and why, in plain language.
+- New or changed behaviour comes with evidence a reviewer can check: a screenshot, a
+  short recording, or numbered steps.
+- Formatting is its own commit or its own pull request. Run `npm run format` before
+  you start editing, so your real changes are not buried in rewrapping.
+- Copy is written for the reader, not the search engine, and does not overstate what
+  the product does today.
+
+## Verification before merge
+
+The pull request description has to answer four things. "It works" is not one of
+them.
+
+1. **What did you exercise?** The exact pages, buttons, forms and states you touched.
+2. **Where?** Operating system and browser, and the viewport width if the change is
+   layout.
+3. **What did you observe?** What happened, and what you expected to happen.
+4. **What did you _not_ verify?** Be specific. Unchecked mobile layout, an untested
+   error path, a form you could not submit. A known gap written down is fine; an
+   unknown one is not.
+
+## Commit messages and pull request titles
+
+Both use [Conventional Commits](https://www.conventionalcommits.org/): a type, an
+optional scope, then a summary.
+
+```
+feat(web): add a changelog entry for 0.1.0
+fix(sounds): stop the preview button double-playing
+docs: explain the waitlist behaviour
+```
+
+Allowed types: `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`,
+`revert`, `style`, `test`.
+
+**CI checks the pull request title**, and fails the run if it does not match. It does
+not check every commit, so a messy commit history is tolerated, but a clean one is
+appreciated. Do not prefix titles with a tool name (`[Claude] fix: ...`); the
+convention is about the change, not about how it was typed.
+
+## Dependencies
+
+Dependabot opens updates weekly, grouped: one pull request for the minor and patch
+bumps of each ecosystem, and security updates on their own so they can be merged
+immediately. Keep dependency bumps out of unrelated pull requests. If a dependency
+change breaks something, say so in its own pull request rather than working around it
+silently.
+
+## Security
+
+Please do not open a public issue for anything you believe is exploitable. Report it
+privately as described in [SECURITY.md](SECURITY.md).
 
 ## Code of Conduct
 
-All contributions must follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+Everyone taking part is expected to follow the
+[Code of Conduct](CODE_OF_CONDUCT.md).

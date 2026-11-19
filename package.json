@@ -13,11 +13,13 @@
     "build": "npm --workspace apps/web run build",
     "start": "npm --workspace apps/web run start",
     "lint": "npm --workspace apps/web run lint",
-    "validate-skills": "go run ./cli validate",
-    "build-catalog": "go run ./cli build-catalog",
-    "detect-duplicates": "node --experimental-strip-types scripts/detect-duplicates.ts"
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "prettier": "3.10.1"
   }
 }

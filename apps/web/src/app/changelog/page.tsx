@@ -64,12 +64,16 @@ export default function ChangelogPage() {
       />
 
       <article className="mt-12 max-w-2xl border-l-2 border-pen pl-5">
-        <h2 className="text-lg font-semibold tracking-tight text-ink">Website replaces the old skyboy.in</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-ink">
+          Website replaces the old skyboy.in
+        </h2>
         <p className="mt-2 text-sm leading-relaxed text-body">
-          skyboy.in is now the home of the Skyboy desktop notifier. The earlier
-          directory of AI skills is no longer part of this site. The download
-          button joins the{" "}
-          <Link href="/download#waitlist" className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen">
+          skyboy.in is now the home of the Skyboy desktop notifier. The earlier directory of AI
+          skills is no longer part of this site. The download button joins the{" "}
+          <Link
+            href="/download#waitlist"
+            className="text-pen underline decoration-hairline underline-offset-2 hover:decoration-pen"
+          >
             waitlist
           </Link>
           .
@@ -82,7 +86,9 @@ export default function ChangelogPage() {
         <ol className="mt-6 max-w-2xl space-y-8">
           {ROADMAP.map((phase) => (
             <li key={phase.version} className="border-t border-hairline pt-5">
-              <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">{phase.version}</p>
+              <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
+                {phase.version}
+              </p>
               <h3 className="mt-2 text-lg font-semibold text-ink">{phase.title}</h3>
               <ul className="mt-3 list-disc space-y-1 pl-5 text-sm leading-relaxed text-body">
                 {phase.items.map((item) => (

@@ -50,7 +50,9 @@ export function SessionDemo() {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-3">
-        <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">A short look at the app</p>
+        <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">
+          A short look at the app
+        </p>
         <div className="flex gap-1" aria-hidden="true">
           {FRAMES.map((item, itemIndex) => (
             <span
@@ -70,7 +72,9 @@ export function SessionDemo() {
         </div>
         <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-hairline pt-5">
           <div>
-            <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">Last activity</dt>
+            <dt className="font-mono text-[0.7rem] uppercase tracking-[0.12em] text-mute">
+              Last activity
+            </dt>
             <dd className="mt-1 text-sm text-ink">{frame.age}</dd>
           </div>
           <div>
@@ -81,7 +85,9 @@ export function SessionDemo() {
         <p className="mt-5 text-sm leading-relaxed text-body">{frame.message}</p>
         <div className="mt-5 flex items-center justify-between gap-3 border-t border-hairline pt-4">
           <p className="font-mono text-xs uppercase tracking-[0.1em] text-pen">{frame.alert}</p>
-          <span className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">Pause all queues</span>
+          <span className="font-mono text-[0.7rem] uppercase tracking-[0.1em] text-mute">
+            Pause all queues
+          </span>
         </div>
       </DrawablyCard>
       <div className="mt-3 flex gap-2">

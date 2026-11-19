@@ -8,10 +8,12 @@ export default function NotFound() {
       <SiteNav />
       <main className="mx-auto max-w-6xl px-6 pb-24 pt-16">
         <p className="font-mono text-xs uppercase tracking-[0.15em] text-pen">404</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink">This page is not part of Skyboy.</h1>
+        <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink">
+          This page is not part of Skyboy.
+        </h1>
         <p className="mt-4 max-w-[46ch] text-base leading-relaxed text-body">
-          skyboy.in is the desktop notifier for Claude Code and Codex. The old
-          skills directory is gone.
+          skyboy.in is the desktop notifier for Claude Code and Codex. The old skills directory is
+          gone.
         </p>
         <Link
           href="/"

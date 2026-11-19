@@ -26,8 +26,8 @@ export function Footer() {
               </p>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-body">
-              A desktop notifier for Claude Code and Codex. Alerts stay on your
-              computer unless you turn on phone push.
+              A desktop notifier for Claude Code and Codex. Alerts stay on your computer unless you
+              turn on phone push.
             </p>
           </div>
           <nav className="flex max-w-xl flex-wrap gap-x-6 gap-y-2" aria-label="Footer">
