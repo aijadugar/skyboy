@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest a change, a new capability, or an improvement to something that already exists.
-title: '[Feature]: '
+title: "[Feature]: "
 labels:
   - enhancement
   - needs-triage
