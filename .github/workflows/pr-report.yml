@@ -311,6 +311,15 @@ jobs:
             const AGGREGATOR_JOB = 'all-checks-pass';
             const actionableFailures = failedChecks.filter((check) => check.job !== AGGREGATOR_JOB);
 
+            // The aggregator records each required job's raw result in `rule`.
+            // `failure` means the code or a check of it failed; cancelled,
+            // abandoned, timed_out and skipped mean the runner never produced a
+            // verdict, so SkyBot must not blame the contributor for those.
+            const aggregatorFindings = findings.filter((finding) => finding.job === AGGREGATOR_JOB);
+            const hasRealFailure =
+              actionableFailures.length > 0 ||
+              aggregatorFindings.some((finding) => finding.rule === 'failure');
+
             let green;
             if (verdicts.length > 0) {
               green = verdictPassed && !verdictFailed;
@@ -350,10 +359,16 @@ jobs:
             lines.push('');
 
             if (conclusion === 'cancelled') {
-              lines.push('> This run was cancelled, usually because a newer commit was pushed. The newest run is the one that counts.');
+              lines.push(
+                '> This run was cancelled before it finished, so it says nothing about the code. ' +
+                  'That is usually a runner problem or a superseded run. Re-run the failed jobs.',
+              );
               lines.push('');
             } else if (conclusion === 'timed_out') {
-              lines.push('> This run hit a job timeout. Re-run it; if it repeats, something is hanging.');
+              lines.push(
+                '> This run hit a job timeout, which is usually a runner problem rather than a test failure. ' +
+                  'Re-run the failed jobs; if it repeats, something is hanging.',
+              );
               lines.push('');
             } else if (checks.length === 0) {
               lines.push(
@@ -440,6 +455,24 @@ jobs:
                 parts.push('- **How to fix it:** see the full run log linked at the bottom.');
               }
               parts.push('');
+              problemBlocks.push(parts.join('\n'));
+            }
+
+            // A required job can report a result that is not a failure of the
+            // code at all: cancelled, abandoned, timed out or skipped. Those
+            // produce no tool-level findings, so the aggregator's own record is
+            // the only place the reason exists. Show it, with the same advice
+            // the verdict gives.
+            for (const finding of aggregatorFindings) {
+              if (finding.rule === 'failure') continue; // already covered above
+              const parts = [
+                `**\`${code(finding.tool, 60)}\` reported \`${code(finding.rule || 'unknown', 30)}\`**`,
+                '',
+                `<pre>${pre(finding.message)}</pre>`,
+                '- **How to fix it:** ' +
+                  cell('This is usually a runner problem, not a test failure. Re-run the failed jobs from the Actions tab.', 300),
+                '',
+              ];
               problemBlocks.push(parts.join('\n'));
             }
 
@@ -585,7 +618,11 @@ jobs:
                     core.warning(`could not dismiss review ${review.id}: ${error.message}`);
                   }
                 }
-              } else if (actionableFailures.length > 0 && !NO_VERDICT_CONCLUSIONS.includes(conclusion)) {
+              } else if (hasRealFailure && !NO_VERDICT_CONCLUSIONS.includes(conclusion)) {
+                // Only a real failure asks for changes. A run whose only
+                // failures are cancelled, abandoned or timed out is a runner
+                // problem, and asking the contributor to fix their code for it
+                // would be wrong.
                 // Re-fetch rather than trusting the payload: a closed pull
                 // request must never be touched, and the head may have moved on
                 // to a commit with its own run.
@@ -611,9 +648,15 @@ jobs:
                   if (latestOnCommit && latestOnCommit.state === 'CHANGES_REQUESTED') {
                     core.notice(`${BOT_NAME} has already requested changes on this commit.`);
                   } else {
-                    const failingNames = actionableFailures
-                      .map((check) => `\`${code(`${check.job} / ${check.tool}`, 70)}\``)
-                      .join(', ');
+                    const failingNames =
+                      actionableFailures.length > 0
+                        ? actionableFailures
+                            .map((check) => `\`${code(`${check.job} / ${check.tool}`, 70)}\``)
+                            .join(', ')
+                        : aggregatorFindings
+                            .filter((finding) => finding.rule === 'failure')
+                            .map((finding) => `\`${code(finding.tool, 70)}\``)
+                            .join(', ');
                     const reviewBody = [
                       REVIEW_MARKER,
                       '',
