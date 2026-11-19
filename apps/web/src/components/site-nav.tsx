@@ -77,15 +77,7 @@ export function SiteNav({ current = "/" }: { current?: string }) {
   );
 }
 
-function NavLink({
-  href,
-  label,
-  current,
-}: {
-  href: string;
-  label: string;
-  current: string;
-}) {
+function NavLink({ href, label, current }: { href: string; label: string; current: string }) {
   const active = current === href;
   return (
     <Link
