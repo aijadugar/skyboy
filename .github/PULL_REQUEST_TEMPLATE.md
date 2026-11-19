@@ -43,6 +43,14 @@ Closes #
 - [ ] Codex
 - [ ] Not applicable
 
+**What I did not verify**
+
+<!--
+  The gap you are aware of: a mobile layout you did not check, an error path you
+  could not trigger, a browser you do not have. Writing it down is not a
+  weakness in the pull request; leaving it unstated is.
+-->
+
 ## Screenshots
 
 <!--
