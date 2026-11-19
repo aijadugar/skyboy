@@ -1,13 +1,7 @@
 import { Footer } from "./footer";
 import { SiteNav } from "./site-nav";
 
-export function PageShell({
-  current,
-  children,
-}: {
-  current: string;
-  children: React.ReactNode;
-}) {
+export function PageShell({ current, children }: { current: string; children: React.ReactNode }) {
   return (
     <div className="min-h-[100dvh]">
       <SiteNav current={current} />
