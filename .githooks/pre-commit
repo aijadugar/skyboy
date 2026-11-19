@@ -1,0 +1,42 @@
+#!/bin/sh
+# Formatting check for staged files only.
+#
+# This hook is opt-in. Enable it once per clone:
+#   git config core.hooksPath .githooks
+#
+# Skip it for a single commit with:
+#   git commit --no-verify
+#
+# Only Prettier runs here. Typecheck, build and the CI checks are too slow to
+# sit in front of every commit; CI enforces them.
+set -e
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+# Staged files that were added, copied, modified or renamed and still exist.
+# -z with tr keeps paths containing spaces intact.
+staged=$(git diff --cached --name-only --diff-filter=ACMR -z |
+  tr '\0' '\n' |
+  grep -Ei '\.(js|jsx|mjs|cjs|ts|tsx|json|css|html|md|ya?ml)$' || true)
+
+[ -z "$staged" ] && exit 0
+
+# Prettier is a root devDependency. If the dependencies are not installed yet,
+# say so and let the commit through: the hook should not be the reason someone
+# cannot commit.
+prettier="$(git rev-parse --show-toplevel)/node_modules/.bin/prettier"
+if [ ! -x "$prettier" ]; then
+  echo "pre-commit: prettier is not installed (run 'npm ci'); skipping the format check."
+  exit 0
+fi
+
+# --ignore-unknown so files Prettier cannot parse are skipped rather than
+# failing the run, and `--` so a path starting with a dash is not read as an
+# option.
+if ! printf '%s\n' "$staged" | xargs "$prettier" --ignore-unknown --check --; then
+  echo ""
+  echo "pre-commit: the staged files above are not formatted."
+  echo "  Fix:  npm run format"
+  echo "  Then: git add -u && git commit"
+  exit 1
+fi
