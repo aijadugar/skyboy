@@ -65,7 +65,8 @@ const TONES: Tone[] = [
     id: "pulse",
     name: "Steady pulse",
     event: "Ring",
-    blurb: "Three pulses here. In the app the ring continues until you dismiss it, within the duration you set.",
+    blurb:
+      "Three pulses here. In the app the ring continues until you dismiss it, within the duration you set.",
     play: (ctx) => {
       note(ctx, 740, 0, 0.12, "sine", 0.1);
       note(ctx, 740, 0.45, 0.12, "sine", 0.1);
@@ -81,7 +82,9 @@ export function SoundGallery() {
 
   async function preview(tone: Tone) {
     setError(null);
-    const AudioCtx = window.AudioContext ?? (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+    const AudioCtx =
+      window.AudioContext ??
+      (window as Window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
     if (!AudioCtx) {
       setError("This browser cannot play the preview.");
       return;
@@ -103,8 +106,12 @@ export function SoundGallery() {
             <li key={tone.id} className="rounded-md border border-hairline bg-card p-5">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-pen">{tone.event}</p>
-                  <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink">{tone.name}</h2>
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-pen">
+                    {tone.event}
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink">
+                    {tone.name}
+                  </h2>
                 </div>
                 <button
                   type="button"
@@ -122,10 +129,9 @@ export function SoundGallery() {
       </ul>
       {error ? <p className="mt-4 text-sm text-error">{error}</p> : null}
       <p className="mt-6 max-w-[62ch] text-sm leading-relaxed text-body">
-        These are the preview tones for the built-in set. In the app you can
-        change the volume, assign a different sound to each agent and event, or
-        import your own audio file. Phone push and desktop banners are separate
-        from these sounds.
+        These are the preview tones for the built-in set. In the app you can change the volume,
+        assign a different sound to each agent and event, or import your own audio file. Phone push
+        and desktop banners are separate from these sounds.
       </p>
     </div>
   );
