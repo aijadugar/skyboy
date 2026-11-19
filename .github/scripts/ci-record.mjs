@@ -485,20 +485,12 @@ const REQUIRED_ON = {
 };
 
 /**
- * Entries in JOB_RESULTS that are not job results. `changes` carries the
- * `changes` job's `web` output - 'true' or 'false' - and is read to decide
- * whether a skipped gated job is legitimate. It is excluded from the drift
- * guard because it is not a job to enforce.
+ * Appended to a required job's failure message when its result is neither
+ * `success` nor `failure`. Those values mean the runner never got to a verdict
+ * on the code, so "your test is broken" would be the wrong advice.
  */
-const CONTROL_KEYS = new Set(['changes']);
-
-/**
- * Jobs that ci.yml gates on `needs.changes.outputs.web`. They may report
- * `skipped` only when that value is exactly 'false', i.e. change detection ran
- * and found nothing web-related. An empty value means detection did not run,
- * so these stay required and a skip fails the run.
- */
-const SKIPPABLE_WHEN_WEB_UNCHANGED = new Set(['typecheck', 'test']);
+const RUNNER_PROBLEM_HINT =
+  ' - this is usually a runner problem, not a test failure; re-run the failed jobs.';
 
 function cmdVerdict() {
   const job = 'all-checks-pass';
@@ -506,7 +498,6 @@ function cmdVerdict() {
   const raw = process.env.JOB_RESULTS || '';
 
   const results = new Map();
-  let webChanges = null;
   for (const line of raw.split('\n')) {
     const trimmed = line.trim();
     if (!trimmed) continue;
@@ -520,10 +511,6 @@ function cmdVerdict() {
       process.exitCode = 1;
       return;
     }
-    if (CONTROL_KEYS.has(name)) {
-      webChanges = value;
-      continue;
-    }
     results.set(name, value);
   }
 
@@ -535,17 +522,6 @@ function cmdVerdict() {
     process.exitCode = 1;
     return;
   }
-
-  if (webChanges !== null && webChanges !== '' && webChanges !== 'true' && webChanges !== 'false') {
-    recordCheck(job, 'aggregator', false, `unexpected \`changes\` value: ${webChanges}`);
-    annotate('error', `The \`changes\` control value must be 'true', 'false' or empty, got: ${clip(webChanges, 100)}`, {
-      title: 'all-checks-pass',
-    });
-    process.exitCode = 1;
-    return;
-  }
-  // Only an explicit 'false' relaxes anything. Missing or empty is strict.
-  const noWebChanges = webChanges === 'false';
 
   // Drift guard: a job wired into `needs:` but missing from REQUIRED_ON would
   // silently never be enforced, which is exactly the failure this job exists
@@ -565,23 +541,21 @@ function cmdVerdict() {
   const lines = [];
   for (const [name, value] of [...results.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
     const required = (REQUIRED_ON[name] ?? []).includes(eventName);
-    // A gated job may skip only when the diff genuinely has nothing web-related
-    // in it. Everything else must pass outright.
-    const allowedToSkip = !required || (noWebChanges && SKIPPABLE_WHEN_WEB_UNCHANGED.has(name));
-    const ok = value === 'success' || (allowedToSkip && value === 'skipped');
-    const reason = !required
-      ? ' (not required on this event)'
-      : value === 'skipped' && allowedToSkip
-        ? ' (skipped: no web changes)'
-        : '';
-    lines.push(`${ok ? 'PASS' : 'FAIL'}  ${name}: ${value}${reason}`);
+    // A required job passes only on `success`. Every other value - skipped,
+    // cancelled, abandoned, failure, or an empty string - is a failure.
+    // A job that is not required on this event may be `success` or `skipped`.
+    const ok = required ? value === 'success' : value === 'success' || value === 'skipped';
+    lines.push(`${ok ? 'PASS' : 'FAIL'}  ${name}: ${value}${required ? '' : ' (not required on this event)'}`);
     if (!ok) {
-      const why = required
-        ? `\`${name}\` must succeed on a \`${eventName}\` run but reported \`${value}\`` +
-          (SKIPPABLE_WHEN_WEB_UNCHANGED.has(name) && !noWebChanges
-            ? ` (\`changes\` was ${webChanges === null || webChanges === '' ? 'not reported' : `'${webChanges}'`}, so a skip is not acceptable)`
-            : '')
-        : `\`${name}\` reported \`${value}\`; only \`success\` or \`skipped\` are acceptable here`;
+      let why;
+      if (required) {
+        why = `\`${name}\` must succeed on a \`${eventName}\` run but reported \`${value}\``;
+        if (value !== 'success' && value !== 'failure') {
+          why += RUNNER_PROBLEM_HINT;
+        }
+      } else {
+        why = `\`${name}\` reported \`${value}\`; only \`success\` or \`skipped\` are acceptable here`;
+      }
       problems.push(why);
       recordFinding(job, name, { rule: value, message: `job \`${name}\` reported \`${value}\`` }, 'fail');
     }
