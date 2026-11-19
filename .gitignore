@@ -9,9 +9,6 @@ build/
 # Emitted build output
 dist/
 
-# Go build output (go build ./... in cli/ drops a native binary here on Windows)
-*.exe
-
 # The design-input repos are vendored separately (each keeps its own git history)
 drawably/
 taste-skill/
@@ -26,7 +23,10 @@ pnpm-debug.log*
 
 # Env & secrets
 .env
-.env*.local
+.env.*
+# `.env *` catches duplicates and editor backups such as `.env copy` or `.env 2`.
+.env *
+!.env.example
 .DS_Store
 
 # Editor
