@@ -68,8 +68,14 @@ export default function Home() {
         <section className="border-y border-hairline bg-card">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-6 py-5">
             <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute">Supported now</p>
-            <span className="sk-chip sk-chip--active"><span className="sk-chip__dot" />Claude Code</span>
-            <span className="sk-chip sk-chip--active"><span className="sk-chip__dot" />Codex</span>
+            <span className="sk-chip sk-chip--active">
+              <span className="sk-chip__dot" />
+              Claude Code
+            </span>
+            <span className="sk-chip sk-chip--active">
+              <span className="sk-chip__dot" />
+              Codex
+            </span>
             <p className="font-mono text-xs uppercase tracking-[0.15em] text-mute sm:ml-4">Later</p>
             <span className="sk-chip">Gemini CLI</span>
             <span className="sk-chip">Cursor</span>
@@ -95,10 +101,9 @@ export default function Home() {
                 Stop checking back every few minutes.
               </h2>
               <p className="mt-4 text-base leading-relaxed text-body">
-                A long agent task means watching for a permission prompt. Miss it,
-                and the agent sits blocked. Small scripts can play a sound. Skyboy
-                is the desktop app: one place for alerts, and a queue that continues
-                the work.
+                A long agent task means watching for a permission prompt. Miss it, and the agent
+                sits blocked. Small scripts can play a sound. Skyboy is the desktop app: one place
+                for alerts, and a queue that continues the work.
               </p>
               <Link
                 href="/features"
@@ -110,8 +115,12 @@ export default function Home() {
             <ol className="space-y-5">
               {POINTS.map((point, index) => (
                 <li key={point.title} className="rounded-md border border-hairline bg-card p-5">
-                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-mute">0{index + 1}</p>
-                  <h3 className="mt-2 text-lg font-semibold tracking-tight text-ink">{point.title}</h3>
+                  <p className="font-mono text-xs uppercase tracking-[0.12em] text-mute">
+                    0{index + 1}
+                  </p>
+                  <h3 className="mt-2 text-lg font-semibold tracking-tight text-ink">
+                    {point.title}
+                  </h3>
                   <p className="mt-2 text-sm leading-relaxed text-body">{point.body}</p>
                 </li>
               ))}
