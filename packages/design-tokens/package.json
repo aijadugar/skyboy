@@ -1,0 +1,15 @@
+{
+  "name": "@skyboy/design-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Colours, radii and type shared by the Skyboy surfaces, as CSS custom properties with a small typed layer over them.",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/tokens.mjs",
+    "./tokens.css": "./src/tokens.css"
+  },
+  "files": [
+    "src"
+  ]
+}
