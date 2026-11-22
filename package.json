@@ -2,11 +2,12 @@
   "name": "skyboy",
   "version": "0.1.0",
   "private": true,
-  "description": "Skyboy — a desktop notifier for Claude Code and Codex. This repo is the skyboy.in website.",
+  "description": "Skyboy — a desktop notifier for Claude Code and Codex, and the skyboy.in website.",
   "license": "MIT",
   "type": "module",
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "packages/*"
   ],
   "scripts": {
     "dev": "npm --workspace apps/web run dev",
@@ -14,7 +15,11 @@
     "start": "npm --workspace apps/web run start",
     "lint": "npm --workspace apps/web run lint",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "desktop:dev": "npm --workspace @skyboy/desktop run tauri:dev",
+    "desktop:build": "npm --workspace @skyboy/desktop run tauri:build",
+    "desktop:test": "npm --workspace @skyboy/desktop run test",
+    "sounds": "npm --workspace @skyboy/desktop run generate:sounds"
   },
   "engines": {
     "node": ">=20"
