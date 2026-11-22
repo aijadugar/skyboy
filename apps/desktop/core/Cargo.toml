@@ -38,7 +38,7 @@ rusqlite = { version = "0.42", features = ["bundled"] }
 # Agent configuration files are edited in place. Both formats carry comments
 # and key order that belong to the user, so they are edited as documents, not
 # parsed into a struct and re-emitted.
-toml_edit = "0.22"
+toml_edit = "0.25"
 # The local IPC server. Tauri already runs tokio, so this adds no runtime; it is
 # named here because `tokio::net::windows::named_pipe` is what a Windows server
 # needs, and std has no server-side named pipe API.
