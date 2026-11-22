@@ -1,0 +1,15 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "The minimum the Skyboy window needs. The window is created and managed from Rust, so it does not need window-control permissions; it listens for events and calls Skyboy's own commands, which are not gated by capabilities. Everything else the app does - the local IPC server, reading and writing agent configuration files, playing a sound - happens in Rust and needs no webview permission at all.",
+  "windows": ["main"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "core:app:allow-version",
+    "notification:default",
+    "autostart:allow-enable",
+    "autostart:allow-disable",
+    "autostart:allow-is-enabled"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "hook_event_name": "PreToolUse",
+  "session_id": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+  "transcript_path": "/Users/example/.claude/projects/-Users-example-project/6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93.jsonl",
+  "cwd": "C:\\Users\\example\\project",
+  "permission_mode": "default",
+  "tool_name": "Bash",
+  "tool_use_id": "toolu_01AaBbCcDdEeFfGgHhIiJjKk",
+  "tool_input": { "command": "git status" }
+}

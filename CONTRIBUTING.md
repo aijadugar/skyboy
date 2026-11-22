@@ -1,8 +1,14 @@
 # Contributing
 
-Thanks for helping with Skyboy. This repository is the **website at
-[skyboy.in](https://skyboy.in)**. The desktop app is not built yet; when it lands it
-will get its own guidance here.
+Thanks for helping with Skyboy. This repository holds two things: the website at
+[skyboy.in](https://skyboy.in), in `apps/web`, and the desktop app, in
+`apps/desktop` with its hook helper in `apps/hook`.
+
+If you are working on the app's interface, read
+[apps/desktop/CLAUDE.md](apps/desktop/CLAUDE.md) first — it is the short version
+of the conventions that part of the repository lives by. The Rust side and the
+event path are described in [docs/architecture.md](docs/architecture.md), and the
+verified agent hook formats in [docs/hooks.md](docs/hooks.md).
 
 ## Before you write code
 

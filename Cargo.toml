@@ -1,0 +1,63 @@
+# Skyboy Rust workspace.
+#
+# Three crates, one lockfile:
+#
+#   packages/protocol   skyboy-protocol  - the event format both other crates agree on
+#   apps/hook           skyboy-hook      - the tiny binary an agent's hook config calls
+#   apps/desktop/core   skyboy-core      - the Tauri app (note: core/, not src-tauri/)
+#
+# `tauri.conf.json` is what marks a Tauri crate, not the folder name, so the CLI
+# finds apps/desktop/core/ from apps/desktop/ and `tauri dev` / `tauri build`
+# work from there. See docs/architecture.md.
+#
+# Because this is a workspace, `target/` lands here at the repository root, not
+# inside each crate. That is deliberate: one build cache, and `tauri build`
+# looks for the binary in the workspace target directory.
+
+[workspace]
+resolver = "2"
+members = ["apps/desktop/core", "apps/hook", "packages/protocol"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/aijadugar/skyboy"
+rust-version = "1.82"
+
+[workspace.dependencies]
+skyboy-protocol = { path = "packages/protocol" }
+
+serde = { version = "1.0", features = ["derive"] }
+# `preserve_order` matters: agent configuration files are edited as documents,
+# and a JSON round trip that reordered a user's settings.json keys would show up
+# as a diff in a file Skyboy does not own.
+serde_json = { version = "1.0", features = ["preserve_order"] }
+time = { version = "0.3", features = ["formatting"] }
+getrandom = "0.2"
+
+# The release profile is the whole point of the size requirement: a "small
+# installer, low memory" app. opt-level "z" plus LTO plus one codegen unit
+# trades compile time for binary size, and `panic = "abort"` drops the
+# unwinding tables. `strip` removes symbols.
+#
+# Caveat worth knowing before debugging a release build: `panic = "abort"`
+# means a panic kills the process rather than unwinding, and backtraces are
+# stripped. Debug builds (the default for `tauri dev`) are unaffected.
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+incremental = false
+
+# The hook binary is the one thing an agent's config spawns, so it is tuned
+# hardest: it is the smallest crate here and it must start instantly.
+#
+# Only `opt-level` and `codegen-units` may appear here - Cargo rejects `panic`,
+# `lto` and `strip` in a package override. The hook inherits those from the
+# workspace release profile above, so the effect is the same.
+[profile.release.package.skyboy-hook]
+opt-level = "z"
+codegen-units = 1

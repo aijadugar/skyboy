@@ -1,0 +1,108 @@
+/*
+ * Tailwind v4 entry point.
+ *
+ * The tokens are CSS custom properties from @skyboy/design-tokens; this file
+ * maps them onto Tailwind's namespaces so `bg-canvas`, `text-ink-muted`,
+ * `border-border` and `rounded-md` all work and follow the theme.
+ *
+ * `@theme inline` rather than `@theme`: `inline` makes Tailwind substitute the
+ * `var(--sky-*)` reference directly into each utility instead of generating an
+ * intermediate `--color-canvas` property. That matters here because the token
+ * values change under `[data-theme="dark"]`; an intermediate property would be
+ * resolved once against the light values and stay there.
+ *
+ * Note for anyone who has seen apps/web: its tailwind.config.ts is never read,
+ * because that project has neither an `@config` directive nor a `@theme` block,
+ * so its custom token utilities are silently never emitted. This file is
+ * written the way that actually works. Do not copy the other one.
+ */
+
+@import "tailwindcss";
+@import "@skyboy/design-tokens/tokens.css";
+
+@theme inline {
+  /* Surfaces */
+  --color-canvas: var(--sky-canvas);
+  --color-surface: var(--sky-surface);
+  --color-surface-raised: var(--sky-surface-raised);
+  --color-surface-sunken: var(--sky-surface-sunken);
+
+  /* Lines */
+  --color-border: var(--sky-border);
+  --color-border-strong: var(--sky-border-strong);
+
+  /* Text */
+  --color-ink: var(--sky-ink);
+  --color-ink-muted: var(--sky-ink-muted);
+  --color-ink-subtle: var(--sky-ink-subtle);
+
+  /* Accent */
+  --color-accent: var(--sky-accent);
+  --color-accent-hover: var(--sky-accent-hover);
+  --color-accent-ink: var(--sky-accent-ink);
+  --color-accent-soft: var(--sky-accent-soft);
+
+  /* Status */
+  --color-ok: var(--sky-ok);
+  --color-warn: var(--sky-warn);
+  --color-danger: var(--sky-danger);
+  --color-info: var(--sky-info);
+
+  /* One per event kind, so a badge and its legend cannot drift apart. */
+  --color-event-finished: var(--sky-event-finished);
+  --color-event-needs-permission: var(--sky-event-needs-permission);
+  --color-event-needs-input: var(--sky-event-needs-input);
+  --color-event-error: var(--sky-event-error);
+
+  --radius-sm: var(--sky-radius-sm);
+  --radius-md: var(--sky-radius-md);
+  --radius-lg: var(--sky-radius-lg);
+
+  --font-sans: var(--sky-font-sans);
+  --font-mono: var(--sky-font-mono);
+
+  --shadow-sm: var(--sky-shadow-sm);
+  --shadow-md: var(--sky-shadow-md);
+  --shadow-lg: var(--sky-shadow-lg);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--sky-canvas);
+  color: var(--sky-ink);
+  font-family: var(--sky-font-sans);
+  /* The window is an application, not a document: text selection on chrome
+     reads as a bug, and the views that hold selectable text opt back in. */
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Motion is defined in one place and can be switched off with the operating
+   system preference, via the token. */
+@keyframes sky-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.sky-pulse {
+  animation: sky-pulse 1.6s ease-in-out calc(3 * (1 - var(--sky-motion-scale, 1)));
+  animation-iteration-count: 3;
+}
+
+/* A visible, consistent focus ring. The primitives rely on this rather than
+   each one drawing its own. */
+:focus-visible {
+  outline: 2px solid var(--sky-focus-ring);
+  outline-offset: 2px;
+}

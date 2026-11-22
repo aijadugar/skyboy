@@ -1,0 +1,16 @@
+[package]
+name = "skyboy-protocol"
+description = "The event format Skyboy's hook binary sends to the Skyboy desktop app, and the agent-specific payloads it parses into it."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+time.workspace = true
+# For the random token in a pipe name. Small, no network, no build script.
+getrandom.workspace = true

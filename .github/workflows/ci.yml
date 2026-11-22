@@ -51,13 +51,446 @@ env:
   NODE_VERSION: "24"
 
 jobs:
-  # TODO(desktop): apps/desktop does not exist yet. When the Electron app lands,
-  # its jobs go here and get added to `needs:` on all-checks-pass below. Expect
-  # at least: a 3-OS matrix that packages the app, a build of the
-  # `skyboy-hook.exe` helper, and an integration job that feeds synthetic Claude
-  # Code and Codex hook payloads through the helper. Keep `all-checks-pass` as
-  # the required check name and add each new job to REQUIRED_ON in
-  # .github/scripts/ci-record.mjs, or the drift guard will fail the run.
+  # ---------------------------------------------------------------------------
+  # Change detection
+  # ---------------------------------------------------------------------------
+  # Decides whether the Rust and desktop jobs are needed. It runs on every
+  # event, and the aggregator consults it before accepting a `skipped` result
+  # for any job that depends on it.
+  #
+  # Why a gate job rather than a `paths:` filter on each job: a path filter makes
+  # a job `skipped`, and GitHub reports "filtered out" and "could not start" as
+  # the same value. `all-checks-pass` cannot tell those apart, so it would have
+  # to either trust every skip - which would let a genuinely broken desktop job
+  # merge - or refuse every skip, which would mean compiling a Rust GUI to merge
+  # a typo fix in a README. Splitting the decision into a job that always reports
+  # keeps the gate meaningful. See REQUIRED_ON and GATED_BY in
+  # .github/scripts/ci-record.mjs.
+  changes:
+    name: Changes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      # "true" or "false". A gated job may only be skipped when this is "false"
+      # and this job succeeded; anything else is a failure.
+      desktop: ${{ steps.detect.outputs.desktop }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The diff needs both commits of a pull request, which a shallow
+          # clone does not have.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      # Every event except a pull request runs the desktop jobs. A push to main,
+      # a merge-queue entry and a manual run are all "check everything": the
+      # saving is only worth taking where a pull request says plainly which files
+      # it touched.
+      - name: Detect whether desktop or Rust code changed
+        id: detect
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          mkdir -p ci-results
+          desktop=true
+
+          if [ "$EVENT_NAME" = "pull_request" ]; then
+            desktop=false
+            # Explicit SHAs rather than `origin/${{ github.base_ref }}`: on a
+            # pull request the checkout is a merge commit, and the base ref is
+            # not guaranteed to exist as a local ref.
+            git diff --name-only "$BASE_SHA" "$HEAD_SHA" > ci-results/changed-files.txt
+            # Counted rather than `grep -q`: under `pipefail`, grep -q exits at
+            # the first match, the writer takes SIGPIPE, and the pipeline fails
+            # for the wrong reason.
+            matches=$(grep -Ec \
+              '^(apps/desktop/|apps/hook/|packages/|Cargo\.|package\.json$|package-lock\.json$|\.github/workflows/|\.github/scripts/)' \
+              ci-results/changed-files.txt || true)
+            if [ "${matches:-0}" -gt 0 ]; then
+              desktop=true
+            fi
+            echo "::notice title=Changed files::$(wc -l < ci-results/changed-files.txt) file(s) changed, $matches desktop-related"
+          fi
+
+          echo "desktop=$desktop" >> "$GITHUB_OUTPUT"
+          echo "::notice title=Desktop jobs::desktop=$desktop"
+          node .github/scripts/ci-record.mjs summary --job changes --tool path-filter \
+            --status pass --message "desktop=$desktop"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-changes
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Rust  (fmt, clippy, tests)
+  # ---------------------------------------------------------------------------
+  # One job for all three, on Linux only. Formatting and lints do not differ by
+  # platform; compilation does, and that is what the desktop matrix below is for.
+  #
+  # The toolchain comes from the runner's own rustup rather than a third-party
+  # setup action, following the same reasoning as fetching actionlint directly in
+  # the lint job: one less thing pinned to a commit and trusted.
+  rust:
+    name: Rust
+    needs: [changes]
+    if: needs.changes.outputs.desktop == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Install the Rust components
+        shell: bash
+        run: |
+          rustup component add rustfmt clippy
+          rustc --version
+          cargo --version
+
+      - name: Check formatting
+        id: fmt
+        continue-on-error: true
+        shell: bash
+        run: cargo fmt --all -- --check > ci-results/cargo-fmt.log 2>&1
+
+      - name: Run clippy
+        id: clippy
+        continue-on-error: true
+        shell: bash
+        run: cargo clippy --workspace --all-targets -- -D warnings > ci-results/clippy.log 2>&1
+
+      - name: Run the Rust tests
+        id: tests
+        continue-on-error: true
+        shell: bash
+        run: cargo test --workspace > ci-results/cargo-test.log 2>&1
+
+      - name: Record Rust results
+        if: always()
+        shell: bash
+        env:
+          FMT_OUTCOME: ${{ steps.fmt.outcome }}
+          CLIPPY_OUTCOME: ${{ steps.clippy.outcome }}
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+        run: |
+          set +e
+          status=0
+          code=0; [ "$FMT_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job rust --tool cargo-fmt \
+            --input ci-results/cargo-fmt.log --exit-code "$code" || status=1
+          code=0; [ "$CLIPPY_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job rust --tool clippy \
+            --input ci-results/clippy.log --exit-code "$code" || status=1
+          code=0; [ "$TESTS_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job rust --tool cargo-test \
+            --input ci-results/cargo-test.log --exit-code "$code" || status=1
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-rust
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Desktop  (compiles on both supported platforms, and the interface builds)
+  # ---------------------------------------------------------------------------
+  # Bundling installers is the release workflow's job. What this proves is the
+  # part that breaks per platform: that the Rust crate and the frontend build on
+  # Windows and macOS, which Linux cannot tell you.
+  desktop:
+    name: Desktop (${{ matrix.os }})
+    needs: [changes]
+    if: needs.changes.outputs.desktop == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Install the Rust components
+        shell: bash
+        run: |
+          rustup component add rustfmt clippy
+          rustc --version
+          cargo --version
+
+      - name: Install dependencies
+        id: install
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          npm ci --no-audit --no-fund 2>&1 | tee ci-results/npm-ci.log
+
+      - name: Compile the Rust workspace
+        id: cargo
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: cargo build --workspace > ci-results/cargo-build.log 2>&1
+
+      - name: Run the interface tests
+        id: ui
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: npm --workspace @skyboy/desktop run test > ci-results/ui-tests.log 2>&1
+
+      # This also builds skyboy-hook in release mode, because the interface's
+      # build script prepares it for the bundler. So a hook that stops compiling
+      # in release fails here too.
+      - name: Build the interface
+        id: bundle
+        if: steps.install.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: npm --workspace @skyboy/desktop run build > ci-results/ui-build.log 2>&1
+
+      - name: Record desktop results
+        if: always()
+        shell: bash
+        env:
+          INSTALL_OUTCOME: ${{ steps.install.outcome }}
+          CARGO_OUTCOME: ${{ steps.cargo.outcome }}
+          UI_OUTCOME: ${{ steps.ui.outcome }}
+          BUNDLE_OUTCOME: ${{ steps.bundle.outcome }}
+        run: |
+          set +e
+          job="desktop-${RUNNER_OS}"
+          status=0
+          if [ "$INSTALL_OUTCOME" != "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job "$job" --tool npm \
+              --status fail --message "npm ci failed; see the run log" || status=1
+            exit "$status"
+          fi
+          code=0; [ "$CARGO_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "$job" --tool cargo-build \
+            --input ci-results/cargo-build.log --exit-code "$code" || status=1
+          code=0; [ "$UI_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "$job" --tool vitest \
+            --input ci-results/ui-tests.log --exit-code "$code" || status=1
+          code=0; [ "$BUNDLE_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "$job" --tool vite-build \
+            --input ci-results/ui-build.log --exit-code "$code" || status=1
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-desktop-${{ matrix.os }}
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # Hook integration  (the real binary, a real endpoint, both platforms)
+  # ---------------------------------------------------------------------------
+  # The Rust tests prove the payloads parse. They cannot prove the compiled
+  # binary starts, reads stdin for one agent and its trailing argument for the
+  # other, finds the endpoint file, connects to a named pipe or a Unix socket,
+  # and exits 0 on all of it. Those are the promises the hook makes to a coding
+  # agent, and they are the things that differ by platform - the Unix socket
+  # path in particular can only be exercised on macOS.
+  hook-integration:
+    name: Hook integration (${{ matrix.os }})
+    needs: [changes]
+    if: needs.changes.outputs.desktop == 'true'
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Build the hook
+        id: build
+        continue-on-error: true
+        shell: bash
+        run: cargo build --release -p skyboy-hook > ci-results/hook-build.log 2>&1
+
+      - name: Feed every sample payload through the real binary
+        id: e2e
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: node scripts/e2e/hook-to-core.mjs --verbose > ci-results/hook-e2e.log 2>&1
+
+      # Informational: a hook runs on the agent's critical path, so the numbers
+      # are worth seeing on every platform, but a slow runner is not a reason to
+      # fail a pull request.
+      - name: Measure the hook's latency
+        if: steps.build.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: node scripts/measure.mjs --iterations 50 > ci-results/hook-latency.log 2>&1
+
+      - name: Record hook integration results
+        if: always()
+        shell: bash
+        env:
+          BUILD_OUTCOME: ${{ steps.build.outcome }}
+          E2E_OUTCOME: ${{ steps.e2e.outcome }}
+        run: |
+          set +e
+          job="hook-integration-${RUNNER_OS}"
+          status=0
+          code=0; [ "$BUILD_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "$job" --tool cargo-build \
+            --input ci-results/hook-build.log --exit-code "$code" || status=1
+          code=0; [ "$E2E_OUTCOME" = "success" ] || code=1
+          node .github/scripts/ci-record.mjs parse --job "$job" --tool hook-e2e \
+            --input ci-results/hook-e2e.log --exit-code "$code" || status=1
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-hook-${{ matrix.os }}
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
+
+  # ---------------------------------------------------------------------------
+  # The recorder's own tests
+  # ---------------------------------------------------------------------------
+  # `all-checks-pass` is the only status check branch protection requires, so the
+  # thing that decides its verdict is worth testing. These cover the gate rules:
+  # a web-only pull request passes with the desktop jobs skipped, and a skip is
+  # refused when the gate failed, when it produced no output, or when it said the
+  # jobs were needed.
+  ci-record-tests:
+    name: CI recorder tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Record the pull request number
+        shell: bash
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          MERGE_GROUP_HEAD_REF: ${{ github.event.merge_group.head_ref }}
+          INPUT_PR_NUMBER: ${{ inputs.pr_number }}
+        run: node .github/scripts/ci-record.mjs pr-number
+
+      - name: Test the recorder
+        id: tests
+        continue-on-error: true
+        shell: bash
+        run: node --test .github/scripts/ci-record.test.mjs > ci-results/ci-record-tests.log 2>&1
+
+      - name: Record the result
+        if: always()
+        shell: bash
+        env:
+          TESTS_OUTCOME: ${{ steps.tests.outcome }}
+        run: |
+          set +e
+          status=0
+          if [ "$TESTS_OUTCOME" = "success" ]; then
+            node .github/scripts/ci-record.mjs summary --job ci-record-tests --tool node-test \
+              --status pass --message "the aggregator's gate rules hold"
+          else
+            node .github/scripts/ci-record.mjs summary --job ci-record-tests --tool node-test \
+              --status fail --message "the recorder's tests failed; see the run log"
+            status=1
+          fi
+          exit "$status"
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ci-results-ci-record-tests
+          path: ci-results/
+          retention-days: 5
+          if-no-files-found: warn
 
   # ---------------------------------------------------------------------------
   # Lint
@@ -630,10 +1063,15 @@ jobs:
     name: all-checks-pass
     if: always()
     needs:
+      - changes
       - lint
       - typecheck
       - format
       - test
+      - rust
+      - desktop
+      - hook-integration
+      - ci-record-tests
       - secret-scan
       - dependency-review
       - pr-title
@@ -677,13 +1115,23 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           JOB_RESULTS: |
+            changes=${{ needs.changes.result }}
             lint=${{ needs.lint.result }}
             typecheck=${{ needs.typecheck.result }}
             format=${{ needs.format.result }}
             test=${{ needs.test.result }}
+            rust=${{ needs.rust.result }}
+            desktop=${{ needs.desktop.result }}
+            hook-integration=${{ needs.hook-integration.result }}
+            ci-record-tests=${{ needs.ci-record-tests.result }}
             secret-scan=${{ needs.secret-scan.result }}
             dependency-review=${{ needs.dependency-review.result }}
             pr-title=${{ needs.pr-title.result }}
+          # A job's *output* is not available through `needs.<job>.result`, so
+          # the gate's decision is passed separately. Without it, a skipped
+          # desktop job would be indistinguishable from one that never started.
+          GATE_OUTPUTS: |
+            desktop=${{ needs.changes.outputs.desktop }}
         run: node .github/scripts/ci-record.mjs verdict
 
       - name: Upload combined results

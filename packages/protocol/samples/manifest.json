@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "note": "Every hook payload Skyboy understands, with the event it must produce. This file is the single source of truth for both packages/protocol/tests/samples.rs and scripts/e2e/hook-to-core.mjs, so an expectation cannot drift between them. Field names and delivery mechanisms were verified against the agents' own documentation and source on 2026-11-21; see docs/hooks.md.",
+  "delivery": {
+    "claude_code": "json on stdin",
+    "codex": "json appended as the final argv element"
+  },
+  "cases": [
+    {
+      "file": "claude-code/stop.json",
+      "agent": "claude_code",
+      "expected_kind": "finished",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "The turn ended and Claude is waiting for a prompt."
+    },
+    {
+      "file": "claude-code/subagent-stop.json",
+      "agent": "claude_code",
+      "expected_kind": "finished",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "A subagent finished; mapped to finished because the user cannot tell the difference."
+    },
+    {
+      "file": "claude-code/permission-request.json",
+      "agent": "claude_code",
+      "expected_kind": "needs_permission",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "The immediate permission signal; the notification route is delayed."
+    },
+    {
+      "file": "claude-code/notification-permission-prompt.json",
+      "agent": "claude_code",
+      "expected_kind": "needs_permission",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "Slower fallback: fires about six seconds after the request."
+    },
+    {
+      "file": "claude-code/notification-idle-prompt.json",
+      "agent": "claude_code",
+      "expected_kind": "needs_input",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "Fires roughly a minute after the turn ends, only if the user has not typed."
+    },
+    {
+      "file": "claude-code/notification-agent-needs-input.json",
+      "agent": "claude_code",
+      "expected_kind": "needs_input",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "A background agent is blocked on an answer."
+    },
+    {
+      "file": "claude-code/pre-tool-use-ask-user-question.json",
+      "agent": "claude_code",
+      "expected_kind": "needs_input",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "The only immediate needs-input signal: PreToolUse matched on AskUserQuestion."
+    },
+    {
+      "file": "claude-code/stop-failure.json",
+      "agent": "claude_code",
+      "expected_kind": "error",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "A turn that ended in an API error rather than an answer."
+    },
+    {
+      "file": "claude-code/post-tool-use-failure.json",
+      "agent": "claude_code",
+      "expected_kind": "error",
+      "expected_session": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+      "note": "A tool failed for a real reason."
+    },
+    {
+      "file": "claude-code/post-tool-use-failure-interrupt.json",
+      "agent": "claude_code",
+      "expected_kind": null,
+      "expected_session": null,
+      "note": "A user interrupt is deliberate, so it must not alert."
+    },
+    {
+      "file": "claude-code/pre-tool-use-bash.json",
+      "agent": "claude_code",
+      "expected_kind": null,
+      "expected_session": null,
+      "note": "Ordinary tool use is not a signal."
+    },
+    {
+      "file": "claude-code/session-start.json",
+      "agent": "claude_code",
+      "expected_kind": null,
+      "expected_session": null,
+      "note": "A session starting is not worth an alert."
+    },
+    {
+      "file": "claude-code/notification-auth-success.json",
+      "agent": "claude_code",
+      "expected_kind": null,
+      "expected_session": null,
+      "note": "A notification type with no rule must be ignored, not alerted on."
+    },
+    {
+      "file": "codex/agent-turn-complete.json",
+      "agent": "codex",
+      "expected_kind": "finished",
+      "expected_session": "0199f0b6-1c9e-7a3a-9d1f-1a2b3c4d5e6f",
+      "note": "The only event Codex notify produces. One compact line, which is what Codex's serde serialiser emits; the argv path also tolerates surrounding whitespace, and that is covered by a unit test rather than by this file."
+    },
+    {
+      "file": "codex/agent-turn-complete-null-message.json",
+      "agent": "codex",
+      "expected_kind": "finished",
+      "expected_session": "0199f0b6-1c9e-7a3a-9d1f-1a2b3c4d5e70",
+      "note": "last-assistant-message is nullable upstream, and the session still needs identifying."
+    }
+  ]
+}

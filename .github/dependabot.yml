@@ -18,6 +18,53 @@ version: 2
 
 updates:
   # ---------------------------------------------------------------------------
+  # Cargo (the Rust workspace: a single root Cargo.lock)
+  # ---------------------------------------------------------------------------
+  # `directory: /` rather than one entry per crate, for the same reason npm uses
+  # the root: the workspace keeps one lockfile at the repository root, and a
+  # per-crate entry would find nothing to update.
+  #
+  # Rust dependencies are the ones most worth keeping current here. `tauri` and
+  # its plugins have to move together, and a `windows-sys` bump is a change to
+  # the only `unsafe` call in the app.
+  - package-ecosystem: cargo
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Kolkata
+    open-pull-requests-limit: 5
+    # Same week-long cooldown as npm and Actions: let a bad release be yanked
+    # before it reaches a pull request. Version updates only.
+    cooldown:
+      default-days: 7
+    commit-message:
+      # Produces `chore(deps): ...`, which satisfies the pull request title check.
+      prefix: chore
+      include: scope
+    labels:
+      - dependencies
+      - rust
+    groups:
+      # Tauri and its plugins are versioned together in practice, so one pull
+      # request that bumps them all is easier to review than four that each
+      # leave the tree in a state that does not compile.
+      tauri:
+        patterns:
+          - "tauri*"
+      cargo-minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+      cargo-security:
+        patterns:
+          - "*"
+        applies-to: security-updates
+
+  # ---------------------------------------------------------------------------
   # npm (root workspace, single lockfile)
   # ---------------------------------------------------------------------------
   - package-ecosystem: npm

@@ -17,3 +17,23 @@ package-lock.json
 
 # Served to the browser byte-for-byte. The SVG is an asset, not source.
 apps/web/public/
+
+# Rust build output, hoisted to the repository root by the Cargo workspace.
+target/
+
+# Cargo owns this file's formatting entirely.
+Cargo.lock
+
+# The hook binary copied in for bundling, and the schemas tauri-build emits.
+apps/desktop/core/binaries/
+apps/desktop/core/gen/
+
+# Generated WAV assets. Prettier has no business reading a PCM stream, and
+# `npm run sounds` regenerates them from apps/desktop/scripts/generate-sounds.mjs.
+apps/desktop/core/assets/sounds/
+
+# The Codex sample payloads are one line on purpose. That is what Codex's own
+# serialiser emits and what it appends to the command line, and the corpus exists
+# to be byte-similar to the real thing - the Rust tests and scripts/e2e both read
+# these files. Prettier would expand them into something Codex never sends.
+packages/protocol/samples/codex/

@@ -6,9 +6,19 @@ Skyboy is a desktop notifier for AI coding agents, starting with **Claude Code**
 
 Website: **https://skyboy.in**
 
-The desktop app is not built yet. This repository's website is the marketing and download site. Items described as planned do not exist yet. How Claude Code and Codex expose events must be checked against their current documentation before the app is implemented.
+The desktop app is in this repository and is **not released yet**. It lives in
+`apps/desktop` — a Tauri app with a Rust core and a React interface — next to
+`apps/hook`, the small helper an agent's configuration runs. Items described as
+planned do not exist yet. The download button still says **Coming soon** and
+opens the waitlist.
 
-The earlier site at this address was a directory of AI skills. That product is not Skyboy the notifier, and it is not part of this website.
+How Claude Code and Codex expose events is documented, with links and dates, in
+[docs/hooks.md](docs/hooks.md). Re-check it against the agents' current
+documentation before trusting it: both change, and the field names are the part
+that fails silently.
+
+The earlier site at this address was a directory of AI skills. That product is
+not Skyboy the notifier, and it is not part of this website.
 
 ## Design rules
 
@@ -41,7 +51,29 @@ Contact: contact@skyboy.in
 
 Notify on task finished, needs permission, needs input, and error. Alert with a custom sound, a repeating ring, a desktop notification, and optional phone push. A prompt queue sends the next step you wrote, with pause points and step and time limits. The window lists sessions, and a local log records alerts and automatic prompts.
 
-Phone push is off by default. The first path is ntfy with a long random topic. A Skyboy mobile app is planned.
+### What each agent can actually report
+
+The two agents are not symmetrical, and the app says so rather than implying
+otherwise. This table is generated from the same table the interface renders, in
+`apps/desktop/core/src/capabilities.rs`, so the README and the app cannot drift
+apart.
+
+| Signal           | Claude Code | Codex   |
+| ---------------- | ----------- | ------- |
+| Task finished    | Yes         | Yes     |
+| Needs permission | Yes         | Not yet |
+| Needs input      | Yes         | No      |
+| Error            | Yes         | No      |
+
+Claude Code reports all four. Codex reports one: it has no hook or notification
+for an approval prompt, a waiting question, or a failed turn. (It _can_ report an
+approval prompt through its newer hooks system, but those hooks must be approved
+by hand inside Codex first; that is planned as an opt-in, not built.)
+
+So: **Codex alerts you when a turn finishes, and that is all it can do today.**
+
+Phone push is off by default. The first path is ntfy with a long random topic. A
+Skyboy mobile app is planned.
 
 Platforms for the first release: Windows 10/11 and macOS. Linux comes after.
 
@@ -70,6 +102,25 @@ Run the checks locally before pushing:
 | Typecheck | `npx tsc --noEmit -p apps/web/tsconfig.json` | Faster than a full build when you only want types.                                                                                                                                                                        |
 | Format    | `npm run format:check`                       | `npm run format` rewrites the files.                                                                                                                                                                                      |
 | Lint      | `npm run lint`                               | **Currently broken.** It runs `next lint`, which Next.js 16 removed, and there is no ESLint config yet. It fails on a clean checkout. ESLint is a separate follow-up; do not treat a lint failure as your change's fault. |
+
+The desktop app has its own checks. None of them need the website:
+
+| Check           | Command                                                                         | Notes                                                                                     |
+| --------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| Rust formatting | `cargo fmt --all --check`                                                       | `cargo fmt --all` rewrites.                                                               |
+| Rust lints      | `cargo clippy --workspace --all-targets -- -D warnings`                         | Warnings are errors in CI.                                                                |
+| Rust tests      | `cargo test --workspace`                                                        | Includes the sample-payload corpus.                                                       |
+| Interface tests | `npm --workspace @skyboy/desktop run test`                                      | Vitest. Logic, not markup.                                                                |
+| Hook end to end | `cargo build --release -p skyboy-hook` then `node scripts/e2e/hook-to-core.mjs` | Feeds every sample payload through the real binary into a real named pipe or Unix socket. |
+| Hook latency    | `node scripts/measure.mjs`                                                      | Percentiles, with a process-creation baseline so the number means something.              |
+| CI recorder     | `node --test .github/scripts/ci-record.test.mjs`                                | The gate rules behind `all-checks-pass`.                                                  |
+
+These need a Rust toolchain and, on Windows, the Visual Studio C++ build tools.
+The website does not.
+
+`scripts/e2e/hook-to-core.mjs` and the Rust tests read the same corpus,
+`packages/protocol/samples/manifest.json`, so an expectation cannot be right in
+one and wrong in the other.
 
 Formatting is Prettier, configured in `.prettierrc.json` to match the code that was
 already here: double quotes, semicolons, 100 columns. There is also an optional

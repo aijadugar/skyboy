@@ -1,0 +1,235 @@
+# Skyboy desktop release.
+#
+# Builds the installers, creates a DRAFT GitHub release, and attaches a
+# SHA256SUMS file. Nothing is published: a maintainer reviews the draft, writes
+# the release notes, and publishes it by hand.
+#
+# Design notes worth knowing before editing:
+#
+#   * **Manual dispatch only.** A release should be a decision, not a
+#     consequence of merging. The `tag` input is checked against the app's own
+#     version, so a release cannot be cut for code that says it is something
+#     else.
+#
+#   * **The builds are UNSIGNED, and the workflow is written so that adding
+#     certificates needs no rewrite.** Every signing value is read from a
+#     repository secret through the job environment. With the secrets absent the
+#     values are empty, the bundler skips signing, and the installers are
+#     produced exactly as they are today. Adding an Apple certificate or a
+#     Windows signing key is then a matter of adding the secret - no change to
+#     this file. `docs/releases.md` has the install help users need in the
+#     meantime.
+#
+#   * **Tauri's updater signing key is not the same thing as a code-signing
+#     certificate**, and this workflow does not create or use one, because
+#     auto-update is not part of v0.1. The steps are in `docs/releases.md` for
+#     whoever adds it. Do not commit a key.
+#
+#   * **All actions are pinned to a full commit SHA**, as everywhere else in
+#     this repository. Dependabot moves them.
+#
+#   * The draft release and the checksums are created with the `gh` CLI, which
+#     is already on every runner, rather than with another action to pin.
+
+name: Release desktop
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release, e.g. v0.1.0. Must match the app's version."
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  # One release at a time. A second dispatch for the same tag would fight the
+  # first over the same draft release.
+  group: release-desktop-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "24"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Check the tag before anything is built
+  # ---------------------------------------------------------------------------
+  check:
+    name: Check the tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      # The version lives in two places and both have to move together: the
+      # frontend's package.json and the Tauri config the installer is stamped
+      # from. Checking both here is cheaper than discovering the mismatch in a
+      # released artefact.
+      - name: Check the tag matches the app version
+        shell: bash
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          version=$(node -e "process.stdout.write(require('./apps/desktop/package.json').version)")
+          tauri_version=$(node -e "process.stdout.write(require('./apps/desktop/core/tauri.conf.json').version)")
+          echo "tag:            $TAG"
+          echo "package.json:   $version"
+          echo "tauri.conf:     $tauri_version"
+
+          expected="v${version}"
+          if [ "$TAG" != "$expected" ]; then
+            echo "::error title=Tag does not match the version::The tag is $TAG but the app is $version. Expected $expected."
+            exit 1
+          fi
+          if [ "$tauri_version" != "$version" ]; then
+            echo "::error title=Versions disagree::apps/desktop/package.json says $version and core/tauri.conf.json says $tauri_version."
+            exit 1
+          fi
+          echo "::notice title=Tag checked::$TAG matches version $version"
+
+  # ---------------------------------------------------------------------------
+  # Build the installers
+  # ---------------------------------------------------------------------------
+  build:
+    name: Build (${{ matrix.name }})
+    needs: [check]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    permissions:
+      # Needed to upload assets to the draft release.
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Windows x64 (NSIS)
+            os: windows-latest
+            target: x86_64-pc-windows-msvc
+            bundles: nsis
+          - name: macOS arm64 (dmg)
+            os: macos-latest
+            target: aarch64-apple-darwin
+            bundles: dmg
+          - name: macOS x64 (dmg)
+            os: macos-latest
+            target: x86_64-apple-darwin
+            bundles: dmg
+    env:
+      # Read from secrets here, at the job level, because the `secrets` context
+      # is not available to a job-level `if`. With the secrets unset these are
+      # empty strings, and the bundler produces unsigned installers.
+      #
+      # Apple code signing and notarisation.
+      APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+      APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+      APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+      APPLE_ID: ${{ secrets.APPLE_ID }}
+      APPLE_PASSWORD: ${{ secrets.APPLE_PASSWORD }}
+      APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      # Windows code signing.
+      WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+      WINDOWS_CERTIFICATE_PASSWORD: ${{ secrets.WINDOWS_CERTIFICATE_PASSWORD }}
+      # Tells `prepare-hook.mjs` which architecture to build the hook for. The
+      # macOS x64 build runs on an arm64 runner, and without this the bundle
+      # would carry an arm64 hook that cannot run on the machine it is installed
+      # on.
+      SKYBOY_HOOK_TARGET: ${{ matrix.target }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install the Rust target
+        shell: bash
+        run: rustup target add ${{ matrix.target }}
+
+      - name: Install dependencies
+        shell: bash
+        run: npm ci --no-audit --no-fund
+
+      # The checksums job needs to find the tag the draft release was created
+      # under, and tauri-action needs it to name the release.
+      - name: Build and attach to the draft release
+        uses: tauri-apps/tauri-action@1deb371b0cd8bd54025b384f1cd735e725c4060f # v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ inputs.tag }}
+          releaseName: "Skyboy ${{ inputs.tag }}"
+          # A maintainer publishes it, after reading what is in it.
+          releaseDraft: true
+          prerelease: false
+          # Auto-update is not part of v0.1, so there is no updater manifest to
+          # generate and no updater key involved. See docs/releases.md.
+          includeUpdaterJson: false
+          args: --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
+
+      - name: Note what was produced
+        shell: bash
+        run: |
+          echo "::notice title=Signed?::Signing secrets were ${{ secrets.APPLE_CERTIFICATE == '' && 'absent' || 'present' }} for this build; unsigned installers are expected until certificates are added."
+
+  # ---------------------------------------------------------------------------
+  # Checksums
+  # ---------------------------------------------------------------------------
+  # One file covering every artefact, so a user can verify a download without
+  # trusting the page they got it from.
+  checksums:
+    name: Checksums
+    needs: [build]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - name: Download the draft release's assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          # `gh release download` on a draft needs the tag, which the build jobs
+          # created. If they all failed there is nothing to checksum, and saying
+          # so is better than uploading an empty file.
+          gh release download "$TAG" --dir assets --repo "$GITHUB_REPOSITORY" || {
+            echo "::error title=No release to checksum::The draft release $TAG has no assets. Did every build job fail?"
+            exit 1
+          }
+          ls -la assets
+
+      - name: Write SHA256SUMS and attach it
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          set -euo pipefail
+          cd assets
+          # Every artefact, in a stable order, with paths relative to the release
+          # so the file verifies from wherever it was downloaded to.
+          find . -maxdepth 1 -type f ! -name SHA256SUMS -printf '%P\n' | sort | xargs sha256sum > ../SHA256SUMS
+          cat ../SHA256SUMS
+          gh release upload "$TAG" ../SHA256SUMS --repo "$GITHUB_REPOSITORY" --clobber
+
+      - name: Upload the checksums as an artifact too
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: SHA256SUMS
+          path: SHA256SUMS
+          retention-days: 30
+          if-no-files-found: warn
