@@ -48,7 +48,7 @@ tokio = { version = "1", features = ["net", "io-util"] }
 # Only for `PlaySoundW`, which plays a WAV file without linking an audio stack.
 # Chosen over an audio decoding crate because the built-in sounds are already
 # WAV and the app must stay small; see docs/architecture.md.
-windows-sys = { version = "0.59", features = [
+windows-sys = { version = "0.61", features = [
     "Win32_Foundation",
     "Win32_Media_Audio",
 ] }
