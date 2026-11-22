@@ -1,0 +1,18 @@
+{
+  "hook_event_name": "PermissionRequest",
+  "session_id": "6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93",
+  "transcript_path": "/Users/example/.claude/projects/-Users-example-project/6f1c0a3e-2b7d-4c58-9a11-7e4d2f8b0c93.jsonl",
+  "cwd": "/Users/example/project",
+  "permission_mode": "default",
+  "tool_name": "Bash",
+  "tool_input": {
+    "command": "rm -rf build/ && npm run build",
+    "description": "Clean and rebuild"
+  },
+  "permission_suggestions": [
+    {
+      "type": "addRules",
+      "rules": [{ "toolName": "Bash", "ruleContent": "npm run build" }]
+    }
+  ]
+}
