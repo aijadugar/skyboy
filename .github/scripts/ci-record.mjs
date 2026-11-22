@@ -31,6 +31,12 @@
  *   check-title   validate a PR title against Conventional Commits
  *   verdict       all-checks-pass: fail the run if any required job is bad
  *
+ * `verdict` reads two environment variables: `JOB_RESULTS` (`name=result` per
+ * line, from `needs.<job>.result`) and `GATE_OUTPUTS` (`name=value` per line,
+ * from `needs.<gate>.outputs`). The second exists because GitHub exposes a
+ * job's result to `needs` but not its outputs, and the gates in ci.yml decide
+ * whether the Rust and desktop jobs were needed at all.
+ *
  * Nothing here ever executes or eval()s tool output. The artifact is parsed
  * as data and re-emitted as data; the bot escapes it before it becomes
  * markdown.
@@ -520,17 +526,53 @@ function cmdCheckTitle() {
  * below fails the run if a job appears in one and not the other.
  */
 const REQUIRED_ON = {
+  // The change-detection gate. Runs on every event, on purpose: it is what
+  // decides whether the jobs below it are needed, so it can never itself be
+  // gated.
+  changes: ["pull_request", "push", "merge_group", "workflow_dispatch"],
   lint: ["pull_request", "push", "merge_group", "workflow_dispatch"],
   typecheck: ["pull_request", "push", "merge_group", "workflow_dispatch"],
   // Formatting is required on every event, pushes to main included. It has no
   // gate and no path filter, so it can never legitimately be skipped.
   format: ["pull_request", "push", "merge_group", "workflow_dispatch"],
   test: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  // The Rust and desktop jobs are required wherever they run, but whether they
+  // run at all is the gate's decision - see GATED_BY.
+  rust: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  desktop: ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  "hook-integration": ["pull_request", "push", "merge_group", "workflow_dispatch"],
+  "ci-record-tests": ["pull_request", "push", "merge_group", "workflow_dispatch"],
   // gitleaks-action does not support the merge_group event; Dependabot's own
   // group merge is covered by the same commits being scanned on the PR.
   "secret-scan": ["pull_request", "push", "workflow_dispatch"],
   "dependency-review": ["pull_request"],
   "pr-title": ["pull_request"],
+};
+
+/**
+ * The job whose verdict decides whether the gated jobs were needed.
+ *
+ * It is an ordinary job in `needs`, so it is also checked for success like any
+ * other. That matters: a gate that failed and a gate that said "not needed"
+ * both leave the jobs below it `skipped`, and only the gate's own result tells
+ * them apart. Treating a failed gate as "not needed" would let a broken gate
+ * silently disable the entire desktop half of CI.
+ */
+const GATE_JOB = "changes";
+
+/**
+ * Gated job -> the gate output that decides whether it was needed.
+ *
+ * A job listed here may be `skipped` **only** when the gate succeeded and its
+ * output says the change does not touch desktop code. In every other case a
+ * skip is a failure, which is the same rule that applies to a job that is not
+ * listed here at all - so adding a gate never weakens the aggregate check, it
+ * only narrows what counts as an acceptable skip.
+ */
+const GATED_BY = {
+  rust: "desktop",
+  desktop: "desktop",
+  "hook-integration": "desktop",
 };
 
 /**
@@ -541,12 +583,15 @@ const REQUIRED_ON = {
 const RUNNER_PROBLEM_HINT =
   " - this is usually a runner problem, not a test failure; re-run the failed jobs.";
 
-function cmdVerdict() {
-  const job = "all-checks-pass";
-  const eventName = process.env.EVENT_NAME || "";
-  const raw = process.env.JOB_RESULTS || "";
-
-  const results = new Map();
+/**
+ * Parse `name=value` lines into a Map.
+ *
+ * Used for both the job results and the gate outputs, which have the same
+ * shape. An unparseable name is reported rather than skipped: a typo in the
+ * workflow would otherwise look like a missing job.
+ */
+function parsePairs(raw, { job, tool }) {
+  const pairs = new Map();
   for (const line of raw.split("\n")) {
     const trimmed = line.trim();
     if (!trimmed) continue;
@@ -555,15 +600,30 @@ function cmdVerdict() {
     const name = trimmed.slice(0, eq).trim();
     const value = trimmed.slice(eq + 1).trim();
     if (!/^[A-Za-z0-9_-]+$/.test(name)) {
-      recordCheck(job, "aggregator", false, `could not parse a job result line: ${name}`);
-      annotate("error", `Unparseable job result entry: ${clip(name, 200)}`, {
-        title: "all-checks-pass",
-      });
+      recordCheck(job, tool, false, `could not parse a result line: ${name}`);
+      annotate("error", `Unparseable result entry: ${clip(name, 200)}`, { title: job });
       process.exitCode = 1;
-      return;
+      return null;
     }
-    results.set(name, value);
+    pairs.set(name, value);
   }
+  return pairs;
+}
+
+function cmdVerdict() {
+  const job = "all-checks-pass";
+  const eventName = process.env.EVENT_NAME || "";
+
+  const results = parsePairs(process.env.JOB_RESULTS || "", { job, tool: "aggregator" });
+  if (results === null) return;
+
+  // What the gate decided. Passed in separately from the job results because a
+  // job's *output* is not available through `needs.<job>.result`.
+  const gateOutputs = parsePairs(process.env.GATE_OUTPUTS || "", {
+    job,
+    tool: "aggregator",
+  });
+  if (gateOutputs === null) return;
 
   if (results.size === 0) {
     recordCheck(job, "aggregator", false, "no job results were passed to the aggregator");
@@ -593,31 +653,78 @@ function cmdVerdict() {
     );
   }
 
+  const gateResult = results.get(GATE_JOB) ?? "";
+
   const lines = [];
   for (const [name, value] of [...results.entries()].sort((a, b) => a[0].localeCompare(b[0]))) {
     const required = (REQUIRED_ON[name] ?? []).includes(eventName);
-    // A required job passes only on `success`. Every other value - skipped,
-    // cancelled, abandoned, failure, or an empty string - is a failure.
-    // A job that is not required on this event may be `success` or `skipped`.
-    const ok = required ? value === "success" : value === "success" || value === "skipped";
-    lines.push(
-      `${ok ? "PASS" : "FAIL"}  ${name}: ${value}${required ? "" : " (not required on this event)"}`,
-    );
-    if (!ok) {
-      let why;
-      if (required) {
-        why = `\`${name}\` must succeed on a \`${eventName}\` run but reported \`${value}\``;
-        if (value !== "success" && value !== "failure") {
-          why += RUNNER_PROBLEM_HINT;
-        }
+    const gateOutput = GATED_BY[name];
+
+    let ok;
+    let why;
+
+    if (gateOutput !== undefined && value === "skipped") {
+      // A gated job that did not run. Whether that is acceptable is entirely the
+      // gate's answer, and there are four ways for there to be no answer.
+      if (gateResult !== "success") {
+        ok = false;
+        why =
+          `\`${name}\` was skipped, but the \`${GATE_JOB}\` gate reported ` +
+          `\`${gateResult || "no result"}\`; a skip is only trusted when the gate itself succeeded` +
+          RUNNER_PROBLEM_HINT;
+      } else if (!gateOutputs.has(gateOutput)) {
+        ok = false;
+        why =
+          `\`${name}\` was skipped and the \`${GATE_JOB}\` gate produced no \`${gateOutput}\` ` +
+          `output, so nothing establishes that it was not needed`;
+      } else if (gateOutputs.get(gateOutput) !== "false") {
+        ok = false;
+        why =
+          `\`${name}\` was skipped even though the \`${GATE_JOB}\` gate reported ` +
+          `\`${gateOutput}=${gateOutputs.get(gateOutput)}\``;
+      } else if (eventName !== "pull_request") {
+        // The gate is required to answer "true" for everything that is not a
+        // pull request, so a "false" here means the gate is broken rather than
+        // that the jobs were unnecessary. Without this, a gate that stopped
+        // matching anything would quietly disable the Rust and desktop jobs on
+        // every push to main.
+        ok = false;
+        why =
+          `\`${name}\` was skipped on a \`${eventName}\` run, where the \`${GATE_JOB}\` gate is ` +
+          `required to report \`${gateOutput}=true\`; it reported \`false\`, so the gate is wrong ` +
+          `and this skip cannot be trusted`;
       } else {
-        why = `\`${name}\` reported \`${value}\`; only \`success\` or \`skipped\` are acceptable here`;
+        ok = true;
+        why = `not needed: \`${gateOutput}=false\``;
       }
+    } else {
+      // The ordinary rule, unchanged: a required job passes only on `success`,
+      // and a job that is not required on this event may be `success` or
+      // `skipped`.
+      ok = required ? value === "success" : value === "success" || value === "skipped";
+      if (!ok) {
+        if (required) {
+          why = `\`${name}\` must succeed on a \`${eventName}\` run but reported \`${value}\``;
+          if (value !== "success" && value !== "failure") {
+            why += RUNNER_PROBLEM_HINT;
+          }
+        } else {
+          why = `\`${name}\` reported \`${value}\`; only \`success\` or \`skipped\` are acceptable here`;
+        }
+      }
+    }
+
+    lines.push(
+      `${ok ? "PASS" : "FAIL"}  ${name}: ${value}${required ? "" : " (not required on this event)"}` +
+        `${ok && gateOutput !== undefined && value === "skipped" ? ` (${why})` : ""}`,
+    );
+
+    if (!ok) {
       problems.push(why);
       recordFinding(
         job,
         name,
-        { rule: value, message: `job \`${name}\` reported \`${value}\`` },
+        { rule: value, message: `job \`${name}\` reported \`${value}\`: ${why}` },
         "fail",
       );
     }
