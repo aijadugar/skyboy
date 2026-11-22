@@ -34,7 +34,7 @@ serde = { version = "1.0", features = ["derive"] }
 # as a diff in a file Skyboy does not own.
 serde_json = { version = "1.0", features = ["preserve_order"] }
 time = { version = "0.3", features = ["formatting"] }
-getrandom = "0.2"
+getrandom = "0.4"
 
 # The release profile is the whole point of the size requirement: a "small
 # installer, low memory" app. opt-level "z" plus LTO plus one codegen unit
