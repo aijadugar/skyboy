@@ -1,0 +1,57 @@
+[package]
+name = "skyboy-core"
+description = "The Skyboy desktop app: watches Claude Code and Codex, alerts you when they need you."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+# Note for anyone reading the Cargo workspace: this crate lives in
+# `apps/desktop/core/`, not `apps/desktop/src-tauri/`. `tauri.conf.json` is what
+# marks a Tauri crate, so the CLI finds it. See docs/architecture.md.
+
+[lib]
+# Tauri needs a library target so the same entry point can be reused by tests
+# and by a future mobile target; the binary is a thin wrapper over it.
+name = "skyboy_core"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri-plugin-single-instance = "2"
+tauri-plugin-notification = "2"
+tauri-plugin-autostart = "2"
+
+skyboy-protocol.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+time.workspace = true
+getrandom.workspace = true
+
+# Settings, event history and the audit log. `bundled` compiles SQLite from
+# source so the app does not depend on a system library being present.
+rusqlite = { version = "0.32", features = ["bundled"] }
+# Agent configuration files are edited in place. Both formats carry comments
+# and key order that belong to the user, so they are edited as documents, not
+# parsed into a struct and re-emitted.
+toml_edit = "0.22"
+# The local IPC server. Tauri already runs tokio, so this adds no runtime; it is
+# named here because `tokio::net::windows::named_pipe` is what a Windows server
+# needs, and std has no server-side named pipe API.
+tokio = { version = "1", features = ["net", "io-util"] }
+
+[target.'cfg(windows)'.dependencies]
+# Only for `PlaySoundW`, which plays a WAV file without linking an audio stack.
+# Chosen over an audio decoding crate because the built-in sounds are already
+# WAV and the app must stay small; see docs/architecture.md.
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_Media_Audio",
+] }
+
+[dev-dependencies]
+tempfile = "3"
