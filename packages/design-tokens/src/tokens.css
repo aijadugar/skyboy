@@ -1,0 +1,171 @@
+/*
+ * Skyboy design tokens.
+ *
+ * Two themes, one set of names. Everything the interface colours comes from
+ * here, so a dark-mode bug is a token bug rather than a hunt through
+ * components.
+ *
+ * Consumed two ways:
+ *   - `@import "@skyboy/design-tokens/tokens.css"` in the app's stylesheet,
+ *     which is what actually defines the variables.
+ *   - via `@theme inline` in the same file, which maps them onto Tailwind
+ *     utilities such as `bg-canvas` and `text-ink`.
+ *
+ * Note for anyone who has seen apps/web: that app has a Tailwind v4 config that
+ * is never read, because it has neither an `@config` directive nor a `@theme`
+ * block. This file is written the way that works.
+ */
+
+:root {
+  /* Surfaces, from furthest back to nearest the eye. */
+  --sky-canvas: #f6f7f9;
+  --sky-surface: #ffffff;
+  --sky-surface-raised: #ffffff;
+  --sky-surface-sunken: #eef0f4;
+
+  --sky-border: #e2e5ea;
+  --sky-border-strong: #c9cfd8;
+
+  /* Text, from most to least emphasis. Three levels is enough to build a
+     hierarchy without a fourth colour nobody can distinguish. */
+  --sky-ink: #14171f;
+  --sky-ink-muted: #5a6273;
+  --sky-ink-subtle: #8a92a2;
+
+  --sky-accent: #2f6df6;
+  --sky-accent-hover: #2560e0;
+  --sky-accent-ink: #ffffff;
+  --sky-accent-soft: #e9effe;
+
+  /* Semantics. Distinct from the accent so a status colour never reads as a
+     call to action. */
+  --sky-ok: #17845a;
+  --sky-warn: #b8720c;
+  --sky-danger: #c8392f;
+  --sky-info: #2f6df6;
+
+  /* One colour per event kind, used by the session badges, the history rows
+     and the legend. `error` is the danger colour on purpose: the same red
+     everywhere is how a user learns what red means here. */
+  --sky-event-finished: var(--sky-ok);
+  --sky-event-needs-permission: var(--sky-warn);
+  --sky-event-needs-input: var(--sky-info);
+  --sky-event-error: var(--sky-danger);
+
+  --sky-focus-ring: #2f6df6;
+  --sky-overlay: rgba(16, 20, 28, 0.42);
+
+  --sky-radius-sm: 6px;
+  --sky-radius-md: 10px;
+  --sky-radius-lg: 14px;
+
+  --sky-font-sans:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sky-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+  --sky-shadow-sm: 0 1px 2px rgba(16, 20, 28, 0.06);
+  --sky-shadow-md: 0 4px 12px rgba(16, 20, 28, 0.1);
+  --sky-shadow-lg: 0 16px 48px rgba(16, 20, 28, 0.18);
+
+  color-scheme: light;
+}
+
+/*
+ * Dark mode is driven by an attribute on <html> rather than by
+ * `prefers-color-scheme` alone, because the General settings section lets the
+ * user override the system choice. The app sets `data-theme` to "light" or
+ * "dark" once it knows the answer; the media query below is only the fallback
+ * for the moment before that happens.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --sky-canvas: #0e1014;
+    --sky-surface: #16191f;
+    --sky-surface-raised: #1d2129;
+    --sky-surface-sunken: #101317;
+
+    --sky-border: #252a34;
+    --sky-border-strong: #363d4a;
+
+    --sky-ink: #ecedf1;
+    --sky-ink-muted: #a0a8b8;
+    --sky-ink-subtle: #737d8e;
+
+    --sky-accent: #6f9bff;
+    --sky-accent-hover: #86acff;
+    --sky-accent-ink: #0e1014;
+    --sky-accent-soft: #1b2438;
+
+    --sky-ok: #46b981;
+    --sky-warn: #e0a343;
+    --sky-danger: #ef6b64;
+    --sky-info: #6f9bff;
+
+    --sky-event-finished: var(--sky-ok);
+    --sky-event-needs-permission: var(--sky-warn);
+    --sky-event-needs-input: var(--sky-info);
+    --sky-event-error: var(--sky-danger);
+
+    --sky-focus-ring: #86acff;
+    --sky-overlay: rgba(0, 0, 0, 0.6);
+
+    --sky-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --sky-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --sky-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --sky-canvas: #0e1014;
+  --sky-surface: #16191f;
+  --sky-surface-raised: #1d2129;
+  --sky-surface-sunken: #101317;
+
+  --sky-border: #252a34;
+  --sky-border-strong: #363d4a;
+
+  --sky-ink: #ecedf1;
+  --sky-ink-muted: #a0a8b8;
+  --sky-ink-subtle: #737d8e;
+
+  --sky-accent: #6f9bff;
+  --sky-accent-hover: #86acff;
+  --sky-accent-ink: #0e1014;
+  --sky-accent-soft: #1b2438;
+
+  --sky-ok: #46b981;
+  --sky-warn: #e0a343;
+  --sky-danger: #ef6b64;
+  --sky-info: #6f9bff;
+
+  --sky-event-finished: var(--sky-ok);
+  --sky-event-needs-permission: var(--sky-warn);
+  --sky-event-needs-input: var(--sky-info);
+  --sky-event-error: var(--sky-danger);
+
+  --sky-focus-ring: #86acff;
+  --sky-overlay: rgba(0, 0, 0, 0.6);
+
+  --sky-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --sky-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --sky-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
+}
+
+/*
+ * Honour a reduced-motion preference. The interface has one animation - the
+ * pulse on a new alert - and a user who has asked the system to stop moving
+ * things should not get it.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --sky-motion-scale: 0;
+  }
+}
+
+:root {
+  --sky-motion-scale: 1;
+}
